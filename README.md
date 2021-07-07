@@ -8,7 +8,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Integrante 1** - [integrante1](https://github.com/integrante1)
 * **Lucia Lourengo Caridade** - [LuLourengo](https://github.com/LuLourengo)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
+* **Daniela Pareja** - [daniela41149](https://github.com/daniela41149)
 * **Rodrigo Vargas Chávez** - [Scuero](https://github.com/Scuero)
 
 Corrector: **{Corrector}**
