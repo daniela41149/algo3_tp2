@@ -1,4 +1,6 @@
 @startuml
+
+title "Diagrama de clases general de A.L.T.E.G.O."
 class Juego{
 {method} 
 }
@@ -68,27 +70,23 @@ class Canjes{
 {method} 
 }
 
-class Ejercito{
-{field} 
-{method} 
-}
-
-Juego "1" *-- "2..6"Jugador
-Juego "1" *-- "1"Tablero
-Juego"1" *-- "*"TarjetaPais
-Jugador"1" *-- "2"Mision
-Jugador"1" --> "1..*"Pais
-Ejercito"*" -- "1"Pais
-Tablero"1" *-- "6"Continente
-Tablero"1" *-- "*"Pais
-Tablero --> Batalla
-Batalla"1" --> "1"Dado
-Jugador --> TarjetaPais
-Continente"1" *-- "1..*"Pais 
-Tablero ..> Canjes
-Tablero"1" o-- "*"Jugador
+Juego "1" *-- "1" Tablero
+Juego "1" *-- "2..6" Jugador
+Tablero "1" *-- "*" Pais
+Jugador "1" --> "0..*" Pais
+Jugador "1" --> "*" Batalla
+Tablero "1" *-- "6" Continente
+Continente "1" *-- "*" Pais
+Pais "1" --> "0..3" Dado
+Pais "1" --> "1..*" Ficha
+Jugador "1" --> "*" Canjes
+Jugador "1" --> "*" Mision
 Mision <|.. MisionSecreta
 Mision <|.. MisionNoSecreta
+Jugador "1" --> "*" TarjetaPais
 TarjetaPais <|.. TarjetaPaisActivada
 TarjetaPais <|.. TarjetaPaisDesactivada
+Tablero "1" <-- "1" Batalla
+Tablero "1  " -> "  2..6" Jugador
+Canjes "1" --> "3" TarjetaPais
 @enduml
