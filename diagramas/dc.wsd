@@ -83,7 +83,7 @@ Jugador "1" --> "*" Canjes
 Jugador "1" --> "*" Mision
 Mision <|.. MisionSecreta
 Mision <|.. MisionNoSecreta
-Jugador "1" --> "*" TarjetaPais
+Juego "1" --> "*" TarjetaPais
 TarjetaPais <|.. TarjetaPaisActivada
 TarjetaPais <|.. TarjetaPaisDesactivada
 Tablero "1" <-- "1" Batalla
