@@ -1,0 +1,94 @@
+@startuml
+class Juego{
+{method} 
+}
+
+interface TarjetaPais{
+{field} 
+{method} 
+}
+
+class TarjetaPaisActivada{
+{field} 
+{method} 
+}
+
+class TarjetaPaisDesactivada{
+{field} 
+{method} 
+}
+
+class Tablero{
+{field} 
+{method} 
+}
+
+class Jugador{
+{field} 
+{method} 
+}
+
+class Pais{
+{field} 
+{method} 
+}
+
+class Dado{
+{field} 
+{method} 
+}
+
+interface Mision{
+{field} 
+{method} 
+}
+
+class Batalla{
+{field} 
+{method} 
+}
+
+class Continente{
+{field} 
+{method} 
+}
+
+class MisionSecreta{
+{field} 
+{method} 
+}
+
+class MisionNoSecreta{
+{field} 
+{method} 
+}
+
+class Canjes{
+{field} 
+{method} 
+}
+
+class Ejercito{
+{field} 
+{method} 
+}
+
+Juego "1" *-- "2..6"Jugador
+Juego "1" *-- "1"Tablero
+Juego"1" *-- "*"TarjetaPais
+Jugador"1" *-- "2"Mision
+Jugador"1" --> "1..*"Pais
+Ejercito"*" -- "1"Pais
+Tablero"1" *-- "6"Continente
+Tablero"1" *-- "*"Pais
+Tablero --> Batalla
+Batalla"1" --> "1"Dado
+Jugador --> TarjetaPais
+Continente"1" *-- "1..*"Pais 
+Tablero ..> Canjes
+Tablero"1" o-- "*"Jugador
+Mision <|.. MisionSecreta
+Mision <|.. MisionNoSecreta
+TarjetaPais <|.. TarjetaPaisActivada
+TarjetaPais <|.. TarjetaPaisDesactivada
+@enduml

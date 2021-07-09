@@ -1,0 +1,39 @@
+@startuml
+title "Ataque entre paises"
+activate "pedro:Jugador"
+    "pedro:Jugador" ->":Tablero" : atacar(paisAtacante, paisDefensor, cantidadEjercito)
+    activate ":Tablero"
+        deactivate "paisDefensor:Pais"
+            ":Tablero" -> ":Batalla" : batalla(paisAtacante, paisDefensor, cantidadEjercito)
+        activate ":Batalla"
+            ":Batalla" -> "paisAtacante:Pais" : dadosAtacante(cantidadEjercito)
+            activate "paisAtacante:Pais"
+                "paisAtacante:Pais" --> ":Batalla" : dadosAtaque
+            deactivate "paisAtacante:Pais"
+            ":Batalla" -> "paisDefensor:Pais" : dadosDefensor(paisAtacante)
+            activate "paisDefensor:Pais"
+                "paisDefensor:Pais" --> ":Batalla" : dadosDefensa
+            deactivate "paisDefensor:Pais"
+            ":Batalla" -> ":Batalla" : ordenarDados(dadosAtaque, dadosDefensa)
+            loop para cada par de dados
+            ":Batalla" -> ":Pais" : sacarFicha()
+            activate ":Pais"
+            deactivate ":Pais"
+            end
+            ":Batalla" -> "paisDefensor:Pais" : quedoSinEjercito()
+            activate "paisDefensor:Pais"
+            ":Batalla" <-- "paisDefensor:Pais" : true
+            deactivate "paisDefensor:Pais"
+            ":Batalla" -> ":Tablero" : ocuparPais(paisAtacante, paisDefensor)
+            /' este metodo asigna el pais conquistado al jugador atacante'/
+            ":Batalla" -> "paisAtacante:Pais" : quitarFicha()
+            activate "paisAtacante:Pais"
+            deactivate "paisAtacante:Pais"
+            ":Batalla" -> "paisDefensor:Pais" : agregarFicha()
+            activate "paisDefensor:Pais"
+            deactivate "paisDefensor:Pais"
+        deactivate ":Batalla"
+    deactivate ":Tablero"
+deactivate "pedro:Jugador"
+
+@enduml
