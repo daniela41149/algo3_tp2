@@ -1,52 +1,76 @@
 @startuml
-title "Ataque entre paises, el defensor queda sin fichas y es invadido"
+title: Ataque exitoso entre países.
+activate ":Juego"
+":Juego" -> "pedro:Jugador" : jugarTurno()
 activate "pedro:Jugador"
-    "pedro:Jugador" ->":Batalla" : atacar(paisAtacante, paisDefensor, cantidadEjercito)
+"pedro:Jugador" -> ":Juego" : atacar (String,String,cantidadEjercito)
 deactivate "pedro:Jugador"
 
-activate ":Batalla"
-    ":Batalla" -> ":Tablero" : dadosAtacante(paisAtacante, cantidadEjercito)
-    /' si la cantidad de ejercito no es suficiente, devuelve una lista de dados vacia'/
-    activate ":Tablero"
-        ":Tablero" --> ":Batalla" : dadosAtaque
-    deactivate ":Tablero"
-    ":Batalla" -> ":Tablero" : dadosDefensor(paisAtacante, paisDefensor)
-    activate ":Tablero"
-        ":Tablero" -> "paisDefensor:Pais" :esLimitrofe(paisAtacante)
-        activate "paisDefensor:Pais"
-            "paisDefensor:Pais" --> ":Tablero" :true
-        deactivate "paisDefensor:Pais"
-        ":Tablero" -> ":Batalla" : dadosDefensa
-        /' si no es limitrofe devuelve una lista de dados vacia '/
-    deactivate ":Tablero"
-    ":Batalla" -> ":Batalla" : ordenarDados(dadosAtaque, dadosDefensa)
-    loop para cada par de dados
-        ":Batalla" -> ":Tablero" : sacarFicha(paisVencido)
-        activate ":Tablero"
-        deactivate ":Tablero"
-    end
-    ":Batalla" -> ":Tablero" : invadir(paisAtacante, paisDefensor)
-    /' este metodo asigna el pais conquistado al jugador atacante'/
-deactivate ":Batalla"
-
+":Juego" -> ":Tablero" : atacar (String, String, cantidadEjercito)
 activate ":Tablero"
-    ":Tablero" -> "paisDefensor:Pais" : quedoSinEjercito()
-    activate "paisDefensor:Pais"
-        "paisDefensor:Pais" --> ":Tablero" : true
-    deactivate "paisDefensor:Pais"
-    ":Tablero" -> "otroJugador:Jugador" : quitarPais(paisDefensor)
-    activate "otroJugador:Jugador"
-    deactivate "otroJugador:Jugador"
-    ":Tablero" -> "pedro:Jugador" : darPais(paisAtacante, paisDefensor)
+":Tablero" -> ":Batalla": atacar (cantidadEjercito)
+activate ":Batalla"
+":Batalla" -> "paisAtacante:Pais": atacar(paisDefensa,cantidadEjercito)
+activate "paisAtacante:Pais"
+"paisAtacante:Pais" -> "paisDefensor:Pais": esLimitrofe(paisAtacante)
+activate "paisDefensor:Pais"
+"paisDefensor:Pais" --> "paisAtacante:Pais": true
+deactivate "paisDefensor:Pais"
+"paisAtacante:Pais" -> "ataque:Ejercito": atacar(cantidadEjercito)
+activate "ataque:Ejercito"
+"ataque:Ejercito" -> ":Dado": tirarDado(cantidadEjercito)
+activate ":Dado"
+":Dado" --> "ataque:Ejercito": dadosAtaque
+deactivate ":Dado"
+"ataque:Ejercito" --> "paisAtacante:Pais": dadosAtaque
+deactivate "ataque:Ejercito"
+"paisAtacante:Pais" --> ":Batalla": dadosAtaque
+"paisAtacante:Pais" -> "paisDefensor:Pais": defender()
+activate "paisDefensor:Pais"
+"paisDefensor:Pais" -> "defensa:Ejercito": defender()
+activate "defensa:Ejercito"
+"defensa:Ejercito" -> ":Dado": tirarDado()
+activate ":Dado"
+":Dado" --> "defensa:Ejercito": dadosDefensa
+deactivate ":Dado"
+"defensa:Ejercito" --> "paisDefensor:Pais": dadosDefensa
+deactivate "defensa:Ejercito"
+"paisDefensor:Pais" --> "paisAtacante:Pais": dadosDefensa
+deactivate "paisDefensor:Pais"
+"paisAtacante:Pais" --> ":Batalla": dadosDefensa
+
+deactivate "paisAtacante:Pais"
+
+":Batalla" -> "paisDefensor:Pais" : sacarFicha(cantidad)
+            activate "paisDefensor:Pais"
+"paisDefensor:Pais" -> "defensa:Ejercito": sacarFicha(cantidad)
+activate "defensa:Ejercito"
+deactivate "defensa:Ejercito"
+deactivate "paisDefensor:Pais"
+
+":Batalla" -> "paisAtacante:Pais" : sacarFicha(cantidad)
+            activate "paisAtacante:Pais"
+"paisAtacante:Pais" -> "ataque:Ejercito": sacarFicha(cantidad)
+activate "ataque:Ejercito"
+deactivate "ataque:Ejercito"
+deactivate "paisAtacante:Pais"
+":Batalla" -> "paisDefensor:Pais" : establecerDueño(paisAtacante)
+            activate "paisDefensor:Pais"
+"paisDefensor:Pais" -> "defensa:Ejercito": quedoSinEjercito()
+activate "defensa:Ejercito"
+"defensa:Ejercito" --> "paisDefensor:Pais": true
+deactivate "defensa:Ejercito"
+
+
+"paisDefensor:Pais" -> ":Jugador": desocupar()
+activate ":Jugador"
+deactivate ":Jugador"
+"paisDefensor:Pais" -> "paisAtacante:Pais": nuevoDueño()
+activate "paisAtacante:Pais"
+"paisAtacante:Pais" --> "paisDefensor:Pais": pedro
+deactivate "paisAtacante:Pais"
+deactivate "paisDefensor:Pais"
+deactivate ":Batalla"
 deactivate ":Tablero"
-
-activate "pedro:Jugador"
-    "pedro:Jugador" -> "paisAtacante:Pais" :quitarFicha()
-    activate "paisAtacante:Pais"
-    deactivate "paisAtacante:Pais"
-    "pedro:Jugador" -> "paisDefensor:Pais" :agregarFicha()
-    activate "paisDefensor:Pais"
-    deactivate "paisDefensor:Pais"
 deactivate "pedro:Jugador"
-
 @enduml

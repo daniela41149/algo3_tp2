@@ -6,7 +6,7 @@ Juego "1" *-- "*" TarjetaPais
 Interface TarjetaPais
 Interface Mision
 
-TarjetaPais <|.. TarjetaPaisActivada  
+TarjetaPais <|.. TarjetaPaisActivada
 TarjetaPais <|.. TarjetaPaisDesactivadas
 Mision <|.. MisionSecreta
 Mision <|.. MisionNoSecreta
@@ -23,4 +23,46 @@ Tablero ..> Canjes
 Pais "1" -> "1" Ejercito
 Tablero -> Batalla
 Batalla "1" --> "2" Pais
+
+
+skinparam classAttributeIconSize 0
+class Juego {
+}
+
+skinparam classAttributeIconSize 0
+class Jugador {
+ +jugarTurno()
+ +desocupar()
+ +nuevoDueño()
+}
+
+skinparam classAttributeIconSize 0
+class Tablero {
+ +atacar(String,String,cantidadEjercito)
+}
+
+skinparam classAttributeIconSize 0
+class Batalla {
+ +atacar(cantidadEjercito)
+}
+
+skinparam classAttributeIconSize 0
+class Pais {
+ +atacar(paisDefensa,cantidadEjercito)
+ +esLimitrofe(paisAtacante)
+ +establecerDueño(paisAtacante)
+}
+
+skinparam classAttributeIconSize 0
+class Ejercito {
+ +sacarFicha(cantidad)
+ +quedoSinEjercito()
+ +atacar(cantidadEjercito)
+ +defender()
+}
+
+skinparam classAttributeIconSize 0
+class Dado {
+ +tirarDado(cantidadEjercito)
+}
 @enduml
