@@ -11,7 +11,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Daniela Pareja** - [daniela41149](https://github.com/daniela41149)
 * **Rodrigo Vargas Chávez** - [Scuero](https://github.com/Scuero)
 
-Corrector: **{Corrector}**
+Corrector: **Santiago Valdez**
 
 ## Aplicación
 
