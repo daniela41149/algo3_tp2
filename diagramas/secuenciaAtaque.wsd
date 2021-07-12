@@ -1,0 +1,52 @@
+@startuml
+title "Ataque entre paises, el defensor queda sin fichas y es invadido"
+activate "pedro:Jugador"
+    "pedro:Jugador" ->":Batalla" : atacar(paisAtacante, paisDefensor, cantidadEjercito)
+deactivate "pedro:Jugador"
+
+activate ":Batalla"
+    ":Batalla" -> ":Tablero" : dadosAtacante(paisAtacante, cantidadEjercito)
+    /' si la cantidad de ejercito no es suficiente, devuelve una lista de dados vacia'/
+    activate ":Tablero"
+        ":Tablero" --> ":Batalla" : dadosAtaque
+    deactivate ":Tablero"
+    ":Batalla" -> ":Tablero" : dadosDefensor(paisAtacante, paisDefensor)
+    activate ":Tablero"
+        ":Tablero" -> "paisDefensor:Pais" :esLimitrofe(paisAtacante)
+        activate "paisDefensor:Pais"
+            "paisDefensor:Pais" --> ":Tablero" :true
+        deactivate "paisDefensor:Pais"
+        ":Tablero" -> ":Batalla" : dadosDefensa
+        /' si no es limitrofe devuelve una lista de dados vacia '/
+    deactivate ":Tablero"
+    ":Batalla" -> ":Batalla" : ordenarDados(dadosAtaque, dadosDefensa)
+    loop para cada par de dados
+        ":Batalla" -> ":Tablero" : sacarFicha(paisVencido)
+        activate ":Tablero"
+        deactivate ":Tablero"
+    end
+    ":Batalla" -> ":Tablero" : invadir(paisAtacante, paisDefensor)
+    /' este metodo asigna el pais conquistado al jugador atacante'/
+deactivate ":Batalla"
+
+activate ":Tablero"
+    ":Tablero" -> "paisDefensor:Pais" : quedoSinEjercito()
+    activate "paisDefensor:Pais"
+        "paisDefensor:Pais" --> ":Tablero" : true
+    deactivate "paisDefensor:Pais"
+    ":Tablero" -> "otroJugador:Jugador" : quitarPais(paisDefensor)
+    activate "otroJugador:Jugador"
+    deactivate "otroJugador:Jugador"
+    ":Tablero" -> "pedro:Jugador" : darPais(paisAtacante, paisDefensor)
+deactivate ":Tablero"
+
+activate "pedro:Jugador"
+    "pedro:Jugador" -> "paisAtacante:Pais" :quitarFicha()
+    activate "paisAtacante:Pais"
+    deactivate "paisAtacante:Pais"
+    "pedro:Jugador" -> "paisDefensor:Pais" :agregarFicha()
+    activate "paisDefensor:Pais"
+    deactivate "paisDefensor:Pais"
+deactivate "pedro:Jugador"
+
+@enduml
