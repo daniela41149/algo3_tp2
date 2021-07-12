@@ -1,0 +1,26 @@
+@startuml
+Juego "1" *-- "1" Tablero
+Juego "1" *-- "2..6" Jugador
+Juego "1" *-- "*" TarjetaPais
+
+Interface TarjetaPais
+Interface Mision
+
+TarjetaPais <|.. TarjetaPaisActivada  
+TarjetaPais <|.. TarjetaPaisDesactivadas
+Mision <|.. MisionSecreta
+Mision <|.. MisionNoSecreta
+
+Tablero "1" *-- "6" Continente
+Tablero "1" *-- "*" Pais
+Continente "1" *-- "1..*" Pais
+
+Jugador "1" *-- "2" Mision
+Jugador "1" -- "1..*" Pais
+Ejercito "1" --> "1" "Dado"
+Tablero ..> Canjes
+
+Pais "1" -> "1" Ejercito
+Tablero -> Batalla
+Batalla "1" --> "2" Pais
+@enduml
