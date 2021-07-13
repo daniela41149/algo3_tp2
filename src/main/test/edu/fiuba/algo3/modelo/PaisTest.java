@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -130,9 +131,7 @@ public class PaisTest {
         Pais pais2 = new Pais(nombrePais2, nombreContinente2, limitrofes2);
 
         List<Integer> dados = new ArrayList<>();
-        dados.add(1);
         dados.add(3);
-        dados.add(4);
 
         Ejercito mockedEjercito1 = mock(Ejercito.class);
         Ejercito mockedEjercito2 = mock(Ejercito.class);
@@ -142,20 +141,13 @@ public class PaisTest {
         pais2.setEjercito(mockedEjercito2);
 
         assertNotNull(pais1.atacar(pais2,1));
-        assertNotNull(pais1.atacar(pais2,2));
-        assertNotNull(pais1.atacar(pais2,3));
         assertNotNull(pais2.atacar(pais1,1));
-        assertNotNull(pais2.atacar(pais1,2));
-        assertNotNull(pais2.atacar(pais1,3));
 
         assertEquals(pais1.atacar(pais2,1),dados);
-        assertEquals(pais1.atacar(pais2,2),dados);
-        assertEquals(pais1.atacar(pais2,3),dados);
         assertEquals(pais2.atacar(pais1,1),dados);
-        assertEquals(pais2.atacar(pais1,2),dados);
-        assertEquals(pais2.atacar(pais1,3),dados);
 
-        System.out.println("Cuando los paises son limitrofes puede atacar y devuelve sus dados "+ pais1.atacar(pais2,3));
+        System.out.println("Puede atacar paises limitrofes. Ataca con 1 ficha, entonces devuelve "+ pais2.atacar(pais1,1));
+        System.out.println("Puede atacar paises limitrofes. Ataca con 1 ficha, entonces devuelve "+ pais1.atacar(pais2,1));
     }
 
 
