@@ -42,7 +42,7 @@ public class EjercitoTest {
     }
 
     @Test
-    public void test04SeQuedaSinEjercito() {
+    public void test04SacoFichasDeAUna() {
         Ejercito ejercitoUno = new Ejercito(2);
         assertEquals(ejercitoUno.devolverCantidadDeFichas(), 2);
         ejercitoUno.sacarFicha();
@@ -51,5 +51,19 @@ public class EjercitoTest {
         assertEquals(ejercitoUno.quedoSinEjercito(), true);
         ejercitoUno.sacarFicha();
         assertEquals(ejercitoUno.quedoSinEjercito(), true);
+    }
+
+    @Test
+    public void test05SacaFichasPorCantidad() {
+        Ejercito ejercitoUno = new Ejercito(40);
+        assertEquals(ejercitoUno.devolverCantidadDeFichas(), 40);
+        ejercitoUno.sacarFicha(10);
+        assertEquals(ejercitoUno.devolverCantidadDeFichas(), 30);
+        ejercitoUno.sacarFicha();
+        assertEquals(ejercitoUno.devolverCantidadDeFichas(), 29);
+        ejercitoUno.sacarFicha(5);
+        assertEquals(ejercitoUno.devolverCantidadDeFichas(), 24);
+        ejercitoUno.sacarFicha(50);
+        assertEquals(ejercitoUno.devolverCantidadDeFichas(), 0);
     }
 }
