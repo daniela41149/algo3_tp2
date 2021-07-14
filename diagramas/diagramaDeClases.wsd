@@ -29,11 +29,12 @@ skinparam classAttributeIconSize 0
 class Juego {
 }
 
+
 skinparam classAttributeIconSize 0
 class Jugador {
  +jugarTurno()
  +desocupar()
- +nuevoDueño()
+ +esElMismo(jugador)
 }
 
 skinparam classAttributeIconSize 0
@@ -51,6 +52,8 @@ class Pais {
  +atacar(paisDefensa,cantidadEjercito)
  +esLimitrofe(paisAtacante)
  +establecerDueño(paisAtacante)
+ +nuevoDueño()
+
 }
 
 skinparam classAttributeIconSize 0
