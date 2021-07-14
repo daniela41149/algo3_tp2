@@ -1,9 +1,12 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.Ejercito;
-import edu.fiuba.algo3.Pais;
+import edu.fiuba.algo3.*;
+
 import java.util.List;
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -12,18 +15,29 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PaisTest {
-    @Test
-    public void test001SeCreaUnPaisConNombrePaisNombreContienteYPaisesLimitrofes() {
-        String nombrePais = "Argentina";
-        String nombreContinente = "America del Sur";
+    private String nombrePais;
+    private String nombreContinente;
+    private List<String> limitrofes;
+    private Pais pais;
 
-        List<String> limitrofes = new ArrayList<>();
+
+    @BeforeEach
+    public void setup() {
+        nombrePais = "Argentina";
+        nombreContinente = "America del Sur";
+
+        limitrofes = new ArrayList<>();
         limitrofes.add("Chile");
         limitrofes.add("Peru");
         limitrofes.add("Brasil");
         limitrofes.add("Uruguay");
+        pais = new Pais(nombrePais, nombreContinente, limitrofes);
+    }
 
-        Pais pais = new Pais(nombrePais, nombreContinente, limitrofes);
+
+    @Test
+    public void test001SeCreaUnPaisConNombrePaisNombreContienteYPaisesLimitrofes() {
+        setup();
         assertEquals(pais.getNombre(),nombrePais);
         assertEquals(pais.getNombreContinente(),nombreContinente);
         System.out.println("Pais: " + pais.getNombre());
@@ -32,15 +46,8 @@ public class PaisTest {
     }
 
     @Test
-    public void test002DosPaisesSonLimitrofes() {
-        String nombrePais1 = "Argentina";
-        String nombreContinente1 = "America del Sur";
-
-        List<String> limitrofes1 = new ArrayList<>();
-        limitrofes1.add("Chile");
-        limitrofes1.add("Peru");
-        limitrofes1.add("Brasil");
-        limitrofes1.add("Uruguay");
+    public void test002DosPaisesSonLimitrofesEntoncesNoSeLanzaPaisNoLimitrofeException() {
+        setup();
 
         String nombrePais2 = "Uruguay";
         String nombreContinente2 = "America del Sur";
@@ -49,108 +56,183 @@ public class PaisTest {
         limitrofes2.add("Argentina");
         limitrofes2.add("Brasil");
 
-        Pais pais1 = new Pais(nombrePais1, nombreContinente1, limitrofes1);
         Pais pais2 = new Pais(nombrePais2, nombreContinente2, limitrofes2);
 
-        assertTrue(pais1.esLimitrofe(pais2));
-        assertTrue(pais2.esLimitrofe(pais1));
-        System.out.println("Los paises " + pais1.getNombre() +" y "+ pais2.getNombre() +" son limítrofes.");
+        assertDoesNotThrow( () -> pais.esLimitrofe(pais2));
+        assertDoesNotThrow( () -> pais2.esLimitrofe(pais));
     }
 
     @Test
-    public void test003DosPaisesNoSonLimitrofes() {
-        String nombrePais1 = "Argentina";
-        String nombreContinente1 = "America del Sur";
+    public void test003DosPaisesNoSonLimitrofesEntoncesSeLanzaPaisNoLimitrofeException() {
+        setup();
+        String nombrePais3 = "Italia";
+        String nombreContinente3 = "Europa";
 
-        List<String> limitrofes1 = new ArrayList<>();
-        limitrofes1.add("Chile");
-        limitrofes1.add("Peru");
-        limitrofes1.add("Brasil");
-        limitrofes1.add("Uruguay");
+        List<String> limitrofes3 = new ArrayList<>();
+        limitrofes3.add("Alemania");
+        limitrofes3.add("Francia");
 
-        String nombrePais2 = "Italia";
-        String nombreContinente2 = "Europa";
+        Pais pais3 = new Pais(nombrePais3, nombreContinente3, limitrofes3);
 
-        List<String> limitrofes2 = new ArrayList<>();
-        limitrofes2.add("Alemania");
-        limitrofes2.add("Francia");
-
-        Pais pais1 = new Pais(nombrePais1, nombreContinente1, limitrofes1);
-        Pais pais2 = new Pais(nombrePais2, nombreContinente2, limitrofes2);
-
-        assertFalse(pais1.esLimitrofe(pais2));
-        assertFalse(pais2.esLimitrofe(pais1));
-        System.out.println("Los paises " + pais1.getNombre() +" e "+ pais2.getNombre() +" no son limítrofes.");
+        assertThrows(PaisNoLimitrofeException.class, ()-> pais.esLimitrofe(pais3));
+        assertThrows(PaisNoLimitrofeException.class, ()-> pais3.esLimitrofe(pais));
     }
 
     @Test
-    public void test005NoPuedeAtacarAUnPaisQueNoEsLimitrofe() {
-        String nombrePais1 = "Argentina";
-        String nombreContinente1 = "America del Sur";
+    public void test004NoPuedeAtacarAUnPaisQueNoEsLimitrofeEntoncesSeLanzaPaisNoLimitrofeException() {
+        String nombrePais4 = "Java";
+        String nombreContinente4 = "Oceania";
 
-        List<String> limitrofes1 = new ArrayList<>();
-        limitrofes1.add("Chile");
-        limitrofes1.add("Peru");
-        limitrofes1.add("Brasil");
-        limitrofes1.add("Uruguay");
+        List<String> limitrofes4 = new ArrayList<>();
+        limitrofes4.add("Australia");
 
-        String nombrePais2 = "Java";
-        String nombreContinente2 = "Oceania";
+        Pais pais4 = new Pais(nombrePais4, nombreContinente4, limitrofes4);
 
-        List<String> limitrofes2 = new ArrayList<>();
-        limitrofes2.add("Australia");
-
-        Pais pais1 = new Pais(nombrePais1, nombreContinente1, limitrofes1);
-        Pais pais2 = new Pais(nombrePais2, nombreContinente2, limitrofes2);
-
-        assertNull(pais1.atacar(pais2, 1));
-        System.out.println(pais1.getNombre() +" no puede atacar a "+ pais2.getNombre() +" porque no son limítrofes.");
+        assertThrows(PaisNoLimitrofeException.class, () -> pais.atacar(pais4, 1));
+        assertThrows(PaisNoLimitrofeException.class, () -> pais4.atacar(pais, 1));
     }
 
     @Test
-    public void test006PuedeAtacarAUnPaisQueSiEsLimitrofe() {
-        String nombrePais1 = "Argentina";
-        String nombreContinente1 = "America del Sur";
+    public void test005PuedeAtacarAUnPaisQueSiEsLimitrofe() {
+        setup();
+        String nombrePais5 = "Peru";
+        String nombreContinente5 = "America del Sur";
 
-        List<String> limitrofes1 = new ArrayList<>();
-        limitrofes1.add("Chile");
-        limitrofes1.add("Peru");
-        limitrofes1.add("Brasil");
-        limitrofes1.add("Uruguay");
+        List<String> limitrofes5 = new ArrayList<>();
+        limitrofes5.add("Colombia");
+        limitrofes5.add("Brasil");
+        limitrofes5.add("Chile");
+        limitrofes5.add("Argentina");
 
-        String nombrePais2 = "Peru";
-        String nombreContinente2 = "America del Sur";
-
-        List<String> limitrofes2 = new ArrayList<>();
-        limitrofes2.add("Colombia");
-        limitrofes2.add("Brasil");
-        limitrofes2.add("Chile");
-        limitrofes2.add("Argentina");
-
-        Pais pais1 = new Pais(nombrePais1, nombreContinente1, limitrofes1);
-        Pais pais2 = new Pais(nombrePais2, nombreContinente2, limitrofes2);
+        Pais pais5 = new Pais(nombrePais5, nombreContinente5, limitrofes5);
 
         List<Integer> dados = new ArrayList<>();
         dados.add(3);
+        List<Integer> dados5 = new ArrayList<>();
+        dados5.add(6);
 
-        Ejercito mockedEjercito1 = mock(Ejercito.class);
-        Ejercito mockedEjercito2 = mock(Ejercito.class);
-        when(mockedEjercito1.atacar(anyInt())).thenReturn(dados);
-        when(mockedEjercito2.atacar(anyInt())).thenReturn(dados);
-        pais1.setEjercito(mockedEjercito1);
-        pais2.setEjercito(mockedEjercito2);
+        Ejercito mockedEjercito = mock(Ejercito.class);
+        Ejercito mockedEjercito5 = mock(Ejercito.class);
 
-        assertNotNull(pais1.atacar(pais2,1));
-        assertNotNull(pais2.atacar(pais1,1));
+        when(mockedEjercito.atacar(anyInt())).thenReturn(dados);
+        when(mockedEjercito5.atacar(anyInt())).thenReturn(dados5);
 
-        assertEquals(pais1.atacar(pais2,1),dados);
-        assertEquals(pais2.atacar(pais1,1),dados);
+        pais.setEjercito(mockedEjercito);
+        pais5.setEjercito(mockedEjercito5);
 
-        System.out.println("Puede atacar paises limitrofes. Ataca con 1 ficha, entonces devuelve "+ pais2.atacar(pais1,1));
-        System.out.println("Puede atacar paises limitrofes. Ataca con 1 ficha, entonces devuelve "+ pais1.atacar(pais2,1));
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            assertEquals(pais.atacar(pais5,1),dados);
+            assertEquals(pais5.atacar(pais,1),dados5);
+        } catch (PaisNoLimitrofeException e) {
+            lanzaUnaExcepcion = true;
+        }
+
+        assertFalse(lanzaUnaExcepcion);
+        assertDoesNotThrow( () -> pais.atacar(pais5, 1));  //ataca con 1 Ficha
+        assertDoesNotThrow( () -> pais5.atacar(pais, 1));  //ataca con 1 Ficha
     }
 
 
+    @Test
+    public void test006SPaisLePideAEjercitoQueDefiendaDeUnAtaque() {
+        setup();
+
+        List<Integer> dados = new ArrayList<>();
+        dados.add(4);
+        dados.add(5);
+
+        Ejercito mockedEjercito = mock(Ejercito.class);
+        when(mockedEjercito.defender()).thenReturn(dados);
+        pais.setEjercito(mockedEjercito);
+
+        assertEquals(pais.defender(),dados);
+    }
+
+    /*
+
+    @Test
+    public void test007JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() {
+        setup();
+        Jugador mockedJugador = mock(Jugador.class);
+        Ejercito mockedEjercito = mock(Ejercito.class);
+        pais.setEjercito(mockedEjercito);
+
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            pais.colocarEjercito(mockedJugador,2);
+        } catch (Exception e){
+            lanzaUnaExcepcion = true;
+        }
+        assertFalse(lanzaUnaExcepcion);
+    }
+
+
+
+    @Test
+    public void test008JugadorQuiereColocarEjercitoEnUnPaisQueNoLePertenece() {
+        setup();
+        Jugador mockedJugador = mock(Jugador.class);
+        Jugador mockedJugador2 = mock(Jugador.class);
+
+        Ejercito mockedEjercito = mock(Ejercito.class);
+        pais.setEjercito(mockedEjercito);
+
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            Mockito.doThrow(new NoEsElMismoJugadorException()).when(mockedJugador).esElMismo(mockedJugador2);
+            pais.colocarEjercito(mockedJugador,2);
+            pais.colocarEjercito(mockedJugador2,1);
+        } catch (NoEsElMismoJugadorException e){
+            lanzaUnaExcepcion = true;
+        }
+
+        assertTrue(lanzaUnaExcepcion);
+
+    }
+
+    @Test
+    public void test009PaisQuePerdioEjercitoEstableceSuDueño() {
+        setup();
+
+        String nombrePais2 = "Uruguay";
+        String nombreContinente2 = "America del Sur";
+
+        List<String> limitrofes2 = new ArrayList<>();
+        limitrofes2.add("Argentina");
+        limitrofes2.add("Brasil");
+
+        Pais pais2 = new Pais(nombrePais2, nombreContinente2, limitrofes2);
+
+        Jugador mockedJugador = mock(Jugador.class);
+        Jugador mockedJugador2 = mock(Jugador.class);
+
+        Ejercito mockedEjercito = mock(Ejercito.class);
+        Ejercito mockedEjercito2 = mock(Ejercito.class);
+
+        when(mockedEjercito.quedoSinEjercito()).thenReturn(true);
+        pais.setEjercito(mockedEjercito);
+        pais2.setEjercito(mockedEjercito);
+
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            Mockito.doThrow(new NoEsElMismoJugadorException()).when(mockedJugador).esElMismo(mockedJugador2);
+            pais.colocarEjercito(mockedJugador,2);
+            pais2.colocarEjercito(mockedJugador2,2);
+            pais.establecerDueño(pais2);
+
+        } catch (NoEsElMismoJugadorException e){
+            lanzaUnaExcepcion = true;
+        }
+        assertFalse(lanzaUnaExcepcion);
+
+    }
+
+*/
 
 
 }

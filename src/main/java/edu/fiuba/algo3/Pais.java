@@ -17,46 +17,56 @@ public class Pais {
         this.ejercito = new Ejercito();
     }
 
-    public Boolean esLimitrofe(Pais paisAtacante) {
+    public void esLimitrofe(Pais paisAtacante) throws PaisNoLimitrofeException {
         for (String limitrofe: nombrePaisesLimitrofes) {
             if (paisAtacante.getNombre().equals(limitrofe)) {
-                return true;
+                return;
             }
         }
-        return false;
+        throw new PaisNoLimitrofeException();
     }
 
-    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) {
-        if(paisDefensa.esLimitrofe(this)){
-            return (ejercito.atacar(cantidadEjercito));
-        } else { return null; }
+    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws PaisNoLimitrofeException {
+        paisDefensa.esLimitrofe(this);
+        return (ejercito.atacar(cantidadEjercito));
     }
 
     public List<Integer> defender() {
         return (ejercito.defender());
     }
 
+    public void sacarFicha(int cantidad) {
+        ejercito.sacarFicha(cantidad);
+    }
+
     /*
-        public void sacarFicha(int cantidad) {
-            ejercito.sacarFicha(cantidad);
-        }
+    public Jugador nuevoDueño() {
+        return this.dueño;
+    }
 
-        public void colocarEjercito (Jugador jugador, int cantidadEjercito) {
-        }
-
-        public Jugador nuevoDueño () {
-            return this.dueño;
-        }
-
-        public void establecerDueño (Pais paisAtacante) {
-            if (ejercito.quedoSinEjercito()) {
-                this.dueño.desocupar();
-                this.dueño = paisAtacante.nuevoDueño();
-        }
+    private void elegirPais (Jugador jugador) {
+        this.dueño = jugador;
     }
 
 
+    public void establecerDueño (Pais paisAtacante) {
+        if (ejercito.quedoSinEjercito()) {
+            this.dueño.desocupar();
+            this.dueño = paisAtacante.nuevoDueño();
+        }
+    }
+
+    public void colocarEjercito (Jugador jugador, int cantidadEjercito) throws NoEsElMismoJugadorException {
+        if (this.dueño == null) {
+            this.elegirPais(jugador);
+        }
+        this.dueño.esElMismo(jugador);
+        ejercito.agregarFichas(cantidadEjercito);
+    }
+
     */
+
+
 
     public String getNombre () {
         return this.nombrePais;
