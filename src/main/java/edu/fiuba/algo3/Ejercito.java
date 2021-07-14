@@ -24,6 +24,14 @@ public class Ejercito {
             this.cantidadDeFichas--;
     }
 
+    public void sacarFicha(int unaCantidadDeFichas){
+
+        if ( unaCantidadDeFichas <= this.cantidadDeFichas )
+            this.cantidadDeFichas = this.cantidadDeFichas-unaCantidadDeFichas;
+        else
+            this.cantidadDeFichas = 0;
+    }
+
     public void agregarFicha(){
 
         this.cantidadDeFichas++;
