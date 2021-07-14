@@ -4,15 +4,13 @@ import java.util.List;
 
 public class Pais {
     private String nombrePais;
-    private String nombreContinente;
     private List<String> nombrePaisesLimitrofes;
     //private Jugador dueño;
     private Ejercito ejercito;
 
 
-    public Pais(String nombrePais, String nombreContinente, List<String> nombrePaisesLimitrofes) {
+    public Pais(String nombrePais, List<String> nombrePaisesLimitrofes) {
         this.nombrePais = nombrePais;
-        this.nombreContinente = nombreContinente;
         this.nombrePaisesLimitrofes = nombrePaisesLimitrofes;
         this.ejercito = new Ejercito();
     }
@@ -39,7 +37,18 @@ public class Pais {
         ejercito.sacarFicha(cantidad);
     }
 
-    /*
+
+/*
+    public boolean esElDueño(Jugador jugador) throws NoEsElMismoJugadorException {
+        try {
+            this.dueño.esElMismo(jugador);
+            return true;
+        } catch (NoEsElMismoJugadorException e) {
+            return false;
+        }
+    }
+
+
     public Jugador nuevoDueño() {
         return this.dueño;
     }
@@ -64,16 +73,12 @@ public class Pais {
         ejercito.agregarFichas(cantidadEjercito);
     }
 
-    */
+*/
 
 
 
     public String getNombre () {
         return this.nombrePais;
-    }
-
-    public String getNombreContinente () {
-        return this.nombreContinente;
     }
 
     public void setEjercito(Ejercito nuevoEjercito) {
