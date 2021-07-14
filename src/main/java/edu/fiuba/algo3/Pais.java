@@ -37,9 +37,9 @@ public class Pais {
         ejercito.sacarFicha(cantidad);
     }
 
-
 /*
-    public boolean esElDueño(Jugador jugador) throws NoEsElMismoJugadorException {
+
+    public boolean esElDueño(Jugador jugador) {
         try {
             this.dueño.esElMismo(jugador);
             return true;

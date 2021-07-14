@@ -14,14 +14,13 @@ public class Continente {
     }
 
 /*
-    public boolean jugadorControlaContinente (Jugador jugador) throws NoEsElMismoJugadorException {
+    public boolean jugadorControlaContinente (Jugador jugador) {
         for (Pais cadaPais: paises) {
             if (!cadaPais.esElDueño(jugador)) {
                 return false;
             }
         }
         return true;
-
     }
 */
 

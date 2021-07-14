@@ -108,12 +108,12 @@ public class ContinenteTest {
             pais4.colocarEjercito(mockedJugador,1);
             pais5.colocarEjercito(mockedJugador,1);
             pais6.colocarEjercito(mockedJugador,1);
-            controlaContinente = continente.jugadorControlaContinente(mockedJugador);
 
         } catch (NoEsElMismoJugadorException e) {
             lanzaUnaExcepcion = true;
         }
 
+        controlaContinente = continente.jugadorControlaContinente(mockedJugador);
         assertFalse(lanzaUnaExcepcion);
         assertTrue(controlaContinente);
 
@@ -136,11 +136,13 @@ public class ContinenteTest {
             pais5.colocarEjercito(mockedJugador,1);
             pais6.colocarEjercito(mockedJugador,1);
             Mockito.doThrow(new NoEsElMismoJugadorException()).when(mockedJugador2).esElMismo(mockedJugador);
-            controlaContinente = continente.jugadorControlaContinente(mockedJugador);
+
 
         } catch (NoEsElMismoJugadorException e) {
             lanzaUnaExcepcion = true;
         }
+
+        controlaContinente = continente.jugadorControlaContinente(mockedJugador);
 
         assertFalse(lanzaUnaExcepcion);
         assertFalse(controlaContinente);
