@@ -7,9 +7,10 @@ import java.util.Scanner;
 public class Jugador {
     private String nombreJugador;
     private String color;
+
     private List<Pais> paises = new ArrayList<>();
 
-    public Jugador(String nombre, String colorJugador, List<Pais> paisesDelJugador){
+    public Jugador(String nombre, String colorJugador, List<Pais> paisesDelJugador, Juego juego){
         this.nombreJugador = nombre;
         this. color = colorJugador;
         this. paises = paisesDelJugador;
@@ -30,8 +31,12 @@ public class Jugador {
     }
 
  */
-    public boolean esElMismo(Jugador jugador){
-        return (jugador.nombreJugador.equals(this.nombreJugador));
+    public boolean esElMismo(Jugador jugador) throws NoEsElMismoJugadorException{
+        boolean esElMismo = jugador.nombreJugador.equals(this.nombreJugador);
+        if(esElMismo){
+            return esElMismo;
+        }
+        throw new NoEsElMismoJugadorException();
     }
     public void desocupar(String nombrePais){
         boolean paisEncontrado = false;
