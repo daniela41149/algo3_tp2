@@ -65,7 +65,7 @@ public class Pais {
 
     public void establecerDueño (Pais paisAtacante) {
         if (ejercito.quedoSinEjercito()) {
-            this.dueño.desocupar();
+            this.dueño.desocupar(this.nombrePais);
             this.dueño = paisAtacante.nuevoDueño();
         }
     }
