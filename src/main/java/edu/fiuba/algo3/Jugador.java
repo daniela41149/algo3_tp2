@@ -49,6 +49,10 @@ public class Jugador {
 
     }
 
+    public int cantidadPaises(){
+        return (this.paises.size());
+    }
+
 
 
 

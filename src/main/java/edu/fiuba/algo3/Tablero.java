@@ -95,5 +95,8 @@ public class Tablero {
     public int cantidadPaises(){
         return (this.paises.size());
     }
+    public int cantidadContinentes(){
+        return (this.continentes.size());
+    }
 
 }
