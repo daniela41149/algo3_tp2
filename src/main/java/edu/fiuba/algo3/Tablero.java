@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.Set;
 
 public class Tablero {
-    private List<Pais> paises = new ArrayList<>();
-    private List<Continente> continentes = new ArrayList<>();
+    private List<Pais> paises;
+    private List<Continente> continentes;
     //private Batalla batalla;
 
 /*

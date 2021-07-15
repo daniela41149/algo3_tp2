@@ -8,7 +8,7 @@ public class Jugador {
     private String nombreJugador;
     private String color;
 
-    private List<Pais> paises = new ArrayList<>();
+    private List<Pais> paises ;
     /*
     public Jugador(String nombre, String colorJugador, List<Pais> paisesDelJugador, Juego juego){
         this.nombreJugador = nombre;
