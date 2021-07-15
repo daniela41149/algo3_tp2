@@ -3,43 +3,71 @@ package edu.fiuba.algo3;
 
 import java.util.ArrayList;
 import java.lang.String;
+import java.util.HashMap;
 import java.util.List;
 import java.io.*;
+import java.util.Set;
 
 public class Tablero {
-    //private private List<Continente> continentes;
-    private List<Pais> paises;
+    private List<Pais> paises = new ArrayList<>();
+    private List<Continente> continentes = new ArrayList<>();
+    // crear la batalla
 
 
-    /*atacar(string string cant ejercito)*/
+    private void cargarArchivo(String direccionArchivo) {
+        String renglon;
+        HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
 
-    private List<Integer> leerArchivo (String rutaArchivo){
-        List<Integer> listaPaises = new ArrayList<>();
-        BufferedReader br = null;
+
         try {
-            br = new BufferedReader(new FileReader(rutaArchivo));
-            String unRenglon = br.readLine();
-            while(unRenglon != null)
-            {
-                String[] parts = unRenglon.split(",");
-                String pais = parts[0];
+            File archivo = new File (direccionArchivo);
+            FileReader fr = new FileReader(archivo);
+            BufferedReader br = new BufferedReader(fr);
+
+            renglon = br.readLine();
+
+            while(renglon != null){
+
+                String[] parts = renglon.split(",", 3);
+                String nombrePais = parts[0];
                 String continente = parts[1];
                 List<String> nombrePaisesLimitrofes = parts[2];
-                Pais nuevoPais = new Pais(pais, continente, nombrePaisesLimitrofes);
-                listaPaises.add (nuevoPais);
-                unRenglon = br.readLine();
+                Pais nuevoPais = new Pais(nombrePais, nombrePaisesLimitrofes);
+                paises.add(nuevoPais);
+
+                List<Pais> listaPaises = new ArrayList<>();
+                if(diccionarioContinentes.containsKey(continente)){
+                    listaPaises = diccionarioContinentes.get(continente);
+                }
+                listaPaises.add(nuevoPais);
+                diccionarioContinentes.put(continente,listaPaises);
+
+                renglon = br.readLine();
             }
+
+
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            System.out.println(e);
+            e.printStackTrace();
         }
-        finally {
-                if (br != null)
-                    br.close();
+        Set<String> listaContinentes = diccionarioContinentes.keySet();
+        for( String nombreContinente : listaContinentes){
+            List<Pais> listaPaisesPorContinente = diccionarioContinentes.get(nombreContinente);
+            Continente nuevoContinente = new Continente(nombreContinente,listaPaisesPorContinente);
+            continentes.add(nuevoContinente);
+
         }
-        return listaPaises;
+
     }
 
     public Tablero(String rutaArchivo){
-        //this.continentes = ;
-        this.paises = leerArchivo(rutaArchivo) ;
+        cargarArchivo(rutaArchivo);
+    }
+    public void atacar(String paisAtacante, String paisDefensor,int cantEjercito){
+        batalla.atacar();
+        // busco los paises y se los mando a batalla ??
     }
 
 }
