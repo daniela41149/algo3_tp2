@@ -11,7 +11,7 @@ import java.util.Set;
 public class Tablero {
     private List<Pais> paises = new ArrayList<>();
     private List<Continente> continentes = new ArrayList<>();
-    // crear la batalla
+    private Batalla batalla;
 
 
     private void cargarArchivo(String direccionArchivo) {
@@ -65,9 +65,30 @@ public class Tablero {
     public Tablero(String rutaArchivo){
         cargarArchivo(rutaArchivo);
     }
-    public void atacar(String paisAtacante, String paisDefensor,int cantEjercito){
-        batalla.atacar();
-        // busco los paises y se los mando a batalla ??
+
+    private Pais buscarPais(String nombrePais){
+        boolean paisEncontrado = false;
+        int i = 0;
+        Pais paisBuscado;
+        while( (!paisEncontrado) && (i < paises.size()) ){
+            paisBuscado = paises[i];
+
+            if(paisBuscado.coicideNombre(nombrePais)){
+                paisEncontrado = true;
+            }
+            i++;
+        }
+
+        return paisBuscado;
+
+    }
+
+    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito){
+        Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
+        Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
+        batalla.atacar(paisAtacante, paisDefensor, cantEjercito);
+        //falta definir bien la batalla
+
     }
 
 }
