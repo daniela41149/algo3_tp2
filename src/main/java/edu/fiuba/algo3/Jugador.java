@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3;
 
 import java.util.List;
 import java.util.Scanner;

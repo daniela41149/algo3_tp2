@@ -73,7 +73,7 @@ public class Tablero {
         while( (!paisEncontrado) && (i < paises.size()) ){
             paisBuscado = paises[i];
 
-            if(paisBuscado.coicideNombre(nombrePais)){
+            if(paisBuscado.coincideNombre(nombrePais)){
                 paisEncontrado = true;
             }
             i++;
@@ -86,8 +86,9 @@ public class Tablero {
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito){
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
-        batalla.atacar(paisAtacante, paisDefensor, cantEjercito);
-        //falta definir bien la batalla
+        Batalla batalla = new Batalla(paisAtacante,paisDefensor);
+        batalla.atacar(cantEjercito);
+        //nose si esta bien definida batalla
 
     }
 
