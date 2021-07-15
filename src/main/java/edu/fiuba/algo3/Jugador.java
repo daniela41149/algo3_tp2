@@ -7,14 +7,15 @@ import java.util.Scanner;
 public class Jugador {
     private String nombreJugador;
     private String color;
-    private List<Pais> paises = new ArrayList<>();
 
-    public Jugador(String nombre, String colorJugador, List<Pais> paisesDelJugador){
+    private List<Pais> paises = new ArrayList<>();
+    /*
+    public Jugador(String nombre, String colorJugador, List<Pais> paisesDelJugador, Juego juego){
         this.nombreJugador = nombre;
         this. color = colorJugador;
         this. paises = paisesDelJugador;
     }
-
+    */
 /*
     public void jugarTurno(){
         Scanner paisAtacante = new Scanner(System.in);
@@ -30,15 +31,20 @@ public class Jugador {
     }
 
  */
-    public boolean esElMismo(Jugador jugador){
-        return (jugador.nombreJugador.equals(this.nombreJugador));
+    public boolean esElMismo(Jugador jugador) throws NoEsElMismoJugadorException{
+        boolean esElMismoJugador = jugador.nombreJugador.equals(this.nombreJugador);
+        if(esElMismoJugador){
+            return esElMismoJugador;
+        }
+        throw new NoEsElMismoJugadorException();
     }
+
     public void desocupar(String nombrePais){
         boolean paisEncontrado = false;
         int i = 0;
         Pais paisBuscado;
         while( (!paisEncontrado) && (i < paises.size()) ){
-            paisBuscado = paises[i];
+            paisBuscado = paises.get(i);
 
             if(paisBuscado.coincideNombre(nombrePais)){
                 paisEncontrado = true;
