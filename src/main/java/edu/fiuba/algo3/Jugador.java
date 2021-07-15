@@ -15,7 +15,7 @@ public class Jugador {
         this. paises = paisesDelJugador;
     }
 
-
+/*
     public void jugarTurno(){
         Scanner paisAtacante = new Scanner(System.in);
         String paisAtacanteNombre = paisAtacante.nextLine();
@@ -28,8 +28,10 @@ public class Jugador {
         //atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
 
     }
+
+ */
     public boolean esElMismo(Jugador jugador){
-        return (jugador.nombreJugador.equals(this.nombreJugador);
+        return (jugador.nombreJugador.equals(this.nombreJugador));
     }
     public void desocupar(String nombrePais){
         boolean paisEncontrado = false;
@@ -46,4 +48,8 @@ public class Jugador {
         }
 
     }
+
+
+
+
 }

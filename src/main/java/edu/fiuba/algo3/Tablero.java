@@ -11,7 +11,7 @@ import java.util.Set;
 public class Tablero {
     private List<Pais> paises = new ArrayList<>();
     private List<Continente> continentes = new ArrayList<>();
-    private Batalla batalla;
+    //private Batalla batalla;
 
 
     private void cargarArchivo(String direccionArchivo) {
@@ -82,7 +82,7 @@ public class Tablero {
         return paisBuscado;
 
     }
-
+    /*
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito){
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
@@ -90,6 +90,10 @@ public class Tablero {
         batalla.atacar(cantEjercito);
         //nose si esta bien definida batalla
 
+    }
+    */
+    public int cantidadPaises(){
+        return (this.paises.size());
     }
 
 }

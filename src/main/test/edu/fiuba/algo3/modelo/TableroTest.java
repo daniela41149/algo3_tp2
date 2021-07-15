@@ -9,7 +9,7 @@ public class TableroTest {
     @Test
     public void test01LaCantidadDePaisesEs50() {
        Tablero tablero = new Tablero("Fronteras.csv");
-        assertEquals(tablero.paises.size(), 50);
+        assertEquals(tablero.cantidadPaises(), 50);
 
     }
 
