@@ -13,7 +13,7 @@ public class Tablero {
     private List<Continente> continentes = new ArrayList<>();
     //private Batalla batalla;
 
-
+/*
     private void cargarArchivo(String direccionArchivo) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
@@ -82,6 +82,8 @@ public class Tablero {
         return paisBuscado;
 
     }
+
+ */
     /*
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito){
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;

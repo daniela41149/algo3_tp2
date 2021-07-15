@@ -1,4 +1,5 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
+
 
 
 
@@ -11,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JugadorTest {
-
+    /*
     private String nombrePais;
     private List<String> limitrofes;
     private Pais pais;
@@ -66,4 +67,6 @@ public class JugadorTest {
         assertEquals( jugador1.cantidadPaises() , 1);
 
     }
+
+     */
 }
