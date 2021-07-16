@@ -34,6 +34,7 @@ public class Jugador {
         Scanner cantEjercito = new Scanner(System.in);
         int cantEjercitoAtaca = cantEjercito.nextInt();
 
+
         try {
             juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
         }catch(PaisNoLimitrofeException e) {

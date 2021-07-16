@@ -65,7 +65,9 @@ public class Tablero {
 
     }
 
-
+    public List<Pais> pasarPiasesAJuego(){
+        return( this.paises);
+    }
 
     public Pais buscarPais(String nombrePais){
         boolean paisEncontrado = false;
