@@ -3,6 +3,7 @@ package edu.fiuba.algo3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.lang.NullPointerException;
 
 public class Jugador {
     private String nombreJugador;
@@ -31,15 +32,21 @@ public class Jugador {
         int cantEjercitoAtaca = cantEjercito.nextInt();
 
 
-       // juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
+       //juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
 
     }
 
+    public String getNombre () {
+        return this.nombreJugador;
+    }
+
+    public String getColor () {
+        return this.color;
+    }
 
     public boolean esElMismo(Jugador jugador) throws NoEsElMismoJugadorException{
-        boolean esElMismoJugador = jugador.nombreJugador.equals(this.nombreJugador);
-        if(esElMismoJugador){
-            return esElMismoJugador;
+        if( (jugador.getNombre().equals(this.nombreJugador) ) && (jugador.getColor().equals(this.color))){
+            return true;
         }
         throw new NoEsElMismoJugadorException();
     }
@@ -50,7 +57,6 @@ public class Jugador {
         Pais paisBuscado;
         while( (!paisEncontrado) && (i < paises.size()) ){
             paisBuscado = paises.get(i);
-
             if(paisBuscado.coincideNombre(nombrePais)){
                 paisEncontrado = true;
                 paises.remove(i);
@@ -63,10 +69,4 @@ public class Jugador {
     public int cantidadPaises(){
         return (this.paises.size());
     }
-
-
-
-
-
-
 }

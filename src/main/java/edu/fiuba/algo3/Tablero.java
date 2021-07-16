@@ -86,7 +86,6 @@ public class Tablero {
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
         this.batalla = new Batalla(paisAtacante,paisDefensor);
         batalla.atacar(cantEjercito);
-        //nose si esta bien definida batalla
     }
 
     public int cantidadPaises(){
