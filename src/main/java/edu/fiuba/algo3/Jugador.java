@@ -15,13 +15,13 @@ public class Jugador {
     public Jugador(String nombre, String colorJugador, Juego juego){
         this.nombreJugador = nombre;
         this. color = colorJugador;
+        this.paises = new ArrayList<>();
         this.juego = juego;
     }
 
-    public void agragarPaises(List<Pais> paisesDelJugador){
-        this. paises = paisesDelJugador;
+    public void agregarPais(Pais nuevoPais){
+        paises.add(nuevoPais);
     }
-
 
     public void jugarTurno(){
         System.out.println("Ingrese el Pais Atacante: ");

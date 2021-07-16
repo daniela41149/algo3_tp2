@@ -18,8 +18,8 @@ public class JugadorTest {
     private String nombrePais;
     private  String nombreOtroPais;
     private List<String> limitrofes = new ArrayList<>();
-    private Pais pais;
-    private List<Pais> paises = new ArrayList<>();
+    private Pais paisUno;
+    private Pais paisDos;
     private Juego juego;
 
     @BeforeEach
@@ -29,30 +29,30 @@ public class JugadorTest {
         limitrofes.add("Chile");
         limitrofes.add("Brasil");
         limitrofes.add("Uruguay");
-        pais = new Pais(nombrePais, limitrofes);
-        paises.add(pais);
+        paisUno = new Pais(nombrePais, limitrofes);
+
 
         nombreOtroPais = "Brasil";
         limitrofes.add("Uruguay");
         limitrofes.add("Argentina");
-        pais = new Pais(nombreOtroPais, limitrofes);
-        paises.add(pais);
+        paisDos = new Pais(nombreOtroPais, limitrofes);
+
     }
 
     @Test
     public void test01EsElMismoJugador() {
 
         Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
-        jugador1.agragarPaises(paises);
+        jugador1.agregarPais(paisUno);
         assertDoesNotThrow( () -> jugador1.esElMismo(jugador1) );
     }
     @Test
     public void test02NoEsElMismoJugador() {
 
         Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
-        jugador1.agragarPaises(paises);
+        jugador1.agregarPais(paisUno);
         Jugador jugador2 = new Jugador("Sebastian", "Rojo",juego);
-        jugador2.agragarPaises(paises);
+        jugador2.agregarPais(paisUno);
         assertThrows(NoEsElMismoJugadorException.class, ()-> jugador1.esElMismo(jugador2));
     }
 
@@ -61,7 +61,9 @@ public class JugadorTest {
     public void test03DesocupoUnPaisYQuedaConUnosolo() {
 
         Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
-        jugador1.agragarPaises(paises);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
 
         assertEquals( 2 ,jugador1.cantidadPaises());
         jugador1.desocupar("Brasil");
