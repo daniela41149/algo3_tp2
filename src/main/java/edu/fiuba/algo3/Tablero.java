@@ -67,7 +67,7 @@ public class Tablero {
 
 
 
-    private Pais buscarPais(String nombrePais){
+    public Pais buscarPais(String nombrePais){
         boolean paisEncontrado = false;
         int i = 0;
         Pais paisBuscado = null;

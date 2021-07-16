@@ -24,15 +24,35 @@ public class Jugador {
 
 
     public void jugarTurno(){
+        System.out.println("Ingrese el Pais Atacante: ");
         Scanner paisAtacante = new Scanner(System.in);
         String paisAtacanteNombre = paisAtacante.nextLine();
+        System.out.println("Ingrese el Pais Defensor: ");
         Scanner paisDefensor = new Scanner(System.in);
         String paisDefensorNombre = paisDefensor.nextLine();
+        System.out.println("Ingrese la cantidad de ejercito para batallar: ");
         Scanner cantEjercito = new Scanner(System.in);
         int cantEjercitoAtaca = cantEjercito.nextInt();
 
+        try {
+            juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
+        }catch(PaisNoLimitrofeException e) {
+        }
+        /*
+        boolean repetir = true;
 
-       //juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
+        while(repetir){
+            try {
+                paisDefensor = new Scanner(System.in);
+                paisDefensorNombre = paisDefensor.nextLine();
+                juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
+                repetir = false;
+            }catch(PaisNoLimitrofeException e) {
+                System.out.println("El pais Defensor no es Limitrofe al atacante, ingrese otro: ");
+            }
+        }
+
+         */
 
     }
 
