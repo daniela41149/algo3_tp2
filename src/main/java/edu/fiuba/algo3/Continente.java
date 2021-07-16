@@ -13,7 +13,7 @@ public class Continente {
         paises = listaPaises;
     }
 
-/*
+
     public boolean jugadorControlaContinente (Jugador jugador) {
         for (Pais cadaPais: paises) {
             if (!cadaPais.esElDueño(jugador)) {
@@ -22,7 +22,7 @@ public class Continente {
         }
         return true;
     }
-*/
+
 
     public String getNombre() {
         return nombre;

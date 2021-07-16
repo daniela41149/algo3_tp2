@@ -127,7 +127,7 @@ public class PaisTest {
 
 
     @Test
-    public void test006SPaisLePideAEjercitoQueDefiendaDeUnAtaque() {
+    public void test006PaisLePideAEjercitoQueDefiendaDeUnAtaque() {
         setup();
 
         List<Integer> dados = new ArrayList<>();
@@ -140,12 +140,6 @@ public class PaisTest {
 
         assertEquals(pais.defender(),dados);
     }
-
-
-/*
-
-
-
 
 
     @Test
@@ -227,7 +221,6 @@ public class PaisTest {
 
     }
 
-*/
 
 
 }

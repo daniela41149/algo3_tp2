@@ -92,14 +92,13 @@ public class ContinenteTest {
         assertEquals(continente.cantidadDePaises(),6);
     }
 
-/*
+
     @Test
     public void test002JugadorControlaTodosLosPaisesDeUnContinente() {
         setup();
         Jugador mockedJugador = mock(Jugador.class);
 
         boolean lanzaUnaExcepcion = false;
-        boolean controlaContinente = false;
 
         try {
             pais1.colocarEjercito(mockedJugador,1);
@@ -113,9 +112,8 @@ public class ContinenteTest {
             lanzaUnaExcepcion = true;
         }
 
-        controlaContinente = continente.jugadorControlaContinente(mockedJugador);
         assertFalse(lanzaUnaExcepcion);
-        assertTrue(controlaContinente);
+        assertTrue(continente.jugadorControlaContinente(mockedJugador));
 
     }
 
@@ -126,7 +124,6 @@ public class ContinenteTest {
         Jugador mockedJugador2 = mock(Jugador.class);
 
         boolean lanzaUnaExcepcion = false;
-        boolean controlaContinente = false;
 
         try {
             pais1.colocarEjercito(mockedJugador,1);
@@ -142,19 +139,11 @@ public class ContinenteTest {
             lanzaUnaExcepcion = true;
         }
 
-        controlaContinente = continente.jugadorControlaContinente(mockedJugador);
-
         assertFalse(lanzaUnaExcepcion);
-        assertFalse(controlaContinente);
-
+        assertFalse(continente.jugadorControlaContinente(mockedJugador));
 
 
     }
-
-
-*/
-
-
 
 
 

@@ -5,7 +5,7 @@ import java.util.List;
 public class Pais {
     private String nombrePais;
     private List<String> nombrePaisesLimitrofes;
-    //private Jugador dueño;
+    private Jugador dueño;
     private Ejercito ejercito;
 
 
@@ -42,7 +42,7 @@ public class Pais {
         return nombre.equals(this.nombrePais);
     }
 
-/*
+
 
     public boolean esElDueño(Jugador jugador) {
         try {
@@ -73,12 +73,11 @@ public class Pais {
     public void colocarEjercito (Jugador jugador, int cantidadEjercito) throws NoEsElMismoJugadorException {
         if (this.dueño == null) {
             this.elegirPais(jugador);
+        } else {
+            this.dueño.esElMismo(jugador);
         }
-        this.dueño.esElMismo(jugador);
         ejercito.agregarFichas(cantidadEjercito);
     }
-
-*/
 
 
 
