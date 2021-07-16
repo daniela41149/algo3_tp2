@@ -8,15 +8,20 @@ public class Jugador {
     private String nombreJugador;
     private String color;
     private List<Pais> paises ;
-    
-    /*
-    public Jugador(String nombre, String colorJugador, List<Pais> paisesDelJugador, Juego juego){
+    private Juego juego;
+
+
+    public Jugador(String nombre, String colorJugador, Juego juego){
         this.nombreJugador = nombre;
         this. color = colorJugador;
+        this.juego = juego;
+    }
+
+    public void agragarPaises(List<Pais> paisesDelJugador){
         this. paises = paisesDelJugador;
     }
-    */
-/*
+
+
     public void jugarTurno(){
         Scanner paisAtacante = new Scanner(System.in);
         String paisAtacanteNombre = paisAtacante.nextLine();
@@ -26,11 +31,11 @@ public class Jugador {
         int cantEjercitoAtaca = cantEjercito.nextInt();
 
 
-        //atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
+       // juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
 
     }
 
- */
+
     public boolean esElMismo(Jugador jugador) throws NoEsElMismoJugadorException{
         boolean esElMismoJugador = jugador.nombreJugador.equals(this.nombreJugador);
         if(esElMismoJugador){
@@ -58,6 +63,8 @@ public class Jugador {
     public int cantidadPaises(){
         return (this.paises.size());
     }
+
+
 
 
 

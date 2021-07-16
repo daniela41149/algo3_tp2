@@ -4,6 +4,8 @@ package edu.fiuba.algo3.modelo;
 
 
 import edu.fiuba.algo3.Jugador;
+import edu.fiuba.algo3.Pais;
+import edu.fiuba.algo3.Juego;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,11 +14,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JugadorTest {
-    /*
+
     private String nombrePais;
     private List<String> limitrofes;
     private Pais pais;
     private List<Pais> paises;
+    private Juego juego = new Juego();
 
     @Test
     public void test01EsElMismoJugador() {
@@ -36,8 +39,8 @@ public class JugadorTest {
         paises.add(pais);
 
 
-        Jugador jugador1 = new Jugador("Adrian", "Rojo", paises);
-        Jugador jugador2 = new Jugador("Martin", "Azul", paises);
+        Jugador jugador1 = new Jugador("Adrian", "Rojo", juego);
+        Jugador jugador2 = new Jugador("Martin", "Azul", juego);
 
         //assertEquals( jugador1.esElMismo(jugador2) , true);
 
@@ -60,7 +63,7 @@ public class JugadorTest {
         paises.add(pais);
 
 
-        Jugador jugador1 = new Jugador("Adrian", "Rojo", paises);
+        Jugador jugador1 = new Jugador("Adrian", "Rojo", juego);
 
         assertEquals( jugador1.cantidadPaises() , 2);
         jugador1.desocupar("Brasil");
@@ -68,5 +71,5 @@ public class JugadorTest {
 
     }
 
-     */
+
 }
