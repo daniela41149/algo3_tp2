@@ -24,12 +24,35 @@ public class Juego {
         String colorAsignado = COLORES[jugadores.size()];
         jugadores.add(new Jugador(nombreDeJugador, colorAsignado, this));
     }
+/*
+    private void repartirPaisesAleatoriamente(int cantidadPorJugador) {
+        Random rand = new Random();
+        List<Pais> paisesSinRepartir = tablero.obtenerPaises;
 
+        for (int i = 0; i < jugadores.size(); i++) {
+            for (int j = 0; j < cantidadPorJugador; j++) {
+                int posicionAleatoria = rand.nextInt(paisesSinRepartir.size());
+                Pais paisAleatorio = paisesSinRepartir.get(posicionAleatoria);
+
+                jugadores.get(i).agregarPais(paisAleatorio);
+                paisesSinRepartir.remove(paisAleatorio);
+            }
+        }
+    }
+*/
     public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException {
         if (jugadores.size() < MIN_JUGADORES)
             throw new NoSeSuperaMinimoDeJugadoresException();
+        /*
+        int paisesPorJugador = (tablero.cantidadPaises()/jugadores.size());
+        repartirPaisesAleatoriamente(paisesPorJugador);
+        */
+    }
 
-        // Aca se piden los paises a tablero y se dividen dependiendo la cantidad de jugadores
+    public void comenzarFaseDeJuego() {
+        for (Jugador jugador: jugadores) {
+            jugador.jugarTurno();
+        }
     }
 
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws PaisNoLimitrofeException {
