@@ -39,7 +39,7 @@ public class Batalla {
 
         ordenarDadosDeFormaDescendente(dadosDelAtacante, dadosDelDefensor);
         establecerResultadosDeBatalla(dadosDelAtacante, dadosDelDefensor);
-//      paisDefensor.establecerDueño(paisAtacante);
+        paisDefensor.establecerDueño(paisAtacante);
     }
 
 }

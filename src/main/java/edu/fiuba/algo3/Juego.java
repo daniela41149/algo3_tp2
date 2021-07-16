@@ -11,8 +11,8 @@ public class Juego {
     static final int MAX_JUGADORES = 6;
     static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
 
-    private Tablero tablero;
-    private List<Jugador> jugadores;
+    public Tablero tablero;
+    public List<Jugador> jugadores;
 
     public Juego() {
 
@@ -27,7 +27,7 @@ public class Juego {
         jugadores.add(new Jugador(nombreDeJugador, colorAsignado, this));
     }
 
-    private void repartirPaisesAleatoriamente(int cantidadPorJugador) {
+    private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws NoEsElMismoJugadorException {
         Random rand = new Random();
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPiasesAJuego());
 
@@ -36,13 +36,14 @@ public class Juego {
                 int posicionAleatoria = rand.nextInt(paisesSinRepartir.size());
                 Pais paisAleatorio = paisesSinRepartir.get(posicionAleatoria);
 
+                paisAleatorio.colocarEjercito(jugadorActual,1);
                 jugadorActual.agregarPais(paisAleatorio);
                 paisesSinRepartir.remove(paisAleatorio);
             }
         }
     }
 
-    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException {
+    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException, NoEsElMismoJugadorException {
         if (jugadores.size() < MIN_JUGADORES)
             throw new NoSeSuperaMinimoDeJugadoresException();
 
@@ -59,6 +60,5 @@ public class Juego {
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws PaisNoLimitrofeException {
         tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
-
 
 }

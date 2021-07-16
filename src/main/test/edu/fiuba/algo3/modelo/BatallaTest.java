@@ -56,7 +56,7 @@ public class BatallaTest {
         assertEquals(dadosDefensor.get(0), 5);
         assertEquals(dadosDefensor.get(1), 4);
         assertEquals(dadosDefensor.get(2), 2);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class BatallaTest {
         batalla.atacar(2);
         verify(mockPaisAtacante, never()).sacarFicha(1);
         verify(mockPaisDefensor).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class BatallaTest {
         batalla.atacar(2);
         verify(mockPaisDefensor, never()).sacarFicha(1);
         verify(mockPaisAtacante).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class BatallaTest {
         batalla.atacar(2);
         verify(mockPaisDefensor, never()).sacarFicha(1);
         verify(mockPaisAtacante).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -131,7 +131,7 @@ public class BatallaTest {
         batalla.atacar(4);
         verify(mockPaisDefensor).sacarFicha(1);
         verify(mockPaisAtacante).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -153,7 +153,7 @@ public class BatallaTest {
         batalla.atacar(4);
         verify(mockPaisAtacante, never()).sacarFicha(1);
         verify(mockPaisDefensor, times(3)).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -175,7 +175,7 @@ public class BatallaTest {
         batalla.atacar(4);
         verify(mockPaisDefensor, never()).sacarFicha(1);
         verify(mockPaisAtacante, times(3)).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
     @Test
@@ -192,6 +192,6 @@ public class BatallaTest {
         batalla.atacar(1);
         verify(mockPaisDefensor, never()).sacarFicha(1);
         verify(mockPaisAtacante, never()).sacarFicha(1);
-//      verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
+        verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 }
