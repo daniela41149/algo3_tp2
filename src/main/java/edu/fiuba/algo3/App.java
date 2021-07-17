@@ -1,25 +1,19 @@
 package edu.fiuba.algo3;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;  
+import javafx.stage.Stage; 
 
-/**
- * JavaFX App
- */
+import javafx.scene.Parent;
+
+
 public class App extends Application {
 
     @Override
-    public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
+    public void start(Stage escenarioDados) throws Exception {
 
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        Parent raiz = FXMLLoader.load( getClass().getResource("VistaDados.fxml") );
     }
 
     public static void main(String[] args) {
