@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.Dados;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DadosTest {
     @Test
@@ -35,16 +36,13 @@ public class DadosTest {
     }
 
     @Test
-    public void test03DevuelveResultadosDeUnDadoReal() {
+    public void test03DevuelveResultadosEntreValoresEsperadosDeUnDado() {
         Dados dados = new Dados();
-        System.out.println(dados.dadosAtaque(4));
-        System.out.println(dados.dadosAtaque(2));
-        System.out.println(dados.dadosAtaque(3));
-        System.out.println(dados.dadosAtaque(1));
-
-        System.out.println(dados.dadosDefensa(4));
-        System.out.println(dados.dadosDefensa(5));
-        System.out.println(dados.dadosDefensa(1));
-        System.out.println(dados.dadosDefensa(2));
+        assertTrue( ( 1 <= dados.dadosDefensa(3).get(0) ) && ( dados.dadosDefensa(3).get(0) <= 6 ) );
+        assertTrue( ( 1 <= dados.dadosDefensa(3).get(1) ) && ( dados.dadosDefensa(3).get(1) <= 6 ) );
+        assertTrue( ( 1 <= dados.dadosDefensa(3).get(2) ) && ( dados.dadosDefensa(3).get(2) <= 6 ) );
+        assertTrue( ( 1 <= dados.dadosAtaque(4).get(0) ) && ( dados.dadosAtaque(4).get(0) <= 6 ) );
+        assertTrue( ( 1 <= dados.dadosAtaque(4).get(1) ) && ( dados.dadosAtaque(4).get(1) <= 6 ) );
+        assertTrue( ( 1 <= dados.dadosAtaque(4).get(2) ) && ( dados.dadosAtaque(4).get(2) <= 6 ) );
     }
 }
