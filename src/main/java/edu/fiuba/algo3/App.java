@@ -14,6 +14,8 @@ public class App extends Application {
     public void start(Stage escenarioDados) throws Exception {
 
         Parent raiz = FXMLLoader.load( getClass().getResource("VistaDados.fxml") );
+        escenarioDados.setScene( new Scene(raiz) );
+        escenarioDados.show();
     }
 
     public static void main(String[] args) {
