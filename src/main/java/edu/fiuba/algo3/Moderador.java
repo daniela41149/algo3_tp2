@@ -1,36 +1,32 @@
 package edu.fiuba.algo3;
 
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.lang.String;
-import java.io.*;
 
-public class Tablero {
+
+public class Moderador {
+    /*
+    private String archivo;
     private List<Pais> paises ;
     private List<Continente> continentes ;
-    private Batalla batalla;
 
-    public Tablero(String rutaArchivo){
+    public Moderador(String rutaArchivo){
+        this.archivo = rutaArchivo;
         List<Pais> paisesLeidos =  new ArrayList<>();
         List<Continente> continentesLeidos = new ArrayList<>();
-        cargarArchivo(rutaArchivo,paisesLeidos ,continentesLeidos);
+        cargarArchivo(archivo,paisesLeidos,continentesLeidos);
         this.paises = paisesLeidos;
         this.continentes = continentesLeidos;
     }
 
-        /*
-    public Tablero (List<Pais> paises, List<Continente> continentes ){
-        this.paises = paises ;
-        this.continentes = continentes;
-    }
-    */
-         
 
     private void cargarArchivo(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
-
-
         try {
             File archivo = new File (direccionArchivo);
             FileReader fr = new FileReader(archivo);
@@ -73,38 +69,13 @@ public class Tablero {
 
     }
 
-    public List<Pais> pasarPiasesAJuego(){
-        return( this.paises);
+    //para que juego pueda recibir el listado de paises del archivo
+    public List<Pais> pedirPaises(){
+        return (this.paises);
     }
-
-    public Pais buscarPais(String nombrePais){
-        boolean paisEncontrado = false;
-        int i = 0;
-        Pais paisBuscado = null;
-        while( (!paisEncontrado) && (i < paises.size()) ){
-            paisBuscado = paises.get(i);
-            if(paisBuscado.coincideNombre(nombrePais)){
-                paisEncontrado = true;
-            }
-            i++;
-        }
-        return paisBuscado;
+    //para que juego pueda recibir el listado de continentes del archivo
+    public List<Continente> pedirContinentes(){
+        return (this.continentes);
     }
-
-    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws PaisNoLimitrofeException{
-        Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
-        Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
-        this.batalla = new Batalla(paisAtacante,paisDefensor);
-        batalla.atacar(cantEjercito);
-    }
-
-    public int cantidadPaises(){
-        return (this.paises.size());
-    }
-    public int cantidadContinentes(){
-        return (this.continentes.size());
-    }
-
-
-
+    */
 }
