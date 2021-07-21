@@ -10,6 +10,7 @@ public class Tablero {
     private List<Continente> continentes ;
     private Batalla batalla;
 
+        /*
     public Tablero(String rutaArchivo){
         List<Pais> paisesLeidos =  new ArrayList<>();
         List<Continente> continentesLeidos = new ArrayList<>();
@@ -17,14 +18,13 @@ public class Tablero {
         this.paises = paisesLeidos;
         this.continentes = continentesLeidos;
     }
+    */
 
-        /*
     public Tablero (List<Pais> paises, List<Continente> continentes ){
         this.paises = paises ;
         this.continentes = continentes;
     }
-    */
-         
+
 
     private void cargarArchivo(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
         String renglon;
