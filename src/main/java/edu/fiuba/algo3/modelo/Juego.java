@@ -31,7 +31,7 @@ public class Juego {
         jugadores.add(new Jugador(nombreDeJugador, colorAsignado, this));
     }
 
-    private void repartirPaisesAleatoriamente(int cantidadPorJugador)  {
+    private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws JugadaInvalidaException {
         Random rand = new Random();
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPiasesAJuego());
 
@@ -47,7 +47,7 @@ public class Juego {
         }
     }
 
-    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException {
+    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
         if (jugadores.size() < MIN_JUGADORES)
             throw new NoSeSuperaMinimoDeJugadoresException();
 

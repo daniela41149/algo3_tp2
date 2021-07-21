@@ -138,9 +138,9 @@ public class PaisTest {
         assertEquals(pais.defender(),dados);
     }
 
-
+/*
     @Test
-    public void test006JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() {
+    public void test006JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() throws JugadaInvalidaException{
         setup();
         Jugador mockedJugador = mock(Jugador.class);
         Ejercito mockedEjercito = mock(Ejercito.class);
@@ -156,7 +156,7 @@ public class PaisTest {
         assertFalse(lanzaUnaExcepcion);
     }
 
-/*
+
 
     @Test
     public void test008JugadorQuiereColocarEjercitoEnUnPaisQueNoLePertenece() {

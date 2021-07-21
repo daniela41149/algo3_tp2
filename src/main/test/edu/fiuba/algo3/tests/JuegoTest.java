@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.tests;
 
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.NoSeSuperaMinimoDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.SuperaMaximoDeJugadoresException;
 import edu.fiuba.algo3.modelo.Juego;
@@ -33,7 +34,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void test03SeCreaUnJuegoConDosJugadoresYseRepartenLosPaises() throws SuperaMaximoDeJugadoresException, NoSeSuperaMinimoDeJugadoresException{
+    public void test03SeCreaUnJuegoConDosJugadoresYseRepartenLosPaises() throws SuperaMaximoDeJugadoresException, NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
         Juego juego = new Juego();
 
         juego.agregarJugador("jugador1");

@@ -72,13 +72,18 @@ public class Pais {
         }
     }
 
-    public void colocarEjercito (Jugador jugador, int cantidadEjercito) {
+    public void colocarEjercito (Jugador jugador, int cantidadEjercito) throws JugadaInvalidaException{
         if (estado.puedeOcupar()) {
             this.elegirPais(jugador);
             estado = new Ocupado();
+           // System.out.println("pasa por aca");
         }
         if (this.dueño.esElMismo(jugador)){
+          //  System.out.println("nooooo");
             ejercito.agregarFichas(cantidadEjercito);
+        } else {
+         //   System.out.println("holaaa");
+            throw new JugadaInvalidaException();
         }
     }
 
