@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package vista;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ public class App extends Application {
     @Override
     public void start(Stage escenarioDados) throws Exception {
         
-        Parent root = FXMLLoader.load( getClass().getResource("Vista.fxml") );
+        Parent root = FXMLLoader.load( getClass().getResource("src/main/vista/Vista.fxml") );
         Scene scene = new Scene(root);
         escenarioDados.setTitle("DADOS");
         escenarioDados.setScene(scene);

@@ -1,4 +1,8 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
+
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.NoSeSuperaMinimoDeJugadoresException;
+import edu.fiuba.algo3.modelo.excepciones.SuperaMaximoDeJugadoresException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -16,7 +20,7 @@ public class Juego {
 
     public Juego() {
 
-        this.tablero = new Tablero("src/main/java/edu/fiuba/algo3/Fronteras.csv");
+        this.tablero = new Tablero("resources/Fronteras.csv");
         this.jugadores = new LinkedList<>();
     }
 
@@ -27,7 +31,7 @@ public class Juego {
         jugadores.add(new Jugador(nombreDeJugador, colorAsignado, this));
     }
 
-    private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws NoEsElMismoJugadorException {
+    private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws JugadaInvalidaException {
         Random rand = new Random();
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPiasesAJuego());
 
@@ -43,7 +47,7 @@ public class Juego {
         }
     }
 
-    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException, NoEsElMismoJugadorException {
+    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
         if (jugadores.size() < MIN_JUGADORES)
             throw new NoSeSuperaMinimoDeJugadoresException();
 
@@ -57,7 +61,7 @@ public class Juego {
         }
     }
 
-    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws PaisNoLimitrofeException {
+    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
         tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
 

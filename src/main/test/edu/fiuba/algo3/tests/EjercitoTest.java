@@ -1,7 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.tests;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.Ejercito;
+import edu.fiuba.algo3.modelo.Ejercito;
 
 public class EjercitoTest {
 

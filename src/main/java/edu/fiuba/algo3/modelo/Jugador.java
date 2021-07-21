@@ -1,9 +1,11 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
+
+
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.lang.NullPointerException;
 
 public class Jugador {
     private String nombreJugador;
@@ -39,7 +41,7 @@ public class Jugador {
 
         try {
             juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
-        }catch(PaisNoLimitrofeException e) {
+        }catch(JugadaInvalidaException e) {
         }
         /*
         boolean repetir = true;
@@ -68,11 +70,11 @@ public class Jugador {
         return this.color;
     }
 
-    public boolean esElMismo(Jugador jugador) throws NoEsElMismoJugadorException{
+    public boolean esElMismo(Jugador jugador)  {
         if( (jugador.getNombre().equals(this.nombreJugador) ) && (jugador.getColor().equals(this.color))){
             return true;
         }
-        throw new NoEsElMismoJugadorException();
+        return false;
     }
 
     public void desocupar(String nombrePais){

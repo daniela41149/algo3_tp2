@@ -1,8 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.tests;
 
-import edu.fiuba.algo3.Batalla;
-import edu.fiuba.algo3.Pais;
-import edu.fiuba.algo3.PaisNoLimitrofeException;
+import edu.fiuba.algo3.modelo.Batalla;
+import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,17 +23,17 @@ public class BatallaTest {
     }
 
     @Test
-    public void test01NoSePuedeHacerBatallarAPaisesQueNoSonLimitrofes() throws PaisNoLimitrofeException {
+    public void test01NoSePuedeHacerBatallarAPaisesQueNoSonLimitrofes() throws JugadaInvalidaException {
         setup();
         Batalla batalla = new Batalla(mockPaisAtacante, mockPaisDefensor);
 
-        when(mockPaisAtacante.atacar(mockPaisDefensor,2)).thenThrow(new PaisNoLimitrofeException());
+        when(mockPaisAtacante.atacar(mockPaisDefensor,2)).thenThrow(new JugadaInvalidaException());
 
-        assertThrows(PaisNoLimitrofeException.class, () -> batalla.atacar(2));
+        assertThrows(JugadaInvalidaException.class, () -> batalla.atacar(2));
     }
 
     @Test
-    public void test02LosDadosDeLosPaisesABatallarSeComparanDeFormaDescendente() throws PaisNoLimitrofeException {
+    public void test02LosDadosDeLosPaisesABatallarSeComparanDeFormaDescendente() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(3);
@@ -60,7 +60,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test03SiElAtacanteGanaUnaComparacionDeDadosEntoncesElDefensorSacaUnEjercito() throws PaisNoLimitrofeException {
+    public void test03SiElAtacanteGanaUnaComparacionDeDadosEntoncesElDefensorSacaUnEjercito() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(5);
@@ -78,7 +78,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test04SiElDefensorGanaUnaComparacionDeDadosEntoncesElAtacanteSacaUnEjercito() throws PaisNoLimitrofeException {
+    public void test04SiElDefensorGanaUnaComparacionDeDadosEntoncesElAtacanteSacaUnEjercito() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(2);
@@ -96,7 +96,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test05SiUnaComparacionDeDadosResultaEnEmpateElAtacanteSacaUnEjercito() throws PaisNoLimitrofeException {
+    public void test05SiUnaComparacionDeDadosResultaEnEmpateElAtacanteSacaUnEjercito() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(4);
@@ -114,7 +114,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test06LosDadosDeMasQuePuedaTenerElAtacantePorEncimaDelDefensorNoSeTienenEnCuentaEnLaBatalla() throws PaisNoLimitrofeException {
+    public void test06LosDadosDeMasQuePuedaTenerElAtacantePorEncimaDelDefensorNoSeTienenEnCuentaEnLaBatalla() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(5);
@@ -135,7 +135,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test07ElAtacanteGanaTodasLasComparacionesDeDados() throws PaisNoLimitrofeException {
+    public void test07ElAtacanteGanaTodasLasComparacionesDeDados() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(3);
@@ -157,7 +157,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test08ElDefensorGanaTodasLasComparacionesDeDados() throws PaisNoLimitrofeException {
+    public void test08ElDefensorGanaTodasLasComparacionesDeDados() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(3);
@@ -179,7 +179,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test09UnPaisAtacanteConUnSoloEjercitoNoPuedeBatallar() throws PaisNoLimitrofeException {
+    public void test09UnPaisAtacanteConUnSoloEjercitoNoPuedeBatallar() throws JugadaInvalidaException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         List<Integer> dadosDefensor = new ArrayList<>();

@@ -1,4 +1,6 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
+
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.List;
 
@@ -7,26 +9,31 @@ public class Pais {
     private List<String> nombrePaisesLimitrofes;
     private Jugador dueño;
     private Ejercito ejercito;
+    private Estado estado;
 
 
     public Pais(String nombrePais, List<String> nombrePaisesLimitrofes) {
         this.nombrePais = nombrePais;
         this.nombrePaisesLimitrofes = nombrePaisesLimitrofes;
         this.ejercito = new Ejercito();
+        this.estado = new Vacante();
     }
 
-    public void esLimitrofe(Pais paisAtacante) throws PaisNoLimitrofeException {
+    public boolean esLimitrofe(Pais paisAtacante) {
         for (String limitrofe: nombrePaisesLimitrofes) {
             if (paisAtacante.getNombre().equals(limitrofe)) {
-                return;
+                return true;
             }
         }
-        throw new PaisNoLimitrofeException();
+        return false;
     }
 
-    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws PaisNoLimitrofeException {
-        paisDefensa.esLimitrofe(this);
-        return (ejercito.atacar(cantidadEjercito));
+    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws JugadaInvalidaException {
+        if(paisDefensa.esLimitrofe(this))
+            return (ejercito.atacar(cantidadEjercito));
+        else  {
+            throw new JugadaInvalidaException();
+        }
     }
 
     public List<Integer> defender() {
@@ -45,12 +52,7 @@ public class Pais {
 
 
     public boolean esElDueño(Jugador jugador) {
-        try {
-            this.dueño.esElMismo(jugador);
-            return true;
-        } catch (NoEsElMismoJugadorException e) {
-            return false;
-        }
+        return this.dueño.esElMismo(jugador);
     }
 
 
@@ -70,13 +72,19 @@ public class Pais {
         }
     }
 
-    public void colocarEjercito (Jugador jugador, int cantidadEjercito) throws NoEsElMismoJugadorException {
-        if (this.dueño == null) {
+    public void colocarEjercito (Jugador jugador, int cantidadEjercito) throws JugadaInvalidaException{
+        if (estado.puedeOcupar()) {
             this.elegirPais(jugador);
-        } else {
-            this.dueño.esElMismo(jugador);
+            estado = new Ocupado();
+           // System.out.println("pasa por aca");
         }
-        ejercito.agregarFichas(cantidadEjercito);
+        if (this.dueño.esElMismo(jugador)){
+          //  System.out.println("nooooo");
+            ejercito.agregarFichas(cantidadEjercito);
+        } else {
+         //   System.out.println("holaaa");
+            throw new JugadaInvalidaException();
+        }
     }
 
 

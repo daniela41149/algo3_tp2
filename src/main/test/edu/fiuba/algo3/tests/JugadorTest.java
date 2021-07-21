@@ -1,10 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.tests;
 
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.NoEsElMismoJugadorException;
-import edu.fiuba.algo3.Pais;
-import edu.fiuba.algo3.Juego;
-import edu.fiuba.algo3.PaisNoLimitrofeException;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.Juego;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +51,7 @@ public class JugadorTest {
         jugador1.agregarPais(paisUno);
         Jugador jugador2 = new Jugador("Sebastian", "Rojo",juego);
         jugador2.agregarPais(paisUno);
-        assertThrows(NoEsElMismoJugadorException.class, ()-> jugador1.esElMismo(jugador2));
+        assertFalse(jugador1.esElMismo(jugador2));
     }
 
 
