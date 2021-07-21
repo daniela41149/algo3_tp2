@@ -27,7 +27,7 @@ public class Tablero {
         this.continentes = continentes;
     }
 
-
+    /*
     private void cargarArchivo(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
@@ -74,7 +74,7 @@ public class Tablero {
         }
 
     }
-
+    */
     public List<Pais> pasarPiasesAJuego(){
         return( this.paises);
     }

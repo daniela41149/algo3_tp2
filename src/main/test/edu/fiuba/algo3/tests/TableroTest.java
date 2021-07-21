@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TableroTest {
+    /*
     Pais pais;
 
     @Test
@@ -28,5 +29,7 @@ public class TableroTest {
         assertEquals( "Argentina", pais.getNombre() );
 
     }
+
+     */
 
 }
