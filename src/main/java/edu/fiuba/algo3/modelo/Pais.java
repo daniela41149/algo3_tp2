@@ -9,12 +9,14 @@ public class Pais {
     private List<String> nombrePaisesLimitrofes;
     private Jugador dueño;
     private Ejercito ejercito;
+    private Estado estado;
 
 
     public Pais(String nombrePais, List<String> nombrePaisesLimitrofes) {
         this.nombrePais = nombrePais;
         this.nombrePaisesLimitrofes = nombrePaisesLimitrofes;
         this.ejercito = new Ejercito();
+        this.estado = new Vacante();
     }
 
     public boolean esLimitrofe(Pais paisAtacante) {
@@ -71,12 +73,13 @@ public class Pais {
     }
 
     public void colocarEjercito (Jugador jugador, int cantidadEjercito) {
-        if (this.dueño == null) {
+        if (estado.puedeOcupar()) {
             this.elegirPais(jugador);
-        } else {
-            this.dueño.esElMismo(jugador);
+            estado = new Ocupado();
         }
-        ejercito.agregarFichas(cantidadEjercito);
+        if (this.dueño.esElMismo(jugador)){
+            ejercito.agregarFichas(cantidadEjercito);
+        }
     }
 
 

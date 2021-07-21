@@ -1,3 +1,5 @@
+package edu.fiuba.algo3.tests;
+
 import edu.fiuba.algo3.modelo.excepciones.NoSeSuperaMinimoDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.SuperaMaximoDeJugadoresException;
 import edu.fiuba.algo3.modelo.Juego;

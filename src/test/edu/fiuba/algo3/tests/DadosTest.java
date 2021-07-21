@@ -1,3 +1,5 @@
+package edu.fiuba.algo3.tests;
+
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Dados;
 import static org.junit.jupiter.api.Assertions.assertEquals;

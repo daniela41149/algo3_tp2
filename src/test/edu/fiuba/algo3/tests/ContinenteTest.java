@@ -1,3 +1,5 @@
+package edu.fiuba.algo3.tests;
+
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.Continente;
 import edu.fiuba.algo3.modelo.Jugador;

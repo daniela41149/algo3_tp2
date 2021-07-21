@@ -1,3 +1,5 @@
+package edu.fiuba.algo3.tests;
+
 import edu.fiuba.algo3.modelo.Batalla;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
