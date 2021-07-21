@@ -1,9 +1,10 @@
-package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.*;
-
 import java.util.List;
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.Ejercito;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Pais;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,15 +34,7 @@ public class PaisTest {
 
 
     @Test
-    public void test001SeCreaUnPaisConNombreYPaisesLimitrofes() {
-        setup();
-        assertEquals(pais.getNombre(),nombrePais);
-        System.out.println("Pais: " + pais.getNombre());
-        System.out.println("Limitrofes: "+limitrofes);
-    }
-
-    @Test
-    public void test002DosPaisesSonLimitrofesEntoncesNoSeLanzaPaisNoLimitrofeException() {
+    public void test001DosPaisesSonLimitrofesEntoncesDevuelveTrue() {
         setup();
 
         String nombrePais2 = "Uruguay";
@@ -52,12 +45,13 @@ public class PaisTest {
 
         Pais pais2 = new Pais(nombrePais2, limitrofes2);
 
-        assertDoesNotThrow( () -> pais.esLimitrofe(pais2));
-        assertDoesNotThrow( () -> pais2.esLimitrofe(pais));
+        assertTrue(pais.esLimitrofe(pais2));
+        assertTrue(pais2.esLimitrofe(pais));
+
     }
 
     @Test
-    public void test003DosPaisesNoSonLimitrofesEntoncesSeLanzaPaisNoLimitrofeException() {
+    public void test002DosPaisesNoSonLimitrofesEntoncesDevuelveFalse() {
         setup();
         String nombrePais3 = "Italia";
 
@@ -67,12 +61,13 @@ public class PaisTest {
 
         Pais pais3 = new Pais(nombrePais3, limitrofes3);
 
-        assertThrows(PaisNoLimitrofeException.class, ()-> pais.esLimitrofe(pais3));
-        assertThrows(PaisNoLimitrofeException.class, ()-> pais3.esLimitrofe(pais));
+        assertFalse(pais.esLimitrofe(pais3));
+        assertFalse(pais3.esLimitrofe(pais));
+
     }
 
     @Test
-    public void test004NoPuedeAtacarAUnPaisQueNoEsLimitrofeEntoncesSeLanzaPaisNoLimitrofeException() {
+    public void test003NoPuedeAtacarAUnPaisQueNoEsLimitrofeEntoncesSeLanzaJugadaInvalidaException() {
         String nombrePais4 = "Java";
 
         List<String> limitrofes4 = new ArrayList<>();
@@ -80,12 +75,12 @@ public class PaisTest {
 
         Pais pais4 = new Pais(nombrePais4, limitrofes4);
 
-        assertThrows(PaisNoLimitrofeException.class, () -> pais.atacar(pais4, 1));
-        assertThrows(PaisNoLimitrofeException.class, () -> pais4.atacar(pais, 1));
+        assertThrows(JugadaInvalidaException.class, () -> pais.atacar(pais4, 1));
+        assertThrows(JugadaInvalidaException.class, () -> pais4.atacar(pais, 1));
     }
 
     @Test
-    public void test005PuedeAtacarAUnPaisQueSiEsLimitrofe() {
+    public void test004PuedeAtacarAUnPaisQueSiEsLimitrofe() {
         setup();
         String nombrePais5 = "Peru";
 
@@ -116,7 +111,7 @@ public class PaisTest {
         try {
             assertEquals(pais.atacar(pais5,1),dados);
             assertEquals(pais5.atacar(pais,1),dados5);
-        } catch (PaisNoLimitrofeException e) {
+        } catch (JugadaInvalidaException e) {
             lanzaUnaExcepcion = true;
         }
 
@@ -127,7 +122,7 @@ public class PaisTest {
 
 
     @Test
-    public void test006PaisLePideAEjercitoQueDefiendaDeUnAtaque() {
+    public void test005PaisLePideAEjercitoQueDefiendaDeUnAtaque() {
         setup();
 
         List<Integer> dados = new ArrayList<>();
@@ -143,7 +138,7 @@ public class PaisTest {
 
 
     @Test
-    public void test007JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() {
+    public void test006JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() {
         setup();
         Jugador mockedJugador = mock(Jugador.class);
         Ejercito mockedEjercito = mock(Ejercito.class);
@@ -159,7 +154,7 @@ public class PaisTest {
         assertFalse(lanzaUnaExcepcion);
     }
 
-
+/*
 
     @Test
     public void test008JugadorQuiereColocarEjercitoEnUnPaisQueNoLePertenece() {
@@ -173,10 +168,10 @@ public class PaisTest {
         boolean lanzaUnaExcepcion = false;
 
         try {
-            Mockito.doThrow(new NoEsElMismoJugadorException()).when(mockedJugador).esElMismo(mockedJugador2);
+            Mockito.doThrow(new JugadaInvalidaException()).when(mockedJugador).esElMismo(mockedJugador2);
             pais.colocarEjercito(mockedJugador,2);
             pais.colocarEjercito(mockedJugador2,1);
-        } catch (NoEsElMismoJugadorException e){
+        } catch (JugadaInvalidaException e){
             lanzaUnaExcepcion = true;
         }
 
@@ -209,18 +204,18 @@ public class PaisTest {
         boolean lanzaUnaExcepcion = false;
 
         try {
-            Mockito.doThrow(new NoEsElMismoJugadorException()).when(mockedJugador).esElMismo(mockedJugador2);
+            Mockito.doThrow(new JugadaInvalidaException()).when(mockedJugador).esElMismo(mockedJugador2);
             pais.colocarEjercito(mockedJugador,2);
             pais2.colocarEjercito(mockedJugador2,2);
             pais.establecerDueño(pais2);
 
-        } catch (NoEsElMismoJugadorException e){
+        } catch (JugadaInvalidaException e){
             lanzaUnaExcepcion = true;
         }
         assertFalse(lanzaUnaExcepcion);
 
     }
 
-
+*/
 
 }

@@ -1,4 +1,7 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
+
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +33,7 @@ public class Batalla {
         }
     }
 
-    public void atacar(int cantidadEjercito) throws PaisNoLimitrofeException {
+    public void atacar(int cantidadEjercito) throws JugadaInvalidaException {
         List<Integer> dadosDelAtacante;
         List<Integer> dadosDelDefensor;
 

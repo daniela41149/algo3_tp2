@@ -1,5 +1,7 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
 
+
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.*;
 import java.lang.String;
@@ -91,7 +93,7 @@ public class Tablero {
         return paisBuscado;
     }
 
-    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws PaisNoLimitrofeException{
+    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException {
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
         this.batalla = new Batalla(paisAtacante,paisDefensor);

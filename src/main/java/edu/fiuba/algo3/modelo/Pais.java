@@ -1,4 +1,6 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo;
+
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.List;
 
@@ -15,18 +17,21 @@ public class Pais {
         this.ejercito = new Ejercito();
     }
 
-    public void esLimitrofe(Pais paisAtacante) throws PaisNoLimitrofeException {
+    public boolean esLimitrofe(Pais paisAtacante) {
         for (String limitrofe: nombrePaisesLimitrofes) {
             if (paisAtacante.getNombre().equals(limitrofe)) {
-                return;
+                return true;
             }
         }
-        throw new PaisNoLimitrofeException();
+        return false;
     }
 
-    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws PaisNoLimitrofeException {
-        paisDefensa.esLimitrofe(this);
-        return (ejercito.atacar(cantidadEjercito));
+    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws JugadaInvalidaException {
+        if(paisDefensa.esLimitrofe(this))
+            return (ejercito.atacar(cantidadEjercito));
+        else  {
+            throw new JugadaInvalidaException();
+        }
     }
 
     public List<Integer> defender() {
@@ -45,12 +50,7 @@ public class Pais {
 
 
     public boolean esElDueño(Jugador jugador) {
-        try {
-            this.dueño.esElMismo(jugador);
-            return true;
-        } catch (NoEsElMismoJugadorException e) {
-            return false;
-        }
+        return this.dueño.esElMismo(jugador);
     }
 
 
@@ -70,7 +70,7 @@ public class Pais {
         }
     }
 
-    public void colocarEjercito (Jugador jugador, int cantidadEjercito) throws NoEsElMismoJugadorException {
+    public void colocarEjercito (Jugador jugador, int cantidadEjercito) {
         if (this.dueño == null) {
             this.elegirPais(jugador);
         } else {
