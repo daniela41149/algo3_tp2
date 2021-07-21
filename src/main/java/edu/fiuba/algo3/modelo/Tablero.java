@@ -12,7 +12,50 @@ public class Tablero {
     private List<Continente> continentes ;
     private Batalla batalla;
 
-        /*
+
+    public Tablero (List<Pais> paises, List<Continente> continentes ){
+        this.paises = paises ;
+        this.continentes = continentes;
+    }
+
+    public List<Pais> pasarPiasesAJuego(){
+        return( this.paises);
+    }
+
+    public Pais buscarPais(String nombrePais){
+        boolean paisEncontrado = false;
+        int i = 0;
+        Pais paisBuscado = null;
+        while( (!paisEncontrado) && (i < paises.size()) ){
+            paisBuscado = paises.get(i);
+            if(paisBuscado.coincideNombre(nombrePais)){
+                paisEncontrado = true;
+            }
+            i++;
+        }
+        return paisBuscado;
+    }
+
+    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException {
+        Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
+        Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
+        this.batalla = new Batalla(paisAtacante,paisDefensor);
+        batalla.atacar(cantEjercito);
+    }
+
+    public int cantidadPaises(){
+        return (this.paises.size());
+    }
+    public int cantidadContinentes(){
+        return (this.continentes.size());
+    }
+
+
+
+}
+
+
+ /*
     public Tablero(String rutaArchivo){
         List<Pais> paisesLeidos =  new ArrayList<>();
         List<Continente> continentesLeidos = new ArrayList<>();
@@ -20,14 +63,8 @@ public class Tablero {
         this.paises = paisesLeidos;
         this.continentes = continentesLeidos;
     }
-    */
 
-    public Tablero (List<Pais> paises, List<Continente> continentes ){
-        this.paises = paises ;
-        this.continentes = continentes;
-    }
 
-    /*
     private void cargarArchivo(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
@@ -74,39 +111,6 @@ public class Tablero {
         }
 
     }
+
     */
-    public List<Pais> pasarPiasesAJuego(){
-        return( this.paises);
-    }
 
-    public Pais buscarPais(String nombrePais){
-        boolean paisEncontrado = false;
-        int i = 0;
-        Pais paisBuscado = null;
-        while( (!paisEncontrado) && (i < paises.size()) ){
-            paisBuscado = paises.get(i);
-            if(paisBuscado.coincideNombre(nombrePais)){
-                paisEncontrado = true;
-            }
-            i++;
-        }
-        return paisBuscado;
-    }
-
-    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException {
-        Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
-        Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
-        this.batalla = new Batalla(paisAtacante,paisDefensor);
-        batalla.atacar(cantEjercito);
-    }
-
-    public int cantidadPaises(){
-        return (this.paises.size());
-    }
-    public int cantidadContinentes(){
-        return (this.continentes.size());
-    }
-
-
-
-}
