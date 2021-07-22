@@ -1,40 +1,41 @@
 package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
-import edu.fiuba.algo3.modelo.excepciones.NoSeSuperaMinimoDeJugadoresException;
-import edu.fiuba.algo3.modelo.excepciones.SuperaMaximoDeJugadoresException;
+import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 
 public class JuegoTest {
 
     @Test
-    public void test01NoSePuedeAgregarAUnJuegoMasDeSieteJugadores() throws SuperaMaximoDeJugadoresException {
+    public void test01NoSePuedeCrearUnJuegoConMasDeSieteJugadores() throws CantidadInvalidaDeJugadoresException {
+        Tablero mockTablero = mock(Tablero.class);
+        ArrayList<String> nombreJugadores = new ArrayList<>();
+        nombreJugadores.add("jugador1");
+        nombreJugadores.add("jugador2");
+        nombreJugadores.add("jugador3");
+        nombreJugadores.add("jugador4");
+        nombreJugadores.add("jugador5");
+        nombreJugadores.add("jugador6");
+        nombreJugadores.add("jugador7");
 
-        Juego juego = new Juego();
-
-        juego.agregarJugador("jugador1");
-        juego.agregarJugador("jugador2");
-        juego.agregarJugador("jugador3");
-        juego.agregarJugador("jugador4");
-        juego.agregarJugador("jugador5");
-        juego.agregarJugador("jugador6");
-
-        assertThrows(SuperaMaximoDeJugadoresException.class, () -> juego.agregarJugador("jugador7"));
+        assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(mockTablero, nombreJugadores));
     }
 
     @Test
-    public void test02NoSePuedeComenzarLaFaseInicialDeUnJuegoConMenosDeDosJugadores() throws SuperaMaximoDeJugadoresException {
-        Juego juego = new Juego();
+    public void test02NoSePuedeCrearUnJuegoMenosDeDosJugadores() throws CantidadInvalidaDeJugadoresException {
+        Tablero mockTablero = mock(Tablero.class);
+        ArrayList<String> nombreJugadores = new ArrayList<>();
+        nombreJugadores.add("jugador1");
 
-        juego.agregarJugador("jugador1");
-        assertThrows(NoSeSuperaMinimoDeJugadoresException.class, juego::comenzarFaseInicial);
+        assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(mockTablero, nombreJugadores));
     }
-
+    /*
     @Test
     public void test03SeCreaUnJuegoConDosJugadoresYseRepartenLosPaises() throws SuperaMaximoDeJugadoresException, NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
         Juego juego = new Juego();
@@ -49,5 +50,5 @@ public class JuegoTest {
         assertEquals(25, jugador1.cantidadPaises());
         assertEquals(25, jugador2.cantidadPaises());
     }
-
+    */
 }

@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 
-import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Jugador {
     private String nombreJugador;
@@ -27,7 +24,7 @@ public class Jugador {
     }
 
     
-        /*
+    /*
     public void jugarTurno(){
         System.out.println("Ingrese el Pais Atacante: ");
         Scanner paisAtacante = new Scanner(System.in);
@@ -44,7 +41,7 @@ public class Jugador {
             juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
         }catch(JugadaInvalidaException e) {
         }
-        /*
+
         boolean repetir = true;
 
         while(repetir){
@@ -57,9 +54,6 @@ public class Jugador {
                 System.out.println("El pais Defensor no es Limitrofe al atacante, ingrese otro: ");
             }
         }
-
-         */
-
     }
     */
 

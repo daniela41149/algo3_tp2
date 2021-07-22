@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
-import edu.fiuba.algo3.modelo.excepciones.NoSeSuperaMinimoDeJugadoresException;
-import edu.fiuba.algo3.modelo.excepciones.SuperaMaximoDeJugadoresException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,12 +17,6 @@ public class Juego {
     public Tablero tablero;
     public List<Jugador> jugadores;
 
-    public Juego() {
-
-        this.tablero = new Tablero("resources/Fronteras.csv");
-        this.jugadores = new LinkedList<>();
-    }
-    /*
     public Juego(Tablero tablero, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
         if (nombresDeJugadores.size() < MIN_JUGADORES || nombresDeJugadores.size() > MAX_JUGADORES)
             throw new CantidadInvalidaDeJugadoresException();
@@ -33,13 +26,6 @@ public class Juego {
         for (int i = 0; i < nombresDeJugadores.size(); i++)
             jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
 
-    }
-    */
-    public void agregarJugador(String nombreDeJugador) throws SuperaMaximoDeJugadoresException {
-        if (jugadores.size() == MAX_JUGADORES)
-            throw new SuperaMaximoDeJugadoresException();
-        String colorAsignado = COLORES[jugadores.size()];
-        jugadores.add(new Jugador(nombreDeJugador, colorAsignado, this));
     }
 
     private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws JugadaInvalidaException {
@@ -58,17 +44,14 @@ public class Juego {
         }
     }
 
-    public void comenzarFaseInicial() throws NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
-        if (jugadores.size() < MIN_JUGADORES)
-            throw new NoSeSuperaMinimoDeJugadoresException();
-
+    public void comenzarFaseInicial() throws JugadaInvalidaException {
         int paisesPorJugador = (tablero.cantidadPaises()/jugadores.size());
         repartirPaisesAleatoriamente(paisesPorJugador);
     }
 
     public void comenzarFaseDeJuego() {
         for (Jugador jugador: jugadores) {
-            jugador.jugarTurno();
+            //jugador.jugarTurno();
         }
     }
 
