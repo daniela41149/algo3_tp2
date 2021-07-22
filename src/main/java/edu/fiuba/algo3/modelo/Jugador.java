@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class Jugador {
         }
         return paisBuscado;
     }
-    public colocarEjercito(String nombrePais,int cantidadEjercito){
+    public void colocarEjercito(String nombrePais,int cantidadEjercito)throws JugadaInvalidaException {
         Pais pais = this.buscarPais(nombrePais);
         pais.colocarEjercito (this, cantidadEjercito);
     }
