@@ -94,6 +94,7 @@ public class PaisTest {
 
         Pais pais5 = new Pais(nombrePais5, limitrofes5);
 
+
         List<Integer> dados = new ArrayList<>();
         dados.add(3);
         List<Integer> dados5 = new ArrayList<>();
@@ -140,7 +141,7 @@ public class PaisTest {
 
 /*
     @Test
-    public void test006JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() throws JugadaInvalidaException{
+    public void test006JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() {
         setup();
         Jugador mockedJugador = mock(Jugador.class);
         Ejercito mockedEjercito = mock(Ejercito.class);
