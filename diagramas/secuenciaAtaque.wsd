@@ -25,7 +25,8 @@ deactivate ":Dado"
 "ataque:Ejercito" --> "paisAtacante:Pais": dadosAtaque
 deactivate "ataque:Ejercito"
 "paisAtacante:Pais" --> ":Batalla": dadosAtaque
-"paisAtacante:Pais" -> "paisDefensor:Pais": defender()
+deactivate "paisAtacante:Pais"
+":Batalla" -> "paisDefensor:Pais": defender()
 activate "paisDefensor:Pais"
 "paisDefensor:Pais" -> "defensa:Ejercito": defender()
 activate "defensa:Ejercito"
@@ -35,11 +36,8 @@ activate ":Dado"
 deactivate ":Dado"
 "defensa:Ejercito" --> "paisDefensor:Pais": dadosDefensa
 deactivate "defensa:Ejercito"
-"paisDefensor:Pais" --> "paisAtacante:Pais": dadosDefensa
+"paisDefensor:Pais" --> ":Batalla": dadosDefensa
 deactivate "paisDefensor:Pais"
-"paisAtacante:Pais" --> ":Batalla": dadosDefensa
-
-deactivate "paisAtacante:Pais"
 
 ":Batalla" -> "paisDefensor:Pais" : sacarFicha(cantidad)
             activate "paisDefensor:Pais"
