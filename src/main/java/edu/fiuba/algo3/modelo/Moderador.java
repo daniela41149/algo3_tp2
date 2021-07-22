@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 
-public class Leer {
+public class Moderador {
     /*
     private String archivo;
     private List<Pais> paises ;
