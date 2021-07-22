@@ -13,7 +13,8 @@ public class Jugador {
     private List<Pais> paises ;
     private Juego juego;
 
-
+    //comentario
+    
     public Jugador(String nombre, String colorJugador, Juego juego){
         this.nombreJugador = nombre;
         this. color = colorJugador;
