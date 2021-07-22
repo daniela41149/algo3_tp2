@@ -1,11 +1,27 @@
 package controladores;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import edu.fiuba.algo3.modelo.Dados;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Controlador{
+
+    List<ImageView> imagenesDadosAtacantes = new ArrayList<ImageView>();
+    List<ImageView> imagenesDadosDefensores = new ArrayList<ImageView>();
+    List<Image> imagenes = new ArrayList<Image>();
+    Image imagenDado1 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_1.png") ) ;
+    Image imagenDado2 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_2.png") ) ;
+    Image imagenDado3 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_3.png") ) ;
+    Image imagenDado4 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_4.png") ) ;
+    Image imagenDado5 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_5.png") ) ;
+    Image imagenDado6 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_6.png") ) ;
+
 
     @FXML
     private Button boton;
@@ -28,12 +44,33 @@ public class Controlador{
     @FXML
     private ImageView dadoDefensorTres;
 
-    @FXML
-    private void lanzar() {
-        System.out.println("asda");
-        Image image1 = new Image(getClass().getResourceAsStream("/vista/dice_6.png"));
-        dadoAtacanteUno.setImage(image1);
+    private void iniciarListasDeImagenes() {
+        imagenes.addAll(  Arrays.asList( imagenDado1, imagenDado2, imagenDado3, imagenDado4, imagenDado5, imagenDado6 )  );
+        imagenesDadosAtacantes.add(dadoAtacanteUno);
+        imagenesDadosAtacantes.add(dadoAtacanteDos);
+        imagenesDadosAtacantes.add(dadoAtacanteTres);
+        imagenesDadosDefensores.add(dadoDefensorUno);
+        imagenesDadosDefensores.add(dadoDefensorDos);
+        imagenesDadosDefensores.add(dadoDefensorTres);
     }
 
+    @FXML
+    private void lanzar() {
+        Dados dados = new Dados();
+        List<Integer> dadosAtacante = dados.dadosAtaque(4);
+        List<Integer> dadosDefensor = dados.dadosDefensa(3);
+        iniciarListasDeImagenes();
+        mostrarDados(dadosAtacante, imagenesDadosAtacantes);
+        mostrarDados(dadosDefensor, imagenesDadosDefensores);
+    }
 
+    private void mostrarDados(List<Integer> dados, List<ImageView> imagenesVacias) {
+        for ( int i = 0; i < dados.size(); i++ )
+            asignarImagen( dados.get(i), i , imagenesVacias );
+    }
+
+    private void asignarImagen( int numeroDado, int posicion, List<ImageView> imagenesVacias ) {
+
+        ( imagenesVacias.get(posicion) ).setImage( imagenes.get( numeroDado-1 ) );
+    }
 }
