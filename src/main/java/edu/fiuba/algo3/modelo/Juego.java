@@ -65,7 +65,8 @@ public class Juego {
     }
 
     public HashMap<String,List<Pais>> mostrarPaisesDeCadaJugador(){
-
+        HashMap<String,List<Pais>> diccionario = null;
+        return  diccionario;
     }
 
 }
