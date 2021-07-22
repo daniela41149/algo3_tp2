@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.modelo.Controlador">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.Controlador">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -67,7 +67,7 @@
             <Button fx:id="boton" layoutX="288.0" layoutY="350.0" mnemonicParsing="false" onAction="#lanzar" text="Lanzar!" />
             <ImageView fx:id="dadoAtacanteUno" fitHeight="91.0" fitWidth="68.0" layoutX="59.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@dice_1.png" />
+                  <Image url="@../../../../resources/dado_imagenes/dice_1.png" />
                </image></ImageView>
             <ImageView fx:id="dadoAtacanteDos" fitHeight="91.0" fitWidth="68.0" layoutX="59.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="dadoAtacanteTres" fitHeight="91.0" fitWidth="68.0" layoutX="59.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />

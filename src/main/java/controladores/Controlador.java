@@ -1,11 +1,11 @@
-package edu.fiuba.algo3.modelo;
+package controladores;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Controlador {
+public class Controlador{
 
     @FXML
     private Button boton;
@@ -29,8 +29,11 @@ public class Controlador {
     private ImageView dadoDefensorTres;
 
     @FXML
-    void lanzar(ActionEvent event) {
-
+    private void lanzar() {
+        System.out.println("asda");
+        Image image1 = new Image(getClass().getResourceAsStream("/vista/dice_6.png"));
+        dadoAtacanteUno.setImage(image1);
     }
+
 
 }
