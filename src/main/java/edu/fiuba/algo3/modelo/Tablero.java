@@ -23,15 +23,12 @@ public class Tablero {
     }
 
     public Pais buscarPais(String nombrePais){
-        boolean paisEncontrado = false;
-        int i = 0;
         Pais paisBuscado = null;
-        while( (!paisEncontrado) && (i < paises.size()) ){
-            paisBuscado = paises.get(i);
-            if(paisBuscado.coincideNombre(nombrePais)){
-                paisEncontrado = true;
+        for(Pais pais: paises){
+            if(pais.coincideNombre(nombrePais)){
+                paisBuscado = pais;
+                return paisBuscado;
             }
-            i++;
         }
         return paisBuscado;
     }
@@ -111,6 +108,19 @@ public class Tablero {
         }
 
     }
+
+    iterador de buscar pais
+    boolean paisEncontrado = false;
+        int i = 0;
+        Pais paisBuscado = null;
+        while( (!paisEncontrado) && (i < paises.size()) ){
+            paisBuscado = paises.get(i);
+            if(paisBuscado.coincideNombre(nombrePais)){
+                paisEncontrado = true;
+            }
+            i++;
+        }
+        return paisBuscado;
 
     */
 

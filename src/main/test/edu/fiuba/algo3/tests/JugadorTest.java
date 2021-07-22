@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
-
+    /*
     private String nombrePais;
     private  String nombreOtroPais;
     private List<String> limitrofes = new ArrayList<>();
@@ -68,5 +68,5 @@ public class JugadorTest {
         assertEquals( jugador1.cantidadPaises() , 1);
     }
 
-
+    */
 }
