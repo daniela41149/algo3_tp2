@@ -23,7 +23,18 @@ public class Juego {
         this.tablero = new Tablero("resources/Fronteras.csv");
         this.jugadores = new LinkedList<>();
     }
+    /*
+    public Juego(Tablero tablero, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
+        if (nombresDeJugadores.size() < MIN_JUGADORES || nombresDeJugadores.size() > MAX_JUGADORES)
+            throw new CantidadInvalidaDeJugadoresException();
 
+        this.tablero = tablero;
+        this.jugadores = new LinkedList<>();
+        for (int i = 0; i < nombresDeJugadores.size(); i++)
+            jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
+
+    }
+    */
     public void agregarJugador(String nombreDeJugador) throws SuperaMaximoDeJugadoresException {
         if (jugadores.size() == MAX_JUGADORES)
             throw new SuperaMaximoDeJugadoresException();
@@ -58,6 +69,14 @@ public class Juego {
     public void comenzarFaseDeJuego() {
         for (Jugador jugador: jugadores) {
             jugador.jugarTurno();
+        }
+    }
+
+    public void colocarEjercito(String nombreJugador, String nombrePais, int cantidadEjercito) {
+        for (Jugador unJugador : jugadores) {
+            if (unJugador.getNombre().equals(nombreJugador)) {
+                //unJugador.colocarEjercito(nombrePais, cantidadEjercito);
+            }
         }
     }
 
