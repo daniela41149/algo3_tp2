@@ -36,7 +36,11 @@ public class Jugador {
     }
     public void colocarEjercito(String nombrePais,int cantidadEjercito)throws JugadaInvalidaException {
         Pais pais = this.buscarPais(nombrePais);
+        if(pais == null){
+            throw new JugadaInvalidaException();
+        }
         pais.colocarEjercito (this, cantidadEjercito);
+
     }
     
 
