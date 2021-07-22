@@ -65,7 +65,7 @@ public class Juego {
     }
 
     public HashMap<String,List<String>> mostrarPaisesDeCadaJugador(){
-        HashMap<String,List<String>> diccionario = null;
+        HashMap<String,List<String>> diccionario = new HashMap<>();
         List<String> listaPaises = new ArrayList<>();
         for(Jugador jugador: jugadores){
             diccionario.put(jugador.getNombre(),jugador.pedirPaises());
