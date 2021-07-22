@@ -25,6 +25,8 @@ public class Jugador {
         paises.add(nuevoPais);
     }
 
+    
+        /*
     public void jugarTurno(){
         System.out.println("Ingrese el Pais Atacante: ");
         Scanner paisAtacante = new Scanner(System.in);
@@ -58,6 +60,7 @@ public class Jugador {
          */
 
     }
+    */
 
     public String getNombre () {
         return this.nombreJugador;
