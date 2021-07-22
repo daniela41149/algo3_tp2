@@ -1,8 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
 
+import java.util.List;
+import java.util.*;
+import java.lang.String;
+import java.io.*;
+
 public class Moderador {
-    /*
+
     private String archivo;
     private List<Pais> paises ;
     private List<Continente> continentes ;
@@ -70,5 +75,5 @@ public class Moderador {
     public List<Continente> pedirContinentes(){
         return (this.continentes);
     }
-    */
+
 }
