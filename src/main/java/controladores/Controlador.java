@@ -56,9 +56,10 @@ public class Controlador{
 
     @FXML
     private void lanzar() {
+        /* aqui se piden los dados de ambos jugadores*/
         Dados dados = new Dados();
-        List<Integer> dadosAtacante = dados.dadosAtaque(4);
-        List<Integer> dadosDefensor = dados.dadosDefensa(3);
+        List<Integer> dadosAtacante = dados.dadosAtaque(3);
+        List<Integer> dadosDefensor = dados.dadosDefensa(2);
         iniciarListasDeImagenes();
         mostrarDados(dadosAtacante, imagenesDadosAtacantes);
         mostrarDados(dadosDefensor, imagenesDadosDefensores);
