@@ -3,6 +3,7 @@ package edu.fiuba.algo3.tests;
 import java.util.List;
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Dados;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.Ejercito;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -94,26 +95,30 @@ public class PaisTest {
 
         Pais pais5 = new Pais(nombrePais5, limitrofes5);
 
+        List<Integer> dadosAtaque = new ArrayList<>();
+        dadosAtaque.add(3);
 
-        List<Integer> dados = new ArrayList<>();
-        dados.add(3);
-        List<Integer> dados5 = new ArrayList<>();
-        dados5.add(6);
+        List<Integer> dadosAtaque5 = new ArrayList<>();
+        dadosAtaque5.add(6);
 
-        Ejercito mockedEjercito = mock(Ejercito.class);
-        Ejercito mockedEjercito5 = mock(Ejercito.class);
+        Dados mockedDadosAtaque = mock(Dados.class);
+        when(mockedDadosAtaque.dadosAtaque(anyInt())).thenReturn(dadosAtaque);
 
-        when(mockedEjercito.atacar(anyInt())).thenReturn(dados);
-        when(mockedEjercito5.atacar(anyInt())).thenReturn(dados5);
+        Dados mockedDadosAtaque5 = mock(Dados.class);
+        when(mockedDadosAtaque5.dadosAtaque(anyInt())).thenReturn(dadosAtaque5);
 
-        pais.setEjercito(mockedEjercito);
-        pais5.setEjercito(mockedEjercito5);
+
+        Ejercito ejercito = pais.getEjercito();
+        Ejercito ejercito5 = pais5.getEjercito();
+
+        ejercito.setDados(mockedDadosAtaque);
+        ejercito5.setDados(mockedDadosAtaque5);
 
         boolean lanzaUnaExcepcion = false;
 
         try {
-            assertEquals(pais.atacar(pais5,1),dados);
-            assertEquals(pais5.atacar(pais,1),dados5);
+            assertEquals(pais.atacar(pais5,1),dadosAtaque);
+            assertEquals(pais5.atacar(pais,1),dadosAtaque5);
         } catch (JugadaInvalidaException e) {
             lanzaUnaExcepcion = true;
         }
@@ -124,6 +129,7 @@ public class PaisTest {
     }
 
 
+/*
     @Test
     public void test005PaisLePideAEjercitoQueDefiendaDeUnAtaque() {
         setup();
@@ -139,7 +145,7 @@ public class PaisTest {
         assertEquals(pais.defender(),dados);
     }
 
-/*
+
     @Test
     public void test006JugadorQuiereColocarEjercitoEnUnPaisQueNoTieneDueño() {
         setup();

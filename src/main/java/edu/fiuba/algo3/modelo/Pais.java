@@ -89,8 +89,10 @@ public class Pais {
         return this.nombrePais;
     }
 
-    public void setEjercito(Ejercito nuevoEjercito) {
-        this.ejercito = nuevoEjercito;
+
+
+    public Ejercito getEjercito() {
+        return this.ejercito;
     }
 
 

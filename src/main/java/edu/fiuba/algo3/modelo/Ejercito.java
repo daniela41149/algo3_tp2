@@ -7,58 +7,63 @@ public class Ejercito {
     int cantidadDeFichas;
     Dados dados;
 
-    public Ejercito(){
+    public Ejercito() {
 
         this.cantidadDeFichas = 0;
         dados = new Dados();
     }
 
-    public Ejercito(int unaCantidadDeFichas){
+    public Ejercito(int unaCantidadDeFichas) {
 
         this.dados = new Dados();
         this.cantidadDeFichas = unaCantidadDeFichas;
     }
 
-    public void sacarFicha(){
+    public void sacarFicha() {
 
         if (cantidadDeFichas > 0)
             this.cantidadDeFichas--;
     }
 
-    public void sacarFicha(int unaCantidadDeFichas){
+    public void sacarFicha(int unaCantidadDeFichas) {
 
-        if ( unaCantidadDeFichas <= this.cantidadDeFichas )
-            this.cantidadDeFichas = this.cantidadDeFichas-unaCantidadDeFichas;
+        if (unaCantidadDeFichas <= this.cantidadDeFichas)
+            this.cantidadDeFichas = this.cantidadDeFichas - unaCantidadDeFichas;
         else
             this.cantidadDeFichas = 0;
     }
 
-    public void agregarFicha(){
+    public void agregarFicha() {
 
         this.cantidadDeFichas++;
     }
 
-    public void agregarFichas(int unaCantidadDeFichas){
+    public void agregarFichas(int unaCantidadDeFichas) {
 
         this.cantidadDeFichas = this.cantidadDeFichas + unaCantidadDeFichas;
     }
 
-    public boolean quedoSinEjercito(){
+    public boolean quedoSinEjercito() {
 
         return (this.cantidadDeFichas == 0);
     }
 
-    public List<Integer> atacar(int unaCantidadDeFichas){
+    public List<Integer> atacar(int unaCantidadDeFichas) {
 
         return dados.dadosAtaque(unaCantidadDeFichas);
     }
 
-    public List<Integer> defender(){
+    public List<Integer> defender() {
 
-        return dados.dadosDefensa( this.cantidadDeFichas );
+        return dados.dadosDefensa(this.cantidadDeFichas);
     }
 
-    public int devolverCantidadDeFichas(){
+    public int devolverCantidadDeFichas() {
         return this.cantidadDeFichas;
+    }
+
+
+    public void setDados(Dados nuevosDados) {
+        this.dados = nuevosDados;
     }
 }

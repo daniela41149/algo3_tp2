@@ -18,7 +18,7 @@ public class Tablero {
         this.continentes = continentes;
     }
 
-    public List<Pais> pasarPiasesAJuego(){
+    public List<Pais> pasarPaisesAJuego(){
         return( this.paises);
     }
 
