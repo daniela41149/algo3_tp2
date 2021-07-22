@@ -1,18 +1,20 @@
 package edu.fiuba.algo3.tests;
 
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.NoSeSuperaMinimoDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.SuperaMaximoDeJugadoresException;
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JuegoTest {
 
     @Test
     public void test01NoSePuedeAgregarAUnJuegoMasDeSieteJugadores() throws SuperaMaximoDeJugadoresException {
+
         Juego juego = new Juego();
 
         juego.agregarJugador("jugador1");
@@ -47,4 +49,5 @@ public class JuegoTest {
         assertEquals(25, jugador1.cantidadPaises());
         assertEquals(25, jugador2.cantidadPaises());
     }
+
 }
