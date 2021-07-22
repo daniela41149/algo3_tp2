@@ -42,7 +42,10 @@ public class Jugador {
         pais.colocarEjercito (this, cantidadEjercito);
 
     }
-    
+
+    public List<Pais> pedirPaises(){
+        return (this.paises);
+    }
 
 
     public String getNombre () {
