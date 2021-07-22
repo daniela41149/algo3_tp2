@@ -36,7 +36,7 @@ public class Tablero {
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException {
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
-        if((paisAtacante == null) || (paisDefensor == null) ){
+        if((paisAtacante == null) || (paisDefensor == null)  ){
             throw new JugadaInvalidaException();
         }
         this.batalla = new Batalla(paisAtacante,paisDefensor);
