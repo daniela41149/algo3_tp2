@@ -1,17 +1,7 @@
 package edu.fiuba.algo3.tests;
 
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-
 public class JuegoTest {
-
+    /*
     @Test
     public void test01NoSePuedeCrearUnJuegoConMasDeSieteJugadores() throws CantidadInvalidaDeJugadoresException {
         Tablero mockTablero = mock(Tablero.class);
@@ -35,7 +25,7 @@ public class JuegoTest {
 
         assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(mockTablero, nombreJugadores));
     }
-    /*
+
     @Test
     public void test03SeCreaUnJuegoConDosJugadoresYseRepartenLosPaises() throws SuperaMaximoDeJugadoresException, NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
         Juego juego = new Juego();

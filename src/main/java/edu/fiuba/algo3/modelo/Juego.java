@@ -17,11 +17,11 @@ public class Juego {
     public Tablero tablero;
     public List<Jugador> jugadores;
 
-    public Juego(Tablero tablero, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
+    public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
         if (nombresDeJugadores.size() < MIN_JUGADORES || nombresDeJugadores.size() > MAX_JUGADORES)
             throw new CantidadInvalidaDeJugadoresException();
 
-        this.tablero = tablero;
+        this.tablero = new Tablero(paises, continentes);
         this.jugadores = new LinkedList<>();
         for (int i = 0; i < nombresDeJugadores.size(); i++)
             jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
@@ -48,21 +48,21 @@ public class Juego {
         int paisesPorJugador = (tablero.cantidadPaises()/jugadores.size());
         repartirPaisesAleatoriamente(paisesPorJugador);
     }
-
+/*
     public void comenzarFaseDeJuego() {
         for (Jugador jugador: jugadores) {
-            //jugador.jugarTurno();
+            jugador.jugarTurno();
         }
     }
 
     public void colocarEjercito(String nombreJugador, String nombrePais, int cantidadEjercito) {
         for (Jugador unJugador : jugadores) {
             if (unJugador.getNombre().equals(nombreJugador)) {
-                //unJugador.colocarEjercito(nombrePais, cantidadEjercito);
+                unJugador.colocarEjercito(nombrePais, cantidadEjercito);
             }
         }
     }
-
+*/
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
         tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
