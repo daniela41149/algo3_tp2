@@ -64,8 +64,12 @@ public class Juego {
         tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
 
-    public HashMap<String,List<Pais>> mostrarPaisesDeCadaJugador(){
-        HashMap<String,List<Pais>> diccionario = null;
+    public HashMap<String,List<String>> mostrarPaisesDeCadaJugador(){
+        HashMap<String,List<String>> diccionario = null;
+        List<String> listaPaises = new ArrayList<>();
+        for(Jugador jugador: jugadores){
+            diccionario.put(jugador.getNombre(),jugador.pedirPaises());
+        }
         return  diccionario;
     }
 

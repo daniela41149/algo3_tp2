@@ -43,8 +43,12 @@ public class Jugador {
 
     }
 
-    public List<Pais> pedirPaises(){
-        return (this.paises);
+    public List<String> pedirPaises(){
+        List<String> listaNombrePaises = new ArrayList<>();
+        for(Pais pais: paises){
+            listaNombrePaises.add(pais.getNombre());
+        }
+        return listaNombrePaises;
     }
 
 
