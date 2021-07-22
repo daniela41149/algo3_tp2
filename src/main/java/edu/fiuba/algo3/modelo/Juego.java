@@ -54,15 +54,15 @@ public class Juego {
             jugador.jugarTurno();
         }
     }
-
-    public void colocarEjercito(String nombreJugador, String nombrePais, int cantidadEjercito) {
+*/
+    public void colocarEjercito(String nombreJugador, String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
         for (Jugador unJugador : jugadores) {
             if (unJugador.getNombre().equals(nombreJugador)) {
                 unJugador.colocarEjercito(nombrePais, cantidadEjercito);
             }
         }
     }
-*/
+
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
         tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
