@@ -1,10 +1,26 @@
 package edu.fiuba.algo3.tests;
 
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Moderador;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class JuegoTest {
-    /*
+
+    Moderador moderador;
+
+    @BeforeEach
+    public void setup() {
+        moderador = new Moderador("resources/Fronteras.csv");
+    }
+
     @Test
-    public void test01NoSePuedeCrearUnJuegoConMasDeSieteJugadores() throws CantidadInvalidaDeJugadoresException {
-        Tablero mockTablero = mock(Tablero.class);
+    public void test01NoSePuedeCrearUnJuegoConMasDeSieteJugadores() {
         ArrayList<String> nombreJugadores = new ArrayList<>();
         nombreJugadores.add("jugador1");
         nombreJugadores.add("jugador2");
@@ -14,18 +30,17 @@ public class JuegoTest {
         nombreJugadores.add("jugador6");
         nombreJugadores.add("jugador7");
 
-        assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(mockTablero, nombreJugadores));
+        assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), nombreJugadores));
     }
 
     @Test
-    public void test02NoSePuedeCrearUnJuegoMenosDeDosJugadores() throws CantidadInvalidaDeJugadoresException {
-        Tablero mockTablero = mock(Tablero.class);
+    public void test02NoSePuedeCrearUnJuegoMenosDeDosJugadores() {
         ArrayList<String> nombreJugadores = new ArrayList<>();
         nombreJugadores.add("jugador1");
 
-        assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(mockTablero, nombreJugadores));
+        assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), nombreJugadores));
     }
-
+    /*
     @Test
     public void test03SeCreaUnJuegoConDosJugadoresYseRepartenLosPaises() throws SuperaMaximoDeJugadoresException, NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
         Juego juego = new Juego();
