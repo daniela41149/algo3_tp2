@@ -40,20 +40,5 @@ public class JuegoTest {
 
         assertThrows(CantidadInvalidaDeJugadoresException.class, () -> new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), nombreJugadores));
     }
-    /*
-    @Test
-    public void test03SeCreaUnJuegoConDosJugadoresYseRepartenLosPaises() throws SuperaMaximoDeJugadoresException, NoSeSuperaMinimoDeJugadoresException, JugadaInvalidaException {
-        Juego juego = new Juego();
 
-        juego.agregarJugador("jugador1");
-        juego.agregarJugador("jugador2");
-        assertEquals(2, juego.jugadores.size());
-
-        juego.comenzarFaseInicial();
-        Jugador jugador1 = juego.jugadores.get(0);
-        Jugador jugador2 = juego.jugadores.get(1);
-        assertEquals(25, jugador1.cantidadPaises());
-        assertEquals(25, jugador2.cantidadPaises());
-    }
-    */
 }
