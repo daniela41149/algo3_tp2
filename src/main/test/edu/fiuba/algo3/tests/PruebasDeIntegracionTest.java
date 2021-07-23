@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PruebasDeIntegracionTest {
-/*
+
     private String nombrePais;
     private List<String> limitrofes;
     private Pais pais;
@@ -53,7 +55,7 @@ public class PruebasDeIntegracionTest {
         limitrofes2 = new ArrayList<>();
         limitrofes2.add("Argentina");
         limitrofes2.add("Brasil");
-        limitrofes.add("Chile");
+        limitrofes2.add("Chile");
         pais2 = new Pais(nombrePais2, limitrofes2);
 
         nombrePais3 = "Brasil";
@@ -95,7 +97,7 @@ public class PruebasDeIntegracionTest {
 
 
     @Test
-    public void test001AtaqueEntrePaisesConElPaisDefensorComoGanador() {
+    public void test001ColocacionDeEjercitosEnLosPaises() {
         setup();
 
         boolean lanzaUnaExcepcion = false;
@@ -106,7 +108,40 @@ public class PruebasDeIntegracionTest {
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
+            juego.colocarEjercito("Pedro",(diccionario.get("Pedro")).get(0).getNombre(),3);
+            juego.colocarEjercito("Martina",(diccionario.get("Martina")).get(0).getNombre(),2);
+            juego.colocarEjercito("Pedro",(diccionario.get("Pedro")).get(1).getNombre(),1);
+            juego.colocarEjercito("Martina",(diccionario.get("Martina")).get(1).getNombre(),3);
 
+            assertEquals((diccionario.get("Pedro")).get(0).cantidadDeFichas(),4);
+            assertEquals((diccionario.get("Pedro")).get(1).cantidadDeFichas(),2);
+            assertEquals((diccionario.get("Martina")).get(0).cantidadDeFichas(),3);
+            assertEquals((diccionario.get("Martina")).get(1).cantidadDeFichas(),4);
+
+
+        } catch (JugadaInvalidaException e1) {
+            lanzaUnaExcepcion = true;
+        } catch (CantidadInvalidaDeJugadoresException e2){
+            lanzaUnaExcepcion = true;
+        }
+
+        assertFalse(lanzaUnaExcepcion);
+
+    }
+
+    @Test
+    public void test002AtaqueEntrePaisesConElPaisDefensorComoGanador() {
+        setup();
+
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.comenzarFaseInicial();
+
+            HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
+
+            /*
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
                 List<Pais> paises = entry.getValue();
@@ -114,7 +149,7 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
-
+             */
 
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
@@ -151,6 +186,7 @@ public class PruebasDeIntegracionTest {
             diccionario = juego.mostrarPaisesDeCadaJugador();
 
 
+            /*
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
                 List<Pais> paises = entry.getValue();
@@ -158,14 +194,16 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
+             */
 
 
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
 
-
-        } catch (Exception e) {
+        } catch (JugadaInvalidaException e1) {
+            lanzaUnaExcepcion = true;
+        } catch (CantidadInvalidaDeJugadoresException e2){
             lanzaUnaExcepcion = true;
         }
 
@@ -176,7 +214,7 @@ public class PruebasDeIntegracionTest {
 
 
     @Test
-    public void test002AtaqueEntrePaisesConElPaisAtacanteComoGanador() {
+    public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() {
         setup();
 
         boolean lanzaUnaExcepcion = false;
@@ -187,6 +225,7 @@ public class PruebasDeIntegracionTest {
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
 
+            /*
 
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
@@ -195,6 +234,8 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
+
+             */
 
 
             assertEquals((diccionario.get("Pedro")).size(),2);
@@ -208,8 +249,8 @@ public class PruebasDeIntegracionTest {
             dadosAtaque.add(5);
 
             List<Integer> dadosDefensa = new ArrayList<>();
-            dadosDefensa.add(2);
             dadosDefensa.add(1);
+            dadosDefensa.add(2);
 
             Dados mockedDadosAtaque = mock(Dados.class);
             when(mockedDadosAtaque.dadosAtaque(anyInt())).thenReturn(dadosAtaque);
@@ -232,6 +273,7 @@ public class PruebasDeIntegracionTest {
             diccionario = juego.mostrarPaisesDeCadaJugador();
 
 
+            /*
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
                 List<Pais> paises = entry.getValue();
@@ -240,24 +282,23 @@ public class PruebasDeIntegracionTest {
                 }
             });
 
+             */
 
 
             assertEquals((diccionario.get("Pedro")).size(),3);
             assertEquals((diccionario.get("Martina")).size(),1);
 
+            } catch (JugadaInvalidaException e1) {
+                lanzaUnaExcepcion = true;
+            } catch (CantidadInvalidaDeJugadoresException e2){
+                lanzaUnaExcepcion = true;
+            }
 
-        } catch (Exception e) {
-            lanzaUnaExcepcion = true;
-        }
-
-        assertFalse(lanzaUnaExcepcion);
+            assertFalse(lanzaUnaExcepcion);
 
     }
 
 
-
-
-*/
 
 
 }
