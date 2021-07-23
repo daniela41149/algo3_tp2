@@ -124,8 +124,8 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            RandomPaises randomPaises = new RandomPaises();
-            juego.comenzarFaseInicial(randomPaises);
+            Aleatorio aleatorio = new Aleatorio();
+            juego.comenzarFaseInicial(aleatorio);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
@@ -159,13 +159,13 @@ public class PruebasDeIntegracionTest {
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
 
-            RandomPaises mockedRandomPaises = mock(RandomPaises.class);
-            when(mockedRandomPaises.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+            Aleatorio mockedAleatorio = mock(Aleatorio.class);
+            when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
 
             //Pedro: Argentina y Uruguay
             //Martina: Brasil y Chile
 
-            juego.comenzarFaseInicial(mockedRandomPaises);
+            juego.comenzarFaseInicial(mockedAleatorio);
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
             /*
@@ -249,13 +249,13 @@ public class PruebasDeIntegracionTest {
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
 
-            RandomPaises mockedRandomPaises = mock(RandomPaises.class);
-            when(mockedRandomPaises.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+            Aleatorio mockedAleatorio = mock(Aleatorio.class);
+            when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
 
             //Pedro: Argentina y Uruguay
             //Martina: Brasil y Chile
 
-            juego.comenzarFaseInicial(mockedRandomPaises);
+            juego.comenzarFaseInicial(mockedAleatorio);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
 

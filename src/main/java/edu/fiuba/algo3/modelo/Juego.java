@@ -29,11 +29,11 @@ public class Juego {
     }
 
 
-    public void comenzarFaseInicial(RandomPaises randomPaises) throws JugadaInvalidaException {
+    public void comenzarFaseInicial(Aleatorio aleatorio) throws JugadaInvalidaException {
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPaisesAJuego());
 
         //RandomPaises randomPaises = new RandomPaises();
-        List<List<Pais>> paisesRepartidos = randomPaises.repartirPaisesAleatoriamente(jugadores.size(), paisesSinRepartir);
+        List<List<Pais>> paisesRepartidos = aleatorio.repartirPaisesAleatoriamente(jugadores.size(), paisesSinRepartir);
 
         for(int indice = 0;indice<jugadores.size();indice++) {
             List<Pais> listaPaisesParaJugador = paisesRepartidos.get(indice);
