@@ -72,8 +72,8 @@ public class BatallaTest {
         when(mockPaisDefensor.defender()).thenReturn(dadosDefensor);
 
         batalla.atacar(2);
-        verify(mockPaisAtacante, never()).sacarFicha(1);
-        verify(mockPaisDefensor).sacarFicha(1);
+        verify(mockPaisAtacante, never()).sacarFichas(1);
+        verify(mockPaisDefensor).sacarFichas(1);
         verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
@@ -90,8 +90,8 @@ public class BatallaTest {
         when(mockPaisDefensor.defender()).thenReturn(dadosDefensor);
 
         batalla.atacar(2);
-        verify(mockPaisDefensor, never()).sacarFicha(1);
-        verify(mockPaisAtacante).sacarFicha(1);
+        verify(mockPaisDefensor, never()).sacarFichas(1);
+        verify(mockPaisAtacante).sacarFichas(1);
         verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
@@ -108,8 +108,8 @@ public class BatallaTest {
         when(mockPaisDefensor.defender()).thenReturn(dadosDefensor);
 
         batalla.atacar(2);
-        verify(mockPaisDefensor, never()).sacarFicha(1);
-        verify(mockPaisAtacante).sacarFicha(1);
+        verify(mockPaisDefensor, never()).sacarFichas(1);
+        verify(mockPaisAtacante).sacarFichas(1);
         verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
@@ -129,8 +129,8 @@ public class BatallaTest {
         when(mockPaisDefensor.defender()).thenReturn(dadosDefensor);
 
         batalla.atacar(4);
-        verify(mockPaisDefensor).sacarFicha(1);
-        verify(mockPaisAtacante).sacarFicha(1);
+        verify(mockPaisDefensor).sacarFichas(1);
+        verify(mockPaisAtacante).sacarFichas(1);
         verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 
@@ -151,8 +151,8 @@ public class BatallaTest {
         when(mockPaisDefensor.defender()).thenReturn(dadosDefensor);
 
         batalla.atacar(4);
-        verify(mockPaisAtacante, never()).sacarFicha(1);
-        verify(mockPaisDefensor, times(3)).sacarFicha(1);
+        verify(mockPaisAtacante, never()).sacarFichas(1);
+        verify(mockPaisDefensor, times(3)).sacarFichas(1);
         verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 /*
@@ -190,8 +190,8 @@ public class BatallaTest {
         when(mockPaisDefensor.defender()).thenReturn(dadosDefensor);
 
         batalla.atacar(1);
-        verify(mockPaisDefensor, never()).sacarFicha(1);
-        verify(mockPaisAtacante, never()).sacarFicha(1);
+        verify(mockPaisDefensor, never()).sacarFichas(1);
+        verify(mockPaisAtacante, never()).sacarFichas(1);
         verify(mockPaisDefensor).establecerDueño(mockPaisAtacante);
     }
 }

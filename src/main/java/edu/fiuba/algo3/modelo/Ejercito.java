@@ -25,7 +25,7 @@ public class Ejercito {
             this.cantidadDeFichas--;
     }
 
-    public void sacarFicha(int unaCantidadDeFichas) {
+    public void sacarFichas(int unaCantidadDeFichas) {
 
         if (unaCantidadDeFichas <= this.cantidadDeFichas)
             this.cantidadDeFichas = this.cantidadDeFichas - unaCantidadDeFichas;

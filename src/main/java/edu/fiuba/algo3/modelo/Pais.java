@@ -40,8 +40,8 @@ public class Pais {
         return (ejercito.defender());
     }
 
-    public void sacarFicha(int cantidad) {
-        ejercito.sacarFicha(cantidad);
+    public void sacarFichas(int cantidad) {
+        ejercito.sacarFichas(cantidad);
     }
 
     public Boolean coincideNombre(String nombre) {

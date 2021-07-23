@@ -58,13 +58,13 @@ public class EjercitoTest {
     public void test05SacaFichasPorCantidad() {
         Ejercito ejercitoUno = new Ejercito(40);
         assertEquals(ejercitoUno.devolverCantidadDeFichas(), 40);
-        ejercitoUno.sacarFicha(10);
+        ejercitoUno.sacarFichas(10);
         assertEquals(ejercitoUno.devolverCantidadDeFichas(), 30);
         ejercitoUno.sacarFicha();
         assertEquals(ejercitoUno.devolverCantidadDeFichas(), 29);
-        ejercitoUno.sacarFicha(5);
+        ejercitoUno.sacarFichas(5);
         assertEquals(ejercitoUno.devolverCantidadDeFichas(), 24);
-        ejercitoUno.sacarFicha(50);
+        ejercitoUno.sacarFichas(50);
         assertEquals(ejercitoUno.devolverCantidadDeFichas(), 0);
     }
 }

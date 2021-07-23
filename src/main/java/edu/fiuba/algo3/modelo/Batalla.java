@@ -20,9 +20,9 @@ public class Batalla {
 
         for (int i = 0; i < comparacionesMaximas; i++) {
             if (dadosDelAtacante.get(i) > dadosDelDefensor.get(i)) {
-                paisDefensor.sacarFicha(1);
+                paisDefensor.sacarFichas(1);
             } else {
-                paisAtacante.sacarFicha(1);
+                paisAtacante.sacarFichas(1);
             }
         }
     }
