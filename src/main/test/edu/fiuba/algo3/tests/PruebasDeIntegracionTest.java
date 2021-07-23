@@ -41,6 +41,7 @@ public class PruebasDeIntegracionTest {
     private List<List<Pais>> listaPaisesRepartidos;
     private List<Pais> listaPaisesParaJugador1;
     private List<Pais> listaPaisesParaJugador2;
+    private Aleatorio mockedAleatorio;
 
 
 
@@ -113,31 +114,32 @@ public class PruebasDeIntegracionTest {
         listaPaisesRepartidos.add(listaPaisesParaJugador1);
         listaPaisesRepartidos.add(listaPaisesParaJugador2);
 
+        mockedAleatorio = mock(Aleatorio.class);
+
+        when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+        when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
+
     }
 
 
     @Test
     public void test001ColocacionDeEjercitosEnLosPaises() {
         setup();
+        //Pedro: Argentina y Uruguay
+        //Martina: Brasil y Chile
 
         boolean lanzaUnaExcepcion = false;
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-
-            Aleatorio mockedAleatorio = mock(Aleatorio.class);
-
-            when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
-            when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
-
             juego.comenzarFaseInicial(mockedAleatorio);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
-            juego.colocarEjercito((diccionario.get("Pedro")).get(0).getNombre(),3);
-            juego.colocarEjercito((diccionario.get("Martina")).get(0).getNombre(),2);
-            juego.colocarEjercito((diccionario.get("Pedro")).get(1).getNombre(),1);
-            juego.colocarEjercito((diccionario.get("Martina")).get(1).getNombre(),3);
+            juego.colocarEjercito("Argentina",3);
+            juego.colocarEjercito("Brasil",2);
+            juego.colocarEjercito("Uruguay",1);
+            juego.colocarEjercito("Chile",3);
 
 
             assertEquals((diccionario.get("Pedro")).get(0).cantidadDeFichas(),4);
@@ -160,21 +162,15 @@ public class PruebasDeIntegracionTest {
     public void test002AtaqueEntrePaisesConElPaisDefensorComoGanador() {
         setup();
 
+        //Pedro: Argentina y Uruguay
+        //Martina: Brasil y Chile
+
         boolean lanzaUnaExcepcion = false;
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-
-            Aleatorio mockedAleatorio = mock(Aleatorio.class);
-
-            when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
-            when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
-
-
-            //Pedro: Argentina y Uruguay
-            //Martina: Brasil y Chile
-
             juego.comenzarFaseInicial(mockedAleatorio);
+
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
             /*
@@ -191,8 +187,8 @@ public class PruebasDeIntegracionTest {
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
-            juego.colocarEjercito((diccionario.get("Pedro")).get(0).getNombre(),3);
-            juego.colocarEjercito((diccionario.get("Martina")).get(0).getNombre(),2);
+            juego.colocarEjercito("Argentina",3);
+            juego.colocarEjercito("Brasil",2);
 
             List<Integer> dadosAtaque = new ArrayList<>();
             dadosAtaque.add(1);
@@ -208,15 +204,15 @@ public class PruebasDeIntegracionTest {
             Dados mockedDadosDefensa = mock(Dados.class);
             when(mockedDadosDefensa.dadosDefensa(anyInt())).thenReturn(dadosDefensa);
 
-            Ejercito ejercitoPaisAtacante = (diccionario.get("Pedro")).get(0).getEjercito();
-            Ejercito ejercitoPaisDefensor = (diccionario.get("Martina")).get(0).getEjercito();
+            Ejercito ejercitoPaisAtacante = pais.getEjercito();
+            Ejercito ejercitoPaisDefensor = pais3.getEjercito();
 
             ejercitoPaisAtacante.setDados(mockedDadosAtaque);
             ejercitoPaisDefensor.setDados(mockedDadosDefensa);
 
             //Argentina (Pedro) ataca a Brasil (Martina).
 
-            juego.atacar((diccionario.get("Pedro")).get(0).getNombre(),(diccionario.get("Martina")).get(0).getNombre(),2);
+            juego.atacar("Argentina","Brasil",2);
 
             //Argentina (Pedro) pierde y Brasil (Martina) gana.
 
@@ -254,20 +250,16 @@ public class PruebasDeIntegracionTest {
     public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() {
         setup();
 
+        //Pedro: Argentina y Uruguay
+        //Martina: Brasil y Chile
+
         boolean lanzaUnaExcepcion = false;
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-
-            Aleatorio mockedAleatorio = mock(Aleatorio.class);
-            when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
-
-            //Pedro: Argentina y Uruguay
-            //Martina: Brasil y Chile
-
             juego.comenzarFaseInicial(mockedAleatorio);
-
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
+
             /*
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
