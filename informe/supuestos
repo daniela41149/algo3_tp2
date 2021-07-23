@@ -1,0 +1,7 @@
+Supuestos
+
+1) Cuando un jugador ataca a otro país y lo gana, una ficha del pais ganador se borra automáticamente y se agrega
+al país perdedor.
+
+2) Cuando los jugadores son 3,4 o 6 y los 50 paises se reparten entre ellos, como no quedan paises sin repartir,
+algunos jugadores van a tener 1 país más que otros.
