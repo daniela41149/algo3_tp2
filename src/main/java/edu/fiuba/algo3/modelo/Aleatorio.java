@@ -32,8 +32,9 @@ public class Aleatorio {
         return listasPaisesRepartidos;
     }
 
+    public int elegirPosicionDelJugadorQueEmpieza(int numeroDeJugadores){
+        Random rand = new Random();
 
-
-
-
+        return (rand.nextInt(numeroDeJugadores));
+    }
 }
