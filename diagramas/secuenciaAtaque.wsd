@@ -71,4 +71,5 @@ deactivate "paisDefensor:Pais"
 deactivate ":Batalla"
 deactivate ":Tablero"
 deactivate "pedro:Jugador"
+
 @enduml
