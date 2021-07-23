@@ -44,17 +44,13 @@ public class Pais {
         ejercito.sacarFicha(cantidad);
     }
 
-
     public Boolean coincideNombre(String nombre) {
         return nombre.equals(this.nombrePais);
     }
 
-
-
     public boolean esElDueño(Jugador jugador) {
         return this.dueño.esElMismo(jugador);
     }
-
 
     public Jugador nuevoDueño() {
         return this.dueño;

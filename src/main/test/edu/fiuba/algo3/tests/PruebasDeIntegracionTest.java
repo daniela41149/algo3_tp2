@@ -124,15 +124,21 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            Aleatorio aleatorio = new Aleatorio();
-            juego.comenzarFaseInicial(aleatorio);
+
+            Aleatorio mockedAleatorio = mock(Aleatorio.class);
+
+            when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+            when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
+
+            juego.comenzarFaseInicial(mockedAleatorio);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
-            juego.colocarEjercito("Pedro",(diccionario.get("Pedro")).get(0).getNombre(),3);
-            juego.colocarEjercito("Martina",(diccionario.get("Martina")).get(0).getNombre(),2);
-            juego.colocarEjercito("Pedro",(diccionario.get("Pedro")).get(1).getNombre(),1);
-            juego.colocarEjercito("Martina",(diccionario.get("Martina")).get(1).getNombre(),3);
+            juego.colocarEjercito((diccionario.get("Pedro")).get(0).getNombre(),3);
+            juego.colocarEjercito((diccionario.get("Martina")).get(0).getNombre(),2);
+            juego.colocarEjercito((diccionario.get("Pedro")).get(1).getNombre(),1);
+            juego.colocarEjercito((diccionario.get("Martina")).get(1).getNombre(),3);
+
 
             assertEquals((diccionario.get("Pedro")).get(0).cantidadDeFichas(),4);
             assertEquals((diccionario.get("Pedro")).get(1).cantidadDeFichas(),2);
@@ -160,7 +166,10 @@ public class PruebasDeIntegracionTest {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
 
             Aleatorio mockedAleatorio = mock(Aleatorio.class);
+
             when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+            when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
+
 
             //Pedro: Argentina y Uruguay
             //Martina: Brasil y Chile
@@ -182,8 +191,8 @@ public class PruebasDeIntegracionTest {
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
-            juego.colocarEjercito("Pedro",(diccionario.get("Pedro")).get(0).getNombre(),3);
-            juego.colocarEjercito("Martina",(diccionario.get("Martina")).get(0).getNombre(),2);
+            juego.colocarEjercito((diccionario.get("Pedro")).get(0).getNombre(),3);
+            juego.colocarEjercito((diccionario.get("Martina")).get(0).getNombre(),2);
 
             List<Integer> dadosAtaque = new ArrayList<>();
             dadosAtaque.add(1);
@@ -224,6 +233,7 @@ public class PruebasDeIntegracionTest {
 
              */
 
+
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
@@ -258,8 +268,6 @@ public class PruebasDeIntegracionTest {
             juego.comenzarFaseInicial(mockedAleatorio);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
-
-
             /*
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
@@ -268,13 +276,15 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
+
              */
+
 
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
-            juego.colocarEjercito("Pedro","Argentina",2);
-            juego.colocarEjercito("Martina","Brasil",1);
+            juego.colocarEjercito("Argentina",2);
+            juego.colocarEjercito("Brasil",1);
             assertEquals(pais.cantidadDeFichas(),3);
             assertEquals(pais3.cantidadDeFichas(),2);
 
@@ -316,7 +326,6 @@ public class PruebasDeIntegracionTest {
             });
 
              */
-
             assertEquals((diccionario.get("Pedro")).size(),3);
             assertEquals((diccionario.get("Martina")).size(),1);
             assertEquals(pais.cantidadDeFichas(),2);
