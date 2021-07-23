@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Math.round;
+
 public class Aleatorio {
 
 
@@ -14,13 +16,13 @@ public class Aleatorio {
     public List<List<Pais>> repartirPaisesAleatoriamente (int cantidadDeJugadores,List<Pais> paisesSinRepartir) {
         Random rand = new Random();
 
-        int cantidadPorJugador = (paisesSinRepartir.size()/cantidadDeJugadores);
+        int cantidadPorJugador = round(paisesSinRepartir.size()/cantidadDeJugadores);
 
         List<List<Pais>> listasPaisesRepartidos = new ArrayList<>();
 
         for(int i = 0; i < cantidadDeJugadores; i++) {
             List<Pais>  listaPaises = new ArrayList<>();
-            for (int j = 0; j < cantidadPorJugador; j++) {
+            for (int j = 0; !(paisesSinRepartir.isEmpty()) || j < cantidadPorJugador; j++) {
                 int posicionAleatoria = rand.nextInt(paisesSinRepartir.size());
                 Pais paisAleatorio = paisesSinRepartir.get(posicionAleatoria);
                 listaPaises.add(paisAleatorio);
