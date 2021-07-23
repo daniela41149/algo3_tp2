@@ -66,6 +66,20 @@ public class JugadorTest {
         jugador1.desocupar("Brasil");
         assertEquals( jugador1.cantidadPaises() , 1);
     }
+    @Test
+    public void test04LaListaDePaisesCoincide() {
 
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
+        List<Pais> listaPaises = new ArrayList<>();
+        listaPaises.add(paisUno);
+        listaPaises.add(paisDos);
+
+
+        assertEquals( listaPaises ,jugador1.pedirPaises());
+
+    }
 
 }
