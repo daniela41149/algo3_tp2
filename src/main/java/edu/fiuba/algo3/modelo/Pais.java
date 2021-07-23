@@ -69,7 +69,9 @@ public class Pais {
         if (ejercito.quedoSinEjercito()) {
             this.dueño.desocupar(this.nombrePais);
             this.dueño = paisAtacante.nuevoDueño();
-            this.dueño.agregarPais(paisAtacante);
+            this.dueño.agregarPais(this);
+            paisAtacante.ejercito.sacarFicha();
+            this.ejercito.agregarFicha();
         }
     }
 

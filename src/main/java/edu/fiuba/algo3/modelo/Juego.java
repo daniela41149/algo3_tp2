@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.*;
 
+
 public class Juego {
 
     static final int MIN_JUGADORES = 2;
@@ -27,28 +28,23 @@ public class Juego {
             jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
     }
 
-    private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws JugadaInvalidaException {
-        Random rand = new Random();
+
+    public void comenzarFaseInicial(RandomPaises randomPaises) throws JugadaInvalidaException {
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPaisesAJuego());
 
-        for (Jugador jugadorActual : jugadores) {
-            for (int j = 0; j < cantidadPorJugador; j++) {
-                int posicionAleatoria = rand.nextInt(paisesSinRepartir.size());
-                Pais paisAleatorio = paisesSinRepartir.get(posicionAleatoria);
+        //RandomPaises randomPaises = new RandomPaises();
+        List<List<Pais>> paisesRepartidos = randomPaises.repartirPaisesAleatoriamente(jugadores.size(), paisesSinRepartir);
 
-                paisAleatorio.colocarEjercito(jugadorActual,1);
-                jugadorActual.agregarPais(paisAleatorio);
-                paisesSinRepartir.remove(paisAleatorio);
-            }
+        for(int indice = 0;indice<jugadores.size();indice++) {
+            List<Pais> listaPaisesParaJugador = paisesRepartidos.get(indice);
+                for (Pais paisActual : listaPaisesParaJugador) {
+                    jugadores.get(indice).agregarPais(paisActual);
+                    paisActual.colocarEjercito(jugadores.get(indice),1);
+                }
         }
-    }
-
-    public void comenzarFaseInicial() throws JugadaInvalidaException {
-        //Random rand = new Random();
-        int paisesPorJugador = (tablero.cantidadPaises()/jugadores.size());
 
         //posicionJugadorEnTurno = rand.nextInt(jugadores.size());
-        repartirPaisesAleatoriamente(paisesPorJugador);
+        //repartirPaisesAleatoriamente(paisesPorJugador);
     }
 
     /*
@@ -61,7 +57,10 @@ public class Juego {
 
         return jugadorEnTurno;
     }
-    */
+
+     */
+
+
 
     public void colocarEjercito(String nombreJugador, String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
         for (Jugador unJugador : jugadores) {

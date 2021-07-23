@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -36,6 +37,11 @@ public class PruebasDeIntegracionTest {
     private List<Pais> listaPaises;
     private List<Continente> listaContinentes;
     private List<String> nombresJugadores;
+
+    private List<List<Pais>> listaPaisesRepartidos;
+    private List<Pais> listaPaisesParaJugador1;
+    private List<Pais> listaPaisesParaJugador2;
+
 
 
     @BeforeEach
@@ -93,6 +99,20 @@ public class PruebasDeIntegracionTest {
         nombresJugadores.add("Pedro");
         nombresJugadores.add("Martina");
 
+
+        listaPaisesParaJugador1 = new ArrayList<>();
+
+        listaPaisesParaJugador1.add(pais);
+        listaPaisesParaJugador1.add(pais2);
+
+        listaPaisesParaJugador2 = new ArrayList<>();
+        listaPaisesParaJugador2.add(pais3);
+        listaPaisesParaJugador2.add(pais4);
+
+        listaPaisesRepartidos = new ArrayList<>();
+        listaPaisesRepartidos.add(listaPaisesParaJugador1);
+        listaPaisesRepartidos.add(listaPaisesParaJugador2);
+
     }
 
 
@@ -104,7 +124,8 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            juego.comenzarFaseInicial();
+            RandomPaises randomPaises = new RandomPaises();
+            juego.comenzarFaseInicial(randomPaises);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
@@ -137,8 +158,14 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            juego.comenzarFaseInicial();
 
+            RandomPaises mockedRandomPaises = mock(RandomPaises.class);
+            when(mockedRandomPaises.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+
+            //Pedro: Argentina y Uruguay
+            //Martina: Brasil y Chile
+
+            juego.comenzarFaseInicial(mockedRandomPaises);
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
 
             /*
@@ -149,6 +176,7 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
+
              */
 
             assertEquals((diccionario.get("Pedro")).size(),2);
@@ -177,14 +205,13 @@ public class PruebasDeIntegracionTest {
             ejercitoPaisAtacante.setDados(mockedDadosAtaque);
             ejercitoPaisDefensor.setDados(mockedDadosDefensa);
 
-            //Un pais (al azar) de Pedro ataca a un pais (al azar) de Martina.
+            //Argentina (Pedro) ataca a Brasil (Martina).
 
             juego.atacar((diccionario.get("Pedro")).get(0).getNombre(),(diccionario.get("Martina")).get(0).getNombre(),2);
 
-            //Pais Atacante de Pedro pierde y Pais Defensor de Martina gana.
+            //Argentina (Pedro) pierde y Brasil (Martina) gana.
 
             diccionario = juego.mostrarPaisesDeCadaJugador();
-
 
             /*
             diccionario.entrySet().forEach(entry -> {
@@ -194,8 +221,8 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
-             */
 
+             */
 
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
@@ -221,12 +248,19 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            juego.comenzarFaseInicial();
+
+            RandomPaises mockedRandomPaises = mock(RandomPaises.class);
+            when(mockedRandomPaises.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+
+            //Pedro: Argentina y Uruguay
+            //Martina: Brasil y Chile
+
+            juego.comenzarFaseInicial(mockedRandomPaises);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
 
-            /*
 
+            /*
             diccionario.entrySet().forEach(entry -> {
                 System.out.println(entry.getKey());
                 List<Pais> paises = entry.getValue();
@@ -234,15 +268,15 @@ public class PruebasDeIntegracionTest {
                     System.out.println(pais.getNombre());
                 }
             });
-
              */
-
 
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
-            juego.colocarEjercito("Pedro",(diccionario.get("Pedro")).get(0).getNombre(),2);
-            juego.colocarEjercito("Martina",(diccionario.get("Martina")).get(0).getNombre(),1);
+            juego.colocarEjercito("Pedro","Argentina",2);
+            juego.colocarEjercito("Martina","Brasil",1);
+            assertEquals(pais.cantidadDeFichas(),3);
+            assertEquals(pais3.cantidadDeFichas(),2);
 
             List<Integer> dadosAtaque = new ArrayList<>();
             dadosAtaque.add(5);
@@ -258,20 +292,19 @@ public class PruebasDeIntegracionTest {
             Dados mockedDadosDefensa = mock(Dados.class);
             when(mockedDadosDefensa.dadosDefensa(anyInt())).thenReturn(dadosDefensa);
 
-            Ejercito ejercitoPaisAtacante = (diccionario.get("Pedro")).get(0).getEjercito();
-            Ejercito ejercitoPaisDefensor = (diccionario.get("Martina")).get(0).getEjercito();
+            Ejercito ejercitoPaisAtacante = pais.getEjercito();
+            Ejercito ejercitoPaisDefensor = pais3.getEjercito();
 
             ejercitoPaisAtacante.setDados(mockedDadosAtaque);
             ejercitoPaisDefensor.setDados(mockedDadosDefensa);
 
-            //Un pais (al azar) de Pedro ataca a un pais (al azar) de Martina.
+            //Argentina (Pedro) ataca a Brasil (Martina).
 
-            juego.atacar((diccionario.get("Pedro")).get(0).getNombre(),(diccionario.get("Martina")).get(0).getNombre(),2);
+            juego.atacar("Argentina","Brasil",2);
 
-            //Pedro gana y Martina pierde ese pais.
+            //Pedro gana y Martina pierde Brasil.
 
             diccionario = juego.mostrarPaisesDeCadaJugador();
-
 
             /*
             diccionario.entrySet().forEach(entry -> {
@@ -284,9 +317,10 @@ public class PruebasDeIntegracionTest {
 
              */
 
-
             assertEquals((diccionario.get("Pedro")).size(),3);
             assertEquals((diccionario.get("Martina")).size(),1);
+            assertEquals(pais.cantidadDeFichas(),2);
+            assertEquals(pais3.cantidadDeFichas(),1);
 
             } catch (JugadaInvalidaException e1) {
                 lanzaUnaExcepcion = true;
@@ -297,8 +331,52 @@ public class PruebasDeIntegracionTest {
             assertFalse(lanzaUnaExcepcion);
 
     }
+/*
+    @Test
+    public void test004JuegoDeUnaRondaConDosJugadores() {
+        Moderador moderador = new Moderador("resources/Fronteras.csv");
+        RandomPaises randomPaises = new RandomPaises();
+
+        List<Pais> listaPaises = moderador.pedirPaises();
+        List<Continente> listaContinentes = moderador.pedirContinentes();
+
+        nombresJugadores = new ArrayList<>();
+        nombresJugadores.add("Felipe");
+        nombresJugadores.add("Tomás");
+
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.comenzarFaseInicial(randomPaises);
+
+            HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
+            diccionario.entrySet().forEach(entry -> {
+                System.out.println(entry.getKey());
+                List<Pais> paises = entry.getValue();
+                for (Pais pais: paises) {
+                    System.out.println(pais.getNombre());
+                }
+            });
 
 
 
+
+        } catch (JugadaInvalidaException e1) {
+            lanzaUnaExcepcion = true;
+        } catch (CantidadInvalidaDeJugadoresException e2){
+            lanzaUnaExcepcion = true;
+        }
+
+        assertFalse(lanzaUnaExcepcion);
+
+
+
+
+
+    }
+
+
+*/
 
 }
