@@ -12,8 +12,7 @@ public class Jugador {
     private List<Pais> paises ;
     private Juego juego;
 
-    //comentario
-    
+
     public Jugador(String nombre, String colorJugador, Juego juego){
         this.nombreJugador = nombre;
         this. color = colorJugador;
@@ -24,6 +23,7 @@ public class Jugador {
     public void agregarPais(Pais nuevoPais){
         paises.add(nuevoPais);
     }
+
     public Pais buscarPais(String nombrePais){
         Pais paisBuscado = null;
         for(Pais pais: paises){
@@ -34,6 +34,7 @@ public class Jugador {
         }
         return paisBuscado;
     }
+
     public void colocarEjercito(String nombrePais,int cantidadEjercito)throws JugadaInvalidaException {
         Pais pais = this.buscarPais(nombrePais);
         if(pais == null){
@@ -43,14 +44,13 @@ public class Jugador {
 
     }
 
-    public List<String> pedirPaises(){
-        List<String> listaNombrePaises = new ArrayList<>();
+    public List<Pais> pedirPaises(){
+        List<Pais> listaPaises = new ArrayList<>();
         for(Pais pais: paises){
-            listaNombrePaises.add(pais.getNombre());
+            listaPaises.add(pais);
         }
-        return listaNombrePaises;
+        return listaPaises;
     }
-
 
     public String getNombre () {
         return this.nombreJugador;
@@ -68,18 +68,8 @@ public class Jugador {
     }
 
     public void desocupar(String nombrePais){
-        boolean paisEncontrado = false;
-        int i = 0;
-        Pais paisBuscado;
-        while( (!paisEncontrado) && (i < paises.size()) ){
-            paisBuscado = paises.get(i);
-            if(paisBuscado.coincideNombre(nombrePais)){
-                paisEncontrado = true;
-                paises.remove(i);
-            }
-            i++;
-        }
-
+        Pais paisBuscado = buscarPais(nombrePais);
+        paises.remove(paisBuscado);
     }
 
     public int cantidadPaises(){
@@ -87,35 +77,3 @@ public class Jugador {
     }
 }
 
-    /*
-    public void jugarTurno(){
-        System.out.println("Ingrese el Pais Atacante: ");
-        Scanner paisAtacante = new Scanner(System.in);
-        String paisAtacanteNombre = paisAtacante.nextLine();
-        System.out.println("Ingrese el Pais Defensor: ");
-        Scanner paisDefensor = new Scanner(System.in);
-        String paisDefensorNombre = paisDefensor.nextLine();
-        System.out.println("Ingrese la cantidad de ejercito para batallar: ");
-        Scanner cantEjercito = new Scanner(System.in);
-        int cantEjercitoAtaca = cantEjercito.nextInt();
-
-
-        try {
-            juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
-        }catch(JugadaInvalidaException e) {
-        }
-
-        boolean repetir = true;
-
-        while(repetir){
-            try {
-                paisDefensor = new Scanner(System.in);
-                paisDefensorNombre = paisDefensor.nextLine();
-                juego.atacar(paisAtacanteNombre,paisDefensorNombre,cantEjercitoAtaca);
-                repetir = false;
-            }catch(PaisNoLimitrofeException e) {
-                System.out.println("El pais Defensor no es Limitrofe al atacante, ingrese otro: ");
-            }
-        }
-    }
-    */

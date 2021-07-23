@@ -29,7 +29,7 @@ public class Juego {
 
     private void repartirPaisesAleatoriamente(int cantidadPorJugador) throws JugadaInvalidaException {
         Random rand = new Random();
-        ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPiasesAJuego());
+        ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPaisesAJuego());
 
         for (Jugador jugadorActual : jugadores) {
             for (int j = 0; j < cantidadPorJugador; j++) {
@@ -75,9 +75,9 @@ public class Juego {
         tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
 
-    public HashMap<String,List<String>> mostrarPaisesDeCadaJugador() {
-        HashMap<String,List<String>> diccionario = new HashMap<>();
-        List<String> listaPaises = new ArrayList<>();
+    public HashMap<String,List<Pais>> mostrarPaisesDeCadaJugador(){
+        HashMap<String,List<Pais>> diccionario = new HashMap<>();
+        List<Pais> listaPaises = new ArrayList<>();
         for(Jugador jugador: jugadores){
             diccionario.put(jugador.getNombre(),jugador.pedirPaises());
         }

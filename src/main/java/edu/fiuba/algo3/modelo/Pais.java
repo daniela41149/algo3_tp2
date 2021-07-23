@@ -83,14 +83,16 @@ public class Pais {
         }
     }
 
+    public int cantidadDeFichas() {return ejercito.devolverCantidadDeFichas();}
 
 
     public String getNombre () {
         return this.nombrePais;
     }
 
-    public void setEjercito(Ejercito nuevoEjercito) {
-        this.ejercito = nuevoEjercito;
+
+    public Ejercito getEjercito() {
+        return this.ejercito;
     }
 
 
