@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
-    /*
+
     private String nombrePais;
     private  String nombreOtroPais;
     private List<String> limitrofes = new ArrayList<>();
@@ -22,13 +22,12 @@ public class JugadorTest {
 
     @BeforeEach
     public void setup() {
-        juego = new Juego();
+
         nombrePais = "Argentina";
         limitrofes.add("Chile");
         limitrofes.add("Brasil");
         limitrofes.add("Uruguay");
         paisUno = new Pais(nombrePais, limitrofes);
-
 
         nombreOtroPais = "Brasil";
         limitrofes.add("Uruguay");
@@ -68,5 +67,5 @@ public class JugadorTest {
         assertEquals( jugador1.cantidadPaises() , 1);
     }
 
-    */
+
 }
