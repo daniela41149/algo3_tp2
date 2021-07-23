@@ -1,13 +1,13 @@
 @startuml
 Juego "1" *-- "1" Tablero
-Juego "1" *-- "2..6" Jugador
+Juego "1" -- "2..6" Jugador
 Juego "1" *-- "*" TarjetaPais
+Juego .> Moderador
+Aleatorio <.Juego
 
-Interface TarjetaPais
+
 Interface Mision
 
-TarjetaPais <|.. TarjetaPaisActivada
-TarjetaPais <|.. TarjetaPaisDesactivadas
 Mision <|.. MisionSecreta
 Mision <|.. MisionNoSecreta
 
@@ -17,55 +17,142 @@ Continente "1" *-- "1..*" Pais
 
 Jugador "1" *-- "2" Mision
 Jugador "1" -- "1..*" Pais
-Ejercito "1" --> "1" "Dado"
+Ejercito "1" --> "1" "Dados"
 Tablero ..> Canjes
 
 Pais "1" -> "1" Ejercito
 Tablero -> Batalla
 Batalla "1" --> "2" Pais
 
+Pais --> Estado
+Estado <|.. Vacante
+Estado <|.. Ocupado
+
+skinparam classAttributeIconSize 0
+class Moderador {
+ +pedirPaises()
+ +pedirContinentes()
+ +pedirTarjetasPais()
+}
+
+skinparam classAttributeIconSize 0
+class Aleatorio {
+ +repartirPaisesAleatoriamente(int cantidadJugadores, listaPaises): listaDeListaDePaises
+ +elegirPosicionDelJugadorQueEmpieza(int cantidadJugadores): int posicion
+}
+
 
 skinparam classAttributeIconSize 0
 class Juego {
+ +new (listaPaises, listaContinentes, listaNombresJugadores): Juego
+ +comenzarFaseInicial (Aleatorio)
+ +mostrarPaisesDeCadaJugador(): diccionario
+ +atacar (String paisAtacante, String paisDefensor, int cantidadEjercito)
+ +colocarEjercito (String nombrePais, int cantidadEjercito)
 }
 
 
 skinparam classAttributeIconSize 0
 class Jugador {
- +jugarTurno()
+ -nombre: String
+ -color: String
+ +new(String nombre, String color, String juego): Jugador
+ +getNombre(): String
+ +getColor(): String
+ +agregarPais(Pais)
+ +buscarPais(String nombrePais): Pais
+ +pedirPaises(): listaPaises
  +desocupar()
- +esElMismo(jugador)
+ +esElMismo(Jugador)
+ +colocarEjercito(String nombrePais, int cantidadEjercito)
+ +cantidadPaises(): int
 }
 
 skinparam classAttributeIconSize 0
 class Tablero {
- +atacar(String,String,cantidadEjercito)
+ +new (listaPaises, listaContinentes): Tablero
+ +pasarPaisesAJuego(): listaPaises
+ +buscarPais (String nombrePais): Pais
+ +atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadEjercito)
+ +cantidadPaises(): int
+ +cantidadContinentes(): int
 }
 
 skinparam classAttributeIconSize 0
 class Batalla {
- +atacar(cantidadEjercito)
+ +atacar (int cantidadEjercito)
 }
+
 
 skinparam classAttributeIconSize 0
 class Pais {
- +atacar(paisDefensa,cantidadEjercito)
- +esLimitrofe(paisAtacante)
- +establecerDueño(paisAtacante)
- +nuevoDueño()
+ -nombrePais: String
+ -nombrePaisesLimitrofes: listaString
+ +new (nombrePais,nombrePaisesLimitrofes): Pais
+ +esLimitrofe (paisAtacante)
+ +atacar (paisDefensa,cantidadEjercito): listaInt
+ +defender(): listaInt
+ +sacarFicha (int cantidad)
+ +coincideNombre(String nombre): boolean
+ +esElDueño(Jugador): boolean
+ +establecerDueño (paisAtacante)
+ +nuevoDueño(): Jugador
+ +colocarEjercito (Jugador, int cantidadEjercito)
+ +cantidadDeFichas(): int
+ +getNombre(): String nombrePais
+
+
+}
+
+skinparam classAttributeIconSize 0
+Interface Estado {
+ +puedeOcupar(): boolean
+}
+
+skinparam classAttributeIconSize 0
+class Ocupado {
+ +puedeOcupar(): boolean
+}
+
+skinparam classAttributeIconSize 0
+class Vacante {
+ +puedeOcupar(): boolean
+}
+
+skinparam classAttributeIconSize 0
+class Continente {
+ +jugadorControlaContiente(Jugador): boolean
 
 }
 
 skinparam classAttributeIconSize 0
 class Ejercito {
- +sacarFicha(cantidad)
- +quedoSinEjercito()
- +atacar(cantidadEjercito)
- +defender()
+ -cantidadDeFichas: int
+ +new (int cantidadFichas): Ejercito
+ +sacarFicha()
+ +sacarFichas (cantidad)
+ +agregarFicha()
+ +agregarFichas (int cantidadFichas)
+ +quedoSinEjercito(): boolean
+ +atacar (cantidadFichas): listaInt
+ +defender(): listaInt
+ +devolverCantidadDeFichas(): int
+
 }
 
 skinparam classAttributeIconSize 0
-class Dado {
- +tirarDado(cantidadEjercito)
+class Dados {
+ -listaDados: listaInt
+ -lanzarDados (cantidadDados): listaInt
+ -ordenarDados (listaInt): listaInt
+ +dadosAtaque (int cantidadDeDados): listaInt
+ +dadosDefensa (int cantidadDeDados): listaInt
+}
+
+
+skinparam classAttributeIconSize 0
+class TarjetaPais {
+ -nombre: String
+ -simbolo: String
 }
 @enduml
