@@ -60,7 +60,7 @@ activate "defensa:Ejercito"
 deactivate "defensa:Ejercito"
 
 
-"paisDefensor:Pais" -> ":Jugador": desocupar()
+"paisDefensor:Pais" -> ":Jugador": desocupar(String Pais)
 activate ":Jugador"
 deactivate ":Jugador"
 "paisDefensor:Pais" -> "paisAtacante:Pais": nuevoDueño()
