@@ -16,7 +16,7 @@ public class JuegoTest {
 
     @BeforeEach
     public void setup() {
-        moderador = new Moderador("resources/Fronteras.csv");
+        moderador = new Moderador("resources/Fronteras.csv", "resources/TarjetasPais.json");
     }
 
     @Test

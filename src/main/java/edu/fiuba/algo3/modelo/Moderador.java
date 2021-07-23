@@ -1,28 +1,35 @@
 package edu.fiuba.algo3.modelo;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.*;
-import java.lang.String;
-import java.io.*;
 
 public class Moderador {
 
-    private String archivo;
-    private List<Pais> paises ;
-    private List<Continente> continentes ;
+    private List<Pais> paises;
+    private List<Continente> continentes;
+    private List<TarjetaPais> tarjetas;
 
-    public Moderador(String rutaArchivo){
-        this.archivo = rutaArchivo;
+    public Moderador(String rutaArchivoFronteras, String rutaArchivoTarjetas){
         List<Pais> paisesLeidos =  new ArrayList<>();
         List<Continente> continentesLeidos = new ArrayList<>();
-        cargarArchivo(archivo,paisesLeidos,continentesLeidos);
+        List<TarjetaPais> tarjetasLeidas = new ArrayList<>();
+
+        cargarArchivoFronteras(rutaArchivoFronteras, paisesLeidos, continentesLeidos);
+        cargarArchivoTarjetas(rutaArchivoTarjetas, tarjetasLeidas);
+
+        this.tarjetas = tarjetasLeidas;
         this.paises = paisesLeidos;
         this.continentes = continentesLeidos;
     }
 
-
-    private void cargarArchivo(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
+    private void cargarArchivoFronteras(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
         try {
@@ -62,9 +69,27 @@ public class Moderador {
             List<Pais> listaPaisesPorContinente = diccionarioContinentes.get(nombreContinente);
             Continente nuevoContinente = new Continente(nombreContinente,listaPaisesPorContinente);
             continentes.add(nuevoContinente);
-
         }
+    }
 
+    private void cargarArchivoTarjetas(String direccionArchivo, List<TarjetaPais> tarjetas) {
+        String json = "";
+        try {
+            BufferedReader buffer = new BufferedReader(new FileReader(direccionArchivo));
+
+            String linea;
+            while ((linea = buffer.readLine()) != null) {
+                json += linea;
+            }
+
+            buffer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Gson gson = new Gson();
+
+        final Type tipoListaContinentes = new TypeToken<List<Continente>>(){}.getType();
+        tarjetas.addAll(gson.fromJson(json, tipoListaContinentes));
     }
 
     //para que juego pueda recibir el listado de paises del archivo
@@ -74,6 +99,10 @@ public class Moderador {
     //para que juego pueda recibir el listado de continentes del archivo
     public List<Continente> pedirContinentes(){
         return (this.continentes);
+    }
+
+    public List<TarjetaPais> pedirTarjetasPais(){
+        return (this.tarjetas);
     }
 
 }
