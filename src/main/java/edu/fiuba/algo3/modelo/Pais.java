@@ -72,7 +72,7 @@ public class Pais {
     }
 
     public void colocarEjercito (Jugador jugador, int cantidadEjercito) {
-        if (estado.puedeOcupar()) {
+        if (estado.puedeOcupar()) {//ARREGLAR
             this.elegirPais(jugador);
             estado = new Ocupado();
         }

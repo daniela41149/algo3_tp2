@@ -61,7 +61,7 @@ public class Moderador {
             }
             br.close();
             fr.close();
-        } catch (IOException e) {
+        } catch (IOException e) {//SACARLOS
             e.printStackTrace();
         }
         Set<String> listaContinentes = diccionarioContinentes.keySet();

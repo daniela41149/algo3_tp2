@@ -12,7 +12,7 @@ public class App extends Application {
     @Override
     public void start(Stage escenarioDados) throws Exception {
         
-        Parent root = FXMLLoader.load( getClass().getResource("Vista.fxml") );
+        Parent root = FXMLLoader.load( getClass().getResource("ventanaDados.fxml") );
         Scene scene = new Scene(root);
         escenarioDados.setTitle("DADOS");
         escenarioDados.setScene(scene);

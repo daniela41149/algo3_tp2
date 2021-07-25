@@ -10,11 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Controlador{
+public class ControladorDados{
 
     List<ImageView> imagenesDadosAtacantes = new ArrayList<ImageView>();
     List<ImageView> imagenesDadosDefensores = new ArrayList<ImageView>();
-    List<Image> imagenes = new ArrayList<Image>();
+    List<Image> imagenes = new ArrayList<Image>();// ../ para ir hacia atras
     Image imagenDado1 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_1.png") ) ;
     Image imagenDado2 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_2.png") ) ;
     Image imagenDado3 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_3.png") ) ;
@@ -57,6 +57,7 @@ public class Controlador{
     @FXML
     private void lanzar() {
         /* aqui se piden los dados de ambos jugadores*/
+        //instanciar entidades en VISTA
         Dados dados = new Dados();
         List<Integer> dadosAtacante = dados.dadosAtaque(3);
         List<Integer> dadosDefensor = dados.dadosDefensa(2);
