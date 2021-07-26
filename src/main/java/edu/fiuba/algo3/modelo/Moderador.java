@@ -88,8 +88,8 @@ public class Moderador {
         }
         Gson gson = new Gson();
 
-        final Type tipoListaContinentes = new TypeToken<List<Continente>>(){}.getType();
-        tarjetas.addAll(gson.fromJson(json, tipoListaContinentes));
+        final Type tipoListaTarjetas = new TypeToken<List<TarjetaPais>>(){}.getType();
+        tarjetas.addAll(gson.fromJson(json, tipoListaTarjetas));
     }
 
     //para que juego pueda recibir el listado de paises del archivo
