@@ -9,6 +9,11 @@ public class Dados {
 
     static final int MIN_VALOR_DADO = 1;
     static final int MAX_VALOR_DADO = 6;
+    static final int MAX_DADOS_DEFENSA = 3;
+    static final int MAX_DADOS_ATAQUE = 4;
+    static final int MIN_CANTIDAD_DADOS = 1;
+
+
     List<Integer> listaDados;
 
     public Dados(){
@@ -31,20 +36,37 @@ public class Dados {
 
     public List<Integer> dadosAtaque(int cantidadDeDados){
 
-        if ( (cantidadDeDados > 1) && (cantidadDeDados <= 4) )
+        if ( (cantidadDeDados > MIN_CANTIDAD_DADOS) && (cantidadDeDados <= MAX_DADOS_ATAQUE) )
             return lanzarDados(cantidadDeDados-1);
+        /*
         if (cantidadDeDados > 4)
             return lanzarDados(3);
         return lanzarDados(0);
+     */
+
+        return lanzarDadosConCantidad(cantidadDeDados);
         
     }
 
     public List<Integer> dadosDefensa(int cantidadDeDados){
-        
-        if ( (cantidadDeDados >= 1) && (cantidadDeDados < 3) )
+
+        if ( (cantidadDeDados >= MIN_CANTIDAD_DADOS) && (cantidadDeDados < MAX_DADOS_DEFENSA) )
             return lanzarDados(cantidadDeDados+1);
+        /*
         if ( cantidadDeDados >= 3 )
             return lanzarDados(3);
         return lanzarDados(0);
+
+         */
+        return lanzarDadosConCantidad(cantidadDeDados);
+    }
+
+    public List<Integer> lanzarDadosConCantidad(int cantidadDeDados){
+
+        if(cantidadDeDados >= MAX_DADOS_DEFENSA){
+            return lanzarDados(3);
+        }
+        return lanzarDados(0);
+
     }
 }
