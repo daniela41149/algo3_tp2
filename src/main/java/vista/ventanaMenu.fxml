@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
+   <children>
+      <AnchorPane layoutX="331.0" layoutY="27.0" prefHeight="48.0" prefWidth="894.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox layoutX="107.0" prefHeight="48.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nombreJugador" contentDisplay="CENTER" prefHeight="48.0" prefWidth="220.0">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                  </Label>
+                  <Button fx:id="botonAtacar" mnemonicParsing="false" prefHeight="48.0" prefWidth="219.0" text="Atacar">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botonReagrupar" mnemonicParsing="false" prefHeight="49.0" prefWidth="235.0" text="Reagrupar Ejercito">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botonPasar" mnemonicParsing="false" prefHeight="49.0" prefWidth="241.0" text="Pasar Turno">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="476.0" fitWidth="728.0" layoutX="166.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
+         <image>
+            <Image url="@imagenesMenuJuego/tableroTEG.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="listaPaises" layoutY="54.0" prefHeight="476.0" prefWidth="214.0">
+         <effect>
+            <SepiaTone />
+         </effect>
+      </ListView>
+   </children>
+</AnchorPane>
