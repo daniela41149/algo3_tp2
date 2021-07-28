@@ -136,7 +136,16 @@ public class PruebasDeIntegracionTest {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
             juego.comenzarFaseInicial(mockedAleatorio);
 
-            HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
+            List<Jugador> jugadores = juego.devolverJugadores();
+
+            Jugador jugador1 = jugadores.get(0);       //jugador 1 es Pedro
+            String nombreJugador1 = jugador1.getNombre();
+            List<Pais> paisesJugador1 = jugador1.pedirPaises();
+
+            Jugador jugador2 = jugadores.get(1);       //jugador 2 es Martina
+            String nombreJugador2 = jugador2.getNombre();
+            List<Pais> paisesJugador2 = jugador2.pedirPaises();
+
 
             juego.colocarEjercito("Argentina",3);
             juego.colocarEjercito("Brasil",2);
@@ -144,10 +153,10 @@ public class PruebasDeIntegracionTest {
             juego.colocarEjercito("Chile",3);
 
 
-            assertEquals((diccionario.get("Pedro")).get(0).cantidadDeFichas(),4);
-            assertEquals((diccionario.get("Pedro")).get(1).cantidadDeFichas(),2);
-            assertEquals((diccionario.get("Martina")).get(0).cantidadDeFichas(),3);
-            assertEquals((diccionario.get("Martina")).get(1).cantidadDeFichas(),4);
+            assertEquals(paisesJugador1.get(0).cantidadDeFichas(),4);
+            assertEquals(paisesJugador1.get(1).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(0).cantidadDeFichas(),3);
+            assertEquals(paisesJugador2.get(1).cantidadDeFichas(),4);
 
 
         } catch (JugadaInvalidaException e1) {
@@ -173,9 +182,19 @@ public class PruebasDeIntegracionTest {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
             juego.comenzarFaseInicial(mockedAleatorio);
 
-            HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
-            assertEquals((diccionario.get("Pedro")).size(),2);
-            assertEquals((diccionario.get("Martina")).size(),2);
+            List<Jugador> jugadores = juego.devolverJugadores();
+
+            Jugador jugador1 = jugadores.get(0);       //jugador 1 es Pedro
+            String nombreJugador1 = jugador1.getNombre();
+            List<Pais> paisesJugador1 = jugador1.pedirPaises();
+
+            Jugador jugador2 = jugadores.get(1);       //jugador 2 es Martina
+            String nombreJugador2 = jugador2.getNombre();
+            List<Pais> paisesJugador2 = jugador2.pedirPaises();
+
+
+            assertEquals(paisesJugador1.size(),2);
+            assertEquals(paisesJugador2.size(),2);
 
             juego.colocarEjercito("Argentina",3);
             juego.colocarEjercito("Brasil",2);
@@ -206,10 +225,16 @@ public class PruebasDeIntegracionTest {
 
             //Argentina (Pedro) pierde y Brasil (Martina) gana.
 
-            diccionario = juego.mostrarPaisesDeCadaJugador();
+            jugadores = juego.devolverJugadores();
 
-            assertEquals((diccionario.get("Pedro")).size(),2);
-            assertEquals((diccionario.get("Martina")).size(),2);
+            jugador1 = jugadores.get(0);       //jugador 1 es Pedro
+            paisesJugador1 = jugador1.pedirPaises();
+
+            jugador2 = jugadores.get(1);       //jugador 2 es Martina
+            paisesJugador2 = jugador2.pedirPaises();
+
+            assertEquals(paisesJugador1.size(),2);
+            assertEquals(paisesJugador2.size(),2);
 
 
         } catch (JugadaInvalidaException e1) {
@@ -221,7 +246,6 @@ public class PruebasDeIntegracionTest {
         assertFalse(lanzaUnaExcepcion);
 
     }
-
 
 
     @Test
@@ -236,15 +260,25 @@ public class PruebasDeIntegracionTest {
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
             juego.comenzarFaseInicial(mockedAleatorio);
-            HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
 
-            assertEquals((diccionario.get("Pedro")).size(),2);
-            assertEquals((diccionario.get("Martina")).size(),2);
+            List<Jugador> jugadores = juego.devolverJugadores();
+
+            Jugador jugador1 = jugadores.get(0);       //jugador 1 es Pedro
+            String nombreJugador1 = jugador1.getNombre();
+            List<Pais> paisesJugador1 = jugador1.pedirPaises();
+
+            Jugador jugador2 = jugadores.get(1);       //jugador 2 es Martina
+            String nombreJugador2 = jugador2.getNombre();
+            List<Pais> paisesJugador2 = jugador2.pedirPaises();
+
+            assertEquals(paisesJugador1.size(),2);
+            assertEquals(paisesJugador2.size(),2);
 
             juego.colocarEjercito("Argentina",2);
             juego.colocarEjercito("Brasil",1);
-            assertEquals(pais.cantidadDeFichas(),3);
-            assertEquals(pais3.cantidadDeFichas(),2);
+
+            assertEquals(paisesJugador1.get(0).cantidadDeFichas(),3);
+            assertEquals(paisesJugador2.get(0).cantidadDeFichas(),2);
 
             List<Integer> dadosAtaque = new ArrayList<>();
             dadosAtaque.add(5);
@@ -272,12 +306,19 @@ public class PruebasDeIntegracionTest {
 
             //Pedro gana y Martina pierde Brasil.
 
-            diccionario = juego.mostrarPaisesDeCadaJugador();
+            jugadores = juego.devolverJugadores();
 
-            assertEquals((diccionario.get("Pedro")).size(),3);
-            assertEquals((diccionario.get("Martina")).size(),1);
-            assertEquals(pais.cantidadDeFichas(),2);
-            assertEquals(pais3.cantidadDeFichas(),1);
+            jugador1 = jugadores.get(0);       //jugador 1 es Pedro
+            paisesJugador1 = jugador1.pedirPaises();
+
+            jugador2 = jugadores.get(1);       //jugador 2 es Martina
+            paisesJugador2 = jugador2.pedirPaises();
+
+            assertEquals(paisesJugador1.size(),3);
+            assertEquals(paisesJugador2.size(),1);
+
+            assertEquals(paisesJugador1.get(0).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(0).cantidadDeFichas(),1);
 
             } catch (JugadaInvalidaException e1) {
                 lanzaUnaExcepcion = true;
@@ -300,7 +341,7 @@ public class PruebasDeIntegracionTest {
         nombresJugadores = new ArrayList<>();
         nombresJugadores.add("Felipe");
         nombresJugadores.add("Tomás");
-        nombresJugadores.add("Pepe");
+
 
         boolean lanzaUnaExcepcion = false;
 
@@ -330,7 +371,7 @@ public class PruebasDeIntegracionTest {
 
 
     }
-
 */
+
 
 }
