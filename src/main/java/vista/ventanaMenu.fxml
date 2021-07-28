@@ -17,7 +17,7 @@
          <children>
             <HBox layoutX="107.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="nombreJugador" contentDisplay="CENTER" prefHeight="79.0" prefWidth="220.0">
+                  <Label fx:id="nombreJugador" alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="220.0">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -41,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonPasar" mnemonicParsing="false" prefHeight="75.0" prefWidth="272.0" text="Pasar Turno">
+                  <Button fx:id="botonPasar" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="272.0" text="Pasar Turno">
                      <effect>
                         <SepiaTone />
                      </effect>
