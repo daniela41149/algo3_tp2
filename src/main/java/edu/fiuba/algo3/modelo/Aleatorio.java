@@ -16,19 +16,24 @@ public class Aleatorio {
     public List<List<Pais>> repartirPaisesAleatoriamente (int cantidadDeJugadores, List<Pais> paisesSinRepartir) {
         Random rand = new Random();
 
-        int cantidadPorJugador = (paisesSinRepartir.size()/cantidadDeJugadores);
-
         List<List<Pais>> listasPaisesRepartidos = new ArrayList<>();
 
-        for(int i = 0; i < cantidadDeJugadores; i++) {
+        for (int i = 0; i < cantidadDeJugadores; i++) {
             List<Pais> listaPaises = new ArrayList<>();
-            for (int j = 0; j < cantidadPorJugador; j++) {
-                int posicionAleatoria = rand.nextInt(paisesSinRepartir.size());
-                Pais paisAleatorio = paisesSinRepartir.get(posicionAleatoria);
-                listaPaises.add(paisAleatorio);
-                paisesSinRepartir.remove(paisAleatorio);
-            }
             listasPaisesRepartidos.add(listaPaises);
+        }
+
+
+        while (!paisesSinRepartir.isEmpty()){
+            for(int i = 0; i < cantidadDeJugadores; i++) {
+                if (!paisesSinRepartir.isEmpty()){
+                    int posicionAleatoria = rand.nextInt(paisesSinRepartir.size());
+                    Pais paisAleatorio = paisesSinRepartir.get(posicionAleatoria);
+                    List<Pais> listaPaisesJugador = listasPaisesRepartidos.get(i);
+                    listaPaisesJugador.add(paisAleatorio);
+                    paisesSinRepartir.remove(paisAleatorio);
+                }
+            }
         }
 
         return listasPaisesRepartidos;
