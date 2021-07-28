@@ -10,13 +10,13 @@ import javafx.scene.Parent;
 public class App extends Application {
 
     @Override
-    public void start(Stage escenarioDados) throws Exception {
+    public void start(Stage escenarioInicio) throws Exception {
         
-        Parent root = FXMLLoader.load( getClass().getResource("ventanaMenu.fxml") );
+        Parent root = FXMLLoader.load( getClass().getResource("ventanaInicio.fxml") );
         Scene scene = new Scene(root);
-        escenarioDados.setTitle("ALTEGO");
-        escenarioDados.setScene(scene);
-        escenarioDados.show();
+        escenarioInicio.setTitle("ALTEGO");
+        escenarioInicio.setScene(scene);
+        escenarioInicio.show();
     }
 
     public static void main(String[] args) {

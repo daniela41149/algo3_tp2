@@ -11,19 +11,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
    <children>
-      <AnchorPane layoutX="331.0" layoutY="27.0" prefHeight="48.0" prefWidth="894.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="331.0" layoutY="27.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox layoutX="107.0" prefHeight="48.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutX="107.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="nombreJugador" contentDisplay="CENTER" prefHeight="48.0" prefWidth="220.0">
+                  <Label fx:id="nombreJugador" contentDisplay="CENTER" prefHeight="79.0" prefWidth="220.0">
                      <effect>
                         <SepiaTone />
                      </effect>
                   </Label>
-                  <Button fx:id="botonAtacar" mnemonicParsing="false" prefHeight="48.0" prefWidth="219.0" text="Atacar">
+                  <Button fx:id="botonAtacar" mnemonicParsing="false" prefHeight="73.0" prefWidth="245.0" text="Atacar">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -34,7 +33,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonReagrupar" mnemonicParsing="false" prefHeight="49.0" prefWidth="235.0" text="Reagrupar Ejercito">
+                  <Button fx:id="botonReagrupar" mnemonicParsing="false" prefHeight="74.0" prefWidth="257.0" text="Reagrupar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -42,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonPasar" mnemonicParsing="false" prefHeight="49.0" prefWidth="241.0" text="Pasar Turno">
+                  <Button fx:id="botonPasar" mnemonicParsing="false" prefHeight="75.0" prefWidth="272.0" text="Pasar Turno">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -54,12 +53,12 @@
             </HBox>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="476.0" fitWidth="728.0" layoutX="166.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
+      <ImageView fitHeight="564.0" fitWidth="764.0" layoutX="304.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="74.0">
          <image>
             <Image url="@imagenesMenuJuego/tableroTEG.png" />
          </image>
       </ImageView>
-      <ListView fx:id="listaPaises" layoutY="54.0" prefHeight="476.0" prefWidth="214.0">
+      <ListView fx:id="listaPaises" layoutY="54.0" prefHeight="543.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0">
          <effect>
             <SepiaTone />
          </effect>
