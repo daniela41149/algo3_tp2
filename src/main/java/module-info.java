@@ -7,4 +7,5 @@ module edu.fiuba.algo3 {
     exports vista;
     exports controladores;
     opens controladores;
+    exports edu.fiuba.algo3.modelo.pais;
 }

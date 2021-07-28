@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.Batalla;
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.pais.Pais;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +13,7 @@ public class Aleatorio {
 
     }
 
-    public List<List<Pais>> repartirPaisesAleatoriamente (int cantidadDeJugadores,List<Pais> paisesSinRepartir) {
+    public List<List<Pais>> repartirPaisesAleatoriamente (int cantidadDeJugadores, List<Pais> paisesSinRepartir) {
         Random rand = new Random();
 
         int cantidadPorJugador = (paisesSinRepartir.size()/cantidadDeJugadores);

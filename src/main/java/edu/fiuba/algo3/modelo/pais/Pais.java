@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.pais;
 
+import edu.fiuba.algo3.modelo.Ejercito;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.List;
@@ -9,14 +11,14 @@ public class Pais {
     private List<String> nombrePaisesLimitrofes;
     private Jugador dueño;
     private Ejercito ejercito;
-    private Estado estado;
+    private EstadoPais estadoPais;
 
 
     public Pais(String nombrePais, List<String> nombrePaisesLimitrofes) {
         this.nombrePais = nombrePais;
         this.nombrePaisesLimitrofes = nombrePaisesLimitrofes;
         this.ejercito = new Ejercito();
-        this.estado = new Vacante();
+        this.estadoPais = new Vacante();
     }
 
     public boolean esLimitrofe(Pais paisAtacante) {
@@ -56,8 +58,12 @@ public class Pais {
         return this.dueño;
     }
 
-    private void elegirPais (Jugador jugador) {
+    public void elegirPais (Jugador jugador) {
         this.dueño = jugador;
+    }
+
+    public void cambiarEstadoAOcupado () {
+        this.estadoPais = new Ocupado();
     }
 
 
@@ -72,10 +78,7 @@ public class Pais {
     }
 
     public void colocarEjercito (Jugador jugador, int cantidadEjercito) {
-        if (estado.puedeOcupar()) {//ARREGLAR
-            this.elegirPais(jugador);
-            estado = new Ocupado();
-        }
+        this.estadoPais.ocuparPais(jugador,this);
         if (this.dueño.esElMismo(jugador)){
             ejercito.agregarFichas(cantidadEjercito);
         }

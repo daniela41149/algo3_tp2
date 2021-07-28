@@ -3,6 +3,7 @@ package edu.fiuba.algo3.tests;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.pais.Pais;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -84,7 +85,6 @@ public class PruebasDeIntegracionTest {
         pais4 = new Pais(nombrePais4, limitrofes4);
 
 
-
         listaPaises = new ArrayList<>();
         listaPaises.add(pais);
         listaPaises.add(pais2);
@@ -120,6 +120,8 @@ public class PruebasDeIntegracionTest {
         when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
 
     }
+
+
 
 
     @Test
@@ -172,18 +174,6 @@ public class PruebasDeIntegracionTest {
             juego.comenzarFaseInicial(mockedAleatorio);
 
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador(); //diccionario jugador pais
-
-            /*
-            diccionario.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey());
-                List<Pais> paises = entry.getValue();
-                for (Pais pais: paises) {
-                    System.out.println(pais.getNombre());
-                }
-            });
-
-             */
-
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
@@ -218,18 +208,6 @@ public class PruebasDeIntegracionTest {
 
             diccionario = juego.mostrarPaisesDeCadaJugador();
 
-            /*
-            diccionario.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey());
-                List<Pais> paises = entry.getValue();
-                for (Pais pais: paises) {
-                    System.out.println(pais.getNombre());
-                }
-            });
-
-             */
-
-
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
 
@@ -259,18 +237,6 @@ public class PruebasDeIntegracionTest {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
             juego.comenzarFaseInicial(mockedAleatorio);
             HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
-
-            /*
-            diccionario.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey());
-                List<Pais> paises = entry.getValue();
-                for (Pais pais: paises) {
-                    System.out.println(pais.getNombre());
-                }
-            });
-
-             */
-
 
             assertEquals((diccionario.get("Pedro")).size(),2);
             assertEquals((diccionario.get("Martina")).size(),2);
@@ -308,16 +274,6 @@ public class PruebasDeIntegracionTest {
 
             diccionario = juego.mostrarPaisesDeCadaJugador();
 
-            /*
-            diccionario.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey());
-                List<Pais> paises = entry.getValue();
-                for (Pais pais: paises) {
-                    System.out.println(pais.getNombre());
-                }
-            });
-
-             */
             assertEquals((diccionario.get("Pedro")).size(),3);
             assertEquals((diccionario.get("Martina")).size(),1);
             assertEquals(pais.cantidadDeFichas(),2);
@@ -335,8 +291,8 @@ public class PruebasDeIntegracionTest {
 /*
     @Test
     public void test004JuegoDeUnaRondaConDosJugadores() {
-        Moderador moderador = new Moderador("resources/Fronteras.csv");
-        RandomPaises randomPaises = new RandomPaises();
+        Moderador moderador = new Moderador("resources/Fronteras.csv","resources/TarjetasPais.json");
+        Aleatorio randomPaises = new Aleatorio();
 
         List<Pais> listaPaises = moderador.pedirPaises();
         List<Continente> listaContinentes = moderador.pedirContinentes();
@@ -344,6 +300,7 @@ public class PruebasDeIntegracionTest {
         nombresJugadores = new ArrayList<>();
         nombresJugadores.add("Felipe");
         nombresJugadores.add("Tomás");
+        nombresJugadores.add("Pepe");
 
         boolean lanzaUnaExcepcion = false;
 
@@ -360,9 +317,6 @@ public class PruebasDeIntegracionTest {
                 }
             });
 
-
-
-
         } catch (JugadaInvalidaException e1) {
             lanzaUnaExcepcion = true;
         } catch (CantidadInvalidaDeJugadoresException e2){
@@ -376,7 +330,6 @@ public class PruebasDeIntegracionTest {
 
 
     }
-
 
 */
 

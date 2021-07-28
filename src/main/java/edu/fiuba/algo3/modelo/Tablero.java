@@ -2,10 +2,10 @@ package edu.fiuba.algo3.modelo;
 
 
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.pais.Pais;
 
 import java.util.*;
 import java.lang.String;
-import java.io.*;
 
 public class Tablero {
     private List<Pais> paises ;
