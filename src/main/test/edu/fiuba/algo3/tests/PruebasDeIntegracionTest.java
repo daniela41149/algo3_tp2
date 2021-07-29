@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -120,7 +119,6 @@ public class PruebasDeIntegracionTest {
         when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
 
     }
-
 
 
 
@@ -247,7 +245,6 @@ public class PruebasDeIntegracionTest {
 
     }
 
-
     @Test
     public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() {
         setup();
@@ -329,49 +326,7 @@ public class PruebasDeIntegracionTest {
             assertFalse(lanzaUnaExcepcion);
 
     }
-/*
-    @Test
-    public void test004JuegoDeUnaRondaConDosJugadores() {
-        Moderador moderador = new Moderador("resources/Fronteras.csv","resources/TarjetasPais.json");
-        Aleatorio randomPaises = new Aleatorio();
 
-        List<Pais> listaPaises = moderador.pedirPaises();
-        List<Continente> listaContinentes = moderador.pedirContinentes();
-
-        nombresJugadores = new ArrayList<>();
-        nombresJugadores.add("Felipe");
-        nombresJugadores.add("Tomás");
-
-
-        boolean lanzaUnaExcepcion = false;
-
-        try {
-            Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            juego.comenzarFaseInicial(randomPaises);
-
-            HashMap<String,List<Pais>>  diccionario = juego.mostrarPaisesDeCadaJugador();
-            diccionario.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey());
-                List<Pais> paises = entry.getValue();
-                for (Pais pais: paises) {
-                    System.out.println(pais.getNombre());
-                }
-            });
-
-        } catch (JugadaInvalidaException e1) {
-            lanzaUnaExcepcion = true;
-        } catch (CantidadInvalidaDeJugadoresException e2){
-            lanzaUnaExcepcion = true;
-        }
-
-        assertFalse(lanzaUnaExcepcion);
-
-
-
-
-
-    }
-*/
 
 
 }
