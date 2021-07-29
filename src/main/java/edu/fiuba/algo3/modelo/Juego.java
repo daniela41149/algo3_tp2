@@ -1,21 +1,27 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Juego {
 
     static final int MIN_JUGADORES = 2;
     static final int MAX_JUGADORES = 6;
+    static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
+    static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
     static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
 
     private Tablero tablero;
     private List<Jugador> jugadores;
     private int posicionJugadorEnTurno;
+    private int ejercitosColocadosPorJugadorEnTurno;
 
     public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
 
@@ -23,12 +29,12 @@ public class Juego {
             throw new CantidadInvalidaDeJugadoresException();
 
         this.posicionJugadorEnTurno = 0;
+        this.ejercitosColocadosPorJugadorEnTurno = 0;
         this.tablero = new Tablero(paises, continentes);
         this.jugadores = new LinkedList<>();
         for (int i = 0; i < nombresDeJugadores.size(); i++)
             jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
     }
-
 
     public void comenzarFaseInicial(Aleatorio aleatorio) throws JugadaInvalidaException {
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPaisesAJuego());
@@ -46,19 +52,46 @@ public class Juego {
     }
 
     private Jugador jugadorEnTurno() {
-        Jugador jugadorEnTurno = jugadores.get(posicionJugadorEnTurno);
+        return jugadores.get(posicionJugadorEnTurno);
+    }
 
+    private void avanzarPosicionDeJugadorEnTurno(){
         posicionJugadorEnTurno++;
         if (posicionJugadorEnTurno >= jugadores.size())
             posicionJugadorEnTurno = 0;
-
-        return jugadorEnTurno;
     }
 
     public void colocarEjercito(String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
-        Jugador jugador = jugadorEnTurno();
+        Jugador jugadorEnTurno = jugadorEnTurno();
+        int cantidadEjercitosParaColocar = (jugadorEnTurno.cantidadPaises() / 2);
 
-        jugador.colocarEjercito(nombrePais, cantidadEjercito);
+        jugadorEnTurno.colocarEjercito(nombrePais, cantidadEjercito);
+        ejercitosColocadosPorJugadorEnTurno++;
+        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosParaColocar) {
+            ejercitosColocadosPorJugadorEnTurno = 0;
+            avanzarPosicionDeJugadorEnTurno();
+        }
+    }
+
+    private void colocarEjercitosDeFaseInicial(Jugador jugadorEnTurno, List<String> nombresDePaises, List<Integer> cantidadEjercitosPorPais) throws JugadaInvalidaException {
+        for (int i = 0; i < nombresDePaises.size(); i++)
+            jugadorEnTurno.colocarEjercito(nombresDePaises.get(i), cantidadEjercitosPorPais.get(i));
+    }
+
+    public void colocarEjercitoPrimeraVuelta(List<String> nombresDePaises, List<Integer> cantidadEjercitosPorPais) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
+        long ejercitosTotales = cantidadEjercitosPorPais.stream().mapToLong(Integer::longValue).sum();
+        if (ejercitosTotales != CANT_EJERCITOS_EN_PRIMERA_VUELTA)
+            throw new CantidadInvalidaDeEjercitosException();
+
+        colocarEjercitosDeFaseInicial(this.jugadorEnTurno(), nombresDePaises, cantidadEjercitosPorPais);
+    }
+
+    public void colocarEjercitoSegundaVuelta(List<String> nombresDePaises, List<Integer> cantidadEjercitosPorPais) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
+        long ejercitosTotales = cantidadEjercitosPorPais.stream().mapToLong(Integer::longValue).sum();
+        if (ejercitosTotales != CANT_EJERCITOS_EN_SEGUNDA_VUELTA)
+            throw new CantidadInvalidaDeEjercitosException();
+
+        colocarEjercitosDeFaseInicial(this.jugadorEnTurno(), nombresDePaises, cantidadEjercitosPorPais);
     }
 
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
@@ -68,6 +101,5 @@ public class Juego {
     public List<Jugador> devolverJugadores(){
         return this.jugadores;
     }
-
 
 }
