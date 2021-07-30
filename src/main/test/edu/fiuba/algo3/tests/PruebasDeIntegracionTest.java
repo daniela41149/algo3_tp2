@@ -141,7 +141,9 @@ public class PruebasDeIntegracionTest {
 
             juego.colocarEjercito("Argentina",3);
             juego.colocarEjercito("Brasil",2);
+            juego.pasarTurno();
             juego.colocarEjercito("Uruguay",1);
+            juego.pasarTurno();
             juego.colocarEjercito("Chile",3);
 
 
@@ -266,7 +268,9 @@ public class PruebasDeIntegracionTest {
             assertEquals(paisesJugador2.size(),2);
 
             juego.colocarEjercito("Argentina",2);
+            juego.pasarTurno();
             juego.colocarEjercito("Brasil",1);
+            juego.pasarTurno();
 
             assertEquals(paisesJugador1.get(0).cantidadDeFichas(),3);
             assertEquals(paisesJugador2.get(0).cantidadDeFichas(),2);
