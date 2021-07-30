@@ -118,19 +118,18 @@ public class Juego {
     private int ejercitosAdicionalesPorContinentesControlados (Jugador jugador){
         return tablero.ejercitosAdicionalesPorContinentesControlados(jugador);
     }
-/*
+
     public void reagrupar(String nombrePaisDesde, String nombrePaisHasta, int cantidadDeEjercito) {
         List<Pais> paises = jugadorEnTurno().pedirPaises();
-        Pais paisHasta = tablero.buscarPais()
-        for (Pais unPais: paises){
-            if (unPais.getNombre().equals(nombrePaisDesde) && unPais.esLimitrofe()){
-                unPais.sacarFichas(cantidadDeEjercito);
+        Pais paisHasta = tablero.buscarPais(nombrePaisHasta);
+        for (Pais unPaisDesde: paises){
+            if (unPaisDesde.getNombre().equals(nombrePaisDesde) && unPaisDesde.esLimitrofe(paisHasta)){
+                unPaisDesde.sacarFichas(cantidadDeEjercito);
+                paisHasta.colocarEjercito(jugadorEnTurno(),cantidadDeEjercito);
             }
         }
-        nombrePaisDesde
-
     }
-*/
+
     //public TarjetaPais entregaTarjetaPais(){
     //}
 
