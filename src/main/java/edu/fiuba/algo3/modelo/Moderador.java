@@ -37,9 +37,21 @@ public class Moderador {
         this.continentes = continentesLeidos;
     }
 
+    private HashMap<String, Integer> establecerEjercitosAdicionalesSegunContinentes() {
+        HashMap<String, Integer> ejercitosSegunContinente = new HashMap<>();
+        ejercitosSegunContinente.put("Asia", EJERCITOS_ADICIONALES_ASIA);
+        ejercitosSegunContinente.put("Europa", EJERCITOS_ADICIONALES_EUROPA);
+        ejercitosSegunContinente.put("America del Norte", EJERCITOS_ADICIONALES_AMERICA_DEL_NORTE);
+        ejercitosSegunContinente.put("America del Sur", EJERCITOS_ADICIONALES_AMERICA_DEL_SUR);
+        ejercitosSegunContinente.put("Africa", EJERCITOS_ADICIONALES_AFRICA);
+        ejercitosSegunContinente.put("Oceania", EJERCITOS_ADICIONALES_OCEANIA);
+        return ejercitosSegunContinente;
+    }
+
     private void cargarArchivoFronteras(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
+        HashMap<String, Integer> ejercitosSegunContinente = establecerEjercitosAdicionalesSegunContinentes();
         try {
             File archivo = new File (direccionArchivo);
             FileReader fr = new FileReader(archivo);
@@ -75,8 +87,8 @@ public class Moderador {
         Set<String> listaContinentes = diccionarioContinentes.keySet();
         for( String nombreContinente : listaContinentes){
             List<Pais> listaPaisesPorContinente = diccionarioContinentes.get(nombreContinente);
-            //Continente nuevoContinente = new Continente(nombreContinente,listaPaisesPorContinente);
-            //continentes.add(nuevoContinente);
+            Continente nuevoContinente = new Continente(nombreContinente,listaPaisesPorContinente, ejercitosSegunContinente.get(nombreContinente));
+            continentes.add(nuevoContinente);
         }
     }
 
