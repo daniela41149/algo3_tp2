@@ -145,8 +145,11 @@ public class Juego {
         }
     }
 
-    //public TarjetaPais entregaTarjetaPais(){
-    //}
+    public TarjetaPais entregaTarjetaPais() {
+        Aleatorio aleatorio = new Aleatorio();
+
+        return aleatorio.agarrarTajetaPaisAleatoriaDelMazo(mazoTarjetasPais);
+    }
 
     public String nombreJugadorActual() {
         return this.jugadorEnTurno().getNombre();
