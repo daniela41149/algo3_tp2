@@ -57,6 +57,7 @@ public class Juego {
 
     private void avanzarPosicionDeJugadorEnTurno(){
         posicionJugadorEnTurno++;
+        ejercitosColocadosPorJugadorEnTurno = 0;
         if (posicionJugadorEnTurno >= jugadores.size())
             posicionJugadorEnTurno = 0;
     }
@@ -67,10 +68,8 @@ public class Juego {
 
         jugadorEnTurno.colocarEjercito(nombrePais, cantidadEjercito);
         ejercitosColocadosPorJugadorEnTurno++;
-        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosParaColocar) {
-            ejercitosColocadosPorJugadorEnTurno = 0;
+        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosParaColocar)
             avanzarPosicionDeJugadorEnTurno();
-        }
     }
 
     private void colocarEjercitosDeFaseInicial(Jugador jugadorEnTurno, List<String> nombresDePaises, List<Integer> cantidadEjercitosPorPais) throws JugadaInvalidaException {
@@ -84,6 +83,7 @@ public class Juego {
             throw new CantidadInvalidaDeEjercitosException();
 
         colocarEjercitosDeFaseInicial(this.jugadorEnTurno(), nombresDePaises, cantidadEjercitosPorPais);
+        avanzarPosicionDeJugadorEnTurno();
     }
 
     public void colocarEjercitoSegundaVuelta(List<String> nombresDePaises, List<Integer> cantidadEjercitosPorPais) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
@@ -92,6 +92,7 @@ public class Juego {
             throw new CantidadInvalidaDeEjercitosException();
 
         colocarEjercitosDeFaseInicial(this.jugadorEnTurno(), nombresDePaises, cantidadEjercitosPorPais);
+        avanzarPosicionDeJugadorEnTurno();
     }
 
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
