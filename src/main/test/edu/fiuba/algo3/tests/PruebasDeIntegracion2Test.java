@@ -164,7 +164,7 @@ public class PruebasDeIntegracion2Test {
 
         limitrofes8 = new ArrayList<>();
         limitrofes8.add("Oregon");
-        pais7 = new Pais(nombrePais8, limitrofes8);
+        pais8 = new Pais(nombrePais8, limitrofes8);
 
         //Continente Oceania
 
@@ -174,7 +174,7 @@ public class PruebasDeIntegracion2Test {
         limitrofes9.add("Chile");
         limitrofes9.add("Sumatra");
         limitrofes9.add("Borneo");
-        pais8 = new Pais(nombrePais9, limitrofes9);
+        pais9 = new Pais(nombrePais9, limitrofes9);
 
 
         nombrePais10 = "Sumatra";
@@ -301,12 +301,11 @@ public class PruebasDeIntegracion2Test {
     }
 
 
-/*
+
 
     @Test
     public void test004JuegoDeUnaRondaConDosJugadores() {
         setup();
-
 
         Moderador moderador = new Moderador("resources/Fronteras.csv","resources/TarjetasPais.json");
         Aleatorio randomPaises = new Aleatorio();
@@ -361,7 +360,7 @@ public class PruebasDeIntegracion2Test {
         try {
             // fase inicial
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
-            juego.comenzarFaseInicial(randomPaises);
+            juego.comenzarFaseInicial(mockedAleatorio);
 
             // cada jugador coloca 5 ejercitos en los paises que quiere.
 
@@ -431,19 +430,6 @@ public class PruebasDeIntegracion2Test {
             assertEquals(paisesJugador1.get(9).cantidadDeFichas(),1);
             assertEquals(paisesJugador1.get(10).cantidadDeFichas(),1);
             assertEquals(paisesJugador1.get(11).cantidadDeFichas(),1);
-            assertEquals(paisesJugador1.get(12).cantidadDeFichas(),1);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         } catch (JugadaInvalidaException e1) {
@@ -463,7 +449,7 @@ public class PruebasDeIntegracion2Test {
 
     }
 
-*/
+
 
 
 
