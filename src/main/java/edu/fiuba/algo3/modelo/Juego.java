@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -128,13 +129,38 @@ public class Juego {
     private int ejercitosAdicionalesPorContinentesControlados (Jugador jugador){
         return tablero.ejercitosAdicionalesPorContinentesControlados(jugador);
     }
-
+/*
     public void reagrupar(String nombrePaisDesde, String nombrePaisHasta, int cantidadDeEjercito) {
+        List<Pais> paises = jugadorEnTurno().pedirPaises();
+        Pais paisHasta = tablero.buscarPais()
+        for (Pais unPais: paises){
+            if (unPais.getNombre().equals(nombrePaisDesde) && unPais.esLimitrofe()){
+                unPais.sacarFichas(cantidadDeEjercito);
+            }
+        }
+        nombrePaisDesde
 
     }
-
+*/
     //public TarjetaPais entregaTarjetaPais(){
     //}
+
+    public String nombreJugadorActual() {
+        return this.jugadorEnTurno().getNombre();
+    }
+
+    public HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
+        List<Pais> listaPaises = this.jugadorEnTurno().pedirPaises();
+        HashMap<String,Integer> diccionario = new HashMap<>();
+        for(Pais unPais: listaPaises){
+            diccionario.put(unPais.getNombre(),unPais.cantidadDeFichas());
+        }
+        return diccionario;
+    }
+
+
+
+    HashMap<String, Integer> ejercitosSegunContinente = new HashMap<>();
 
 }
 
