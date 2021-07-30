@@ -85,9 +85,18 @@ public class Jugador {
         tarjetasPais.add(nuevaTarjetaPais);
     }
 
+    public boolean esDueñoDelPais(String nombrePais) {
+        for (Pais pais : paises) {
+            if (pais.coincideNombre(nombrePais)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-    public void activarTarjetaPais (String nombreTarjetaPais){
+
+        public void activarTarjetaPais (String nombreTarjetaPais) throws JugadaInvalidaException {
         for (TarjetaPais unaTarjetaPais: tarjetasPais){
             if (unaTarjetaPais.getNombre().equals(nombreTarjetaPais)){
                 unaTarjetaPais.activar(this);
