@@ -16,6 +16,7 @@ public class Juego {
     static final int MAX_JUGADORES = 6;
     static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
     static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
+    static final int MIN_EJERCITOS_PERMITIDOS_PARA_COLOCAR = 3;
     static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
 
     private Tablero tablero;
@@ -63,13 +64,24 @@ public class Juego {
             posicionJugadorEnTurno = 0;
     }
 
+    private int establecerCantidadDeEjercitosPermitidosParaColocar(Jugador jugadorEnTurno) {
+        int paisesDominados = jugadorEnTurno.cantidadPaises();
+
+        int cantidadTotal = MIN_EJERCITOS_PERMITIDOS_PARA_COLOCAR;
+        if (paisesDominados >= 6)
+            cantidadTotal = (paisesDominados / 2);
+        cantidadTotal += ejercitosAdicionalesPorContinentesControlados(jugadorEnTurno);
+
+        return cantidadTotal;
+    }
+
     public void colocarEjercito(String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
         Jugador jugadorEnTurno = jugadorEnTurno();
-        int cantidadEjercitosParaColocar = (jugadorEnTurno.cantidadPaises() / 2);
+        int cantidadEjercitosPermitidosParaColocar = establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno);
 
         jugadorEnTurno.colocarEjercito(nombrePais, cantidadEjercito);
-        ejercitosColocadosPorJugadorEnTurno++;
-        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosParaColocar)
+        ejercitosColocadosPorJugadorEnTurno += cantidadEjercito;
+        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosPermitidosParaColocar)
             avanzarPosicionDeJugadorEnTurno();
     }
 
@@ -103,7 +115,6 @@ public class Juego {
     public List<Jugador> devolverJugadores(){
         return this.jugadores;
     }
-
 
     public boolean controlaContiente (String nombreJugador, String nombreContinente) {
         for (Jugador unJugador: this.jugadores) {
