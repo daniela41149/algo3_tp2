@@ -44,4 +44,14 @@ public class Aleatorio {
 
         return (rand.nextInt(numeroDeJugadores));
     }
+
+    public TarjetaPais agarrarTajetaPaisAleatoriaDelMazo(List<TarjetaPais> mazoDeTarjetas) {
+        Random rand = new Random();
+
+        int posicionDeTarjetaRandom = rand.nextInt(mazoDeTarjetas.size());
+        TarjetaPais tarjetaRandom = mazoDeTarjetas.get(posicionDeTarjetaRandom);
+        mazoDeTarjetas.remove(posicionDeTarjetaRandom);
+
+        return tarjetaRandom;
+    }
 }
