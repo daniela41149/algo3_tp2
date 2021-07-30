@@ -23,7 +23,7 @@ public class Juego {
     private List<Jugador> jugadores;
     private int posicionJugadorEnTurno;
     private int ejercitosColocadosPorJugadorEnTurno;
-    private List<TarjetaPais> tarjetasPais;
+    private List<TarjetaPais> mazoTarjetasPais;
 
     public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
 
@@ -36,6 +36,10 @@ public class Juego {
         this.jugadores = new LinkedList<>();
         for (int i = 0; i < nombresDeJugadores.size(); i++)
             jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
+    }
+
+    public void guardarMazoDeTarjetasPais (List<TarjetaPais> tarjetasPais){
+        this.mazoTarjetasPais = tarjetasPais;
     }
 
     public void comenzarFaseInicial(Aleatorio aleatorio) throws JugadaInvalidaException {
