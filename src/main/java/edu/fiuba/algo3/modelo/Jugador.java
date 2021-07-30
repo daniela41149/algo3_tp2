@@ -99,7 +99,7 @@ public class Jugador {
         public void activarTarjetaPais (String nombreTarjetaPais) throws JugadaInvalidaException {
         for (TarjetaPais unaTarjetaPais: tarjetasPais){
             if (unaTarjetaPais.getNombre().equals(nombreTarjetaPais)){
-                unaTarjetaPais.activar(this);
+                unaTarjetaPais.activarTarjeta(this);
             }
         }
     }

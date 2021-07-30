@@ -6,8 +6,7 @@ public class Ocupado implements EstadoPais {
 
     public Ocupado() {
     }
-    public boolean ocuparPais(Jugador jugador, Pais pais){
-        return false;
+    public void ocuparPais(Jugador jugador, Pais pais){
     }
 
 

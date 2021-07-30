@@ -25,7 +25,7 @@ public class TarjetaPais {
     }
 
 
-    public void activar(Jugador jugador) throws JugadaInvalidaException {
+    public void activarTarjeta(Jugador jugador) throws JugadaInvalidaException {
         this.estadoTarjeta.activar(this,jugador);
     }
 

@@ -17,6 +17,14 @@ Continente "1" *-- "1..*" Pais
 
 Jugador "1" *-- "2" Mision
 Jugador "1" -- "1..*" Pais
+Jugador "1" -> "*" TarjetaPais
+
+Interface EstadoTarjetaPais
+
+TarjetaPais --> EstadoTarjetaPais
+TarjetaActivada <|.. EstadoTarjetaPais
+TarjetaDesactivada <|.. EstadoTarjetaPais
+
 Ejercito "1" --> "1" "Dados"
 Tablero ..> Canjes
 
@@ -106,17 +114,17 @@ class Pais {
 
 skinparam classAttributeIconSize 0
 Interface Estado {
- +puedeOcupar(): boolean
+ +ocuparPais(Jugador,Pais)
 }
 
 skinparam classAttributeIconSize 0
 class Ocupado {
- +puedeOcupar(): boolean
+ +ocuparPais(Jugador,Pais)
 }
 
 skinparam classAttributeIconSize 0
 class Vacante {
- +puedeOcupar(): boolean
+ +ocuparPais(Jugador,Pais)
 }
 
 skinparam classAttributeIconSize 0
@@ -154,5 +162,25 @@ skinparam classAttributeIconSize 0
 class TarjetaPais {
  -nombre: String
  -simbolo: String
+ +getNombre(): String
+ +getSimbolo(): String
+ +activarTarjeta(Jugador)
+ +activar()
+
+}
+
+skinparam classAttributeIconSize 0
+class TarjetaActivada {
+ +activarTarjeta(Jugador)
+}
+
+skinparam classAttributeIconSize 0
+class TarjetaDesactivada {
+ +activarTarjeta(Jugador)
+}
+
+skinparam classAttributeIconSize 0
+Interface EstadoTarjetaPais {
+ +activarTarjeta(Jugador)
 }
 @enduml

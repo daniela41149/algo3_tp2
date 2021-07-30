@@ -8,10 +8,9 @@ public class Vacante implements EstadoPais {
 
     public Vacante() {
     }
-    public boolean ocuparPais(Jugador jugador, Pais pais) {
+    public void ocuparPais(Jugador jugador, Pais pais) {
         pais.elegirPais(jugador);
         pais.cambiarEstadoAOcupado();
-        return true;
     }
 
 
