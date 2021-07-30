@@ -21,17 +21,10 @@ import static org.mockito.Mockito.when;
 public class PruebasDeIntegracionTest {
 
     static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
-    private String nombrePais;
-    private List<String> limitrofes;
+
     private Pais pais;
-    private String nombrePais2;
-    private List<String> limitrofes2;
     private Pais pais2;
-    private String nombrePais3;
-    private List<String> limitrofes3;
     private Pais pais3;
-    private String nombrePais4;
-    private List<String> limitrofes4;
     private Pais pais4;
 
     private Continente continente;
@@ -49,36 +42,36 @@ public class PruebasDeIntegracionTest {
     @BeforeEach
     public void setup() {
 
-        nombrePais = "Argentina";
+        String nombrePais = "Argentina";
 
-        limitrofes = new ArrayList<>();
+        List<String> limitrofes = new ArrayList<>();
         limitrofes.add("Chile");
         limitrofes.add("Brasil");
         limitrofes.add("Uruguay");
         pais = new Pais(nombrePais, limitrofes);
 
 
-        nombrePais2 = "Uruguay";
+        String nombrePais2 = "Uruguay";
 
-        limitrofes2 = new ArrayList<>();
+        List<String> limitrofes2 = new ArrayList<>();
         limitrofes2.add("Argentina");
         limitrofes2.add("Brasil");
         limitrofes2.add("Chile");
         pais2 = new Pais(nombrePais2, limitrofes2);
 
-        nombrePais3 = "Brasil";
+        String nombrePais3 = "Brasil";
 
 
-        limitrofes3 = new ArrayList<>();
+        List<String> limitrofes3 = new ArrayList<>();
         limitrofes3.add("Chile");
         limitrofes3.add("Argentina");
         limitrofes3.add("Uruguay");
         pais3 = new Pais(nombrePais3, limitrofes3);
 
 
-        nombrePais4 = "Chile";
+        String nombrePais4 = "Chile";
 
-        limitrofes4 = new ArrayList<>();
+        List<String> limitrofes4 = new ArrayList<>();
         limitrofes4.add("Argentina");
         limitrofes4.add("Brasil");
         limitrofes4.add("Uruguay");

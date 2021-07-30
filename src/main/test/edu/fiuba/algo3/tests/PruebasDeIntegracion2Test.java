@@ -27,74 +27,29 @@ public class PruebasDeIntegracion2Test {
     static final int EJERCITOS_ADICIONALES_AFRICA = 3;
     static final int EJERCITOS_ADICIONALES_OCEANIA = 2;
 
-    private String nombrePais;
-    private List<String> limitrofes;
+
     private Pais pais;
-    private String nombrePais2;
-    private List<String> limitrofes2;
     private Pais pais2;
-    private String nombrePais3;
-    private List<String> limitrofes3;
     private Pais pais3;
-    private String nombrePais4;
-    private List<String> limitrofes4;
     private Pais pais4;
-    private String nombrePais5;
-    private List<String> limitrofes5;
     private Pais pais5;
-    private String nombrePais6;
-    private List<String> limitrofes6;
     private Pais pais6;
-    private String nombrePais7;
-    private List<String> limitrofes7;
     private Pais pais7;
-    private String nombrePais8;
-    private List<String> limitrofes8;
     private Pais pais8;
-    private String nombrePais9;
-    private List<String> limitrofes9;
     private Pais pais9;
-    private String nombrePais10;
-    private List<String> limitrofes10;
     private Pais pais10;
-    private String nombrePais11;
-    private List<String> limitrofes11;
     private Pais pais11;
-    private String nombrePais12;
-    private List<String> limitrofes12;
     private Pais pais12;
-    private String nombrePais13;
-    private List<String> limitrofes13;
     private Pais pais13;
-    private String nombrePais14;
-    private List<String> limitrofes14;
     private Pais pais14;
-    private String nombrePais15;
-    private List<String> limitrofes15;
     private Pais pais15;
-    private String nombrePais16;
-    private List<String> limitrofes16;
     private Pais pais16;
-    private String nombrePais17;
-    private List<String> limitrofes17;
     private Pais pais17;
-    private String nombrePais18;
-    private List<String> limitrofes18;
     private Pais pais18;
-    private String nombrePais19;
-    private List<String> limitrofes19;
     private Pais pais19;
-    private String nombrePais20;
-    private List<String> limitrofes20;
     private Pais pais20;
-    private String nombrePais21;
-    private List<String> limitrofes21;
     private Pais pais21;
-    private String nombrePais22;
-    private List<String> limitrofes22;
     private Pais pais22;
-    private String nombrePais23;
-    private List<String> limitrofes23;
     private Pais pais23;
 
 
@@ -114,121 +69,121 @@ public class PruebasDeIntegracion2Test {
 
         // Continente America del Sur
 
-        nombrePais = "Argentina";
+        String nombrePais = "Argentina";
 
-        limitrofes = new ArrayList<>();
+        List<String> limitrofes = new ArrayList<>();
         limitrofes.add("Chile");
         limitrofes.add("Brasil");
         limitrofes.add("Uruguay");
         pais = new Pais(nombrePais, limitrofes);
 
 
-        nombrePais2 = "Uruguay";
+        String nombrePais2 = "Uruguay";
 
-        limitrofes2 = new ArrayList<>();
+        List<String> limitrofes2 = new ArrayList<>();
         limitrofes2.add("Argentina");
         limitrofes2.add("Brasil");
         pais2 = new Pais(nombrePais2, limitrofes2);
 
 
-        nombrePais3 = "Brasil";
+        String nombrePais3 = "Brasil";
 
-        limitrofes3 = new ArrayList<>();
+        List<String> limitrofes3 = new ArrayList<>();
         limitrofes3.add("Argentina");
         limitrofes3.add("Uruguay");
         limitrofes3.add("Sahara");
         pais3 = new Pais(nombrePais3, limitrofes3);
 
 
-        nombrePais4 = "Chile";
+        String nombrePais4 = "Chile";
 
-        limitrofes4 = new ArrayList<>();
+        List<String> limitrofes4 = new ArrayList<>();
         limitrofes4.add("Argentina");
         limitrofes4.add("Australia");
         pais4 = new Pais(nombrePais4, limitrofes4);
 
         //Continente America del Norte
 
-        nombrePais5 = "Oregon";
+        String nombrePais5 = "Oregon";
 
-        limitrofes5 = new ArrayList<>();
+        List<String> limitrofes5 = new ArrayList<>();
         limitrofes5.add("Alaska");
         limitrofes5.add("Nueva York");
         pais5 = new Pais(nombrePais5, limitrofes5);
 
-        nombrePais6 = "Nueva York";
+        String  nombrePais6 = "Nueva York";
 
-        limitrofes6 = new ArrayList<>();
+        List<String> limitrofes6 = new ArrayList<>();
         limitrofes6.add("Oregon");
         limitrofes6.add("Terranova");
         pais6 = new Pais(nombrePais6, limitrofes6);
 
-        nombrePais7 = "Terranova";
+        String nombrePais7 = "Terranova";
 
-        limitrofes7 = new ArrayList<>();
+        List<String> limitrofes7 = new ArrayList<>();
         limitrofes7.add("Nueva York");
         pais7 = new Pais(nombrePais7, limitrofes7);
 
-        nombrePais8 = "Alaska";
+        String nombrePais8 = "Alaska";
 
-        limitrofes8 = new ArrayList<>();
+        List<String> limitrofes8 = new ArrayList<>();
         limitrofes8.add("Oregon");
         pais8 = new Pais(nombrePais8, limitrofes8);
 
         //Continente Oceania
 
-        nombrePais9 = "Australia";
+        String nombrePais9 = "Australia";
 
-        limitrofes9 = new ArrayList<>();
+        List<String> limitrofes9 = new ArrayList<>();
         limitrofes9.add("Chile");
         limitrofes9.add("Sumatra");
         limitrofes9.add("Borneo");
         pais9 = new Pais(nombrePais9, limitrofes9);
 
 
-        nombrePais10 = "Sumatra";
+        String nombrePais10 = "Sumatra";
 
-        limitrofes10 = new ArrayList<>();
+        List<String> limitrofes10 = new ArrayList<>();
         limitrofes10.add("Australia");
         limitrofes10.add("India");
         pais10 = new Pais(nombrePais10, limitrofes10);
 
 
-        nombrePais11 = "Borneo";
+        String nombrePais11 = "Borneo";
 
-        limitrofes11 = new ArrayList<>();
+        List<String> limitrofes11 = new ArrayList<>();
         limitrofes11.add("Australia");
         pais11 = new Pais(nombrePais11, limitrofes11);
 
 
         //Continente Europa
 
-        nombrePais12 = "Francia";
+        String nombrePais12 = "Francia";
 
-        limitrofes12 = new ArrayList<>();
+        List<String> limitrofes12 = new ArrayList<>();
         limitrofes12.add("España");
         pais12 = new Pais(nombrePais12, limitrofes12);
 
 
-        nombrePais13 = "España";
+        String nombrePais13 = "España";
 
-        limitrofes13 = new ArrayList<>();
+        List<String> limitrofes13 = new ArrayList<>();
         limitrofes13.add("Sahara");
         limitrofes13.add("Francia");
         pais13 = new Pais(nombrePais13, limitrofes13);
 
 
-        nombrePais14 = "Polonia";
+        String nombrePais14 = "Polonia";
 
-        limitrofes14 = new ArrayList<>();
+        List<String> limitrofes14 = new ArrayList<>();
         limitrofes14.add("Rusia");
         limitrofes14.add("Turquia");
         limitrofes14.add("Egipto");
         pais14 = new Pais(nombrePais14, limitrofes14);
 
-        nombrePais15 = "Rusia";
+        String nombrePais15 = "Rusia";
 
-        limitrofes15 = new ArrayList<>();
+        List<String> limitrofes15 = new ArrayList<>();
         limitrofes15.add("Iran");
         limitrofes15.add("Turquia");
         limitrofes15.add("Polonia");
@@ -236,9 +191,9 @@ public class PruebasDeIntegracion2Test {
 
         //Continente Asia
 
-        nombrePais16 = "Turquia";
+        String nombrePais16 = "Turquia";
 
-        limitrofes16 = new ArrayList<>();
+        List<String> limitrofes16 = new ArrayList<>();
         limitrofes16.add("Egipto");
         limitrofes16.add("Polonia");
         limitrofes16.add("Rusia");
@@ -247,24 +202,24 @@ public class PruebasDeIntegracion2Test {
         pais16 = new Pais(nombrePais16, limitrofes16);
 
 
-        nombrePais17 = "India";
+        String nombrePais17 = "India";
 
-        limitrofes17 = new ArrayList<>();
+        List<String> limitrofes17 = new ArrayList<>();
         limitrofes17.add("Iran");
         pais17 = new Pais(nombrePais17, limitrofes17);
 
 
-        nombrePais18 = "Iran";
+        String nombrePais18 = "Iran";
 
-        limitrofes18 = new ArrayList<>();
+        List<String> limitrofes18 = new ArrayList<>();
         limitrofes18.add("India");
         limitrofes18.add("Turquia");
         limitrofes18.add("Rusia");
         pais18 = new Pais(nombrePais18, limitrofes18);
 
-        nombrePais19 = "Arabia";
+        String nombrePais19 = "Arabia";
 
-        limitrofes19 = new ArrayList<>();
+        List<String> limitrofes19 = new ArrayList<>();
         limitrofes19.add("Turquia");
         limitrofes19.add("Israel");
         pais19 = new Pais(nombrePais19, limitrofes19);
@@ -272,9 +227,9 @@ public class PruebasDeIntegracion2Test {
 
         //Continente Africa
 
-        nombrePais20 = "Sahara";
+        String nombrePais20 = "Sahara";
 
-        limitrofes20 = new ArrayList<>();
+        List<String> limitrofes20 = new ArrayList<>();
         limitrofes20.add("Brasil");
         limitrofes20.add("España");
         limitrofes20.add("Egipto");
@@ -283,24 +238,24 @@ public class PruebasDeIntegracion2Test {
         pais20 = new Pais(nombrePais20, limitrofes20);
 
 
-        nombrePais21 = "Zaire";
+        String nombrePais21 = "Zaire";
 
-        limitrofes21 = new ArrayList<>();
+        List<String> limitrofes21 = new ArrayList<>();
         limitrofes21.add("Etiopia");
         limitrofes21.add("Sahara");
         pais21 = new Pais(nombrePais21, limitrofes21);
 
-        nombrePais22 = "Etiopia";
+        String nombrePais22 = "Etiopia";
 
-        limitrofes22 = new ArrayList<>();
+        List<String> limitrofes22 = new ArrayList<>();
         limitrofes22.add("Sahra");
         limitrofes22.add("Egipto");
         limitrofes22.add("Zaire");
         pais22 = new Pais(nombrePais22, limitrofes22);
 
-        nombrePais23 = "Egipto";
+        String nombrePais23 = "Egipto";
 
-        limitrofes23 = new ArrayList<>();
+        List<String> limitrofes23 = new ArrayList<>();
         limitrofes23.add("Polonia");
         limitrofes23.add("Turquia");
         limitrofes23.add("Etiopia");
