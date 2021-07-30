@@ -28,7 +28,8 @@ public class ControladorMenuJugador implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        nombreJugador.setText("Rodrigo");
+        mostrarJugadorActual();
+        mostrarPaisesLimitrofesActuales();
     }
 
     private void mostrarJugadorActual(){
@@ -41,7 +42,9 @@ public class ControladorMenuJugador implements Initializable {
 
     @FXML
     void pasarTurno(ActionEvent event) {
-
+        // cambia de jugador
+        mostrarJugadorActual();
+        mostrarPaisesLimitrofesActuales();
     }
 
 }
