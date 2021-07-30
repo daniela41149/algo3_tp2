@@ -38,26 +38,15 @@ public class Dados {
 
         if ( (cantidadDeDados > MIN_CANTIDAD_DADOS) && (cantidadDeDados <= MAX_DADOS_ATAQUE) )
             return lanzarDados(cantidadDeDados-1);
-        /*
-        if (cantidadDeDados > 4)
-            return lanzarDados(3);
-        return lanzarDados(0);
-     */
 
         return lanzarDadosConCantidad(cantidadDeDados);
-        
     }
 
     public List<Integer> dadosDefensa(int cantidadDeDados){
 
         if ( (cantidadDeDados >= MIN_CANTIDAD_DADOS) && (cantidadDeDados < MAX_DADOS_DEFENSA) )
             return lanzarDados(cantidadDeDados+1);
-        /*
-        if ( cantidadDeDados >= 3 )
-            return lanzarDados(3);
-        return lanzarDados(0);
 
-         */
         return lanzarDadosConCantidad(cantidadDeDados);
     }
 
