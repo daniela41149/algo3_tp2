@@ -22,6 +22,7 @@ public class Juego {
     private List<Jugador> jugadores;
     private int posicionJugadorEnTurno;
     private int ejercitosColocadosPorJugadorEnTurno;
+    private List<TarjetaPais> tarjetasPais;
 
     public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
 
@@ -120,6 +121,9 @@ public class Juego {
     public void reagrupar(String nombrePaisDesde, String nombrePaisHasta, int cantidadDeEjercito) {
 
     }
+
+    //public TarjetaPais entregaTarjetaPais(){
+    //}
 
 }
 

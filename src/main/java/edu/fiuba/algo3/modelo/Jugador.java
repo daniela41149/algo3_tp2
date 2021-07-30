@@ -77,5 +77,13 @@ public class Jugador {
     public int cantidadPaises(){
         return (this.paises.size());
     }
+
+    /*
+    public void pedirTarjetaPais(){
+        TarjetaPais nuevaTarjetaPais = juego.entregaTarjetaPais();
+        tarjetasPais.add(nuevaTarjetaPais);
+    }
+
+     */
 }
 
