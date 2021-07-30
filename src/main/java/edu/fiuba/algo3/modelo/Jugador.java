@@ -12,6 +12,7 @@ public class Jugador {
     private String color;
     private List<Pais> paises ;
     private Juego juego;
+    private List<TarjetaPais> tarjetasPais;
 
 
     public Jugador(String nombre, String colorJugador, Juego juego){

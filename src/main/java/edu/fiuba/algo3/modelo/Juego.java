@@ -117,5 +117,9 @@ public class Juego {
         return tablero.ejercitosAdicionalesPorContinentesControlados(jugador);
     }
 
+    public void reagrupar(String nombrePaisDesde, String nombrePaisHasta, int cantidadDeEjercito) {
+
+    }
+
 }
 
