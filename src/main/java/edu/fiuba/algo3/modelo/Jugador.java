@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,12 +79,23 @@ public class Jugador {
         return (this.paises.size());
     }
 
-    /*
+
     public void pedirTarjetaPais(){
         TarjetaPais nuevaTarjetaPais = juego.entregaTarjetaPais();
         tarjetasPais.add(nuevaTarjetaPais);
     }
 
-     */
+
+
+    public void activarTarjetaPais (String nombreTarjetaPais){
+        for (TarjetaPais unaTarjetaPais: tarjetasPais){
+            if (unaTarjetaPais.getNombre().equals(nombreTarjetaPais)){
+                unaTarjetaPais.activar(this);
+            }
+        }
+    }
+
+
+
 }
 
