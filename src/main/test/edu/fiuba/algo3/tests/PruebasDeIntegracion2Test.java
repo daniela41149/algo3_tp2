@@ -12,14 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PruebasDeIntegracion2Test {
+
+    static final int EJERCITOS_ADICIONALES_ASIA = 7;
+    static final int EJERCITOS_ADICIONALES_EUROPA = 5;
+    static final int EJERCITOS_ADICIONALES_AMERICA_DEL_NORTE = 5;
+    static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
+    static final int EJERCITOS_ADICIONALES_AFRICA = 3;
+    static final int EJERCITOS_ADICIONALES_OCEANIA = 2;
 
     private String nombrePais;
     private List<String> limitrofes;
@@ -99,11 +105,14 @@ public class PruebasDeIntegracion2Test {
     private Continente continente5;
     private Continente continente6;
 
+    private List<Pais> listaPaises;
+    private List<Continente> listaContinentes;
+
 
     @BeforeEach
     public void setup() {
 
-    // Continente America del Sur
+        // Continente America del Sur
 
         nombrePais = "Argentina";
 
@@ -298,20 +307,85 @@ public class PruebasDeIntegracion2Test {
         limitrofes23.add("Sahara");
         pais23 = new Pais(nombrePais23, limitrofes23);
 
+        listaPaises = new ArrayList<>();
+        listaPaises.add(pais);
+        listaPaises.add(pais2);
+        listaPaises.add(pais3);
+        listaPaises.add(pais4);
+        listaPaises.add(pais5);
+        listaPaises.add(pais6);
+        listaPaises.add(pais7);
+        listaPaises.add(pais8);
+        listaPaises.add(pais9);
+        listaPaises.add(pais10);
+        listaPaises.add(pais11);
+        listaPaises.add(pais12);
+        listaPaises.add(pais13);
+        listaPaises.add(pais14);
+        listaPaises.add(pais15);
+        listaPaises.add(pais16);
+        listaPaises.add(pais17);
+        listaPaises.add(pais18);
+        listaPaises.add(pais19);
+        listaPaises.add(pais20);
+        listaPaises.add(pais21);
+        listaPaises.add(pais22);
+        listaPaises.add(pais23);
+
+        List<Pais> listaPaises1 = new ArrayList<>();
+        listaPaises1.add(pais);
+        listaPaises1.add(pais2);
+        listaPaises1.add(pais3);
+        listaPaises1.add(pais4);
+        continente1 = new Continente("America del Sur",listaPaises1,EJERCITOS_ADICIONALES_AMERICA_DEL_SUR);
+
+        List<Pais> listaPaises2 = new ArrayList<>();
+        listaPaises2.add(pais5);
+        listaPaises2.add(pais6);
+        listaPaises2.add(pais7);
+        listaPaises2.add(pais8);
+        continente2 = new Continente("America del Norte",listaPaises2,EJERCITOS_ADICIONALES_AMERICA_DEL_NORTE);
+
+        List<Pais> listaPaises3 = new ArrayList<>();
+        listaPaises3.add(pais9);
+        listaPaises3.add(pais10);
+        listaPaises3.add(pais11);
+        continente3 = new Continente("Oceania",listaPaises3,EJERCITOS_ADICIONALES_OCEANIA);
+
+        List<Pais> listaPaises4 = new ArrayList<>();
+        listaPaises4.add(pais12);
+        listaPaises4.add(pais13);
+        listaPaises4.add(pais14);
+        listaPaises4.add(pais15);
+        continente4 = new Continente("Europa",listaPaises4,EJERCITOS_ADICIONALES_EUROPA);
+
+        List<Pais> listaPaises5 = new ArrayList<>();
+        listaPaises5.add(pais16);
+        listaPaises5.add(pais17);
+        listaPaises5.add(pais18);
+        listaPaises5.add(pais19);
+        continente5 = new Continente("Asia",listaPaises5,EJERCITOS_ADICIONALES_ASIA);
+
+        List<Pais> listaPaises6 = new ArrayList<>();
+        listaPaises6.add(pais20);
+        listaPaises6.add(pais21);
+        listaPaises6.add(pais22);
+        listaPaises6.add(pais23);
+        continente6 = new Continente("Africa",listaPaises6,EJERCITOS_ADICIONALES_AFRICA);
+
+        listaContinentes = new ArrayList<>();
+        listaContinentes.add(continente1);
+        listaContinentes.add(continente2);
+        listaContinentes.add(continente3);
+        listaContinentes.add(continente4);
+        listaContinentes.add(continente5);
+        listaContinentes.add(continente6);
+
     }
 
-
-
-
     @Test
-    public void test004JuegoDeUnaRondaConDosJugadores() {
+    public void test004JuegoDeUnaRondaConDosJugadoresCadaJugadorColocaEjercitosDeLaFaseInicial() {
         setup();
-
-        Moderador moderador = new Moderador("resources/Fronteras.csv","resources/TarjetasPais.json");
-        Aleatorio randomPaises = new Aleatorio();
-
-        List<Pais> listaPaises = moderador.pedirPaises();
-        List<Continente> listaContinentes = moderador.pedirContinentes();
 
         List <String> nombresJugadores = new ArrayList<>();
         nombresJugadores.add("Pedro");
@@ -431,6 +505,18 @@ public class PruebasDeIntegracion2Test {
             assertEquals(paisesJugador1.get(10).cantidadDeFichas(),1);
             assertEquals(paisesJugador1.get(11).cantidadDeFichas(),1);
 
+            assertEquals(paisesJugador2.get(0).cantidadDeFichas(),1);
+            assertEquals(paisesJugador2.get(1).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(2).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(3).cantidadDeFichas(),1);
+            assertEquals(paisesJugador2.get(4).cantidadDeFichas(),1);
+            assertEquals(paisesJugador2.get(5).cantidadDeFichas(),1);
+            assertEquals(paisesJugador2.get(6).cantidadDeFichas(),1);
+            assertEquals(paisesJugador2.get(7).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(8).cantidadDeFichas(),3);
+            assertEquals(paisesJugador2.get(9).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(10).cantidadDeFichas(),3);
+
 
         } catch (JugadaInvalidaException e1) {
             lanzaUnaExcepcion = true;
@@ -440,14 +526,190 @@ public class PruebasDeIntegracion2Test {
             lanzaUnaExcepcion = true;
         }
 
-
         assertFalse(lanzaUnaExcepcion);
 
 
+    }
 
+    @Test
+    public void test005JuegoDeUnaRondaConTresJugadoresCadaJugadorColocaEjercitosDeLaFaseInicialJugadorControlaAsia() {
+        setup();
+
+        Aleatorio randomPaises = new Aleatorio();
+
+        List <String> nombresJugadores = new ArrayList<>();
+        nombresJugadores.add("Pedro");
+        nombresJugadores.add("Martina");
+        nombresJugadores.add("Felipe");
+
+        List<Pais> paisesJugador1 = new ArrayList<>();
+        List<Pais> paisesJugador2 = new ArrayList<>();
+        List<Pais> paisesJugador3 = new ArrayList<>();
+
+        paisesJugador1.add(pais);
+        paisesJugador1.add(pais2);
+        paisesJugador3.add(pais3);
+        paisesJugador3.add(pais4);
+        paisesJugador1.add(pais5);
+        paisesJugador3.add(pais6);
+        paisesJugador1.add(pais7);
+        paisesJugador2.add(pais8);
+        paisesJugador3.add(pais9);
+        paisesJugador1.add(pais10);
+        paisesJugador3.add(pais11);
+        paisesJugador3.add(pais12);
+        paisesJugador1.add(pais13);
+        paisesJugador2.add(pais14);
+        paisesJugador3.add(pais15);
+        paisesJugador2.add(pais16);
+        paisesJugador2.add(pais17);
+        paisesJugador2.add(pais18);
+        paisesJugador2.add(pais19);
+        paisesJugador2.add(pais20);
+        paisesJugador3.add(pais21);
+        paisesJugador1.add(pais22);
+        paisesJugador2.add(pais23);
+
+        List<List<Pais>> listaPaisesRepartidos = new ArrayList<>();
+        listaPaisesRepartidos.add(paisesJugador1);
+        listaPaisesRepartidos.add(paisesJugador2);
+        listaPaisesRepartidos.add(paisesJugador3);
+
+        Aleatorio mockedAleatorio = mock(Aleatorio.class);
+
+        when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
+        when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
+
+
+        boolean lanzaUnaExcepcion = false;
+
+        try {
+            // fase inicial
+            Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.comenzarFaseInicial(mockedAleatorio);
+
+
+            // cada jugador coloca 5 ejercitos en los paises que quiere.
+
+            List<String> listaPaisesElegidosPorJugador1 = new ArrayList<>();
+            List<Integer> listaEjercitosElegidosPorJugador1 = new ArrayList<>();
+
+            listaPaisesElegidosPorJugador1.add("Argentina");
+            listaEjercitosElegidosPorJugador1.add(2);
+            listaPaisesElegidosPorJugador1.add("Uruguay");
+            listaEjercitosElegidosPorJugador1.add(1);
+            listaPaisesElegidosPorJugador1.add("Terranova");
+            listaEjercitosElegidosPorJugador1.add(1);
+            listaPaisesElegidosPorJugador1.add("Sumatra");
+            listaEjercitosElegidosPorJugador1.add(1);
+
+            juego.colocarEjercitoPrimeraVuelta(listaPaisesElegidosPorJugador1,listaEjercitosElegidosPorJugador1);
+
+            List<String> listaPaisesElegidosPorJugador2 = new ArrayList<>();
+            List<Integer> listaEjercitosElegidosPorJugador2 = new ArrayList<>();
+
+            listaPaisesElegidosPorJugador2.add("Polonia");
+            listaEjercitosElegidosPorJugador2.add(2);
+            listaPaisesElegidosPorJugador2.add("Iran");
+            listaEjercitosElegidosPorJugador2.add(2);
+            listaPaisesElegidosPorJugador2.add("India");
+            listaEjercitosElegidosPorJugador2.add(1);
+
+            juego.colocarEjercitoPrimeraVuelta(listaPaisesElegidosPorJugador2,listaEjercitosElegidosPorJugador2);
+
+            List<String> listaPaisesElegidosPorJugador3 = new ArrayList<>();
+            List<Integer> listaEjercitosElegidosPorJugador3 = new ArrayList<>();
+
+            listaPaisesElegidosPorJugador3.add("Brasil");
+            listaEjercitosElegidosPorJugador3.add(1);
+            listaPaisesElegidosPorJugador3.add("Borneo");
+            listaEjercitosElegidosPorJugador3.add(1);
+            listaPaisesElegidosPorJugador3.add("Nueva York");
+            listaEjercitosElegidosPorJugador3.add(1);
+            listaPaisesElegidosPorJugador3.add("Rusia");
+            listaEjercitosElegidosPorJugador3.add(1);
+            listaPaisesElegidosPorJugador3.add("Zaire");
+            listaEjercitosElegidosPorJugador3.add(1);
+
+            juego.colocarEjercitoPrimeraVuelta(listaPaisesElegidosPorJugador3,listaEjercitosElegidosPorJugador3);
+
+            // cada jugador coloca 3 ejercitos en los paises que quiere.
+
+            listaPaisesElegidosPorJugador1 = new ArrayList<>();
+            listaEjercitosElegidosPorJugador1 = new ArrayList<>();
+
+            listaPaisesElegidosPorJugador1.add("Uruguay");
+            listaEjercitosElegidosPorJugador1.add(3);
+
+            juego.colocarEjercitoSegundaVuelta(listaPaisesElegidosPorJugador1,listaEjercitosElegidosPorJugador1);
+
+            listaPaisesElegidosPorJugador2 = new ArrayList<>();
+            listaEjercitosElegidosPorJugador2 = new ArrayList<>();
+
+            listaPaisesElegidosPorJugador2.add("Alaska");
+            listaEjercitosElegidosPorJugador2.add(1);
+            listaPaisesElegidosPorJugador2.add("Turquia");
+            listaEjercitosElegidosPorJugador2.add(1);
+            listaPaisesElegidosPorJugador2.add("Arabia");
+            listaEjercitosElegidosPorJugador2.add(1);
+
+            juego.colocarEjercitoSegundaVuelta(listaPaisesElegidosPorJugador2,listaEjercitosElegidosPorJugador2);
+
+            listaPaisesElegidosPorJugador3 = new ArrayList<>();
+            listaEjercitosElegidosPorJugador3 = new ArrayList<>();
+
+            listaPaisesElegidosPorJugador3.add("Chile");
+            listaEjercitosElegidosPorJugador3.add(2);
+            listaPaisesElegidosPorJugador3.add("Australia");
+            listaEjercitosElegidosPorJugador3.add(1);
+
+            juego.colocarEjercitoSegundaVuelta(listaPaisesElegidosPorJugador3,listaEjercitosElegidosPorJugador3);
+
+            assertEquals(paisesJugador1.get(0).cantidadDeFichas(),3);
+            assertEquals(paisesJugador1.get(1).cantidadDeFichas(),5);
+            assertEquals(paisesJugador1.get(2).cantidadDeFichas(),1);
+            assertEquals(paisesJugador1.get(3).cantidadDeFichas(),2);
+            assertEquals(paisesJugador1.get(4).cantidadDeFichas(),2);
+            assertEquals(paisesJugador1.get(5).cantidadDeFichas(),1);
+            assertEquals(paisesJugador1.get(6).cantidadDeFichas(),1);
+
+
+            assertEquals(paisesJugador2.get(0).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(1).cantidadDeFichas(),3);
+            assertEquals(paisesJugador2.get(2).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(3).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(4).cantidadDeFichas(),3);
+            assertEquals(paisesJugador2.get(5).cantidadDeFichas(),2);
+            assertEquals(paisesJugador2.get(6).cantidadDeFichas(),1);
+            assertEquals(paisesJugador2.get(7).cantidadDeFichas(),1);
+
+            assertEquals(paisesJugador3.get(0).cantidadDeFichas(),2);
+            assertEquals(paisesJugador3.get(1).cantidadDeFichas(),3);
+            assertEquals(paisesJugador3.get(2).cantidadDeFichas(),2);
+            assertEquals(paisesJugador3.get(3).cantidadDeFichas(),2);
+            assertEquals(paisesJugador3.get(4).cantidadDeFichas(),2);
+            assertEquals(paisesJugador3.get(5).cantidadDeFichas(),1);
+            assertEquals(paisesJugador3.get(6).cantidadDeFichas(),2);
+            assertEquals(paisesJugador3.get(7).cantidadDeFichas(),2);
+
+            assertTrue(juego.controlaContiente("Martina", "Asia"));
+
+
+        } catch (JugadaInvalidaException e1) {
+            lanzaUnaExcepcion = true;
+        } catch (CantidadInvalidaDeJugadoresException e2){
+            lanzaUnaExcepcion = true;
+        } catch (CantidadInvalidaDeEjercitosException e3){
+            lanzaUnaExcepcion = true;
+        }
+        assertFalse(lanzaUnaExcepcion);
 
 
     }
+
+
+
+
 
 
 

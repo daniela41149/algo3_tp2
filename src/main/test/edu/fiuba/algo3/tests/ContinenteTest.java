@@ -10,6 +10,7 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 
 public class ContinenteTest {
+    static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
     private List<Pais> listaPaises;
     private Continente continente;
     private Pais pais1;
@@ -79,7 +80,7 @@ public class ContinenteTest {
         listaPaises.add(pais5);
         listaPaises.add(pais6);
 
-        continente = new Continente ("America del Sur",listaPaises);
+        continente = new Continente ("America del Sur",listaPaises,EJERCITOS_ADICIONALES_AMERICA_DEL_SUR);
 
     }
 

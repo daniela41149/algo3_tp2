@@ -51,6 +51,27 @@ public class Tablero {
         return (this.continentes.size());
     }
 
+
+    public boolean controlaContinente(Jugador unJugador,String nombreContinente) {
+        for (Continente unContinente: this.continentes) {
+            if (unContinente.getNombre().equals(nombreContinente)) {
+                return unContinente.jugadorControlaContinente(unJugador);
+            }
+        }
+        return false;
+    }
+
+    public int ejercitosAdicionalesPorContinentesControlados (Jugador jugador) {
+        int ejercitosAdicionales = 0;
+        for (Continente unContinente: this.continentes) {
+            unContinente.ejercitosAdicionalesPorContinentesControlados(jugador,ejercitosAdicionales);
+        }
+        return ejercitosAdicionales;
+
+    }
+
 }
+
+
 
 

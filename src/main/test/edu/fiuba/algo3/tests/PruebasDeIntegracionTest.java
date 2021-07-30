@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class PruebasDeIntegracionTest {
 
+    static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
     private String nombrePais;
     private List<String> limitrofes;
     private Pais pais;
@@ -90,7 +91,7 @@ public class PruebasDeIntegracionTest {
         listaPaises.add(pais3);
         listaPaises.add(pais4);
 
-        continente = new Continente("America del Sur",listaPaises);
+        continente = new Continente("America del Sur",listaPaises,EJERCITOS_ADICIONALES_AMERICA_DEL_SUR);
 
         listaContinentes = new ArrayList<>();
         listaContinentes.add(continente);

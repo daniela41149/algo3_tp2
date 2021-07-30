@@ -13,6 +13,13 @@ import java.util.*;
 
 public class Moderador {
 
+    static final int EJERCITOS_ADICIONALES_ASIA = 7;
+    static final int EJERCITOS_ADICIONALES_EUROPA = 5;
+    static final int EJERCITOS_ADICIONALES_AMERICA_DEL_NORTE = 5;
+    static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
+    static final int EJERCITOS_ADICIONALES_AFRICA = 3;
+    static final int EJERCITOS_ADICIONALES_OCEANIA = 2;
+
     private List<Pais> paises;
     private List<Continente> continentes;
     private List<TarjetaPais> tarjetas;
@@ -68,8 +75,8 @@ public class Moderador {
         Set<String> listaContinentes = diccionarioContinentes.keySet();
         for( String nombreContinente : listaContinentes){
             List<Pais> listaPaisesPorContinente = diccionarioContinentes.get(nombreContinente);
-            Continente nuevoContinente = new Continente(nombreContinente,listaPaisesPorContinente);
-            continentes.add(nuevoContinente);
+            //Continente nuevoContinente = new Continente(nombreContinente,listaPaisesPorContinente);
+            //continentes.add(nuevoContinente);
         }
     }
 

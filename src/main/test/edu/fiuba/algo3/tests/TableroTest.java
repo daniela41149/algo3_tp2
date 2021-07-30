@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TableroTest {
-
+    static final int EJERCITOS_ADICIONALES = 3;
     private String nombrePais;
     private  String nombreOtroPais;
     private List<String> limitrofes = new ArrayList<>();
@@ -39,7 +39,7 @@ public class TableroTest {
         listaPaises.add(paisDos);
 
 
-        continente = new Continente("America",listaPaises);
+        continente = new Continente("America",listaPaises,EJERCITOS_ADICIONALES);
         listaContinentes.add(continente);
     }
 

@@ -103,4 +103,19 @@ public class Juego {
         return this.jugadores;
     }
 
+
+    public boolean controlaContiente (String nombreJugador, String nombreContinente) {
+        for (Jugador unJugador: this.jugadores) {
+            if (unJugador.getNombre().equals(nombreJugador)) {
+                return tablero.controlaContinente(unJugador,nombreContinente);
+            }
+        }
+        return false;
+    }
+
+    private int ejercitosAdicionalesPorContinentesControlados (Jugador jugador){
+        return tablero.ejercitosAdicionalesPorContinentesControlados(jugador);
+    }
+
 }
+
