@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 
 public class ControladorDados{
 
+    Integer fichasAtaque = 0;
+    Integer fichasDefensa = 0;
     List<ImageView> imagenesDadosAtacantes = new ArrayList<ImageView>();
     List<ImageView> imagenesDadosDefensores = new ArrayList<ImageView>();
     List<Image> imagenes = new ArrayList<Image>();// ../ para ir hacia atras
@@ -56,11 +58,9 @@ public class ControladorDados{
 
     @FXML
     private void lanzar() {
-        /* aqui se piden los dados de ambos jugadores*/
-        //instanciar entidades en VISTA
         Dados dados = new Dados();
-        List<Integer> dadosAtacante = dados.dadosAtaque(3);
-        List<Integer> dadosDefensor = dados.dadosDefensa(2);
+        List<Integer> dadosAtacante = dados.dadosAtaque(fichasAtaque);
+        List<Integer> dadosDefensor = dados.dadosDefensa(fichasDefensa);
         iniciarListasDeImagenes();
         mostrarDados(dadosAtacante, imagenesDadosAtacantes);
         mostrarDados(dadosDefensor, imagenesDadosDefensores);
@@ -72,7 +72,11 @@ public class ControladorDados{
     }
 
     private void asignarImagen( int numeroDado, int posicion, List<ImageView> imagenesVacias ) {
-
         ( imagenesVacias.get(posicion) ).setImage( imagenes.get( numeroDado-1 ) );
+    }
+
+    public void asignarFichas(Integer fichasAtaque, Integer fichasDefensa){
+        this.fichasAtaque = fichasAtaque;
+        this.fichasDefensa = fichasDefensa;
     }
 }
