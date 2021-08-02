@@ -37,6 +37,10 @@ public class ControladorMenuJugador implements Initializable {
     private HashMap<String, Integer> paisesConEjercitos;
 
     private Juego juego;
+    Stage escenarioDados = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -62,17 +66,23 @@ public class ControladorMenuJugador implements Initializable {
     }
 
     @FXML
-    void atacar(ActionEvent event) throws Exception {
-        Stage escenarioDados = new Stage();
-        Scene scene;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/ventanaDados.fxml"));
-        Parent root = (Parent)loader.load();
-        ControladorDados controladorDados = (ControladorDados)loader.getController();
-        controladorDados.asignarFichas(4, 4);
+    void atacar(ActionEvent event) throws IOException {
+       levantarVentanaDados();
+       ControladorDados controladorDados = obtenerControladorDados();
+       controladorDados.asignarFichas(2, 4);
+    }
+
+    public void levantarVentanaDados() throws IOException {
+        loader = new FXMLLoader(getClass().getResource("/vista/ventanaDados.fxml"));
+        root = (Parent)loader.load();
         scene = new Scene(root);
         escenarioDados.setTitle("Batalla");
         escenarioDados.setScene(scene);
         escenarioDados.show();
+    }
 
+    public ControladorDados obtenerControladorDados() {
+        ControladorDados controladorDados = (ControladorDados)loader.getController();
+        return controladorDados;
     }
 }

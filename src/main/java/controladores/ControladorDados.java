@@ -64,6 +64,7 @@ public class ControladorDados{
         iniciarListasDeImagenes();
         mostrarDados(dadosAtacante, imagenesDadosAtacantes);
         mostrarDados(dadosDefensor, imagenesDadosDefensores);
+        boton.setVisible(false);
     }
 
     private void mostrarDados(List<Integer> dados, List<ImageView> imagenesVacias) {

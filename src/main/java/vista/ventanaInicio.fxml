@@ -29,7 +29,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="645.0" layoutY="503.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="163.0" text="Button">
+      <Button fx:id="botonSalir" contentDisplay="GRAPHIC_ONLY" layoutX="645.0" layoutY="503.0" mnemonicParsing="false" onAction="#cerrarJuego" prefHeight="54.0" prefWidth="163.0" text="Button">
          <graphic>
             <ImageView fitHeight="47.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <image>

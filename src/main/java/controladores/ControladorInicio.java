@@ -15,6 +15,15 @@ public class ControladorInicio {
     private Button botonJugar;
 
     @FXML
+    private Button botonSalir;
+
+    @FXML
+    void cerrarJuego(ActionEvent event) {
+        Stage stage = (Stage) botonSalir.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
     void lanzarJuego(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load( getClass().getResource("/vista/ventanaMenu.fxml") );
