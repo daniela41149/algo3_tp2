@@ -70,6 +70,7 @@ public class Pais {
     public void establecerDueño (Pais paisAtacante) {
         if (ejercito.quedoSinEjercito()) {
             this.dueño.desocupar(this.nombrePais);
+            this.dueño.establecerPosibleDestructor(paisAtacante.nuevoDueño());
             this.dueño = paisAtacante.nuevoDueño();
             this.dueño.agregarPais(this);
             paisAtacante.ejercito.sacarFicha();
