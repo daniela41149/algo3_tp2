@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Juego {
     private int posicionJugadorEnTurno;
     private int ejercitosColocadosPorJugadorEnTurno;
     private List<TarjetaPais> mazoTarjetasPais;
+    private List<TarjetaObjetivo> mazoTarjetasObjetivo;
 
     public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
 
@@ -40,9 +42,11 @@ public class Juego {
             jugadores.add(new Jugador(nombresDeJugadores.get(i), COLORES[i], this));
     }
 
-    public void guardarMazoDeTarjetasPais (List<TarjetaPais> tarjetasPais){
+    public void guardarMazoDeTarjetasPais(List<TarjetaPais> tarjetasPais){
         this.mazoTarjetasPais = tarjetasPais;
     }
+
+    public void guardarMazoDeTarjetasObjetivo(List<TarjetaObjetivo> tarjetasObjetivo) { this.mazoTarjetasObjetivo = tarjetasObjetivo; }
 
     public void comenzarFaseInicial(Aleatorio aleatorio) throws JugadaInvalidaException {
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPaisesAJuego());
@@ -129,6 +133,34 @@ public class Juego {
             }
         }
         return false;
+    }
+
+    private Jugador buscarJugadorPorColor(String colorBuscado) {
+        int i = 0;
+        boolean encontro = false;
+        Jugador jugadorBuscado = null;
+
+        while (!encontro && i < jugadores.size()){
+            if (jugadores.get(i).getColor().equals(colorBuscado)){
+                jugadorBuscado = jugadores.get(i);
+                encontro = true;
+            }
+            i++;
+        }
+        return jugadorBuscado;
+    }
+
+    public Jugador jugadorDeColorOSiguiente(String colorBuscado, Jugador unJugador) {
+        Jugador jugadorBuscado = buscarJugadorPorColor(colorBuscado);
+
+        if (jugadorBuscado == null) {
+            int indiceDejugadorSiguiente = jugadores.indexOf(unJugador);
+            if (indiceDejugadorSiguiente == jugadores.size())
+                indiceDejugadorSiguiente = 0;
+            jugadorBuscado = jugadores.get(indiceDejugadorSiguiente);
+        }
+
+        return jugadorBuscado;
     }
 
     private int ejercitosAdicionalesPorContinentesControlados (Jugador jugador){
