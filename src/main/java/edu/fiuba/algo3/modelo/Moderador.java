@@ -3,6 +3,9 @@ package edu.fiuba.algo3.modelo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaDestruccion;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaOcupacion;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 
 import java.io.BufferedReader;
@@ -21,21 +24,30 @@ public class Moderador {
     static final int EJERCITOS_ADICIONALES_AFRICA = 3;
     static final int EJERCITOS_ADICIONALES_OCEANIA = 2;
 
+    static final String RUTA_FRONTERAS = "resources/Fronteras.csv";
+    static final String RUTA_TARJETAS_PAIS = "resources/TarjetasPais.json";
+    static final String RUTA_OBJETIVOS_OCUPACION = "resources/ObjetivosDeOcupacion.json";
+    static final String RUTA_OBJETIVOS_DESTRUCCION = "resources/ObjetivosDeDestruccion.json";
+
     private List<Pais> paises;
     private List<Continente> continentes;
-    private List<TarjetaPais> tarjetas;
+    private List<TarjetaPais> tarjetasPais;
+    private List<TarjetaObjetivo> tarjetasObjetivo;
 
-    public Moderador(String rutaArchivoFronteras, String rutaArchivoTarjetas){
+    public Moderador(){
         List<Pais> paisesLeidos =  new ArrayList<>();
         List<Continente> continentesLeidos = new ArrayList<>();
-        List<TarjetaPais> tarjetasLeidas = new ArrayList<>();
+        List<TarjetaPais> tarjetasPaisLeidas = new ArrayList<>();
+        List<TarjetaObjetivo> tarjetasObjetivoLeidas = new ArrayList<>();
 
-        cargarArchivoFronteras(rutaArchivoFronteras, paisesLeidos, continentesLeidos);
-        cargarArchivoTarjetas(rutaArchivoTarjetas, tarjetasLeidas);
+        cargarArchivoFronteras(paisesLeidos, continentesLeidos);
+        cargarArchivoTarjetasPais(tarjetasPaisLeidas);
+        cargarArchivoTarjetasObjetivo(tarjetasObjetivoLeidas);
 
-        this.tarjetas = tarjetasLeidas;
         this.paises = paisesLeidos;
         this.continentes = continentesLeidos;
+        this.tarjetasPais = tarjetasPaisLeidas;
+        this.tarjetasObjetivo = tarjetasObjetivoLeidas;
     }
 
     private HashMap<String, Integer> establecerEjercitosAdicionalesSegunContinentes() {
@@ -49,12 +61,12 @@ public class Moderador {
         return ejercitosSegunContinente;
     }
 
-    private void cargarArchivoFronteras(String direccionArchivo, List<Pais> paises, List<Continente> continentes) {
+    private void cargarArchivoFronteras(List<Pais> paises, List<Continente> continentes) {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
         HashMap<String, Integer> ejercitosSegunContinente = establecerEjercitosAdicionalesSegunContinentes();
         try {
-            File archivo = new File (direccionArchivo);
+            File archivo = new File (RUTA_FRONTERAS);
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
 
@@ -93,24 +105,41 @@ public class Moderador {
         }
     }
 
-    private void cargarArchivoTarjetas(String direccionArchivo, List<TarjetaPais> tarjetas) {
-        String json = "";
+    private String leerJson(String rutaArchivo) {
+        String jsonLeido = "";
+
         try {
-            BufferedReader buffer = new BufferedReader(new FileReader(direccionArchivo));
+            BufferedReader buffer = new BufferedReader(new FileReader(rutaArchivo));
 
             String linea;
             while ((linea = buffer.readLine()) != null) {
-                json += linea;
+                jsonLeido += linea;
             }
 
             buffer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return jsonLeido;
+    }
+
+    private void cargarArchivoTarjetasPais(List<TarjetaPais> tarjetas) {
         Gson gson = new Gson();
 
+        String jsonLeido = leerJson(RUTA_TARJETAS_PAIS);
         final Type tipoListaTarjetas = new TypeToken<List<TarjetaPais>>(){}.getType();
-        tarjetas.addAll(gson.fromJson(json, tipoListaTarjetas));
+        tarjetas.addAll(gson.fromJson(jsonLeido, tipoListaTarjetas));
+    }
+
+    private void cargarArchivoTarjetasObjetivo(List<TarjetaObjetivo> tarjetas){
+        Gson gson = new Gson();
+
+        String jsonLeidoDeOcupacion = leerJson(RUTA_OBJETIVOS_OCUPACION);
+        String jsonLeidoDeDestruccion = leerJson(RUTA_OBJETIVOS_DESTRUCCION);
+        final Type tipoListaObjetivosOcupacion = new TypeToken<List<TarjetaOcupacion>>(){}.getType();
+        final Type tipoListaObjetivosDestruccion = new TypeToken<List<TarjetaDestruccion>>(){}.getType();
+        tarjetas.addAll(gson.fromJson(jsonLeidoDeOcupacion, tipoListaObjetivosOcupacion));
+        tarjetas.addAll(gson.fromJson(jsonLeidoDeDestruccion, tipoListaObjetivosDestruccion));
     }
 
     //para que juego pueda recibir el listado de paises del archivo
@@ -123,7 +152,8 @@ public class Moderador {
     }
 
     public List<TarjetaPais> pedirTarjetasPais(){
-        return (this.tarjetas);
+        return (this.tarjetasPais);
     }
 
+    public List<TarjetaObjetivo> pedirTarjetasObjetivo() { return (this.tarjetasObjetivo); }
 }
