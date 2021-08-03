@@ -1,9 +1,6 @@
 package controladores;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import edu.fiuba.algo3.modelo.Juego;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import edu.fiuba.algo3.modelo.Juego;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.ResourceBundle;
 
 
 public class ControladorMenuJugador implements Initializable {
@@ -44,9 +45,11 @@ public class ControladorMenuJugador implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        /*juego = new Juego(paises,continentes,jugadores);
+/*      Moderador moderador = new Moderador();
+        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
         mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();*/
+        mostrarPaisesLimitrofesActuales();
+ */
     }
 
     private void mostrarJugadorActual(){
