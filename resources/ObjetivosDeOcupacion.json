@@ -1,0 +1,67 @@
+[
+  {
+    "enunciado": "Ocupar África, 5 países de América del Norte y 4 países de Europa.",
+    "continentesAOcupar": [ "Africa" ],
+    "cantidadPaisesPorContinente": {
+      "America del Norte": 5,
+      "Europa": 4
+    }
+  },
+  {
+    "enunciado": "Ocupar América del Sur y 7 países de Europa.",
+    "continentesAOcupar": [ "America del Sur" ],
+    "cantidadPaisesPorContinente": {
+      "Europa": 7
+    }
+  },
+  {
+    "enunciado": "Ocupar Asia y 2 países de América del Sur.",
+    "continentesAOcupar": [ "Asia" ],
+    "cantidadPaisesPorContinente": {
+      "America del Sur": 2
+    }
+  },
+  {
+    "enunciado": "Ocupar Europa, 4 países de Asia y 2 países de América de Sur.",
+    "continentesAOcupar": [ "Europa" ],
+    "cantidadPaisesPorContinente": {
+      "Asia": 4,
+      "America del Sur": 2
+    }
+  },
+  {
+    "enunciado": "Ocupar América del Norte, 2 países de Oceanía y 4 de Asia.",
+    "continentesAOcupar": [ "America del Norte" ],
+    "cantidadPaisesPorContinente": {
+      "Oceania": 2,
+      "Asia": 4
+    }
+  },
+  {
+    "enunciado": "Ocupar 2 países de Oceanía, 2 países de África, 2 países de América del Sur, 3 países de Europa, 4 de América del Norte y 3 de Asia.",
+    "continentesAOcupar": [  ],
+    "cantidadPaisesPorContinente": {
+      "Oceania": 2,
+      "Africa": 2,
+      "America del Sur": 2,
+      "Europa": 3,
+      "America del Norte": 4,
+      "Asia": 3
+    }
+  },
+  {
+    "enunciado": "Ocupar Oceanía, América del Norte y 2 países de Europa.",
+    "continentesAOcupar": [ "Oceania", "America del Norte" ],
+    "cantidadPaisesPorContinente": {
+      "Europa": 2
+    }
+
+  },
+  {
+    "enunciado": "Ocupar América del Sur, África y 5 países de América del Norte.",
+    "continentesAOcupar": [ "America del Sur", "Africa" ],
+    "cantidadPaisesPorContinente": {
+      "America del Norte": 5
+    }
+  }
+]

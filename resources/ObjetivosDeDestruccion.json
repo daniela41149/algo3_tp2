@@ -1,0 +1,26 @@
+[
+  {
+    "enunciado": "Destruir el ejército azul de ser imposible al jugador de la derecha.",
+    "colorADestruir": "Azul"
+  },
+  {
+    "enunciado": "Destruir al ejército rojo de ser imposible al jugador de la derecha.",
+    "colorADestruir": "Rojo"
+  },
+  {
+    "enunciado": "Destruir al ejército negro de ser imposible al jugador de la derecha.",
+    "colorADestruir": "Negro"
+  },
+  {
+    "enunciado": "Destruir al ejército amarillo de ser imposible al jugador de la derecha.",
+    "colorADestruir": "Amarillo"
+  },
+  {
+    "enunciado": "Destruir al ejército verde de ser imposible al jugador de la derecha.",
+    "colorADestruir": "Verde"
+  },
+  {
+    "enunciado": "Destruir al ejército rosa de ser imposible al jugador de la derecha.",
+    "colorADestruir": "Rosa"
+  }
+]

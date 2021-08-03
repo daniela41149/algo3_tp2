@@ -9,4 +9,5 @@ module edu.fiuba.algo3 {
     opens controladores;
     exports edu.fiuba.algo3.modelo.pais;
     exports edu.fiuba.algo3.modelo.tarjetaPais;
+    exports edu.fiuba.algo3.modelo.tarjetaObjetivo;
 }
