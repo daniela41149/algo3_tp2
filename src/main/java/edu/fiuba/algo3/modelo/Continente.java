@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.pais.Pais;
 
 import java.util.List;
 
-
 public class Continente {
     private String nombre;
     private List<Pais> paises;
@@ -17,6 +16,16 @@ public class Continente {
         ejercitos = ejercitosAdicionales;
     }
 
+    public int cantidadDePaisesControlados(Jugador unJugador) {
+        int cantidadControlada = 0;
+
+        for (Pais pais : paises) {
+            if (pais.esElDueño(unJugador))
+                cantidadControlada++;
+        }
+
+        return cantidadControlada;
+    }
 
     public boolean jugadorControlaContinente (Jugador jugador) {
         for (Pais cadaPais: paises) {
@@ -27,10 +36,8 @@ public class Continente {
         return true;
     }
 
-
     public String getNombre() {
         return nombre;
-
     }
 
     public int cantidadDePaises() {
@@ -44,6 +51,5 @@ public class Continente {
         return ejercitosAdicionales;
 
     }
-
 
 }
