@@ -12,7 +12,6 @@ public class Tablero {
     private List<Continente> continentes ;
     private Batalla batalla;
 
-
     public Tablero (List<Pais> paises, List<Continente> continentes ){
         this.paises = paises ;
         this.continentes = continentes;
@@ -20,6 +19,14 @@ public class Tablero {
 
     public List<Pais> pasarPaisesAJuego(){
         return( this.paises);
+    }
+
+    public int cantidadPaises(){
+        return (this.paises.size());
+    }
+
+    public int cantidadContinentes(){
+        return (this.continentes.size());
     }
 
     public Pais buscarPais(String nombrePais){
@@ -36,23 +43,32 @@ public class Tablero {
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException {
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
-        if((paisAtacante == null) || (paisDefensor == null)  ){
+        if( (paisAtacante == null) || (paisDefensor == null) ){
             throw new JugadaInvalidaException();
         }
         this.batalla = new Batalla(paisAtacante,paisDefensor);
         batalla.atacar(cantEjercito);
     }
 
-    public int cantidadPaises(){
-        return (this.paises.size());
+    private Continente buscarContinente(String nombreContinente) {
+        for (Continente unContinente : continentes) {
+            if (unContinente.getNombre().equals(nombreContinente))
+                return unContinente;
+        }
+        return null;
     }
 
-    public int cantidadContinentes(){
-        return (this.continentes.size());
+    public boolean poseeUnaCantidadDePaisesEnContinente(Jugador unJugador, int cantidadDePaises, String nombreContinente) {
+        Continente continente = this.buscarContinente(nombreContinente);
+        if (continente == null)
+            return false;
+
+        int cantidadControlada = continente.cantidadDePaisesControlados(unJugador);
+
+        return (cantidadControlada == cantidadDePaises);
     }
 
-
-    public boolean controlaContinente(Jugador unJugador,String nombreContinente) {
+    public boolean controlaContinente(Jugador unJugador, String nombreContinente) {
         for (Continente unContinente: this.continentes) {
             if (unContinente.getNombre().equals(nombreContinente)) {
                 return unContinente.jugadorControlaContinente(unJugador);
@@ -61,7 +77,7 @@ public class Tablero {
         return false;
     }
 
-    public int ejercitosAdicionalesPorContinentesControlados (Jugador jugador) {
+    public int ejercitosAdicionalesPorContinentesControlados(Jugador jugador) {
         int ejercitosAdicionales = 0;
         for (Continente unContinente: this.continentes) {
             unContinente.ejercitosAdicionalesPorContinentesControlados(jugador,ejercitosAdicionales);
