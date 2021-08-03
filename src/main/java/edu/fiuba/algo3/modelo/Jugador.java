@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ public class Jugador {
     private String nombreJugador;
     private String color;
     private List<Pais> paises ;
+    private Jugador jugadorQueLoDestruyo;
+    private TarjetaObjetivo tarjetaDeObjetivo;
     private Juego juego;
     private List<TarjetaPais> tarjetasPais;
 
@@ -20,6 +23,7 @@ public class Jugador {
         this.nombreJugador = nombre;
         this. color = colorJugador;
         this.paises = new ArrayList<>();
+        this.jugadorQueLoDestruyo = null;
         this.juego = juego;
     }
 
@@ -79,6 +83,28 @@ public class Jugador {
         return (this.paises.size());
     }
 
+    public void establecerObjetivo(TarjetaObjetivo objetivo) {
+        this.tarjetaDeObjetivo = objetivo;
+    }
+
+    public boolean cumplioObjetivo(Tablero tablero) {
+        if (tarjetaDeObjetivo == null)
+            return false;
+
+        return (tarjetaDeObjetivo.cumplioObjetivo(tablero, juego));
+    }
+
+    public void establecerPosibleDestructor(Jugador jugador) {
+        if (cantidadPaises() == 0)
+            this.jugadorQueLoDestruyo = jugador;
+    }
+
+    public boolean fueDestruidoPor(Jugador jugador) {
+        if (jugadorQueLoDestruyo == null)
+            return false;
+
+        return (jugadorQueLoDestruyo.esElMismo(jugador));
+    }
 
     public void pedirTarjetaPais(){
         TarjetaPais nuevaTarjetaPais = juego.entregaTarjetaPais();
