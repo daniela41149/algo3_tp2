@@ -90,7 +90,7 @@ public class JugadorTest {
         assertEquals( listaPaises ,jugador1.pedirPaises());
 
     }
-    
+
     @Test
     public void test05SeEncuentraPaisBuscado() {
         Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);

@@ -45,7 +45,7 @@ public class TableroTest {
 
     @Test
     public void test01LaListaDePaisesCoincide() {
-       Tablero tablero = new Tablero(listaPaises,listaContinentes);
+        Tablero tablero = new Tablero(listaPaises,listaContinentes);
         assertEquals( listaPaises,tablero.pasarPaisesAJuego());
 
     }
@@ -65,13 +65,16 @@ public class TableroTest {
 
     }
     @Test
-    public void test03LaCantidaDeContientesEsUno() {
+    public void test04LaCantidaDeContientesEsUno() {
         Tablero tablero = new Tablero(listaPaises,listaContinentes);
 
         assertEquals( 1,tablero.cantidadContinentes() );
 
     }
+    @Test
+    public void test05NoSeEncuentraElPaisBuscado() {
+        Tablero tablero = new Tablero(listaPaises,listaContinentes);
+        assertEquals( null, tablero.buscarPais("Rusia"));
 
-
-
+    }
 }
