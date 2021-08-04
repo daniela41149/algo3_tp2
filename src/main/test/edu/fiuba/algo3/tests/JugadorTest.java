@@ -18,6 +18,7 @@ public class JugadorTest {
     private List<String> limitrofes = new ArrayList<>();
     private Pais paisUno;
     private Pais paisDos;
+    private Pais paisTres;
     private Juego juego;
 
     @BeforeEach
@@ -28,11 +29,19 @@ public class JugadorTest {
         limitrofes.add("Brasil");
         limitrofes.add("Uruguay");
         paisUno = new Pais(nombrePais, limitrofes);
+        limitrofes.clear();
 
         nombreOtroPais = "Brasil";
         limitrofes.add("Uruguay");
         limitrofes.add("Argentina");
         paisDos = new Pais(nombreOtroPais, limitrofes);
+        limitrofes.clear();
+
+        nombreOtroPais = "Estados Unidos";
+        limitrofes.add("Canada");
+        limitrofes.add("Mexico");
+        paisTres = new Pais(nombreOtroPais, limitrofes);
+        limitrofes.clear();
 
     }
 
@@ -81,5 +90,67 @@ public class JugadorTest {
         assertEquals( listaPaises ,jugador1.pedirPaises());
 
     }
+    
+    @Test
+    public void test05SeEncuentraPaisBuscado() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
+        assertEquals( paisUno,jugador1.buscarPais("Argentina"));
+    }
+    @Test
+    public void test06NoSeEncuentraPaisBuscado() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
+        assertEquals( null,jugador1.buscarPais("Rusia"));
+    }
+    @Test
+    public void test07LaCantidadDePaisesCoincide() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
+        assertEquals( 2,jugador1.cantidadPaises());
+    }
+
+    @Test
+    public void test08CoincideElJugadorDestructor() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        Jugador jugador2 = new Jugador("Lucas", "Azul",juego);
+        jugador2.agregarPais(paisTres);
+
+        jugador1.establecerPosibleDestructor(jugador2);
+
+        assertEquals( true,jugador1.fueDestruidoPor(jugador2));
+    }
+    @Test
+    public void test09NoCoincideElJugadorDestructor() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        Jugador jugador2 = new Jugador("Lucas", "Azul",juego);
+        jugador2.agregarPais(paisTres);
+
+        assertEquals( false,jugador1.fueDestruidoPor(jugador2));
+    }
+    @Test
+    public void test010Jugador1EsDueñoDeArgentina() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
+        assertEquals( true,jugador1.esDueñoDelPais("Argentina"));
+    }
+    @Test
+    public void test011Jugador1NoEsDueñoDeRusia() {
+        Jugador jugador1 = new Jugador("Adrian", "Rojo",juego);
+        jugador1.agregarPais(paisUno);
+        jugador1.agregarPais(paisDos);
+
+        assertEquals( false,jugador1.esDueñoDelPais("Rusia"));
+    }
+
+
 
 }
