@@ -52,18 +52,23 @@ public class Juego {
         ArrayList<Pais> paisesSinRepartir = new ArrayList<>(tablero.pasarPaisesAJuego());
 
         posicionJugadorEnTurno = aleatorio.elegirPosicionDelJugadorQueEmpieza(jugadores.size());
-        List<List<Pais>> paisesRepartidos = aleatorio.repartirPaisesAleatoriamente(jugadores.size(), paisesSinRepartir);
 
+        List<List<Pais>> paisesRepartidos = aleatorio.repartirPaisesAleatoriamente(jugadores.size(), paisesSinRepartir);
         for(int indice = 0;indice<jugadores.size();indice++) {
             List<Pais> listaPaisesParaJugador = paisesRepartidos.get(indice);
-                for (Pais paisActual : listaPaisesParaJugador) {
-                    jugadores.get(indice).agregarPais(paisActual);
-                    paisActual.colocarEjercito(jugadores.get(indice),1);
-                }
+            for (Pais paisActual : listaPaisesParaJugador) {
+                jugadores.get(indice).agregarPais(paisActual);
+                paisActual.colocarEjercito(jugadores.get(indice),1);
+            }
+        }
+
+        for (Jugador jugador : jugadores) {
+            TarjetaObjetivo tarjetaObjetivoAleatoria = aleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoTarjetasObjetivo);
+            jugador.establecerObjetivo(tarjetaObjetivoAleatoria);
         }
     }
 
-    private Jugador jugadorEnTurno() {
+    public Jugador jugadorEnTurno() {
         return jugadores.get(posicionJugadorEnTurno);
     }
 
@@ -83,16 +88,6 @@ public class Juego {
         cantidadTotal += ejercitosAdicionalesPorContinentesControlados(jugadorEnTurno);
 
         return cantidadTotal;
-    }
-
-    public void colocarEjercito(String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
-        Jugador jugadorEnTurno = jugadorEnTurno();
-        int cantidadEjercitosPermitidosParaColocar = establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno);
-
-        jugadorEnTurno.colocarEjercito(nombrePais, cantidadEjercito);
-        ejercitosColocadosPorJugadorEnTurno += cantidadEjercito;
-        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosPermitidosParaColocar)
-            pasarTurno();
     }
 
     private void colocarEjercitosDeFaseInicial(Jugador jugadorEnTurno, List<String> nombresDePaises, List<Integer> cantidadEjercitosPorPais) throws JugadaInvalidaException {
@@ -116,6 +111,16 @@ public class Juego {
 
         colocarEjercitosDeFaseInicial(this.jugadorEnTurno(), nombresDePaises, cantidadEjercitosPorPais);
         pasarTurno();
+    }
+
+    public void colocarEjercito(String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
+        Jugador jugadorEnTurno = jugadorEnTurno();
+        int cantidadEjercitosPermitidosParaColocar = establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno);
+
+        jugadorEnTurno.colocarEjercito(nombrePais, cantidadEjercito);
+        ejercitosColocadosPorJugadorEnTurno += cantidadEjercito;
+        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosPermitidosParaColocar)
+            pasarTurno();
     }
 
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
@@ -153,7 +158,7 @@ public class Juego {
     public Jugador jugadorDeColorOSiguiente(String colorBuscado, Jugador unJugador) {
         Jugador jugadorBuscado = buscarJugadorPorColor(colorBuscado);
 
-        if (jugadorBuscado == null) {
+        if (jugadorBuscado == null || jugadorBuscado.esElMismo(unJugador)) {
             int indiceDejugadorSiguiente = jugadores.indexOf(unJugador);
             if (indiceDejugadorSiguiente == jugadores.size())
                 indiceDejugadorSiguiente = 0;
@@ -161,6 +166,12 @@ public class Juego {
         }
 
         return jugadorBuscado;
+    }
+
+    public boolean cumplioObjetivo(Jugador jugador) {
+        if (jugador == null)
+            return false;
+        return (jugador.cumplioObjetivo(tablero));
     }
 
     private int ejercitosAdicionalesPorContinentesControlados (Jugador jugador){
