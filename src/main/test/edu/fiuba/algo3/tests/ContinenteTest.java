@@ -1,13 +1,18 @@
 package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.Continente;
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ContinenteTest {
     static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
@@ -25,6 +30,7 @@ public class ContinenteTest {
     private List<String> limitrofes5;
     private Pais pais6;
     private List<String> limitrofes6;
+    private Juego juego;
 
 
 
@@ -83,45 +89,63 @@ public class ContinenteTest {
         continente = new Continente ("America del Sur",listaPaises,EJERCITOS_ADICIONALES_AMERICA_DEL_SUR);
 
     }
-
-/*
     @Test
-    public void test001JugadorControlaTodosLosPaisesDeUnContinente() {
-        setup();
-        Jugador mockedJugador = mock(Jugador.class);
+    public void test001JugadorTiene6PaisesDeUnContinente() {
+        Jugador jugador = new Jugador("Adrian", "Rojo",juego);
+        jugador.agregarPais(pais1);
+        jugador.agregarPais(pais2);
+        jugador.agregarPais(pais3);
+        jugador.agregarPais(pais4);
+        jugador.agregarPais(pais5);
+        jugador.agregarPais(pais6);
 
-
-        pais1.colocarEjercito(mockedJugador,1);
-        pais2.colocarEjercito(mockedJugador,1);
-        pais3.colocarEjercito(mockedJugador,1);
-        pais4.colocarEjercito(mockedJugador,1);
-        pais5.colocarEjercito(mockedJugador,1);
-        pais6.colocarEjercito(mockedJugador,1);
-
-        assertTrue(continente.jugadorControlaContinente(mockedJugador));
+        assertEquals(6,continente.cantidadDePaisesControlados(jugador));
 
     }
-
     @Test
-    public void test002JugadorNoControlaTodosLosPaisesDeUnContinente() {
-        setup();
-        Jugador mockedJugador = mock(Jugador.class);
-        Jugador mockedJugador2 = mock(Jugador.class);
+    public void test002JugadorTieneTodosLosPaisesDeUnContinente() {
+        Jugador jugador = new Jugador("Adrian", "Rojo",juego);
+        jugador.agregarPais(pais1);
+        jugador.agregarPais(pais2);
+        jugador.agregarPais(pais3);
+        jugador.agregarPais(pais4);
+        jugador.agregarPais(pais5);
+        jugador.agregarPais(pais6);
 
-        pais1.colocarEjercito(mockedJugador,1);
-        pais2.colocarEjercito(mockedJugador,1);
-        pais3.colocarEjercito(mockedJugador2,3);
-        pais4.colocarEjercito(mockedJugador,1);
-        pais5.colocarEjercito(mockedJugador,1);
-        pais6.colocarEjercito(mockedJugador,1);
-        Mockito.doThrow(new JugadaInvalidaException()).when(mockedJugador2).esElMismo(mockedJugador);
-
-
-        assertFalse(continente.jugadorControlaContinente(mockedJugador));
-
+        assertTrue(continente.jugadorControlaContinente(jugador));
 
     }
+    @Test
+    public void test003JugadorNoTieneTodosLosPaisesDeUnContinente() {
+        Jugador jugador = new Jugador("Adrian", "Rojo",juego);
+        jugador.agregarPais(pais1);
+        jugador.agregarPais(pais2);
+        jugador.agregarPais(pais3);
+        jugador.agregarPais(pais5);
+        jugador.agregarPais(pais6);
 
-*/
+        assertFalse(continente.jugadorControlaContinente(jugador));
+
+    }
+    @Test
+    public void test004ElContinenteTiene6Paises() {
+
+        assertEquals(6,continente.cantidadDePaises());
+
+    }
+    @Test
+    public void test005JugadorTieneTodosLosPaisesDeUnContinenteYObtieneEjercitoAdicional() {
+        Jugador jugador = new Jugador("Adrian", "Rojo",juego);
+        jugador.agregarPais(pais1);
+        jugador.agregarPais(pais2);
+        jugador.agregarPais(pais3);
+        jugador.agregarPais(pais4);
+        jugador.agregarPais(pais5);
+        jugador.agregarPais(pais6);
+
+        assertEquals(6,continente.ejercitosAdicionalesPorContinentesControlados(jugador,3));
+
+    }
 
 }
+
