@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ public class Aleatorio {
             List<Pais> listaPaises = new ArrayList<>();
             listasPaisesRepartidos.add(listaPaises);
         }
-
 
         while (!paisesSinRepartir.isEmpty()){
             for(int i = 0; i < cantidadDeJugadores; i++) {
@@ -50,9 +50,15 @@ public class Aleatorio {
         Random rand = new Random();
 
         int posicionDeTarjetaRandom = rand.nextInt(mazoDeTarjetas.size());
-        TarjetaPais tarjetaRandom = mazoDeTarjetas.get(posicionDeTarjetaRandom);
-        mazoDeTarjetas.remove(posicionDeTarjetaRandom);
 
-        return tarjetaRandom;
+        return (mazoDeTarjetas.remove(posicionDeTarjetaRandom));
+    }
+
+    public TarjetaObjetivo agarrarTajetaObjetivoAleatoriaDelMazo(List<TarjetaObjetivo> mazoDeTarjetas) {
+        Random rand = new Random();
+
+        int posicionDeTarjetaRandom = rand.nextInt(mazoDeTarjetas.size());
+
+        return (mazoDeTarjetas.remove(posicionDeTarjetaRandom));
     }
 }
