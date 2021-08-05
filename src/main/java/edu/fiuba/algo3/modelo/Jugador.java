@@ -28,6 +28,7 @@ public class Jugador {
     }
 
     public void agregarPais(Pais nuevoPais){
+        nuevoPais.elegirPais(this);
         paises.add(nuevoPais);
     }
 

@@ -51,6 +51,9 @@ public class Pais {
     }
 
     public boolean esElDueño(Jugador jugador) {
+        if(this.dueño == null){
+            return false;
+        }
         return this.dueño.esElMismo(jugador);
     }
 

@@ -142,11 +142,11 @@ public class Moderador {
         tarjetas.addAll(gson.fromJson(jsonLeidoDeDestruccion, tipoListaObjetivosDestruccion));
     }
 
-    //para que juego pueda recibir el listado de paises del archivo
+
     public List<Pais> pedirPaises(){
         return (this.paises);
     }
-    //para que juego pueda recibir el listado de continentes del archivo
+
     public List<Continente> pedirContinentes(){
         return (this.continentes);
     }
