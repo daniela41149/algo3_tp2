@@ -85,6 +85,7 @@ public class Jugador {
     }
 
     public void establecerObjetivo(TarjetaObjetivo objetivo) {
+        objetivo.establecerDueño(this);
         this.tarjetaDeObjetivo = objetivo;
     }
 
