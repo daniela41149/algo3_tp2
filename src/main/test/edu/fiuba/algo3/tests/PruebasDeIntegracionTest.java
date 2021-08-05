@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class PruebasDeIntegracionTest {
     private Moderador moderador;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
 
         String nombrePais = "Argentina";
 
@@ -125,7 +126,7 @@ public class PruebasDeIntegracionTest {
 
 
     @Test
-    public void test001ColocacionDeEjercitosEnLosPaises() {
+    public void test001ColocacionDeEjercitosEnLosPaises() throws IOException{
         setup();
         //Pedro: Argentina y Uruguay
         //Martina: Brasil y Chile
@@ -174,7 +175,7 @@ public class PruebasDeIntegracionTest {
     }
 
     @Test
-    public void test002AtaqueEntrePaisesConElPaisDefensorComoGanador() {
+    public void test002AtaqueEntrePaisesConElPaisDefensorComoGanador() throws IOException{
         setup();
 
         //Pedro: Argentina y Uruguay
@@ -254,7 +255,7 @@ public class PruebasDeIntegracionTest {
     }
 
     @Test
-    public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() {
+    public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() throws IOException {
         setup();
 
         //Pedro: Argentina y Uruguay

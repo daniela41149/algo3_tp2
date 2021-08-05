@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TarjetaObjetivoTest {
     List<Integer> dadosPerdedores;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws IOException {
 
         moderador = new Moderador();
         tablero = new Tablero(moderador.pedirPaises(), moderador.pedirContinentes());

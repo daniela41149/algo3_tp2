@@ -34,7 +34,7 @@ public class Moderador {
     private List<TarjetaPais> tarjetasPais;
     private List<TarjetaObjetivo> tarjetasObjetivo;
 
-    public Moderador(){
+    public Moderador() throws IOException {
         List<Pais> paisesLeidos =  new ArrayList<>();
         List<Continente> continentesLeidos = new ArrayList<>();
         List<TarjetaPais> tarjetasPaisLeidas = new ArrayList<>();
@@ -61,11 +61,11 @@ public class Moderador {
         return ejercitosSegunContinente;
     }
 
-    private void cargarArchivoFronteras(List<Pais> paises, List<Continente> continentes) {
+    private void cargarArchivoFronteras(List<Pais> paises, List<Continente> continentes) throws IOException {
         String renglon;
         HashMap<String,List<Pais>> diccionarioContinentes = new HashMap<>();
         HashMap<String, Integer> ejercitosSegunContinente = establecerEjercitosAdicionalesSegunContinentes();
-        try {
+
             File archivo = new File (RUTA_FRONTERAS);
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
@@ -94,9 +94,7 @@ public class Moderador {
             }
             br.close();
             fr.close();
-        } catch (IOException e) {//SACARLOS
-            e.printStackTrace();
-        }
+
         Set<String> listaContinentes = diccionarioContinentes.keySet();
         for( String nombreContinente : listaContinentes){
             List<Pais> listaPaisesPorContinente = diccionarioContinentes.get(nombreContinente);

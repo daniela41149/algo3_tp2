@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class PruebasDeIntegracion2Test {
 
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
 
         // Continente America del Sur
 
@@ -345,7 +346,7 @@ public class PruebasDeIntegracion2Test {
     }
 
     @Test
-    public void test004JuegoDeUnaRondaConDosJugadoresCadaJugadorColocaEjercitosDeLaFaseInicial() {
+    public void test004JuegoDeUnaRondaConDosJugadoresCadaJugadorColocaEjercitosDeLaFaseInicial() throws IOException{
         setup();
 
         List <String> nombresJugadores = new ArrayList<>();
@@ -495,7 +496,7 @@ public class PruebasDeIntegracion2Test {
     }
 
     @Test
-    public void test005JuegoDeUnaRondaConTresJugadoresCadaJugadorColocaEjercitosDeLaFaseInicialJugadorControlaAsia() {
+    public void test005JuegoDeUnaRondaConTresJugadoresCadaJugadorColocaEjercitosDeLaFaseInicialJugadorControlaAsia() throws IOException{
         setup();
 
         Aleatorio randomPaises = new Aleatorio();

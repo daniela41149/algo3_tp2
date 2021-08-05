@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +16,7 @@ public class JuegoTest {
     Moderador moderador;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         moderador = new Moderador();
     }
 
