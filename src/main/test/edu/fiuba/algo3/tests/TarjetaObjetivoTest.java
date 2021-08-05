@@ -33,8 +33,8 @@ public class TarjetaObjetivoTest {
 
     private Moderador moderador;
     private Jugador dueñoDeTarjeta;
-    private Juego juegoMockeado;
     private Tablero tablero;
+    private Juego juegoMockeado;
 
     private List<Pais> paises;
     private List<Continente> continentes;
@@ -94,25 +94,26 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test01SiLaTarjetaNoTieneDueñoEntoncesSuObjetivoNoEstaCumplido() {
-        assertFalse(ocupacion1.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion2.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion3.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion4.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion5.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion6.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion7.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion8.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion1.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion2.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion3.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion4.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion5.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion6.cumplioObjetivo(tablero, juegoMockeado));
+    public void test01UnaTarjetaConDueñoPeroSinUnTableroOJuegoValidoNoPuedeCumplirSuObjetivo() {
+        dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
+
+        ocupacion1.establecerDueño(dueñoDeTarjeta);
+        assertFalse(ocupacion1.cumplioObjetivo(null, juegoMockeado));
+        assertFalse(ocupacion1.cumplioObjetivo(tablero, null));
+
+        destruccion1.establecerDueño(dueñoDeTarjeta);
+        assertFalse(destruccion1.cumplioObjetivo(null, juegoMockeado));
+        assertFalse(destruccion1.cumplioObjetivo(tablero, null));
     }
 
     @Test
-    public void test02LaTarjetaTieneDueñoQueNoControlaNingunPaisEntoncesSuObjetivoNoEstaCumplido() {
+    public void test02SiLaTarjetaNoTieneDueñoEntoncesSuObjetivoNoEstaCumplido() {
+        assertFalse(ocupacion1.cumplioObjetivo(tablero, juegoMockeado));
+        assertFalse(destruccion1.cumplioObjetivo(tablero, juegoMockeado));
+    }
+
+    @Test
+    public void test03LaTarjetaTieneDueñoQueNoControlaNingunPaisEntoncesSuObjetivoNoEstaCumplido() {
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
         assertFalse(ocupacion1.cumplioObjetivo(tablero, juegoMockeado));
@@ -126,7 +127,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test03LaTarjetaTieneDueñoQueNoDestruyoAlJugadorADestruirEntoncesSuObjetivoNoEstaCumplido() {
+    public void test04LaTarjetaTieneDueñoQueNoDestruyoAlJugadorADestruirEntoncesSuObjetivoNoEstaCumplido() {
         Jugador jugadorADestruir;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -156,7 +157,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test04SiElDueñoDeLaTarjetaPosee30PaisesCumplioElObjetivoGeneral() {
+    public void test05SiElDueñoDeLaTarjetaPosee30PaisesCumplioElObjetivoGeneral() {
         boolean hayJugadaInvalida = false;
 
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
@@ -236,7 +237,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test05ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion1() {
+    public void test06ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion1() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -287,7 +288,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test06ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion2() {
+    public void test07ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion2() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -332,7 +333,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test07ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion3() {
+    public void test08ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion3() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -385,7 +386,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test08ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion4() {
+    public void test09ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion4() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -436,7 +437,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test09ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion5() {
+    public void test10ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion5() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -489,7 +490,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test10ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion6() {
+    public void test11ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion6() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -548,7 +549,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test11ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion7() {
+    public void test12ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion7() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -601,7 +602,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test12ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion8() {
+    public void test13ElDueñoDeLaTarjetaCumpleObjetivoDeOcupacion8() {
         boolean hayJugadaInvalida = false;
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
@@ -656,7 +657,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test13ElDueñoDeLaTarjetaCumpleElObjetivoDeDestruirAlJugadorAzul() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
+    public void test14ElDueñoDeLaTarjetaCumpleElObjetivoDeDestruirAlJugadorAzul() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
         Jugador jugadorAzul;
         List<String> jugadores = new ArrayList<>();
         jugadores.add("jugadorAzul");
@@ -688,7 +689,70 @@ public class TarjetaObjetivoTest {
 
         assertEquals(0, jugadorAzul.cantidadPaises());
         assertEquals(2, dueñoDeTarjeta.cantidadPaises());
-        juego.cumplioObjetivo(dueñoDeTarjeta);
         assertTrue(juego.cumplioObjetivo(dueñoDeTarjeta));
+    }
+
+    @Test
+    public void test15ElJugadorAzulPoseeLosContinentesDelEnunciadoPeroNoLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
+        List<String> jugadores = new ArrayList<>();
+        jugadores.add("jugadorAzul");
+        jugadores.add("jugadorRojo");
+
+        Juego juego = new Juego(paises, continentes, jugadores);
+
+        Jugador jugadorAzul = juego.jugadorEnTurno();
+        jugadorAzul.establecerObjetivo(ocupacion1);
+        //Controla Africa
+        jugadorAzul.agregarPais(tablero.buscarPais("Zaire"));
+        jugadorAzul.colocarEjercito("Zaire", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Etiopia"));
+        jugadorAzul.colocarEjercito("Etiopia", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Egipto"));
+        jugadorAzul.colocarEjercito("Egipto", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Madagascar"));
+        jugadorAzul.colocarEjercito("Madagascar", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Sahara"));
+        jugadorAzul.colocarEjercito("Sahara", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Sudafrica"));
+        jugadorAzul.colocarEjercito("Sudafrica", 1);
+        juego.pasarTurno();
+
+        assertEquals(6, jugadorAzul.cantidadPaises());
+        assertFalse(juego.cumplioObjetivo(jugadorAzul));
+    }
+
+    @Test
+    public void test16ElJugadorAzulNoPoseeLosContinentesDelEnunciadoPeroSiLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
+        List<String> jugadores = new ArrayList<>();
+        jugadores.add("jugadorAzul");
+        jugadores.add("jugadorRojo");
+
+        Juego juego = new Juego(paises, continentes, jugadores);
+
+        Jugador jugadorAzul = juego.jugadorEnTurno();
+        jugadorAzul.establecerObjetivo(ocupacion1);
+        //Ocupacion de 5 paises de America del Norte
+        jugadorAzul.agregarPais(tablero.buscarPais("Oregon"));
+        jugadorAzul.colocarEjercito("Oregon", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Nueva York"));
+        jugadorAzul.colocarEjercito("Nueva York", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Terranova"));
+        jugadorAzul.colocarEjercito("Terranova", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("California"));
+        jugadorAzul.colocarEjercito("California", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Canada"));
+        jugadorAzul.colocarEjercito("Canada", 1);
+        //Ocupacion de 4 paises de Europa
+        jugadorAzul.agregarPais(tablero.buscarPais("Francia"));
+        jugadorAzul.colocarEjercito("Francia", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Gran Bretaña"));
+        jugadorAzul.colocarEjercito("Gran Bretaña", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("Rusia"));
+        jugadorAzul.colocarEjercito("Rusia", 1);
+        jugadorAzul.agregarPais(tablero.buscarPais("España"));
+        jugadorAzul.colocarEjercito("España", 1);
+
+        assertEquals(9, jugadorAzul.cantidadPaises());
+        assertFalse(juego.cumplioObjetivo(jugadorAzul));
     }
 }

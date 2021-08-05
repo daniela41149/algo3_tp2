@@ -14,8 +14,6 @@ public abstract class TarjetaObjetivo {
     }
 
     public boolean cumplioObjetivoGeneral() {
-        if (dueño == null)
-            return false;
         return (dueño.cantidadPaises() >= OBJETIVO_GENERAL);
     }
 

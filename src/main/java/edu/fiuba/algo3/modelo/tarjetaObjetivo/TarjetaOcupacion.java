@@ -45,7 +45,7 @@ public class TarjetaOcupacion extends TarjetaObjetivo {
     }
 
     public boolean cumplioObjetivo(Tablero tablero, Juego juego) {
-        if (dueño == null)
+        if (dueño == null || tablero == null || juego == null)
             return false;
 
         if (cumplioObjetivoGeneral())
