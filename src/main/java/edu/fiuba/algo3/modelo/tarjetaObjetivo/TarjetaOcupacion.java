@@ -29,6 +29,7 @@ public class TarjetaOcupacion extends TarjetaObjetivo {
 
         while ( (i < continentesAOcupar.size()) && cumpleObjetivo ) {
             cumpleObjetivo = tablero.controlaContinente(dueño, continentesAOcupar.get(i));
+            i++;
         }
 
         return cumpleObjetivo;
