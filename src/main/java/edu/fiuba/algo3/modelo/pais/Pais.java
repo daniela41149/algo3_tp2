@@ -78,7 +78,8 @@ public class Pais {
             this.dueño.agregarPais(this);
             paisAtacante.ejercito.sacarFicha();
             this.ejercito.agregarFicha();
-            //this.dueño.pedirTarjetaPais();
+            this.dueño.pedirTarjetaPais();
+
         }
     }
 

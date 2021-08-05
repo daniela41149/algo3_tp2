@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
+import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +33,7 @@ public class PruebasDeIntegracionTest {
     private List<Pais> listaPaises;
     private List<Continente> listaContinentes;
     private List<String> nombresJugadores;
+    private List<TarjetaPais> mazoDeTarjetasPais;
     private List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
 
     private List<List<Pais>> listaPaisesRepartidos;
@@ -112,6 +114,7 @@ public class PruebasDeIntegracionTest {
         moderador = new Moderador();
         aleatorio = new Aleatorio();
         mazoDeTarjetasObjetivo = moderador.pedirTarjetasObjetivo();
+        mazoDeTarjetasPais = moderador.pedirTarjetasPais();
 
         mockedAleatorio = mock(Aleatorio.class);
         when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
@@ -131,6 +134,7 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasPais(mazoDeTarjetasPais);
             juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
@@ -180,6 +184,7 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasPais(mazoDeTarjetasPais);
             juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
@@ -259,6 +264,7 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasPais(mazoDeTarjetasPais);
             juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 

@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
+import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,7 @@ public class TarjetaObjetivoTest {
     private Jugador dueñoDeTarjeta;
     private Tablero tablero;
     private Juego juegoMockeado;
+    private TarjetaPais tarjetaPais;
 
     private List<Pais> paises;
     private List<Continente> continentes;
@@ -664,6 +666,7 @@ public class TarjetaObjetivoTest {
         jugadores.add("jugadorRojo");
 
         Juego juego = new Juego(paises, continentes, jugadores);
+        juego.guardarMazoDeTarjetasPais(moderador.pedirTarjetasPais());
 
         jugadorAzul = juego.jugadorEnTurno();
         jugadorAzul.agregarPais(brasil);

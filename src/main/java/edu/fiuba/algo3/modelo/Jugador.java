@@ -25,6 +25,7 @@ public class Jugador {
         this.paises = new ArrayList<>();
         this.jugadorQueLoDestruyo = null;
         this.juego = juego;
+        this.tarjetasPais = new ArrayList<>();
     }
 
     public void agregarPais(Pais nuevoPais){
