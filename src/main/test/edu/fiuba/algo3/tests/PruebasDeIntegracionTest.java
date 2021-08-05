@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,13 +32,14 @@ public class PruebasDeIntegracionTest {
     private List<Pais> listaPaises;
     private List<Continente> listaContinentes;
     private List<String> nombresJugadores;
+    private List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
 
     private List<List<Pais>> listaPaisesRepartidos;
     private List<Pais> listaPaisesParaJugador1;
     private List<Pais> listaPaisesParaJugador2;
     private Aleatorio mockedAleatorio;
-
-
+    private Aleatorio aleatorio;
+    private Moderador moderador;
 
     @BeforeEach
     public void setup() {
@@ -107,11 +109,14 @@ public class PruebasDeIntegracionTest {
         listaPaisesRepartidos.add(listaPaisesParaJugador1);
         listaPaisesRepartidos.add(listaPaisesParaJugador2);
 
-        mockedAleatorio = mock(Aleatorio.class);
+        moderador = new Moderador();
+        aleatorio = new Aleatorio();
+        mazoDeTarjetasObjetivo = moderador.pedirTarjetasObjetivo();
 
+        mockedAleatorio = mock(Aleatorio.class);
         when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
         when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
-
+        when(mockedAleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo)).thenReturn(aleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo));
     }
 
 
@@ -126,6 +131,7 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
             List<Jugador> jugadores = juego.devolverJugadores();
@@ -174,6 +180,7 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
             List<Jugador> jugadores = juego.devolverJugadores();
@@ -252,6 +259,7 @@ public class PruebasDeIntegracionTest {
 
         try {
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
             List<Jugador> jugadores = juego.devolverJugadores();

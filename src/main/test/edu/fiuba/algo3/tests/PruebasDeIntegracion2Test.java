@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,6 @@ public class PruebasDeIntegracion2Test {
     static final int EJERCITOS_ADICIONALES_AMERICA_DEL_SUR = 3;
     static final int EJERCITOS_ADICIONALES_AFRICA = 3;
     static final int EJERCITOS_ADICIONALES_OCEANIA = 2;
-
 
     private Pais pais;
     private Pais pais2;
@@ -62,6 +62,9 @@ public class PruebasDeIntegracion2Test {
 
     private List<Pais> listaPaises;
     private List<Continente> listaContinentes;
+    private List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
+    private Moderador moderador;
+    private Aleatorio aleatorio;
 
 
     @BeforeEach
@@ -336,6 +339,9 @@ public class PruebasDeIntegracion2Test {
         listaContinentes.add(continente5);
         listaContinentes.add(continente6);
 
+        moderador = new Moderador();
+        aleatorio = new Aleatorio();
+        mazoDeTarjetasObjetivo = moderador.pedirTarjetasObjetivo();
     }
 
     @Test
@@ -382,6 +388,7 @@ public class PruebasDeIntegracion2Test {
 
         when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
         when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
+        when(mockedAleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo)).thenReturn(aleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo));
 
 
         boolean lanzaUnaExcepcion = false;
@@ -389,6 +396,7 @@ public class PruebasDeIntegracion2Test {
         try {
             // fase inicial
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
             // cada jugador coloca 5 ejercitos en los paises que quiere.
@@ -534,6 +542,7 @@ public class PruebasDeIntegracion2Test {
 
         when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
         when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
+        when(mockedAleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo)).thenReturn(aleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo));
 
 
         boolean lanzaUnaExcepcion = false;
@@ -541,6 +550,7 @@ public class PruebasDeIntegracion2Test {
         try {
             // fase inicial
             Juego juego = new Juego(listaPaises,listaContinentes,nombresJugadores);
+            juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
             juego.comenzarFaseInicial(mockedAleatorio);
 
 
