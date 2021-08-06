@@ -1,6 +1,7 @@
 package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Moderador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,11 +46,10 @@ public class ControladorMenuJugador implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-/*      Moderador moderador = new Moderador();
+        Moderador moderador = new Moderador();
         juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
         mostrarJugadorActual();
         mostrarPaisesLimitrofesActuales();
- */
     }
 
     private void mostrarJugadorActual(){
@@ -63,9 +63,9 @@ public class ControladorMenuJugador implements Initializable {
 
     @FXML
     void pasarTurno(ActionEvent event) {
-        /*juego.pasarTurno();
+        juego.pasarTurno();
         mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();*/
+        mostrarPaisesLimitrofesActuales();
     }
 
     @FXML
