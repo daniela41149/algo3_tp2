@@ -9,12 +9,9 @@ import java.util.List;
 public class Canjes {
     static final int CONST1 = 1;
     private List<Canje> listaDeCanjes;
-    private int posicion;
 
     public Canjes () {
         listaDeCanjes = new ArrayList<>();
-        posicion = 0;
-
     }
 
     private TarjetaPais buscarTarjetaPais (String nombreTarjetaPais, List<TarjetaPais> tarjetasPais){
