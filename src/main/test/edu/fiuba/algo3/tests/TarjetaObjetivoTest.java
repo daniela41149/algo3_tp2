@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Moderador;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaDestruccion;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
@@ -649,7 +648,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test14ElDueñoDeLaTarjetaCumpleElObjetivoDeDestruirAlJugadorAzul() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
+    public void test14ElDueñoDeLaTarjetaCumpleElObjetivoDeDestruirAlJugadorAzul() {
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
         Jugador jugadorAzul = new Jugador("Pedro", "Azul", juegoMockeado);
 
@@ -662,7 +661,7 @@ public class TarjetaObjetivoTest {
     }
 
     @Test
-    public void test15ElDueñoDeLaTarjetaPoseeLosContinentesDelEnunciadoPeroNoLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
+    public void test15ElDueñoDeLaTarjetaPoseeLosContinentesDelEnunciadoPeroNoLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws JugadaInvalidaException {
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
         dueñoDeTarjeta.establecerObjetivo(ocupacion1);
 
