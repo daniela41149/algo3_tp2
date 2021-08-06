@@ -26,7 +26,7 @@ public class ControladorInicio {
     @FXML
     void lanzarJuego(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load( getClass().getResource("/vista/ventanaMenu.fxml") );
+        Parent root = FXMLLoader.load( getClass().getResource("/vista/seleccionJugadores.fxml") );
         Stage ventana = (Stage) botonJugar.getScene().getWindow();
         ventana.setScene( new Scene(root) );
     }

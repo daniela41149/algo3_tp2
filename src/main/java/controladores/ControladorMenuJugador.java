@@ -2,6 +2,7 @@ package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -43,13 +45,25 @@ public class ControladorMenuJugador implements Initializable {
     Scene scene;
     Parent root;
     FXMLLoader loader;
+    List<String> jugadores;
+    Moderador moderador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        Moderador moderador = new Moderador();
-        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
+        /*try {
+            moderador = new Moderador();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
+        } catch (CantidadInvalidaDeJugadoresException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();
+        mostrarPaisesLimitrofesActuales();*/
     }
 
     private void mostrarJugadorActual(){
@@ -87,5 +101,9 @@ public class ControladorMenuJugador implements Initializable {
     public ControladorDados obtenerControladorDados() {
         ControladorDados controladorDados = (ControladorDados)loader.getController();
         return controladorDados;
+    }
+
+    public void asignarJugadores(List<String> listaJugadores) {
+        jugadores = listaJugadores;
     }
 }
