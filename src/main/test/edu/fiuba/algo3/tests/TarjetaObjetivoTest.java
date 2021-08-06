@@ -1,22 +1,30 @@
 package edu.fiuba.algo3.tests;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Moderador;
+import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
-import edu.fiuba.algo3.modelo.pais.Pais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaDestruccion;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
-import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
+import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaOcupacion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TarjetaObjetivoTest {
+
+    private TarjetaOcupacion tarjetaDeOcupacion;
+    private TarjetaDestruccion tarjetaDeDestruccion;
 
     private TarjetaObjetivo ocupacion1;
     private TarjetaObjetivo ocupacion2;
@@ -27,24 +35,11 @@ public class TarjetaObjetivoTest {
     private TarjetaObjetivo ocupacion7;
     private TarjetaObjetivo ocupacion8;
     private TarjetaObjetivo destruccion1;
-    private TarjetaObjetivo destruccion2;
-    private TarjetaObjetivo destruccion3;
-    private TarjetaObjetivo destruccion4;
-    private TarjetaObjetivo destruccion5;
-    private TarjetaObjetivo destruccion6;
 
     private Moderador moderador;
     private Jugador dueñoDeTarjeta;
     private Tablero tablero;
     private Juego juegoMockeado;
-    private TarjetaPais tarjetaPais;
-
-    private List<Pais> paises;
-    private List<Continente> continentes;
-    private Pais argentina;
-    private Pais brasil;
-    List<Integer> dadosGanadores;
-    List<Integer> dadosPerdedores;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -63,107 +58,101 @@ public class TarjetaObjetivoTest {
         ocupacion7 = tarjetas.get(6);
         ocupacion8 = tarjetas.get(7);
         destruccion1 = tarjetas.get(8);
-        destruccion2 = tarjetas.get(9);
-        destruccion3 = tarjetas.get(10);
-        destruccion4 = tarjetas.get(11);
-        destruccion5 = tarjetas.get(12);
-        destruccion6 = tarjetas.get(13);
-
-        List<String> limitrofesArg = new ArrayList<>();
-        limitrofesArg.add("Chile");
-        limitrofesArg.add("Brasil");
-        limitrofesArg.add("Uruguay");
-        argentina = new Pais("Argentina", limitrofesArg);
-
-        List<String> limitrofesBr = new ArrayList<>();
-        limitrofesBr.add("Chile");
-        limitrofesBr.add("Argentina");
-        limitrofesBr.add("Uruguay");
-        brasil = new Pais("Brasil", limitrofesBr);
-
-        paises = new ArrayList<>();
-        paises.add(argentina);
-        paises.add(brasil);
-
-        continentes = new ArrayList<>();
-        continentes.add(new Continente("America del Sur", paises, 3));
-
-        dadosGanadores = new ArrayList<>();
-        dadosGanadores.add(5);
-        dadosGanadores.add(5);
-        dadosPerdedores = new ArrayList<>();
-        dadosPerdedores.add(1);
-        dadosPerdedores.add(2);
     }
 
     @Test
     public void test01UnaTarjetaConDueñoPeroSinUnTableroOJuegoValidoNoPuedeCumplirSuObjetivo() {
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
-        ocupacion1.establecerDueño(dueñoDeTarjeta);
-        assertFalse(ocupacion1.cumplioObjetivo(null, juegoMockeado));
-        assertFalse(ocupacion1.cumplioObjetivo(tablero, null));
+        String enunciado1 = "Ocupar África, 5 países de América del Norte y 4 países de Europa.";
+        List<String> continentesAOcupar = new ArrayList<>();
+        continentesAOcupar.add("Africa");
+        HashMap<String, Integer> cantPaisesPorContinente = new HashMap<>();
+        cantPaisesPorContinente.put("America del Norte", 5);
+        cantPaisesPorContinente.put("Europa", 4);
+        tarjetaDeOcupacion = new TarjetaOcupacion(enunciado1, continentesAOcupar, cantPaisesPorContinente);
 
-        destruccion1.establecerDueño(dueñoDeTarjeta);
-        assertFalse(destruccion1.cumplioObjetivo(null, juegoMockeado));
-        assertFalse(destruccion1.cumplioObjetivo(tablero, null));
+        String enunciado2 = "Destruir el ejército azul de ser imposible al jugador de la derecha.";
+        String colorADestruir = "Azul";
+        tarjetaDeDestruccion = new TarjetaDestruccion(enunciado2, colorADestruir);
+
+        tarjetaDeOcupacion.establecerDueño(dueñoDeTarjeta);
+        assertFalse(tarjetaDeOcupacion.cumplioObjetivo(null, juegoMockeado));
+        assertFalse(tarjetaDeOcupacion.cumplioObjetivo(tablero, null));
+
+        tarjetaDeDestruccion.establecerDueño(dueñoDeTarjeta);
+        assertFalse(tarjetaDeDestruccion.cumplioObjetivo(null, juegoMockeado));
+        assertFalse(tarjetaDeDestruccion.cumplioObjetivo(tablero, null));
     }
 
     @Test
     public void test02SiLaTarjetaNoTieneDueñoEntoncesSuObjetivoNoEstaCumplido() {
-        assertFalse(ocupacion1.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(destruccion1.cumplioObjetivo(tablero, juegoMockeado));
+        dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
+
+        String enunciado1 = "Ocupar África, 5 países de América del Norte y 4 países de Europa.";
+        List<String> continentesAOcupar = new ArrayList<>();
+        continentesAOcupar.add("Africa");
+        HashMap<String, Integer> cantPaisesPorContinente = new HashMap<>();
+        cantPaisesPorContinente.put("America del Norte", 5);
+        cantPaisesPorContinente.put("Europa", 4);
+        tarjetaDeOcupacion = new TarjetaOcupacion(enunciado1, continentesAOcupar, cantPaisesPorContinente);
+
+        String enunciado2 = "Destruir el ejército azul de ser imposible al jugador de la derecha.";
+        String colorADestruir = "Azul";
+        tarjetaDeDestruccion = new TarjetaDestruccion(enunciado2, colorADestruir);
+
+        assertFalse(tarjetaDeOcupacion.cumplioObjetivo(tablero, juegoMockeado));
+        assertFalse(tarjetaDeDestruccion.cumplioObjetivo(tablero, juegoMockeado));
     }
 
     @Test
     public void test03LaTarjetaTieneDueñoQueNoControlaNingunPaisEntoncesSuObjetivoNoEstaCumplido() {
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
-        assertFalse(ocupacion1.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion2.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion3.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion4.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion5.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion6.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion7.cumplioObjetivo(tablero, juegoMockeado));
-        assertFalse(ocupacion8.cumplioObjetivo(tablero, juegoMockeado));
+        String enunciado1 = "Ocupar África, 5 países de América del Norte y 4 países de Europa.";
+        List<String> continentesAOcupar = new ArrayList<>();
+        continentesAOcupar.add("Africa");
+        HashMap<String, Integer> cantPaisesPorContinente = new HashMap<>();
+        cantPaisesPorContinente.put("America del Norte", 5);
+        cantPaisesPorContinente.put("Europa", 4);
+        tarjetaDeOcupacion = new TarjetaOcupacion(enunciado1, continentesAOcupar, cantPaisesPorContinente);
+
+        tarjetaDeOcupacion.establecerDueño(dueñoDeTarjeta);
+        assertFalse(tarjetaDeOcupacion.cumplioObjetivo(tablero, juegoMockeado));
     }
 
     @Test
     public void test04LaTarjetaTieneDueñoQueNoDestruyoAlJugadorADestruirEntoncesSuObjetivoNoEstaCumplido() {
-        Jugador jugadorADestruir;
+        Jugador jugadorADestruir = new Jugador("Pablo", "Azul", juegoMockeado);
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
 
-        jugadorADestruir = new Jugador("Pablo", "Azul", juegoMockeado);
+        String enunciado2 = "Destruir el ejército azul de ser imposible al jugador de la derecha.";
+        String colorADestruir = "Azul";
+        tarjetaDeDestruccion = new TarjetaDestruccion(enunciado2, colorADestruir);
+
         when(juegoMockeado.jugadorDeColorOSiguiente("Azul", dueñoDeTarjeta)).thenReturn(jugadorADestruir);
-        assertFalse(destruccion1.cumplioObjetivo(tablero, juegoMockeado));
 
-        jugadorADestruir = new Jugador("Pablo", "Rojo", juegoMockeado);
-        when(juegoMockeado.jugadorDeColorOSiguiente("Rojo", dueñoDeTarjeta)).thenReturn(jugadorADestruir);
-        assertFalse(destruccion2.cumplioObjetivo(tablero, juegoMockeado));
-
-        jugadorADestruir = new Jugador("Pablo", "Negro", juegoMockeado);
-        when(juegoMockeado.jugadorDeColorOSiguiente("Negro", dueñoDeTarjeta)).thenReturn(jugadorADestruir);
-        assertFalse(destruccion3.cumplioObjetivo(tablero, juegoMockeado));
-
-        jugadorADestruir = new Jugador("Pablo", "Amarillo", juegoMockeado);
-        when(juegoMockeado.jugadorDeColorOSiguiente("Amarillo", dueñoDeTarjeta)).thenReturn(jugadorADestruir);
-        assertFalse(destruccion4.cumplioObjetivo(tablero, juegoMockeado));
-
-        jugadorADestruir = new Jugador("Pablo", "Verde", juegoMockeado);
-        when(juegoMockeado.jugadorDeColorOSiguiente("Verde", dueñoDeTarjeta)).thenReturn(jugadorADestruir);
-        assertFalse(destruccion5.cumplioObjetivo(tablero, juegoMockeado));
-
-        jugadorADestruir = new Jugador("Pablo", "Rosa", juegoMockeado);
-        when(juegoMockeado.jugadorDeColorOSiguiente("Rosa", dueñoDeTarjeta)).thenReturn(jugadorADestruir);
-        assertFalse(destruccion6.cumplioObjetivo(tablero, juegoMockeado));
+        tarjetaDeDestruccion.establecerDueño(dueñoDeTarjeta);
+        assertFalse(tarjetaDeDestruccion.cumplioObjetivo(tablero, juegoMockeado));
     }
 
     @Test
     public void test05SiElDueñoDeLaTarjetaPosee30PaisesCumplioElObjetivoGeneral() {
         boolean hayJugadaInvalida = false;
-
         dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
+
+        String enunciado1 = "Ocupar África, 5 países de América del Norte y 4 países de Europa.";
+        List<String> continentesAOcupar = new ArrayList<>();
+        continentesAOcupar.add("Africa");
+        HashMap<String, Integer> cantPaisesPorContinente = new HashMap<>();
+        cantPaisesPorContinente.put("America del Norte", 5);
+        cantPaisesPorContinente.put("Europa", 4);
+        tarjetaDeOcupacion = new TarjetaOcupacion(enunciado1, continentesAOcupar, cantPaisesPorContinente);
+
+        String enunciado2 = "Destruir el ejército azul de ser imposible al jugador de la derecha.";
+        String colorADestruir = "Azul";
+        tarjetaDeDestruccion = new TarjetaDestruccion(enunciado2, colorADestruir);
+
         try {
             dueñoDeTarjeta.agregarPais(tablero.buscarPais("Zaire"));
             dueñoDeTarjeta.colocarEjercito("Zaire", 1);
@@ -232,11 +221,11 @@ public class TarjetaObjetivoTest {
         assertFalse(hayJugadaInvalida);
         assertEquals(30, dueñoDeTarjeta.cantidadPaises());
 
-        dueñoDeTarjeta.establecerObjetivo(ocupacion1);
-        assertTrue(ocupacion1.cumplioObjetivo(tablero, juegoMockeado));
+        tarjetaDeOcupacion.establecerDueño(dueñoDeTarjeta);
+        assertTrue(tarjetaDeOcupacion.cumplioObjetivo(tablero, juegoMockeado));
 
-        dueñoDeTarjeta.establecerObjetivo(destruccion1);
-        assertTrue(destruccion1.cumplioObjetivo(tablero, juegoMockeado));
+        tarjetaDeDestruccion.establecerDueño(dueñoDeTarjeta);
+        assertTrue(tarjetaDeDestruccion.cumplioObjetivo(tablero, juegoMockeado));
     }
 
     @Test
@@ -661,102 +650,67 @@ public class TarjetaObjetivoTest {
 
     @Test
     public void test14ElDueñoDeLaTarjetaCumpleElObjetivoDeDestruirAlJugadorAzul() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
-        Jugador jugadorAzul;
-        List<String> jugadores = new ArrayList<>();
-        jugadores.add("jugadorAzul");
-        jugadores.add("jugadorRojo");
+        dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
+        Jugador jugadorAzul = new Jugador("Pedro", "Azul", juegoMockeado);
 
-        Juego juego = new Juego(paises, continentes, jugadores);
-        juego.guardarMazoDeTarjetasPais(moderador.pedirTarjetasPais());
-
-        jugadorAzul = juego.jugadorEnTurno();
-        jugadorAzul.agregarPais(brasil);
-        juego.colocarEjercito("Brasil", 1);
-        juego.pasarTurno();
-
-        dueñoDeTarjeta = juego.jugadorEnTurno();
         dueñoDeTarjeta.establecerObjetivo(destruccion1);
-        dueñoDeTarjeta.agregarPais(argentina);
-        juego.colocarEjercito("Argentina", 2);
+        jugadorAzul.establecerPosibleDestructor(dueñoDeTarjeta);
 
-        Dados mockDadosJugadorRojo = mock(Dados.class);
-        when(mockDadosJugadorRojo.dadosAtaque(anyInt())).thenReturn(dadosGanadores);
-        Dados mockDadosJugadorAzul = mock(Dados.class);
-        when(mockDadosJugadorAzul.dadosDefensa(anyInt())).thenReturn(dadosPerdedores);
+        when(juegoMockeado.jugadorDeColorOSiguiente("Azul", dueñoDeTarjeta)).thenReturn(jugadorAzul);
 
-        Ejercito ejercitoPaisAtacante = argentina.getEjercito();
-        Ejercito ejercitoPaisDefensor = brasil.getEjercito();
-        ejercitoPaisAtacante.setDados(mockDadosJugadorRojo);
-        ejercitoPaisDefensor.setDados(mockDadosJugadorAzul);
-
-        juego.atacar("Argentina", "Brasil", 1);
-
-        assertEquals(0, jugadorAzul.cantidadPaises());
-        assertEquals(2, dueñoDeTarjeta.cantidadPaises());
-        assertTrue(juego.cumplioObjetivo(dueñoDeTarjeta));
+        assertTrue(dueñoDeTarjeta.cumplioObjetivo(tablero));
     }
 
     @Test
-    public void test15ElJugadorAzulPoseeLosContinentesDelEnunciadoPeroNoLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
-        List<String> jugadores = new ArrayList<>();
-        jugadores.add("jugadorAzul");
-        jugadores.add("jugadorRojo");
+    public void test15ElDueñoDeLaTarjetaPoseeLosContinentesDelEnunciadoPeroNoLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
+        dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
+        dueñoDeTarjeta.establecerObjetivo(ocupacion1);
 
-        Juego juego = new Juego(paises, continentes, jugadores);
-
-        Jugador jugadorAzul = juego.jugadorEnTurno();
-        jugadorAzul.establecerObjetivo(ocupacion1);
         //Controla Africa
-        jugadorAzul.agregarPais(tablero.buscarPais("Zaire"));
-        jugadorAzul.colocarEjercito("Zaire", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Etiopia"));
-        jugadorAzul.colocarEjercito("Etiopia", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Egipto"));
-        jugadorAzul.colocarEjercito("Egipto", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Madagascar"));
-        jugadorAzul.colocarEjercito("Madagascar", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Sahara"));
-        jugadorAzul.colocarEjercito("Sahara", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Sudafrica"));
-        jugadorAzul.colocarEjercito("Sudafrica", 1);
-        juego.pasarTurno();
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Zaire"));
+        dueñoDeTarjeta.colocarEjercito("Zaire", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Etiopia"));
+        dueñoDeTarjeta.colocarEjercito("Etiopia", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Egipto"));
+        dueñoDeTarjeta.colocarEjercito("Egipto", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Madagascar"));
+        dueñoDeTarjeta.colocarEjercito("Madagascar", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Sahara"));
+        dueñoDeTarjeta.colocarEjercito("Sahara", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Sudafrica"));
+        dueñoDeTarjeta.colocarEjercito("Sudafrica", 1);
 
-        assertEquals(6, jugadorAzul.cantidadPaises());
-        assertFalse(juego.cumplioObjetivo(jugadorAzul));
+        assertEquals(6, dueñoDeTarjeta.cantidadPaises());
+        assertFalse(dueñoDeTarjeta.cumplioObjetivo(tablero));
     }
 
     @Test
-    public void test16ElJugadorAzulNoPoseeLosContinentesDelEnunciadoPeroSiLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws CantidadInvalidaDeJugadoresException, JugadaInvalidaException {
-        List<String> jugadores = new ArrayList<>();
-        jugadores.add("jugadorAzul");
-        jugadores.add("jugadorRojo");
+    public void test16ElJugadorAzulNoPoseeLosContinentesDelEnunciadoPeroSiLosPaisesPorContinentesEntoncesNoCumpleObjetivo() throws JugadaInvalidaException {
+        dueñoDeTarjeta = new Jugador("Pedro", "Rojo", juegoMockeado);
+        dueñoDeTarjeta.establecerObjetivo(ocupacion1);
 
-        Juego juego = new Juego(paises, continentes, jugadores);
-
-        Jugador jugadorAzul = juego.jugadorEnTurno();
-        jugadorAzul.establecerObjetivo(ocupacion1);
         //Ocupacion de 5 paises de America del Norte
-        jugadorAzul.agregarPais(tablero.buscarPais("Oregon"));
-        jugadorAzul.colocarEjercito("Oregon", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Nueva York"));
-        jugadorAzul.colocarEjercito("Nueva York", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Terranova"));
-        jugadorAzul.colocarEjercito("Terranova", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("California"));
-        jugadorAzul.colocarEjercito("California", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Canada"));
-        jugadorAzul.colocarEjercito("Canada", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Oregon"));
+        dueñoDeTarjeta.colocarEjercito("Oregon", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Nueva York"));
+        dueñoDeTarjeta.colocarEjercito("Nueva York", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Terranova"));
+        dueñoDeTarjeta.colocarEjercito("Terranova", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("California"));
+        dueñoDeTarjeta.colocarEjercito("California", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Canada"));
+        dueñoDeTarjeta.colocarEjercito("Canada", 1);
         //Ocupacion de 4 paises de Europa
-        jugadorAzul.agregarPais(tablero.buscarPais("Francia"));
-        jugadorAzul.colocarEjercito("Francia", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Gran Bretaña"));
-        jugadorAzul.colocarEjercito("Gran Bretaña", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("Rusia"));
-        jugadorAzul.colocarEjercito("Rusia", 1);
-        jugadorAzul.agregarPais(tablero.buscarPais("España"));
-        jugadorAzul.colocarEjercito("España", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Francia"));
+        dueñoDeTarjeta.colocarEjercito("Francia", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Gran Bretaña"));
+        dueñoDeTarjeta.colocarEjercito("Gran Bretaña", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("Rusia"));
+        dueñoDeTarjeta.colocarEjercito("Rusia", 1);
+        dueñoDeTarjeta.agregarPais(tablero.buscarPais("España"));
+        dueñoDeTarjeta.colocarEjercito("España", 1);
 
-        assertEquals(9, jugadorAzul.cantidadPaises());
-        assertFalse(juego.cumplioObjetivo(jugadorAzul));
+        assertEquals(9, dueñoDeTarjeta.cantidadPaises());
+        assertFalse(dueñoDeTarjeta.cumplioObjetivo(tablero));
     }
 }
