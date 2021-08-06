@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 
+import edu.fiuba.algo3.modelo.canjes.Canjes;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
@@ -17,15 +18,17 @@ public class Jugador {
     private TarjetaObjetivo tarjetaDeObjetivo;
     private Juego juego;
     private List<TarjetaPais> tarjetasPais;
+    private Canjes canjes;
 
 
     public Jugador(String nombre, String colorJugador, Juego juego){
         this.nombreJugador = nombre;
-        this. color = colorJugador;
+        this.color = colorJugador;
         this.paises = new ArrayList<>();
         this.jugadorQueLoDestruyo = null;
         this.juego = juego;
         this.tarjetasPais = new ArrayList<>();
+        this.canjes = new Canjes();
     }
 
     public void agregarPais(Pais nuevoPais){
@@ -123,14 +126,32 @@ public class Jugador {
         return false;
     }
 
-
-
-        public void activarTarjetaPais (String nombreTarjetaPais) throws JugadaInvalidaException {
+    public void activarTarjetaPais (String nombreTarjetaPais) throws JugadaInvalidaException {
         for (TarjetaPais unaTarjetaPais: tarjetasPais){
             if (unaTarjetaPais.getNombre().equals(nombreTarjetaPais)){
                 unaTarjetaPais.activarTarjeta(this);
             }
         }
+    }
+
+    public void solicitarUnCanje (List<String> nombresTarjetasPaisParaCanjear){
+        this.canjes.solicitarUnCanje(nombresTarjetasPaisParaCanjear,this,this.tarjetasPais);
+    }
+
+    public void devolverTarjetasAlMazo(List<TarjetaPais> tarjetasPaisParaDevolverAlMazo) {
+        for (TarjetaPais unaTarjetaParaDevolver: tarjetasPaisParaDevolverAlMazo) {
+            for (TarjetaPais unaTarjetaPais: tarjetasPais){
+                if (unaTarjetaParaDevolver.getNombre().equals(unaTarjetaPais.getNombre())){
+                    this.tarjetasPais.remove(unaTarjetaPais);
+                }
+             }
+        }
+        juego.devolverTarjetasAlMazo(tarjetasPaisParaDevolverAlMazo);
+    }
+
+    public void colocarEjercitosDeCanje(int ejercitos){
+
+
     }
 
 

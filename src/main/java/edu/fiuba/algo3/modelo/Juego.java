@@ -199,6 +199,13 @@ public class Juego {
         return this.jugadorEnTurno().getNombre();
     }
 
+
+    public void devolverTarjetasAlMazo(List<TarjetaPais> tarjetasPais) {
+        for (TarjetaPais unaTarjetaPais: tarjetasPais) {
+            mazoTarjetasPais.add(unaTarjetaPais);
+        }
+    }
+
     public HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
         List<Pais> listaPaises = this.jugadorEnTurno().pedirPaises();
         HashMap<String,Integer> diccionario = new HashMap<>();

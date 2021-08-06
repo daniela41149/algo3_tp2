@@ -6,4 +6,6 @@ import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 public interface EstadoTarjetaPais {
 
     public void activar(TarjetaPais tarjeta, Jugador jugador) throws JugadaInvalidaException;
+
+
 }
