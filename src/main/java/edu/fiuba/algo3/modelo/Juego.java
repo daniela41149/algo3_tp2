@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
@@ -30,10 +29,7 @@ public class Juego {
     private List<TarjetaObjetivo> mazoTarjetasObjetivo;
 
 
-    public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
-
-        if (nombresDeJugadores.size() < MIN_JUGADORES || nombresDeJugadores.size() > MAX_JUGADORES)
-            throw new CantidadInvalidaDeJugadoresException();
+    public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) {
 
         this.posicionJugadorEnTurno = 0;
         this.ejercitosColocadosPorJugadorEnTurno = 0;

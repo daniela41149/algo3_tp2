@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
@@ -26,7 +25,7 @@ public class CanjesTest {
 
 
     @BeforeEach
-    public void setup() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void setup() throws IOException {
         List<String> nombresJugadores = new ArrayList<>();
         Moderador moderador = new Moderador();
         nombresJugadores.add("Pedro");
@@ -58,7 +57,7 @@ public class CanjesTest {
 
 
     @Test
-    public void test001JugadorTiene12TarjetasPaisYRealizaElPrimerCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test001JugadorTiene12TarjetasPaisYRealizaElPrimerCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -78,7 +77,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test002JugadorTiene12TarjetasPaisYRealizaElSegundoCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test002JugadorTiene12TarjetasPaisYRealizaElSegundoCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -107,7 +106,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test003JugadorTiene12TarjetasPaisYRealizaElTercerCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test003JugadorTiene12TarjetasPaisYRealizaElTercerCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -144,7 +143,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test004JugadorTiene12TarjetasPaisYRealizaElCuartoCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test004JugadorTiene12TarjetasPaisYRealizaElCuartoCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -189,7 +188,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test005DosJugadoresRealizanUnCanjeCadaUno() throws CantidadInvalidaDeJugadoresException, IOException  {
+    public void test005DosJugadoresRealizanUnCanjeCadaUno() throws IOException  {
         List<String> nombresJugadores = new ArrayList<>();
         Moderador moderador = new Moderador();
         listaContinentes = moderador.pedirContinentes();
@@ -243,7 +242,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test006JugadorSinTarjetaPaisNoPuedeRealizarCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test006JugadorSinTarjetaPaisNoPuedeRealizarCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -259,7 +258,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test007JugadorCon1TarjetaPaisNoPuedeRealizarCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test007JugadorCon1TarjetaPaisNoPuedeRealizarCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -276,7 +275,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test008JugadorCon2TarjetasPaisNoPuedeRealizarCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test008JugadorCon2TarjetasPaisNoPuedeRealizarCanje() throws IOException {
         setup();
         List<Jugador> listaJugadores = juego.devolverJugadores();
         Jugador jugador = listaJugadores.get(0);
@@ -295,7 +294,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test009JugadorCon3TarjetasPaisDosSimbolosIgualesYUnoDistintoNoPuedeRealizarCanje() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test009JugadorCon3TarjetasPaisDosSimbolosIgualesYUnoDistintoNoPuedeRealizarCanje() throws IOException {
         List<String> nombresJugadores = new ArrayList<>();
         Moderador moderador = new Moderador();
         listaContinentes = moderador.pedirContinentes();
@@ -330,7 +329,7 @@ public class CanjesTest {
     }
 
     @Test
-    public void test010JugadorNoPuedeRealizarCanjeSiAlgunaTarjetaPaisNoLePertenece() throws CantidadInvalidaDeJugadoresException, IOException {
+    public void test010JugadorNoPuedeRealizarCanjeSiAlgunaTarjetaPaisNoLePertenece() throws IOException {
         List<String> nombresJugadores = new ArrayList<>();
         Moderador moderador = new Moderador();
         listaContinentes = moderador.pedirContinentes();

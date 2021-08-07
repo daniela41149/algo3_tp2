@@ -2,7 +2,6 @@ package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
@@ -484,8 +483,6 @@ public class PruebasDeIntegracion2Test {
 
         } catch (JugadaInvalidaException e1) {
             lanzaUnaExcepcion = true;
-        } catch (CantidadInvalidaDeJugadoresException e2){
-            lanzaUnaExcepcion = true;
         } catch (CantidadInvalidaDeEjercitosException e3){
             lanzaUnaExcepcion = true;
         }
@@ -662,8 +659,6 @@ public class PruebasDeIntegracion2Test {
 
 
         } catch (JugadaInvalidaException e1) {
-            lanzaUnaExcepcion = true;
-        } catch (CantidadInvalidaDeJugadoresException e2){
             lanzaUnaExcepcion = true;
         } catch (CantidadInvalidaDeEjercitosException e3){
             lanzaUnaExcepcion = true;

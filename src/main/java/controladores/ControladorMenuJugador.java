@@ -2,7 +2,6 @@ package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,11 +53,8 @@ public class ControladorMenuJugador implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
-        } catch (CantidadInvalidaDeJugadoresException e) {
-            e.printStackTrace();
-        }
+        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
+
         //mostrarJugadorActual();
         //mostrarPaisesLimitrofesActuales();
     }
