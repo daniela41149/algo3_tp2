@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -28,7 +28,7 @@ public class ControladorMenuJugador implements Initializable {
     Scene scene;
     Parent root;
     FXMLLoader loader;
-    List<String> jugadores;
+    ArrayList<String> jugadores = new ArrayList<>();
     Moderador moderador;
 
     @FXML
@@ -47,12 +47,21 @@ public class ControladorMenuJugador implements Initializable {
     private ListView<String> listaPaises;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-        moderador = new Moderador();
-        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
-        mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();
+    public void initialize(URL url, ResourceBundle rb) {
+        /*try {
+            moderador = new Moderador();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
+        } catch (CantidadInvalidaDeJugadoresException e) {
+            e.printStackTrace();
+        }*/
+        //mostrarJugadorActual();
+        //mostrarPaisesLimitrofesActuales();
     }
+
 
     private void mostrarJugadorActual(){
         nombreJugador.setText( juego.nombreJugadorActual() );
@@ -91,7 +100,7 @@ public class ControladorMenuJugador implements Initializable {
         return controladorDados;
     }
 
-    public void asignarJugadores(List<String> listaJugadores) {
-        jugadores = listaJugadores;
+    public void asignarJugadores(ArrayList<String> jugadores2) {
+        jugadores = jugadores2;
     }
 }

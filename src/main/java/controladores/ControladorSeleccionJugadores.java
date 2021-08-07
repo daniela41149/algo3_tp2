@@ -8,8 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -66,7 +64,7 @@ public class ControladorSeleccionJugadores {
     Scene scene;
     Parent root;
     FXMLLoader loader;
-    List<String> jugadores = new ArrayList<String>();
+    ArrayList<String> jugadores = new ArrayList<>();
 
     public void levantarVentanaMenuJugadores() throws IOException {
         loader = new FXMLLoader(getClass().getResource("/vista/ventanaMenu.fxml"));
