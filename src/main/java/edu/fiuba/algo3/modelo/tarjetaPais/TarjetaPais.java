@@ -13,6 +13,7 @@ public class TarjetaPais {
 
         this.nombre = nombre;
         this.simbolo = simbolo;
+        this.estadoTarjeta = new Desactivada();
 
     }
 
@@ -39,17 +40,11 @@ public class TarjetaPais {
 
 
     public boolean esElMismoSimbolo(TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
-        if (this.simbolo.equals(tarjetaPais1.getSimbolo()) && this.simbolo.equals(tarjetaPais2.getSimbolo())) {
-            return true;
-        }
-        return false;
+        return this.simbolo.equals(tarjetaPais1.getSimbolo()) && this.simbolo.equals(tarjetaPais2.getSimbolo());
     }
 
     public boolean sonSimbolosDiferentes(TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
-        if (!this.simbolo.equals(tarjetaPais1.getSimbolo()) && !this.simbolo.equals(tarjetaPais2.getSimbolo()) && !tarjetaPais1.getSimbolo().equals(tarjetaPais2.getSimbolo())) {
-            return true;
-        }
-        return false;
+        return !this.simbolo.equals(tarjetaPais1.getSimbolo()) && !this.simbolo.equals(tarjetaPais2.getSimbolo()) && !tarjetaPais1.getSimbolo().equals(tarjetaPais2.getSimbolo());
     }
 }
 
