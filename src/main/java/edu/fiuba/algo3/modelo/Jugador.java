@@ -19,6 +19,7 @@ public class Jugador {
     private Juego juego;
     private List<TarjetaPais> tarjetasPais;
     private Canjes canjes;
+    private int ejercitosDeCanje;
 
 
     public Jugador(String nombre, String colorJugador, Juego juego){
@@ -29,6 +30,7 @@ public class Jugador {
         this.juego = juego;
         this.tarjetasPais = new ArrayList<>();
         this.canjes = new Canjes();
+        this.ejercitosDeCanje = 0;
     }
 
     public void agregarPais(Pais nuevoPais){
@@ -137,21 +139,20 @@ public class Jugador {
     public void solicitarUnCanje (List<String> nombresTarjetasPaisParaCanjear){
         this.canjes.solicitarUnCanje(nombresTarjetasPaisParaCanjear,this,this.tarjetasPais);
     }
-
     public void devolverTarjetasAlMazo(List<TarjetaPais> tarjetasPaisParaDevolverAlMazo) {
-        for (TarjetaPais unaTarjetaParaDevolver: tarjetasPaisParaDevolverAlMazo) {
-            for (TarjetaPais unaTarjetaPais: tarjetasPais){
-                if (unaTarjetaParaDevolver.getNombre().equals(unaTarjetaPais.getNombre())){
-                    this.tarjetasPais.remove(unaTarjetaPais);
-                }
-             }
-        }
         juego.devolverTarjetasAlMazo(tarjetasPaisParaDevolverAlMazo);
     }
 
-    public void colocarEjercitosDeCanje(int ejercitos){
+    public void entregarEjercitosDeCanje(int ejercitos){
+        this.ejercitosDeCanje = ejercitos;
+    }
 
+    public int ejercitosDeCanje() {
+        return this.ejercitosDeCanje;
+    }
 
+    public void borrarEjercitosDeCanje(){
+        this.ejercitosDeCanje = 0;
     }
 
 

@@ -17,9 +17,11 @@ public class Canje {
     private int ejercitos;
     private int numeroDeCanje;
     private List<TarjetaPais> tarjetasPaisParaCanjear = new ArrayList<>();
+    private Canjes canjes;
 
-    public Canje (int numeroDeCanje) {
+    public Canje (int numeroDeCanje, Canjes canjes) {
         this.numeroDeCanje = numeroDeCanje;
+        this.canjes = canjes;
         calcularEjercitosSegunNumeroDeCanje(numeroDeCanje);
     }
 
@@ -46,11 +48,11 @@ public class Canje {
         }
     }
 
-    public boolean solicitarUnCanje(Jugador jugador) {
+    public boolean solicitarUnCanje(Jugador jugador, List<TarjetaPais> tarjetasPais) {
         if(tarjetasPaisParaCanjear.get(0).esElMismoSimbolo(tarjetasPaisParaCanjear.get(1), tarjetasPaisParaCanjear.get(2)) || tarjetasPaisParaCanjear.get(0).sonSimbolosDiferentes(tarjetasPaisParaCanjear.get(1), tarjetasPaisParaCanjear.get(2) ))  {
             this.desactivarTarjetas(tarjetasPaisParaCanjear);
-            jugador.devolverTarjetasAlMazo(tarjetasPaisParaCanjear);
-            jugador.colocarEjercitosDeCanje(ejercitos);
+            canjes.devolverTarjetasAlMazo(jugador,tarjetasPaisParaCanjear,tarjetasPais);
+            jugador.entregarEjercitosDeCanje(ejercitos);
             return true;
         }
         else {

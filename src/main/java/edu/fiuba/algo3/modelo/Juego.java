@@ -29,6 +29,7 @@ public class Juego {
     private List<TarjetaPais> mazoTarjetasPais;
     private List<TarjetaObjetivo> mazoTarjetasObjetivo;
 
+
     public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) throws CantidadInvalidaDeJugadoresException {
 
         if (nombresDeJugadores.size() < MIN_JUGADORES || nombresDeJugadores.size() > MAX_JUGADORES)
@@ -86,6 +87,11 @@ public class Juego {
         if (paisesDominados >= 6)
             cantidadTotal = (paisesDominados / 2);
         cantidadTotal += ejercitosAdicionalesPorContinentesControlados(jugadorEnTurno);
+
+        if (jugadorEnTurno.ejercitosDeCanje() > 0) {
+            cantidadTotal += jugadorEnTurno.ejercitosDeCanje();
+            jugadorEnTurno.borrarEjercitosDeCanje();
+        }
 
         return cantidadTotal;
     }
@@ -218,6 +224,10 @@ public class Juego {
 
 
     HashMap<String, Integer> ejercitosSegunContinente = new HashMap<>();
+
+
+
+
 
 }
 
