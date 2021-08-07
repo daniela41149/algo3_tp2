@@ -2,7 +2,6 @@ package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +22,15 @@ import java.util.ResourceBundle;
 
 public class ControladorMenuJugador implements Initializable {
 
+    private HashMap<String, Integer> paisesConEjercitos;
+    private Juego juego;
+    Stage escenarioDados = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
+    List<String> jugadores;
+    Moderador moderador;
+
     @FXML
     private Label nombreJugador;
 
@@ -38,32 +46,12 @@ public class ControladorMenuJugador implements Initializable {
     @FXML
     private ListView<String> listaPaises;
 
-    private HashMap<String, Integer> paisesConEjercitos;
-
-    private Juego juego;
-    Stage escenarioDados = new Stage();
-    Scene scene;
-    Parent root;
-    FXMLLoader loader;
-    List<String> jugadores;
-    Moderador moderador;
-
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        /*try {
-            moderador = new Moderador();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try {
-            juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
-        } catch (CantidadInvalidaDeJugadoresException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        moderador = new Moderador();
+        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
         mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();*/
+        mostrarPaisesLimitrofesActuales();
     }
 
     private void mostrarJugadorActual(){

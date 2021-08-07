@@ -62,7 +62,7 @@ public class ControladorSeleccionJugadores {
         cambiarDeVentana();
     }
 
-    Stage escenarioDados = new Stage();
+    Stage escenarioSeleccion = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
@@ -72,9 +72,10 @@ public class ControladorSeleccionJugadores {
         loader = new FXMLLoader(getClass().getResource("/vista/ventanaMenu.fxml"));
         root = (Parent)loader.load();
         scene = new Scene(root);
-        escenarioDados.setTitle("ALTEGO");
-        escenarioDados.setScene(scene);
-        escenarioDados.show();
+        escenarioSeleccion = (Stage) boton2.getScene().getWindow();
+        escenarioSeleccion.setTitle("ALTEGO");
+        escenarioSeleccion.setScene(scene);
+        escenarioSeleccion.show();
     }
 
     public ControladorMenuJugador obtenerControladorMenuJugador() {
@@ -90,7 +91,7 @@ public class ControladorSeleccionJugadores {
 
     private void crearListaJugadores(Integer cantidadJugadores){
         String nombreJugador;
-        for(int i=2; i <= cantidadJugadores; i++){
+        for(int i=0; i < cantidadJugadores; i++){
             nombreJugador = "Jugador "+ String.valueOf(i);
             jugadores.add(nombreJugador);
         }
