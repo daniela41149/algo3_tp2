@@ -2,6 +2,7 @@ package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeJugadoresException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +49,7 @@ public class ControladorMenuJugador implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*try {
+        try {
             moderador = new Moderador();
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class ControladorMenuJugador implements Initializable {
             juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
         } catch (CantidadInvalidaDeJugadoresException e) {
             e.printStackTrace();
-        }*/
+        }
         //mostrarJugadorActual();
         //mostrarPaisesLimitrofesActuales();
     }
@@ -100,7 +101,7 @@ public class ControladorMenuJugador implements Initializable {
         return controladorDados;
     }
 
-    public void asignarJugadores(ArrayList<String> jugadores2) {
-        jugadores = jugadores2;
+    public void asignarJugadores(ArrayList<String> nombresJugadores) {
+        jugadores = nombresJugadores;
     }
 }
