@@ -67,8 +67,8 @@ public class CanjesTest {
         }
 
         List<String> nombresTarjetasPaisParaCanjear = new ArrayList<>();
-        nombresTarjetasPaisParaCanjear.add("Argentina");
         nombresTarjetasPaisParaCanjear.add("Uruguay");
+        nombresTarjetasPaisParaCanjear.add("Argentina");
         nombresTarjetasPaisParaCanjear.add("Brasil");
 
         assertEquals(jugador.ejercitosDeCanje(),0);
