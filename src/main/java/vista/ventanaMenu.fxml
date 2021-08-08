@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
    <children>
@@ -63,5 +64,10 @@
             <SepiaTone />
          </effect>
       </ListView>
+      <Button fx:id="botonArranque" layoutX="241.0" layoutY="196.0" mnemonicParsing="false" onAction="#cargarJuego" prefHeight="297.0" prefWidth="582.0" text="Buena Suerte!" textFill="#c3531c">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

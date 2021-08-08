@@ -46,34 +46,18 @@ public class ControladorMenuJugador implements Initializable {
     @FXML
     private ListView<String> listaPaises;
 
+    @FXML
+    private Button botonArranque;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            moderador = new Moderador();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
-
-        //mostrarJugadorActual();
-        //mostrarPaisesLimitrofesActuales();
-    }
-
-
-    private void mostrarJugadorActual(){
-        nombreJugador.setText( juego.nombreJugadorActual() );
-    }
-
-    private void mostrarPaisesLimitrofesActuales(){
-        paisesConEjercitos = juego.nombrePaisesYEjercitosDeJugadorActual();
-        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais + cantidadEjercito.toString() ) );
+        
     }
 
     @FXML
     void pasarTurno(ActionEvent event) {
         juego.pasarTurno();
-        mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();
+        refrescarDatosEnPantalla();
     }
 
     @FXML
@@ -81,6 +65,12 @@ public class ControladorMenuJugador implements Initializable {
        levantarVentanaDados();
        ControladorDados controladorDados = obtenerControladorDados();
        controladorDados.asignarFichas(2, 4);
+    }
+
+    @FXML
+    void cargarJuego(ActionEvent event) throws IOException {
+        iniciarJuego();
+        botonArranque.setVisible(false);
     }
 
     public void levantarVentanaDados() throws IOException {
@@ -100,4 +90,25 @@ public class ControladorMenuJugador implements Initializable {
     public void asignarJugadores(ArrayList<String> nombresJugadores) {
         jugadores = nombresJugadores;
     }
+
+    public void iniciarJuego() throws IOException{
+        moderador = new Moderador();
+        juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
+        refrescarDatosEnPantalla();
+    }
+
+    public void refrescarDatosEnPantalla(){
+        mostrarJugadorActual();
+        mostrarPaisesLimitrofesActuales();
+    }
+
+    private void mostrarJugadorActual(){
+        nombreJugador.setText( juego.nombreJugadorActual() );
+    }
+
+    private void mostrarPaisesLimitrofesActuales(){
+        paisesConEjercitos = juego.nombrePaisesYEjercitosDeJugadorActual();
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais + cantidadEjercito.toString() ) );
+    }
+
 }

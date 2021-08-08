@@ -90,7 +90,7 @@ public class ControladorSeleccionJugadores {
     private void crearListaJugadores(Integer cantidadJugadores){
         String nombreJugador;
         for(int i=0; i < cantidadJugadores; i++){
-            nombreJugador = "Jugador "+ String.valueOf(i);
+            nombreJugador = "Jugador "+ String.valueOf(i+1);
             jugadores.add(nombreJugador);
         }
     }
