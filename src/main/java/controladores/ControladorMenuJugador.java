@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -108,7 +109,11 @@ public class ControladorMenuJugador implements Initializable {
 
     private void mostrarPaisesLimitrofesActuales(){
         paisesConEjercitos = juego.nombrePaisesYEjercitosDeJugadorActual();
-        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais + cantidadEjercito.toString() ) );
+        paisesConEjercitos.put("a",20);
+        paisesConEjercitos.put("b",10);
+        paisesConEjercitos.put("c",40);
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ cantidadEjercito.toString() ) );
+        
     }
 
 }
