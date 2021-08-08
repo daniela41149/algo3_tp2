@@ -222,6 +222,12 @@ public class Juego {
     HashMap<String, Integer> ejercitosSegunContinente = new HashMap<>();
 
 
+    public void activarTarjetaPais (String nombreTarjetaPais) throws JugadaInvalidaException {
+        jugadorEnTurno().activarTarjetaPais(nombreTarjetaPais);
+
+    }
+
+
 
 
 

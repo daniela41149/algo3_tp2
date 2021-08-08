@@ -46,6 +46,17 @@ public class TarjetaPais {
     public boolean sonSimbolosDiferentes(TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
         return !this.simbolo.equals(tarjetaPais1.getSimbolo()) && !this.simbolo.equals(tarjetaPais2.getSimbolo()) && !tarjetaPais1.getSimbolo().equals(tarjetaPais2.getSimbolo());
     }
+/*
+    public void guardarFiguraDeTarjetaPais (String simbolo) {
+        if (simbolo.equals("Comodin")) {
+            this.simbolo = new Comodin();
+        }
+        else {
+            this.simbolo = new Figura(simbolo);
+        }
+    }
+*/
+
 }
 
 
