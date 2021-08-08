@@ -14,8 +14,6 @@ import java.util.List;
 
 public class Juego {
 
-    static final int MIN_JUGADORES = 2;
-    static final int MAX_JUGADORES = 6;
     static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
     static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
     static final int MIN_EJERCITOS_PERMITIDOS_PARA_COLOCAR = 3;
@@ -82,7 +80,7 @@ public class Juego {
         int cantidadTotal = MIN_EJERCITOS_PERMITIDOS_PARA_COLOCAR;
         if (paisesDominados >= 6)
             cantidadTotal = (paisesDominados / 2);
-        cantidadTotal += ejercitosAdicionalesPorContinentesControlados(jugadorEnTurno);
+        cantidadTotal += tablero.ejercitosAdicionalesPorContinentesControlados(jugadorEnTurno);
 
         if (jugadorEnTurno.ejercitosDeCanje() > 0) {
             cantidadTotal += jugadorEnTurno.ejercitosDeCanje();
@@ -176,9 +174,6 @@ public class Juego {
         return (jugador.cumplioObjetivo(tablero));
     }
 
-    private int ejercitosAdicionalesPorContinentesControlados (Jugador jugador){
-        return tablero.ejercitosAdicionalesPorContinentesControlados(jugador);
-    }
 
     public void reagrupar(String nombrePaisDesde, String nombrePaisHasta, int cantidadDeEjercito) {
         List<Pais> paises = jugadorEnTurno().pedirPaises();
@@ -218,14 +213,6 @@ public class Juego {
     }
 
 
-
-    HashMap<String, Integer> ejercitosSegunContinente = new HashMap<>();
-
-
-    public void activarTarjetaPais (String nombreTarjetaPais) throws JugadaInvalidaException {
-        jugadorEnTurno().activarTarjetaPais(nombreTarjetaPais);
-
-    }
 
 
 

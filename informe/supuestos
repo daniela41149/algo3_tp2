@@ -14,3 +14,6 @@ se desactivan.
 
 5) Las tarjetas pais que tienen de simbolo "comodin" valen como tarjetas iguales o diferentes segun le convenga al
 dueño de la tarjeta.
+
+6) Cada jugador puede colocar tantos ejércitos como países domine, dividido 2, pero si tiene un numero impar de paises,
+se redondea para abajo. Por ejemplo, si tiene 7 paises, le corresponden 3 ejercitos y no 4.

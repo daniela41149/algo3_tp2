@@ -46,7 +46,7 @@ public class Continente {
 
     public int ejercitosAdicionalesPorContinentesControlados(Jugador jugador,int ejercitosAdicionales) {
         if (this.jugadorControlaContinente(jugador)){
-            return ejercitosAdicionales += ejercitos;
+            ejercitosAdicionales += ejercitos;
         }
         return ejercitosAdicionales;
 

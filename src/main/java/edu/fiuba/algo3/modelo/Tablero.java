@@ -80,7 +80,7 @@ public class Tablero {
     public int ejercitosAdicionalesPorContinentesControlados(Jugador jugador) {
         int ejercitosAdicionales = 0;
         for (Continente unContinente: this.continentes) {
-            unContinente.ejercitosAdicionalesPorContinentesControlados(jugador,ejercitosAdicionales);
+            ejercitosAdicionales = unContinente.ejercitosAdicionalesPorContinentesControlados(jugador,ejercitosAdicionales);
         }
         return ejercitosAdicionales;
 

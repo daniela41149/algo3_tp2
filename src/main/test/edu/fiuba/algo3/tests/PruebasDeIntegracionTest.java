@@ -554,30 +554,30 @@ public class PruebasDeIntegracionTest {
 
             juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina,listaEjercitosElegidosPorMartina);
 
-            assertEquals(paisesDePedro.get(0).cantidadDeFichas(),3);
-            assertEquals(paisesDePedro.get(1).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(2).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(3).cantidadDeFichas(),3);
-            assertEquals(paisesDePedro.get(4).cantidadDeFichas(),3);
-            assertEquals(paisesDePedro.get(5).cantidadDeFichas(),2);
-            assertEquals(paisesDePedro.get(6).cantidadDeFichas(),2);
-            assertEquals(paisesDePedro.get(7).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(8).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(9).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(10).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(11).cantidadDeFichas(),1);
+            assertEquals(argentina.cantidadDeFichas(),3);
+            assertEquals(brasil.cantidadDeFichas(),1);
+            assertEquals(oregon.cantidadDeFichas(),1);
+            assertEquals(terranova.cantidadDeFichas(),3);
+            assertEquals(australia.cantidadDeFichas(),3);
+            assertEquals(borneo.cantidadDeFichas(),2);
+            assertEquals(españa.cantidadDeFichas(),2);
+            assertEquals(rusia.cantidadDeFichas(),1);
+            assertEquals(india.cantidadDeFichas(),1);
+            assertEquals(arabia.cantidadDeFichas(),1);
+            assertEquals(zaire.cantidadDeFichas(),1);
+            assertEquals(egipto.cantidadDeFichas(),1);
 
-            assertEquals(paisesDeMartina.get(0).cantidadDeFichas(),1);
-            assertEquals(paisesDeMartina.get(1).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(2).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(3).cantidadDeFichas(),1);
-            assertEquals(paisesDeMartina.get(4).cantidadDeFichas(),1);
-            assertEquals(paisesDeMartina.get(5).cantidadDeFichas(),1);
-            assertEquals(paisesDeMartina.get(6).cantidadDeFichas(),1);
-            assertEquals(paisesDeMartina.get(7).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(8).cantidadDeFichas(),3);
-            assertEquals(paisesDeMartina.get(9).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(10).cantidadDeFichas(),3);
+            assertEquals(uruguay.cantidadDeFichas(),1);
+            assertEquals(chile.cantidadDeFichas(),2);
+            assertEquals(nuevaYork.cantidadDeFichas(),2);
+            assertEquals(alaska.cantidadDeFichas(),1);
+            assertEquals(sumatra.cantidadDeFichas(),1);
+            assertEquals(francia.cantidadDeFichas(),1);
+            assertEquals(polonia.cantidadDeFichas(),1);
+            assertEquals(turquia.cantidadDeFichas(),2);
+            assertEquals(iran.cantidadDeFichas(),3);
+            assertEquals(sahara.cantidadDeFichas(),2);
+            assertEquals(etiopia.cantidadDeFichas(),3);
 
 
         } catch (JugadaInvalidaException e1) {
@@ -726,34 +726,53 @@ public class PruebasDeIntegracionTest {
 
             juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorFelipe,listaEjercitosElegidosPorFelipe);
 
-            assertEquals(paisesDePedro.get(0).cantidadDeFichas(),3);
-            assertEquals(paisesDePedro.get(1).cantidadDeFichas(),5);
-            assertEquals(paisesDePedro.get(2).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(3).cantidadDeFichas(),2);
-            assertEquals(paisesDePedro.get(4).cantidadDeFichas(),2);
-            assertEquals(paisesDePedro.get(5).cantidadDeFichas(),1);
-            assertEquals(paisesDePedro.get(6).cantidadDeFichas(),1);
-
-
-            assertEquals(paisesDeMartina.get(0).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(1).cantidadDeFichas(),3);
-            assertEquals(paisesDeMartina.get(2).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(3).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(4).cantidadDeFichas(),3);
-            assertEquals(paisesDeMartina.get(5).cantidadDeFichas(),2);
-            assertEquals(paisesDeMartina.get(6).cantidadDeFichas(),1);
-            assertEquals(paisesDeMartina.get(7).cantidadDeFichas(),1);
-
-            assertEquals(paisesDeFelipe.get(0).cantidadDeFichas(),2);
-            assertEquals(paisesDeFelipe.get(1).cantidadDeFichas(),3);
-            assertEquals(paisesDeFelipe.get(2).cantidadDeFichas(),2);
-            assertEquals(paisesDeFelipe.get(3).cantidadDeFichas(),2);
-            assertEquals(paisesDeFelipe.get(4).cantidadDeFichas(),2);
-            assertEquals(paisesDeFelipe.get(5).cantidadDeFichas(),1);
-            assertEquals(paisesDeFelipe.get(6).cantidadDeFichas(),2);
-            assertEquals(paisesDeFelipe.get(7).cantidadDeFichas(),2);
-
             assertTrue(juego.controlaContiente("Martina", "Asia"));
+
+            juego.colocarEjercito("Oregon",3);
+            juego.colocarEjercito("Iran",11);
+            juego.colocarEjercito("Rusia",4);
+
+            juego.colocarEjercito("Terranova",1);
+            juego.colocarEjercito("España",2);
+
+            juego.colocarEjercito("Arabia",3);
+            juego.colocarEjercito("Sahara",3);
+            juego.colocarEjercito("Egipto",3);
+            juego.pasarTurno();
+
+            juego.colocarEjercito("Nueva York",2);
+            juego.colocarEjercito("Australia",2);
+
+            juego.pasarTurno();
+            juego.reagrupar("Iran","India",6);
+            juego.pasarTurno();
+
+            assertEquals(argentina.cantidadDeFichas(),3);
+            assertEquals(uruguay.cantidadDeFichas(),5);
+            assertEquals(oregon.cantidadDeFichas(),4);
+            assertEquals(terranova.cantidadDeFichas(),3);
+            assertEquals(sumatra.cantidadDeFichas(),2);
+            assertEquals(españa.cantidadDeFichas(),3);
+            assertEquals(etiopia.cantidadDeFichas(),1);
+
+            assertEquals(alaska.cantidadDeFichas(),2);
+            assertEquals(polonia.cantidadDeFichas(),3);
+            assertEquals(turquia.cantidadDeFichas(),2);
+            assertEquals(india.cantidadDeFichas(),8);
+            assertEquals(iran.cantidadDeFichas(),8);
+            assertEquals(arabia.cantidadDeFichas(),5);
+            assertEquals(sahara.cantidadDeFichas(),4);
+            assertEquals(egipto.cantidadDeFichas(),4);
+
+            assertEquals(brasil.cantidadDeFichas(),2);
+            assertEquals(chile.cantidadDeFichas(),3);
+            assertEquals(nuevaYork.cantidadDeFichas(),4);
+            assertEquals(australia.cantidadDeFichas(),4);
+            assertEquals(borneo.cantidadDeFichas(),2);
+            assertEquals(francia.cantidadDeFichas(),1);
+            assertEquals(rusia.cantidadDeFichas(),6);
+            assertEquals(zaire.cantidadDeFichas(),2);
+
 
         } catch (JugadaInvalidaException e1) {
             lanzaExcepcionJugadaInvalida = true;
