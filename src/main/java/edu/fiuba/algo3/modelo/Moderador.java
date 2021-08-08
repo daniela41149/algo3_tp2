@@ -78,7 +78,7 @@ public class Moderador {
                 List<String> parts = Arrays.asList(renglonSinComillas.split(",", 3));
                 String nombrePais = parts.get(0);
                 String continente = parts.get(1);
-                List<String> nombrePaisesLimitrofes = Arrays.asList(parts.get(2));
+                List<String> nombrePaisesLimitrofes = Arrays.asList((parts.get(2).split(",")));
 
                 Pais nuevoPais = new Pais(nombrePais, nombrePaisesLimitrofes);
                 paises.add(nuevoPais);
