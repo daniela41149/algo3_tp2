@@ -25,7 +25,7 @@ public class Moderador {
     static final int EJERCITOS_ADICIONALES_OCEANIA = 2;
 
     static final String RUTA_FRONTERAS = "resources/Fronteras.csv";
-    static final String RUTA_TARJETAS_PAIS = "resources/TarjetasPais.json";
+    static final String RUTA_TARJETAS_PAIS = "resources/TarjetasPais.csv";
     static final String RUTA_OBJETIVOS_OCUPACION = "resources/ObjetivosDeOcupacion.json";
     static final String RUTA_OBJETIVOS_DESTRUCCION = "resources/ObjetivosDeDestruccion.json";
 
@@ -103,33 +103,45 @@ public class Moderador {
         }
     }
 
-    private String leerJson(String rutaArchivo) {
+    private void cargarArchivoTarjetasPais(List<TarjetaPais> tarjetas) throws IOException {
+        String renglon;
+        File archivo = new File (RUTA_TARJETAS_PAIS);
+        FileReader fr = new FileReader(archivo);
+        BufferedReader br = new BufferedReader(fr);
+
+        renglon = br.readLine();
+
+        while(renglon != null){
+            String renglonSinComillas = renglon.replaceAll("\"", "");
+            List<String> parts = Arrays.asList(renglonSinComillas.split(",", 2));
+            String nombre = parts.get(0);
+            String tipoDeSimbolo = parts.get(1);
+
+            TarjetaPais tarjeta = new TarjetaPais(nombre, tipoDeSimbolo);
+            tarjetas.add(tarjeta);
+
+            renglon = br.readLine();
+        }
+        br.close();
+        fr.close();
+    }
+
+    private String leerJson(String rutaArchivo) throws IOException {
         String jsonLeido = "";
 
-        try {
-            BufferedReader buffer = new BufferedReader(new FileReader(rutaArchivo));
+        BufferedReader buffer = new BufferedReader(new FileReader(rutaArchivo));
 
-            String linea;
-            while ((linea = buffer.readLine()) != null) {
-                jsonLeido += linea;
-            }
-
-            buffer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String linea;
+        while ((linea = buffer.readLine()) != null) {
+            jsonLeido += linea;
         }
+
+        buffer.close();
+
         return jsonLeido;
     }
 
-    private void cargarArchivoTarjetasPais(List<TarjetaPais> tarjetas) {
-        Gson gson = new Gson();
-
-        String jsonLeido = leerJson(RUTA_TARJETAS_PAIS);
-        final Type tipoListaTarjetas = new TypeToken<List<TarjetaPais>>(){}.getType();
-        tarjetas.addAll(gson.fromJson(jsonLeido, tipoListaTarjetas));
-    }
-
-    private void cargarArchivoTarjetasObjetivo(List<TarjetaObjetivo> tarjetas){
+    private void cargarArchivoTarjetasObjetivo(List<TarjetaObjetivo> tarjetas) throws IOException {
         Gson gson = new Gson();
 
         String jsonLeidoDeOcupacion = leerJson(RUTA_OBJETIVOS_OCUPACION);
