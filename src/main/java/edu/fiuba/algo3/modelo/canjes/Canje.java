@@ -37,6 +37,7 @@ public class Canje {
     }
 
     private void calcularEjercitosSegunNumeroDeCanje (int numeroDeCanje) {
+
         if (numeroDeCanje == PRIMER_CANJE) {
             this.ejercitos = PRIMER_CANJE_EJERCITOS;
         }
@@ -48,8 +49,9 @@ public class Canje {
         }
     }
 
+
     public boolean solicitarUnCanje(Jugador jugador, List<TarjetaPais> tarjetasPais) {
-        if(tarjetasPaisParaCanjear.get(0).esElMismoSimbolo(tarjetasPaisParaCanjear.get(1), tarjetasPaisParaCanjear.get(2)) || tarjetasPaisParaCanjear.get(0).sonSimbolosDiferentes(tarjetasPaisParaCanjear.get(1), tarjetasPaisParaCanjear.get(2) ))  {
+        if(tarjetasPaisParaCanjear.get(0).puedeCanjear(tarjetasPaisParaCanjear.get(1), tarjetasPaisParaCanjear.get(2)))  {
             this.desactivarTarjetas(tarjetasPaisParaCanjear);
             canjes.devolverTarjetasAlMazo(jugador,tarjetasPaisParaCanjear,tarjetasPais);
             jugador.entregarEjercitosDeCanje(ejercitos);

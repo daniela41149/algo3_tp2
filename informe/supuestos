@@ -9,5 +9,8 @@ algunos jugadores van a tener 1 país más que otros.
 3) El jugador puede pasar el turno o colocar una cantidad de ejercitos menor que la que le corresponde poner.
 Por ejemplo, si el juego le permite poner 3 ejercitos, el jugador podria poner solo 1 ejercito y pasar de turno.
 
-4) Las tarjetas pueden canjearse estando activadas o no, pero al canjearse (vuelven al mazo) las que estaban activadas
+4) Las tarjetas pais pueden canjearse estando activadas o no, pero al canjearse (vuelven al mazo) las que estaban activadas
 se desactivan.
+
+5) Las tarjetas pais que tienen de simbolo "comodin" valen como tarjetas iguales o diferentes segun le convenga al
+dueño de la tarjeta.

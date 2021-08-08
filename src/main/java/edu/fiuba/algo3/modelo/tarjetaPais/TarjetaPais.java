@@ -38,12 +38,16 @@ public class TarjetaPais {
     }
 
 
-    public boolean esElMismoSimbolo(TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
-        return this.simbolo.equals(tarjetaPais1.getSimbolo()) && this.simbolo.equals(tarjetaPais2.getSimbolo());
+    private boolean esElMismoSimbolo(Simbolo simbolo1, Simbolo simbolo2) {
+        return this.simbolo.esElMismoSimbolo(simbolo1) && this.simbolo.esElMismoSimbolo(simbolo2);
     }
 
-    public boolean sonSimbolosDiferentes(TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
-        return !this.simbolo.equals(tarjetaPais1.getSimbolo()) && !this.simbolo.equals(tarjetaPais2.getSimbolo()) && !tarjetaPais1.getSimbolo().equals(tarjetaPais2.getSimbolo());
+    private boolean sonSimbolosDiferentes(Simbolo simbolo1, Simbolo simbolo2) {
+        return this.simbolo.sonSimbolosDiferentes(simbolo1) && this.simbolo.sonSimbolosDiferentes(simbolo2) && simbolo1.sonSimbolosDiferentes(simbolo2);
+    }
+
+    public boolean puedeCanjear (TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
+        return this.esElMismoSimbolo(tarjetaPais1.getSimbolo(),tarjetaPais2.getSimbolo()) || this.sonSimbolosDiferentes(tarjetaPais1.getSimbolo(),tarjetaPais2.getSimbolo());
     }
 
     private void guardarSimboloDeTarjetaPais (String simbolo) {
