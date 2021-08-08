@@ -1,202 +1,202 @@
 [
  {
    "nombre": "Francia",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Gran Bretaña",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Tartaria",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Mongolia",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Zaire",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Polonia",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Oregon",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Etiopia",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Chile",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Australia",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Kamtchatka",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Egipto",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Turquia",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Nueva York",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Terranova",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Iran",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Madagascar",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Argentina",
-   "simbolo": "Comodin"
+   "tipoDeSimbolo": "Comodin"
  },
  {
    "nombre": "Israel",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Rusia",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Borneo",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "California",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Taymir",
-   "simbolo": "Comodin"
+   "tipoDeSimbolo": "Comodin"
  },
  {
    "nombre": "Aral",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Siberia",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Canada",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Sahara",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Yukon",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Uruguay",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Groenlandia",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Japon",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Sumatra",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Alaska",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Brasil",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Gobi",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Italia",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "España",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Colombia",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Suecia",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Sudafrica",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Arabia",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "India",
-   "simbolo": "Globo"
+   "tipoDeSimbolo": "Globo"
  },
  {
    "nombre": "Java",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Mexico",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Peru",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Alemania",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "China",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Labrador",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  },
  {
    "nombre": "Islandia",
-   "simbolo": "Barco"
+   "tipoDeSimbolo": "Barco"
  },
  {
    "nombre": "Malasia",
-   "simbolo": "Cañon"
+   "tipoDeSimbolo": "Cañon"
  }
 ]

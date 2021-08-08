@@ -6,23 +6,21 @@ import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 public class TarjetaPais {
 
     private String nombre;
-    private String simbolo;
-    private Simbolo tipoDeSimbolo;
+    private Simbolo simbolo;
     private EstadoTarjetaPais estadoTarjeta;
 
-    public TarjetaPais(String nombre, String simbolo) {
+    public TarjetaPais(String nombre, String tipoDeSimbolo) {
 
         this.nombre = nombre;
-        this.simbolo = simbolo;
         this.estadoTarjeta = new Desactivada();
-
+        guardarSimboloDeTarjetaPais(tipoDeSimbolo);
     }
 
     public String getNombre() {
         return this.nombre;
     }
 
-    public String getSimbolo() {
+    public Simbolo getSimbolo() {
         return this.simbolo;
     }
 
@@ -47,16 +45,15 @@ public class TarjetaPais {
     public boolean sonSimbolosDiferentes(TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
         return !this.simbolo.equals(tarjetaPais1.getSimbolo()) && !this.simbolo.equals(tarjetaPais2.getSimbolo()) && !tarjetaPais1.getSimbolo().equals(tarjetaPais2.getSimbolo());
     }
-/*
+
     private void guardarSimboloDeTarjetaPais (String simbolo) {
         if (simbolo.equals("Comodin")) {
-            this.tipoDeSimbolo = new Comodin();
-        }
-        else {
-            this.tipoDeSimbolo = new Figura(simbolo);
+            this.simbolo = new Comodin();
+        } else {
+            this.simbolo = new Figura(simbolo);
         }
     }
-*/
+
 
 }
 
