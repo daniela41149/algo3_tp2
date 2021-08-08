@@ -7,6 +7,7 @@ public class TarjetaPais {
 
     private String nombre;
     private String simbolo;
+    private Simbolo tipoDeSimbolo;
     private EstadoTarjetaPais estadoTarjeta;
 
     public TarjetaPais(String nombre, String simbolo) {
@@ -49,10 +50,10 @@ public class TarjetaPais {
 /*
     private void guardarSimboloDeTarjetaPais (String simbolo) {
         if (simbolo.equals("Comodin")) {
-            this.simbolo = new Comodin();
+            this.tipoDeSimbolo = new Comodin();
         }
         else {
-            this.simbolo = new Figura(simbolo);
+            this.tipoDeSimbolo = new Figura(simbolo);
         }
     }
 */
