@@ -44,11 +44,11 @@ public class Continente {
         return paises.size();
     }
 
-    public int ejercitosAdicionalesPorContinentesControlados(Jugador jugador,int ejercitosAdicionales) {
+    public int ejercitosAdicionalesPorContinentesControlados(Jugador jugador,int sumaEjercitos) {
         if (this.jugadorControlaContinente(jugador)){
-            ejercitosAdicionales += ejercitos;
+            sumaEjercitos += ejercitos;
         }
-        return ejercitosAdicionales;
+        return sumaEjercitos;
 
     }
 

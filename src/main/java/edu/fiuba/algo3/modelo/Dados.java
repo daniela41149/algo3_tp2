@@ -50,7 +50,7 @@ public class Dados {
         return lanzarDadosConCantidad(cantidadDeDados);
     }
 
-    public List<Integer> lanzarDadosConCantidad(int cantidadDeDados){
+    private List<Integer> lanzarDadosConCantidad(int cantidadDeDados){
 
         if(cantidadDeDados >= MAX_DADOS_DEFENSA){
             return lanzarDados(3);
