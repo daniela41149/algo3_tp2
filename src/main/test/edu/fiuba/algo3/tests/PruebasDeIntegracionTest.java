@@ -476,7 +476,6 @@ public class PruebasDeIntegracionTest {
         paisesDeMartina.add(etiopia);
         paisesDePedro.add(egipto);
 
-
         List<List<Pais>> listaPaisesRepartidos = new ArrayList<>();
         listaPaisesRepartidos.add(paisesDePedro);
         listaPaisesRepartidos.add(paisesDeMartina);
@@ -486,7 +485,6 @@ public class PruebasDeIntegracionTest {
         when(mockedAleatorio.repartirPaisesAleatoriamente(anyInt(), any())).thenReturn(listaPaisesRepartidos);
         when(mockedAleatorio.elegirPosicionDelJugadorQueEmpieza(anyInt())).thenReturn(0);
         when(mockedAleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo)).thenReturn(aleatorio.agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetasObjetivo));
-
 
         boolean lanzaExcepcionJugadaInvalida = false;
         boolean lanzaExcepcionCantidadInvalidaDeEjercitos = false;
@@ -499,60 +497,27 @@ public class PruebasDeIntegracionTest {
             juego.comenzarFaseInicial(mockedAleatorio);
 
             // cada jugador coloca 5 ejercitos en los paises que quiere.
+            //Pedro
+            juego.colocarEjercitoPrimeraVuelta("Argentina", 2);
+            juego.colocarEjercitoPrimeraVuelta("Australia", 1);
+            juego.colocarEjercitoPrimeraVuelta("Borneo", 1);
+            juego.colocarEjercitoPrimeraVuelta("España", 1);
+            //Martina
+            juego.colocarEjercitoPrimeraVuelta("Chile", 1);
+            juego.colocarEjercitoPrimeraVuelta("Nueva York", 1);
+            juego.colocarEjercitoPrimeraVuelta("Turquia", 1);
+            juego.colocarEjercitoPrimeraVuelta("Iran", 1);
+            juego.colocarEjercitoPrimeraVuelta("Etiopia", 1);
 
-            List<String> listaPaisesParaColocarEjercitosElegidosPorPedro = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorPedro = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Argentina");
-            listaEjercitosElegidosPorPedro.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Australia");
-            listaEjercitosElegidosPorPedro.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Borneo");
-            listaEjercitosElegidosPorPedro.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("España");
-            listaEjercitosElegidosPorPedro.add(1);
-
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorPedro,listaEjercitosElegidosPorPedro);
-
-            List<String> listaPaisesParaColocarEjercitosElegidosPorMartina = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorMartina = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Chile");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Nueva York");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Turquia");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Iran");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Etiopia");
-            listaEjercitosElegidosPorMartina.add(1);
-
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina,listaEjercitosElegidosPorMartina);
 
             //cada jugador coloca 3 ejercitos en los paises que quiere.
-
-            listaPaisesParaColocarEjercitosElegidosPorPedro = new ArrayList<>();
-            listaEjercitosElegidosPorPedro = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Terranova");
-            listaEjercitosElegidosPorPedro.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Australia");
-            listaEjercitosElegidosPorPedro.add(1);
-
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorPedro,listaEjercitosElegidosPorPedro);
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina = new ArrayList<>();
-            listaEjercitosElegidosPorMartina = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Iran");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Sahara");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Etiopia");
-            listaEjercitosElegidosPorMartina.add(1);
-
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina,listaEjercitosElegidosPorMartina);
+            //Pedro
+            juego.colocarEjercitoSegundaVuelta("Terranova", 2);
+            juego.colocarEjercitoSegundaVuelta("Australia", 1);
+            //Martina
+            juego.colocarEjercitoSegundaVuelta("Iran", 1);
+            juego.colocarEjercitoSegundaVuelta("Sahara", 1);
+            juego.colocarEjercitoSegundaVuelta("Etiopia", 1);
 
             assertEquals(argentina.cantidadDeFichas(),3);
             assertEquals(brasil.cantidadDeFichas(),1);
@@ -578,7 +543,6 @@ public class PruebasDeIntegracionTest {
             assertEquals(iran.cantidadDeFichas(),3);
             assertEquals(sahara.cantidadDeFichas(),2);
             assertEquals(etiopia.cantidadDeFichas(),3);
-
 
         } catch (JugadaInvalidaException e1) {
             lanzaExcepcionJugadaInvalida = true;
@@ -652,79 +616,37 @@ public class PruebasDeIntegracionTest {
 
             // cada jugador coloca 5 ejercitos en los paises que quiere.
 
-            List<String> listaPaisesParaColocarEjercitosElegidosPorPedro  = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorPedro = new ArrayList<>();
+            //Pedro
+            juego.colocarEjercitoPrimeraVuelta("Argentina", 2);
+            juego.colocarEjercitoPrimeraVuelta("Uruguay", 1);
+            juego.colocarEjercitoPrimeraVuelta("Terranova", 1);
+            juego.colocarEjercitoPrimeraVuelta("Sumatra", 1);
 
-            listaPaisesParaColocarEjercitosElegidosPorPedro .add("Argentina");
-            listaEjercitosElegidosPorPedro.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorPedro .add("Uruguay");
-            listaEjercitosElegidosPorPedro.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorPedro .add("Terranova");
-            listaEjercitosElegidosPorPedro.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorPedro .add("Sumatra");
-            listaEjercitosElegidosPorPedro.add(1);
+            //Martina
+            juego.colocarEjercitoPrimeraVuelta("Polonia", 2);
+            juego.colocarEjercitoPrimeraVuelta("Iran", 2);
+            juego.colocarEjercitoPrimeraVuelta("India", 1);
 
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorPedro ,listaEjercitosElegidosPorPedro);
-
-            List<String> listaPaisesParaColocarEjercitosElegidosPorMartina = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorMartina = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Polonia");
-            listaEjercitosElegidosPorMartina.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Iran");
-            listaEjercitosElegidosPorMartina.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("India");
-            listaEjercitosElegidosPorMartina.add(1);
-
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina,listaEjercitosElegidosPorMartina);
-
-            List<String> listaPaisesParaColocarEjercitosElegidosPorFelipe = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorFelipe = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Brasil");
-            listaEjercitosElegidosPorFelipe.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Borneo");
-            listaEjercitosElegidosPorFelipe.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Nueva York");
-            listaEjercitosElegidosPorFelipe.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Rusia");
-            listaEjercitosElegidosPorFelipe.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Zaire");
-            listaEjercitosElegidosPorFelipe.add(1);
-
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorFelipe,listaEjercitosElegidosPorFelipe);
+            //Felipe
+            juego.colocarEjercitoPrimeraVuelta("Brasil", 1);
+            juego.colocarEjercitoPrimeraVuelta("Borneo", 1);
+            juego.colocarEjercitoPrimeraVuelta("Nueva York", 1);
+            juego.colocarEjercitoPrimeraVuelta("Rusia", 1);
+            juego.colocarEjercitoPrimeraVuelta("Zaire", 1);
 
             // cada jugador coloca 3 ejercitos en los paises que quiere.
 
-            listaPaisesParaColocarEjercitosElegidosPorPedro  = new ArrayList<>();
-            listaEjercitosElegidosPorPedro = new ArrayList<>();
+            //Pedro
+            juego.colocarEjercitoSegundaVuelta("Uruguay", 3);
 
-            listaPaisesParaColocarEjercitosElegidosPorPedro .add("Uruguay");
-            listaEjercitosElegidosPorPedro.add(3);
+            //Martina
+            juego.colocarEjercitoSegundaVuelta("Alaska", 1);
+            juego.colocarEjercitoSegundaVuelta("Turquia", 1);
+            juego.colocarEjercitoSegundaVuelta("Arabia", 1);
 
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorPedro,listaEjercitosElegidosPorPedro);
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina = new ArrayList<>();
-            listaEjercitosElegidosPorMartina = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Alaska");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Turquia");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Arabia");
-            listaEjercitosElegidosPorMartina.add(1);
-
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina,listaEjercitosElegidosPorMartina);
-
-            listaPaisesParaColocarEjercitosElegidosPorFelipe = new ArrayList<>();
-            listaEjercitosElegidosPorFelipe = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Chile");
-            listaEjercitosElegidosPorFelipe.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorFelipe.add("Australia");
-            listaEjercitosElegidosPorFelipe.add(1);
-
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorFelipe,listaEjercitosElegidosPorFelipe);
+            //Felipe
+            juego.colocarEjercitoSegundaVuelta("Chile", 2);
+            juego.colocarEjercitoSegundaVuelta("Australia", 1);
 
             assertTrue(juego.controlaContiente("Martina", "Asia"));
 
@@ -773,7 +695,6 @@ public class PruebasDeIntegracionTest {
             assertEquals(rusia.cantidadDeFichas(),6);
             assertEquals(zaire.cantidadDeFichas(),2);
 
-
         } catch (JugadaInvalidaException e1) {
             lanzaExcepcionJugadaInvalida = true;
         } catch (CantidadInvalidaDeEjercitosException e2){
@@ -781,8 +702,6 @@ public class PruebasDeIntegracionTest {
         }
         assertFalse(lanzaExcepcionJugadaInvalida);
         assertFalse(lanzaExcepcionCantidadInvalidaDeEjercitos);
-
-
     }
 
     @Test
@@ -844,62 +763,31 @@ public class PruebasDeIntegracionTest {
 
             // cada jugador coloca 5 ejercitos en los paises que quiere.
 
-            List<String> listaPaisesParaColocarEjercitosElegidosPorPedro = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorPedro = new ArrayList<>();
+            //Pedro
+            juego.colocarEjercitoPrimeraVuelta("Argentina", 2);
+            juego.colocarEjercitoPrimeraVuelta("Australia", 1);
+            juego.colocarEjercitoPrimeraVuelta("Borneo", 1);
+            juego.colocarEjercitoPrimeraVuelta("España", 1);
 
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Argentina");
-            listaEjercitosElegidosPorPedro.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Australia");
-            listaEjercitosElegidosPorPedro.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Borneo");
-            listaEjercitosElegidosPorPedro.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("España");
-            listaEjercitosElegidosPorPedro.add(1);
-
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorPedro, listaEjercitosElegidosPorPedro);
-
-            List<String> listaPaisesParaColocarEjercitosElegidosPorMartina = new ArrayList<>();
-            List<Integer> listaEjercitosElegidosPorMartina = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Chile");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Nueva York");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Turquia");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Iran");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Etiopia");
-            listaEjercitosElegidosPorMartina.add(1);
-
-            juego.colocarEjercitoPrimeraVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina, listaEjercitosElegidosPorMartina);
+            //Martina
+            juego.colocarEjercitoPrimeraVuelta("Chile", 1);
+            juego.colocarEjercitoPrimeraVuelta("Nueva York", 1);
+            juego.colocarEjercitoPrimeraVuelta("Turquia", 1);
+            juego.colocarEjercitoPrimeraVuelta("Iran", 1);
+            juego.colocarEjercitoPrimeraVuelta("Etiopia", 1);
 
             //cada jugador coloca 3 ejercitos en los paises que quiere.
 
-            listaPaisesParaColocarEjercitosElegidosPorPedro = new ArrayList<>();
-            listaEjercitosElegidosPorPedro = new ArrayList<>();
+            //Pedro
+            juego.colocarEjercitoSegundaVuelta("Terranova", 2);
+            juego.colocarEjercitoSegundaVuelta("Australia", 1);
 
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Terranova");
-            listaEjercitosElegidosPorPedro.add(2);
-            listaPaisesParaColocarEjercitosElegidosPorPedro.add("Australia");
-            listaEjercitosElegidosPorPedro.add(1);
-
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorPedro, listaEjercitosElegidosPorPedro);
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina = new ArrayList<>();
-            listaEjercitosElegidosPorMartina = new ArrayList<>();
-
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Iran");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Sahara");
-            listaEjercitosElegidosPorMartina.add(1);
-            listaPaisesParaColocarEjercitosElegidosPorMartina.add("Etiopia");
-            listaEjercitosElegidosPorMartina.add(1);
-
-            juego.colocarEjercitoSegundaVuelta(listaPaisesParaColocarEjercitosElegidosPorMartina, listaEjercitosElegidosPorMartina);
+            //Martina
+            juego.colocarEjercitoSegundaVuelta("Iran", 1);
+            juego.colocarEjercitoSegundaVuelta("Sahara", 1);
+            juego.colocarEjercitoSegundaVuelta("Etiopia", 1);
 
             // JUGADOR 1 ATACA Y CONQUISTA 1 PAIS DE JUGADOR 2
-
             List<Integer> dadosAtaque = new ArrayList<>();
             dadosAtaque.add(5);
             dadosAtaque.add(5);

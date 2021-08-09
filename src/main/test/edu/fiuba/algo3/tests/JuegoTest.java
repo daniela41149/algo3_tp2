@@ -164,33 +164,35 @@ public class JuegoTest {
     }
 
     @Test
-    public void test08NoSePuedeColocarMasDe5EjercitosEnLaPrimeraVuelta() throws JugadaInvalidaException {
+    public void test08NoSePuedeColocarMasDe5EjercitosEnLaPrimeraVuelta() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         Juego juego = new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), nombresDeCincoJugadores);
 
         juego.guardarMazoDeTarjetasPais(moderador.pedirTarjetasPais());
         juego.guardarMazoDeTarjetasObjetivo(moderador.pedirTarjetasObjetivo());
         juego.comenzarFaseInicial(aleatorio);
 
-        List<String> paisesAColocar = new ArrayList<>();
-        List<Integer> cantidadPorPais = new ArrayList<>();
-        cantidadPorPais.add(6);
+        List<Pais> paisesJugadorEnTurno = juego.jugadorEnTurno().pedirPaises();
+        juego.colocarEjercitoPrimeraVuelta(paisesJugadorEnTurno.get(0).getNombre(), 1);
+        juego.colocarEjercitoPrimeraVuelta(paisesJugadorEnTurno.get(1).getNombre(), 1);
+        juego.colocarEjercitoPrimeraVuelta(paisesJugadorEnTurno.get(2).getNombre(), 1);
+        juego.colocarEjercitoPrimeraVuelta(paisesJugadorEnTurno.get(3).getNombre(), 1);
 
-        assertThrows(CantidadInvalidaDeEjercitosException.class, () -> juego.colocarEjercitoPrimeraVuelta(paisesAColocar, cantidadPorPais));
+        assertThrows(CantidadInvalidaDeEjercitosException.class, () -> juego.colocarEjercitoPrimeraVuelta(paisesJugadorEnTurno.get(5).getNombre(), 2));
     }
 
     @Test
-    public void test09NoSePuedeColocarMasDe3EjercitosEnLaSegundaVuelta() throws JugadaInvalidaException {
+    public void test09NoSePuedeColocarMasDe3EjercitosEnLaSegundaVuelta() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         Juego juego = new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), nombresDeCincoJugadores);
 
         juego.guardarMazoDeTarjetasPais(moderador.pedirTarjetasPais());
         juego.guardarMazoDeTarjetasObjetivo(moderador.pedirTarjetasObjetivo());
         juego.comenzarFaseInicial(aleatorio);
 
-        List<String> paisesAColocar = new ArrayList<>();
-        List<Integer> cantidadPorPais = new ArrayList<>();
-        cantidadPorPais.add(4);
+        List<Pais> paisesJugadorEnTurno = juego.jugadorEnTurno().pedirPaises();
+        juego.colocarEjercitoSegundaVuelta(paisesJugadorEnTurno.get(0).getNombre(), 1);
+        juego.colocarEjercitoSegundaVuelta(paisesJugadorEnTurno.get(1).getNombre(), 1);
 
-        assertThrows(CantidadInvalidaDeEjercitosException.class, () -> juego.colocarEjercitoSegundaVuelta(paisesAColocar, cantidadPorPais));
+        assertThrows(CantidadInvalidaDeEjercitosException.class, () -> juego.colocarEjercitoSegundaVuelta(paisesJugadorEnTurno.get(3).getNombre(), 2));
     }
 
     @Test
@@ -201,20 +203,17 @@ public class JuegoTest {
         juego.guardarMazoDeTarjetasObjetivo(moderador.pedirTarjetasObjetivo());
         juego.comenzarFaseInicial(aleatorio);
 
-        Jugador jugador1 = juego.jugadorEnTurno();
-        List<Pais> paisesJugador1 = jugador1.pedirPaises();
-        List<String> paisesAColocarEjercitosDeJugador1 = new ArrayList<>();
-        paisesAColocarEjercitosDeJugador1.add(paisesJugador1.get(0).getNombre());
-        paisesAColocarEjercitosDeJugador1.add(paisesJugador1.get(1).getNombre());
-        List<Integer> cantidadPorPais = new ArrayList<>();
-        cantidadPorPais.add(3);
-        cantidadPorPais.add(2);
-        juego.colocarEjercitoPrimeraVuelta(paisesAColocarEjercitosDeJugador1, cantidadPorPais);
+        Jugador jugador = juego.jugadorEnTurno();
+        List<Pais> paisesJugador = jugador.pedirPaises();
 
-        assertTrue(paisesJugador1.get(0).esElDueño(jugador1));
-        assertEquals( 4, paisesJugador1.get(0).cantidadDeFichas());
-        assertTrue(paisesJugador1.get(1).esElDueño(jugador1));
-        assertEquals( 3, paisesJugador1.get(1).cantidadDeFichas());
+        juego.colocarEjercitoPrimeraVuelta(paisesJugador.get(0).getNombre(), 3);
+        juego.colocarEjercitoPrimeraVuelta(paisesJugador.get(1).getNombre(), 2);
+
+        assertTrue(paisesJugador.get(0).esElDueño(jugador));
+        assertEquals( 4, paisesJugador.get(0).cantidadDeFichas());
+        assertTrue(paisesJugador.get(1).esElDueño(jugador));
+        assertEquals( 3, paisesJugador.get(1).cantidadDeFichas());
+        assertNotEquals(jugador, juego.jugadorEnTurno());
     }
 
     @Test
@@ -225,21 +224,17 @@ public class JuegoTest {
         juego.guardarMazoDeTarjetasObjetivo(moderador.pedirTarjetasObjetivo());
         juego.comenzarFaseInicial(aleatorio);
 
-        Jugador jugador1 = juego.jugadorEnTurno();
+        Jugador jugador = juego.jugadorEnTurno();
+        List<Pais> paisesJugador = jugador.pedirPaises();
 
-        List<Pais> paisesJugador1 = jugador1.pedirPaises();
-        List<String> paisesAColocarEjercitosDeJugador1 = new ArrayList<>();
-        paisesAColocarEjercitosDeJugador1.add(paisesJugador1.get(0).getNombre());
-        paisesAColocarEjercitosDeJugador1.add(paisesJugador1.get(1).getNombre());
-        List<Integer> cantidadPorPais = new ArrayList<>();
-        cantidadPorPais.add(1);
-        cantidadPorPais.add(2);
-        juego.colocarEjercitoSegundaVuelta(paisesAColocarEjercitosDeJugador1, cantidadPorPais);
+        juego.colocarEjercitoSegundaVuelta(paisesJugador.get(0).getNombre(), 1);
+        juego.colocarEjercitoSegundaVuelta(paisesJugador.get(1).getNombre(), 2);
 
-        assertTrue(paisesJugador1.get(0).esElDueño(jugador1));
-        assertEquals( 2, paisesJugador1.get(0).cantidadDeFichas());
-        assertTrue(paisesJugador1.get(1).esElDueño(jugador1));
-        assertEquals( 3, paisesJugador1.get(1).cantidadDeFichas());
+        assertTrue(paisesJugador.get(0).esElDueño(jugador));
+        assertEquals( 2, paisesJugador.get(0).cantidadDeFichas());
+        assertTrue(paisesJugador.get(1).esElDueño(jugador));
+        assertEquals( 3, paisesJugador.get(1).cantidadDeFichas());
+        assertNotEquals(jugador, juego.jugadorEnTurno());
     }
 
 }
