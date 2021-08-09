@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.Aleatorio;
+import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaObjetivo.TarjetaObjetivo;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import javafx.event.ActionEvent;
@@ -136,5 +137,18 @@ public class ControladorMenuJugador{
         listaLimitrofes.getItems().clear();
         listaLimitrofes.getItems().add( "sdfsdf");
     }
+
+    private List<String> mostrarPaisesLimitrofes(String nombrePais) {
+        List<String> paisesLimitrofes = new ArrayList<>();
+        List<Pais> paises = juego.devolverPaises();
+        for (Pais unPais: paises) {
+            if (juego.jugadorEnTurno().buscarPais(nombrePais).esLimitrofe(unPais)) {
+                paisesLimitrofes.add(unPais.getNombre());
+            }
+        }
+        return paisesLimitrofes;
+    }
+
+
 
 }

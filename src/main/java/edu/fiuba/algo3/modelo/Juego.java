@@ -203,6 +203,10 @@ public class Juego {
         }
     }
 
+    public List<Pais> devolverPaises(){
+        return tablero.pasarPaisesAJuego();
+    }
+
     public HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
         List<Pais> listaPaises = this.jugadorEnTurno().pedirPaises();
         HashMap<String,Integer> diccionario = new HashMap<>();
