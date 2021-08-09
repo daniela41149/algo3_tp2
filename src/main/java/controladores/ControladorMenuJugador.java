@@ -57,6 +57,9 @@ public class ControladorMenuJugador implements Initializable {
     @FXML
     private Button botonArranque;
 
+    @FXML
+    private Button botonColocarEjercito;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -80,6 +83,11 @@ public class ControladorMenuJugador implements Initializable {
     void cargarJuego(ActionEvent event) throws IOException, JugadaInvalidaException {
         iniciarJuego();
         botonArranque.setVisible(false);
+    }
+
+    @FXML
+    void colocarEjercito(ActionEvent event) {
+
     }
 
     public void levantarVentanaDados() throws IOException {

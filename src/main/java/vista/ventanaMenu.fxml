@@ -23,7 +23,7 @@
                         <SepiaTone />
                      </effect>
                   </Label>
-                  <Button fx:id="botonAtacar" mnemonicParsing="false" onAction="#atacar" prefHeight="73.0" prefWidth="245.0" text="Atacar">
+                  <Button fx:id="botonAtacar" mnemonicParsing="false" onAction="#atacar" prefHeight="73.0" prefWidth="196.0" text="Atacar">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -34,7 +34,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonReagrupar" mnemonicParsing="false" prefHeight="74.0" prefWidth="257.0" text="Reagrupar Ejercito">
+                  <Button fx:id="botonReagrupar" mnemonicParsing="false" prefHeight="74.0" prefWidth="190.0" text="Reagrupar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -42,7 +42,15 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonPasar" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="272.0" text="Pasar Turno">
+                  <Button fx:id="botonPasar" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="203.0" text="Pasar Turno">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botonColocarEjercito" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="73.0" prefWidth="196.0" text="Agregar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -64,10 +72,13 @@
             <SepiaTone />
          </effect>
       </ListView>
-      <Button fx:id="botonArranque" layoutX="241.0" layoutY="196.0" mnemonicParsing="false" onAction="#cargarJuego" prefHeight="297.0" prefWidth="582.0" text="Buena Suerte!" textFill="#c3531c">
+      <Button fx:id="botonArranque" layoutX="241.0" layoutY="196.0" mnemonicParsing="false" onAction="#cargarJuego" prefHeight="297.0" prefWidth="582.0" text="Comenzar!" textFill="#c3531c">
          <font>
             <Font size="56.0" />
          </font>
+         <effect>
+            <SepiaTone />
+         </effect>
       </Button>
    </children>
 </AnchorPane>
