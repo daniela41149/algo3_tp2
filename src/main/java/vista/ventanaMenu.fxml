@@ -42,7 +42,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonPasar" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="203.0" text="Pasar Turno">
+                  <Button fx:id="botonColocarEjercito" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="73.0" prefWidth="196.0" text="Agregar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -50,7 +50,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonColocarEjercito" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="73.0" prefWidth="196.0" text="Agregar Ejercito">
+                  <Button fx:id="botonPasar" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="203.0" text="Pasar Turno">
                      <effect>
                         <SepiaTone />
                      </effect>
