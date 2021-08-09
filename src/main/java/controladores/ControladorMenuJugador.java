@@ -124,11 +124,11 @@ public class ControladorMenuJugador{
     }
 
     private void mostrarJugadorActual(){
-        nombreJugador.setText( juego.nombreJugadorActual() );
+        nombreJugador.setText( nombreJugadorActual() );
     }
 
     private void mostrarPaisesActuales(){
-        paisesConEjercitos = juego.nombrePaisesYEjercitosDeJugadorActual();
+        paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
         paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
     }
 
@@ -148,6 +148,22 @@ public class ControladorMenuJugador{
         }
         return paisesLimitrofes;
     }
+
+    private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
+        List<Pais> listaPaises = juego.jugadorEnTurno().pedirPaises();
+        HashMap<String,Integer> diccionario = new HashMap<>();
+        for(Pais unPais: listaPaises){
+            diccionario.put(unPais.getNombre(),unPais.cantidadDeFichas());
+        }
+        return diccionario;
+    }
+
+    private String nombreJugadorActual() {
+        return juego.jugadorEnTurno().getNombre();
+    }
+
+
+
 
 
 
