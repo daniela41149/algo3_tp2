@@ -122,11 +122,7 @@ public class ControladorMenuJugador implements Initializable {
 
     private void mostrarPaisesLimitrofesActuales(){
         paisesConEjercitos = juego.nombrePaisesYEjercitosDeJugadorActual();
-        paisesConEjercitos.put("a",20);
-        paisesConEjercitos.put("b",10);
-        paisesConEjercitos.put("c",40);
         paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
-        
     }
 
 }
