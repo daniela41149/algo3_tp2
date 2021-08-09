@@ -74,6 +74,7 @@ public class ControladorMenuJugador{
         levantarVentanaDados();
         ControladorDados controladorDados = obtenerControladorDados();
         controladorDados.asignarFichas(2, 4);
+        refrescarDatosEnPantalla();
     }
 
     @FXML
@@ -132,6 +133,7 @@ public class ControladorMenuJugador{
 
     @FXML
     void mostrarLimitrofes(MouseEvent event) {
+        listaLimitrofes.getItems().clear();
         listaLimitrofes.getItems().add( "sdfsdf");
     }
 
