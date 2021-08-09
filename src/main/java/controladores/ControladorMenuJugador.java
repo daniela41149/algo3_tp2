@@ -2,6 +2,8 @@ package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.Aleatorio;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -31,6 +32,7 @@ public class ControladorMenuJugador implements Initializable {
     FXMLLoader loader;
     ArrayList<String> jugadores = new ArrayList<>();
     Moderador moderador;
+    Aleatorio aleatorio = new Aleatorio();
 
     @FXML
     private Label nombreJugador;
@@ -69,7 +71,7 @@ public class ControladorMenuJugador implements Initializable {
     }
 
     @FXML
-    void cargarJuego(ActionEvent event) throws IOException {
+    void cargarJuego(ActionEvent event) throws IOException, JugadaInvalidaException {
         iniciarJuego();
         botonArranque.setVisible(false);
     }
@@ -92,9 +94,10 @@ public class ControladorMenuJugador implements Initializable {
         jugadores = nombresJugadores;
     }
 
-    public void iniciarJuego() throws IOException{
+    public void iniciarJuego() throws IOException, JugadaInvalidaException{
         moderador = new Moderador();
         juego = new Juego(moderador.pedirPaises(),moderador.pedirContinentes(),jugadores);
+        juego.comenzarFaseInicial(aleatorio);
         refrescarDatosEnPantalla();
     }
 
