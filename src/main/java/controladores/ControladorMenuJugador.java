@@ -9,23 +9,21 @@ import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ResourceBundle;
 
 
-public class ControladorMenuJugador implements Initializable {
+public class ControladorMenuJugador{
 
     private HashMap<String, Integer> paisesConEjercitos;
     private Juego juego;
@@ -55,15 +53,13 @@ public class ControladorMenuJugador implements Initializable {
     private ListView<String> listaPaises;
 
     @FXML
+    private ListView<String> listaLimitrofes;
+
+    @FXML
     private Button botonArranque;
 
     @FXML
     private Button botonColocarEjercito;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-    }
 
     @FXML
     void pasarTurno(ActionEvent event) {
@@ -74,9 +70,10 @@ public class ControladorMenuJugador implements Initializable {
 
     @FXML
     void atacar(ActionEvent event) throws IOException {
-       levantarVentanaDados();
-       ControladorDados controladorDados = obtenerControladorDados();
-       controladorDados.asignarFichas(2, 4);
+        listaPaises.getSelectionModel().getSelectedItem();
+        levantarVentanaDados();
+        ControladorDados controladorDados = obtenerControladorDados();
+        controladorDados.asignarFichas(2, 4);
     }
 
     @FXML
@@ -121,16 +118,21 @@ public class ControladorMenuJugador implements Initializable {
 
     public void refrescarDatosEnPantalla(){
         mostrarJugadorActual();
-        mostrarPaisesLimitrofesActuales();
+        mostrarPaisesActuales();
     }
 
     private void mostrarJugadorActual(){
         nombreJugador.setText( juego.nombreJugadorActual() );
     }
 
-    private void mostrarPaisesLimitrofesActuales(){
+    private void mostrarPaisesActuales(){
         paisesConEjercitos = juego.nombrePaisesYEjercitosDeJugadorActual();
         paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
+    }
+
+    @FXML
+    void mostrarLimitrofes(MouseEvent event) {
+        listaLimitrofes.getItems().add( "sdfsdf");
     }
 
 }

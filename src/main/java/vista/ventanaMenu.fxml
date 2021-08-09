@@ -67,7 +67,7 @@
             <Image url="@imagenesMenuJuego/tableroTEG.png" />
          </image>
       </ImageView>
-      <ListView fx:id="listaPaises" layoutY="54.0" prefHeight="543.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0">
+      <ListView fx:id="listaPaises" layoutY="54.0" onDragDetected="#mostrarLimitrofes" prefHeight="543.0" prefWidth="112.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="877.0">
          <effect>
             <SepiaTone />
          </effect>
@@ -80,5 +80,10 @@
             <SepiaTone />
          </effect>
       </Button>
+      <ListView fx:id="listaLimitrofes" layoutX="111.0" layoutY="73.0" prefHeight="543.0" prefWidth="106.0" AnchorPane.leftAnchor="111.0">
+         <effect>
+            <SepiaTone />
+         </effect>
+      </ListView>
    </children>
 </AnchorPane>
