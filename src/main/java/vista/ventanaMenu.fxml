@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
    <children>
       <AnchorPane layoutX="331.0" layoutY="27.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox layoutX="107.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="nombreJugador" alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="220.0">
+                  <Label fx:id="nombreJugador" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="271.0">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -26,7 +26,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="botonAtacar" disable="true" mnemonicParsing="false" onAction="#atacar" prefHeight="73.0" prefWidth="196.0" text="Atacar">
+                  <Button fx:id="botonAtacar" disable="true" mnemonicParsing="false" onAction="#atacar" prefHeight="75.0" prefWidth="257.0" text="Atacar">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -37,7 +37,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonReagrupar" disable="true" mnemonicParsing="false" prefHeight="74.0" prefWidth="190.0" text="Reagrupar Ejercito">
+                  <Button fx:id="botonReagrupar" disable="true" mnemonicParsing="false" prefHeight="75.0" prefWidth="257.0" text="Reagrupar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -45,15 +45,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botonColocarEjercito" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="73.0" prefWidth="196.0" text="Agregar Ejercito">
-                     <effect>
-                        <SepiaTone />
-                     </effect>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="botonPasar" disable="true" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="203.0" text="Pasar Turno">
+                  <Button fx:id="botonColocarEjercito" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="75.0" prefWidth="257.0" text="Agregar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -65,17 +57,17 @@
             </HBox>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="543.0" fitWidth="772.0" layoutX="304.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="74.0">
+      <ImageView fitHeight="543.0" fitWidth="772.0" layoutX="257.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="73.21319580078125" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
          <image>
             <Image url="@imagenesMenuJuego/tableroTEG.png" />
          </image>
       </ImageView>
-      <ListView fx:id="listaPaises" layoutY="54.0" onMouseClicked="#seleccionarPais" prefHeight="543.0" prefWidth="112.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="877.0">
+      <ListView fx:id="listaPaises" layoutY="73.0" onMouseClicked="#seleccionarPais" prefHeight="543.0" prefWidth="135.0" AnchorPane.bottomAnchor="74.0" AnchorPane.rightAnchor="907.0">
          <effect>
             <SepiaTone />
          </effect>
       </ListView>
-      <Button fx:id="botonArranque" layoutX="241.0" layoutY="196.0" mnemonicParsing="false" onAction="#cargarJuego" prefHeight="297.0" prefWidth="582.0" text="Comenzar!" textFill="#c3531c">
+      <Button fx:id="botonArranque" layoutX="288.0" layoutY="196.0" mnemonicParsing="false" onAction="#cargarJuego" prefHeight="297.0" prefWidth="582.0" text="Comenzar!" textFill="#c3531c">
          <font>
             <Font size="56.0" />
          </font>
@@ -83,10 +75,50 @@
             <SepiaTone />
          </effect>
       </Button>
-      <ListView fx:id="listaLimitrofes" layoutX="111.0" layoutY="73.0" prefHeight="543.0" prefWidth="106.0" AnchorPane.leftAnchor="111.0">
+      <ListView fx:id="listaLimitrofes" layoutX="135.0" layoutY="74.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="135.0" AnchorPane.leftAnchor="135.0">
          <effect>
             <SepiaTone />
          </effect>
       </ListView>
+      <AnchorPane layoutY="616.0" prefHeight="75.0" prefWidth="1023.0">
+         <children>
+            <HBox layoutX="107.0" prefHeight="75.0" prefWidth="1029.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-28.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nombreJugador1" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="271.0">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botonObjetivo"  mnemonicParsing="false" prefHeight="75.0" prefWidth="257.0" text="Objetivo Secreto">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botonTarjetas" disable="true" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="75.0" prefWidth="257.0" text="Tarjetas">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botonPasar" disable="true" mnemonicParsing="false" onAction="#pasarTurno" prefHeight="75.0" prefWidth="257.0" text="Pasar Turno">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
