@@ -117,14 +117,15 @@ public class Juego {
             pasarTurno();
     }
 
-    public void colocarEjercito(String nombrePais, int cantidadEjercito) throws JugadaInvalidaException {
+    public void colocarEjercito(String nombrePais, int cantidadEjercito) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         Jugador jugadorEnTurno = jugadorEnTurno();
         int cantidadEjercitosPermitidosParaColocar = establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno);
 
+        if (cantidadEjercito > cantidadEjercitosPermitidosParaColocar-ejercitosColocadosPorJugadorEnTurno)
+            throw new CantidadInvalidaDeEjercitosException();
+
         jugadorEnTurno.colocarEjercito(nombrePais, cantidadEjercito);
         ejercitosColocadosPorJugadorEnTurno += cantidadEjercito;
-        if (ejercitosColocadosPorJugadorEnTurno == cantidadEjercitosPermitidosParaColocar)
-            pasarTurno();
     }
 
     public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {

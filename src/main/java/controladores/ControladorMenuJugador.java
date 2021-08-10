@@ -37,6 +37,7 @@ public class ControladorMenuJugador{
     Aleatorio aleatorio = new Aleatorio();
     List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
     List<TarjetaPais> mazoDeTarjetasPais;
+    String paisSeleccionado;
 
     @FXML
     private Label nombreJugador;
@@ -85,8 +86,28 @@ public class ControladorMenuJugador{
     }
 
     @FXML
-    void colocarEjercito(ActionEvent event) {
+    void colocarEjercito(ActionEvent event) throws IOException{
+        levantarVentanaAgregarEjercitos();
+        ControladorAgregarEjercitos controladorAgregarEjercitos = obtenerControladorMenuJugadorFaseInicial();
+        String[] partes = paisSeleccionado.split(" ");
+        String pais = partes[0];
+        int fichas = nombrePaisesYEjercitosDeJugadorActual().get(pais);
+        controladorAgregarEjercitos.asignarEjercitos(pais,fichas,juego,nombreJugador,listaPaises,botonAtacar,botonReagrupar,botonPasar);
+    }
 
+    @FXML
+    void seleccionarPais(MouseEvent event) throws IOException{
+        paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
+    }
+
+
+    public void levantarVentanaAgregarEjercitos() throws IOException {
+        loader = new FXMLLoader(getClass().getResource("/vista/ventanaAgregarEjercitos.fxml"));
+        root = (Parent)loader.load();
+        scene = new Scene(root);
+        escenarioDados.setTitle("Agregar Ejercitos");
+        escenarioDados.setScene(scene);
+        escenarioDados.show();
     }
 
     public void levantarVentanaDados() throws IOException {
@@ -103,6 +124,11 @@ public class ControladorMenuJugador{
         return controladorDados;
     }
 
+    public ControladorAgregarEjercitos obtenerControladorMenuJugadorFaseInicial() {
+        ControladorAgregarEjercitos controladorAgregarEjercitos = (ControladorAgregarEjercitos) loader.getController();
+        return controladorAgregarEjercitos;
+    }
+
     public void asignarJugadores(ArrayList<String> nombresJugadores) {
         jugadores = nombresJugadores;
     }
@@ -116,6 +142,7 @@ public class ControladorMenuJugador{
         juego.guardarMazoDeTarjetasPais(mazoDeTarjetasPais);
         juego.comenzarFaseInicial(aleatorio);
         refrescarDatosEnPantalla();
+
     }
 
     public void refrescarDatosEnPantalla(){
@@ -127,10 +154,13 @@ public class ControladorMenuJugador{
         nombreJugador.setText( nombreJugadorActual() );
     }
 
+
     private void mostrarPaisesActuales(){
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
         paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
     }
+
+
 
     @FXML
     void mostrarLimitrofes(MouseEvent event) {
@@ -161,9 +191,6 @@ public class ControladorMenuJugador{
     private String nombreJugadorActual() {
         return juego.jugadorEnTurno().getNombre();
     }
-
-
-
 
 
 

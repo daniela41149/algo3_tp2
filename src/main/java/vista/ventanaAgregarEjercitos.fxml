@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorAgregarEjercitos">
+    <children>
+        <Button fx:id="botonAgregar" layoutX="100.0" layoutY="222.0" mnemonicParsing="false" onAction="#agregarEjercitos" prefHeight="47.0" prefWidth="140.0" text="Agregar">
+            <font>
+                <Font size="25.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <effect>
+                <InnerShadow />
+            </effect>
+        </Button>
+        <Button fx:id="botonSumarUno" layoutX="68.0" layoutY="127.0" mnemonicParsing="false" onAction="#sumarUno" prefHeight="77.0" prefWidth="77.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imagenes_agregar_ejercitos/botonAgregarEjercitos.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label fx:id="labelPais" alignment="CENTER" layoutX="26.0" layoutY="71.0" prefHeight="47.0"  prefWidth="290.0">
+            <font>
+                <Font size="25.0" />
+            </font></Label>
+        <Label fx:id="labelEjercitos" layoutX="198.0" layoutY="135.0" prefHeight="68.0" prefWidth="71.0" textAlignment="RIGHT">
+            <font>
+                <Font name="System Bold" size="38.0" />
+            </font></Label>
+        <Label alignment="CENTER" layoutX="11.0" layoutY="24.0" prefHeight="47.0" prefWidth="300.0" text="Agregar Ejercitos en">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Label>
+    </children>
+    <effect>
+        <SepiaTone />
+    </effect>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+</AnchorPane>
