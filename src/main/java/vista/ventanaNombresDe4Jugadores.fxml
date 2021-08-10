@@ -37,7 +37,7 @@
                     </font></TextField>
             </children>
         </VBox>
-        <Button fx:id="jugar" alignment="CENTER" contentDisplay="CENTER" layoutX="323.0" layoutY="431.0" mnemonicParsing="false" onAction="#guardar4Nombres" prefHeight="68.0" prefWidth="179.0" text="Â¡Jugar!">
+        <Button fx:id="jugar" alignment="CENTER" contentDisplay="CENTER" layoutX="323.0" layoutY="431.0" mnemonicParsing="false" onAction="#guardar4Nombres" prefHeight="68.0" prefWidth="179.0" text="¡Jugar!">
             <font>
                 <Font size="36.0" />
             </font>
