@@ -98,6 +98,7 @@ public class ControladorMenuJugador{
     @FXML
     void seleccionarPais(MouseEvent event) throws IOException{
         paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
+        mostrarLimitrofes();
     }
 
 
@@ -154,21 +155,20 @@ public class ControladorMenuJugador{
         nombreJugador.setText( nombreJugadorActual() );
     }
 
-
     private void mostrarPaisesActuales(){
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
-        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais ) );
     }
 
 
-
-    @FXML
-    void mostrarLimitrofes(MouseEvent event) {
+    public void mostrarLimitrofes() {
         listaLimitrofes.getItems().clear();
-        listaLimitrofes.getItems().add( "sdfsdf");
+        listaLimitrofes.getItems().addAll( paisesLimitrofes( listaPaises.getSelectionModel().getSelectedItem() ) );
+        //listaEjercitosPaisesLimitrofes.getItems().clear();
+        //listaEjercitosPaisesLimitrofes.getItems().addAll( (ejercitosPaisesLimitrofes( listaPaises.getSelectionModel().getSelectedItem() )) );
     }
 
-    private List<String> mostrarPaisesLimitrofes(String nombrePais) {
+    private List<String> paisesLimitrofes(String nombrePais) {
         List<String> paisesLimitrofes = new ArrayList<>();
         List<Pais> paises = juego.devolverPaises();
         for (Pais unPais: paises) {
