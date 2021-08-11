@@ -105,9 +105,9 @@ public class ControladorMenuJugador {
     }
 
 
-    private String nombre(String cadena) {
-        String[] partes = cadena.split(" ");
-        return partes[0];
+    private String nombre(String cadena){
+        cadena = cadena.replaceAll("[0-9]","");
+        return cadena.substring(0, cadena.length() - 2);
     }
 
     @FXML

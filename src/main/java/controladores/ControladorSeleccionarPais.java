@@ -97,29 +97,11 @@ public class ControladorSeleccionarPais {
     }
 
 
-
-    private String nombre (String cadena) {
-        String[] partes = cadena.split(" ");
-        return partes[0];
+    private String nombre(String cadena){
+        cadena = cadena.replaceAll("[0-9]","");
+        return cadena.substring(0, cadena.length() - 2);
     }
 
-
-
-    private void mostrarLimitrofesActualesParaReagrupar(String nombre){
-        limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(nombre);
-        if (limitrofesConEjercitos.isEmpty()) {
-            labelPais2.setText("no tiene limitrofes para reagrupar");
-        }
-        limitrofesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaLimitrofes.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
-    }
-
-    private void mostrarLimitrofesActualesParaAtacar(String nombre) {
-        limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(nombre);
-        if (limitrofesConEjercitos.isEmpty()) {
-            labelPais2.setText("no tiene limitrofes para atacar");
-        }
-        limitrofesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaLimitrofes.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
-    }
 
 
     public void levantarVentanaReagruparEjercitos() throws IOException {
@@ -148,6 +130,22 @@ public class ControladorSeleccionarPais {
 
 
 
+    private void mostrarLimitrofesActualesParaReagrupar(String nombre){
+        limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(nombre);
+        if (limitrofesConEjercitos.isEmpty()) {
+            labelPais2.setText("no tiene limitrofes para reagrupar");
+        }
+        limitrofesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaLimitrofes.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
+    }
+
+    private void mostrarLimitrofesActualesParaAtacar(String nombre) {
+        limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(nombre);
+        if (limitrofesConEjercitos.isEmpty()) {
+            labelPais2.setText("no tiene limitrofes para atacar");
+        }
+        limitrofesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaLimitrofes.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
+    }
+
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
         List<Pais> paises = juego.devolverPaises();
@@ -172,8 +170,6 @@ public class ControladorSeleccionarPais {
         return paisesLimitrofes;
     }
 
-
-
     private Pais buscarPais (String nombrePaisBuscado) {
         List<Pais> paises = juego.devolverPaises();
         for (Pais unPais: paises) {
@@ -183,7 +179,6 @@ public class ControladorSeleccionarPais {
         return null;
     }
 
-
     private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
         List<Pais> listaPaises = juego.jugadorEnTurno().pedirPaises();
         HashMap<String,Integer> diccionario = new HashMap<>();
@@ -192,6 +187,4 @@ public class ControladorSeleccionarPais {
         }
         return diccionario;
     }
-
-
 }

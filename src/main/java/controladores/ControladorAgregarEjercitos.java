@@ -115,7 +115,6 @@ public class ControladorAgregarEjercitos {
             levantarVentanaNoHayEjercitosSuficientes();
 
         } catch (JugadaInvalidaException e2) {
-            levantarVentanaNoHayEjercitosSuficientes();
         }
 
         Stage stage = (Stage) botonAgregar.getScene().getWindow();
