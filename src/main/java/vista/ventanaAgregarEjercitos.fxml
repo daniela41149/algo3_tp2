@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorAgregarEjercitos">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorAgregarEjercitos">
     <children>
-        <Button fx:id="botonAgregar" layoutX="100.0" layoutY="222.0" mnemonicParsing="false" onAction="#agregarEjercitos" prefHeight="47.0" prefWidth="140.0" text="Agregar">
+        <Button fx:id="botonAgregar" layoutX="77.0" layoutY="237.0" mnemonicParsing="false" onAction="#agregarEjercitos" prefHeight="52.0" prefWidth="189.0" text="Agregar">
             <font>
                 <Font size="25.0" />
             </font>
@@ -24,31 +24,43 @@
                 <InnerShadow />
             </effect>
         </Button>
-        <Button fx:id="botonSumarUno" layoutX="68.0" layoutY="127.0" mnemonicParsing="false" onAction="#sumarUno" prefHeight="77.0" prefWidth="77.0">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-            <graphic>
-                <ImageView fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@imagenes_agregar_ejercitos/botonAgregarEjercitos.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Label fx:id="labelPais" alignment="CENTER" layoutX="26.0" layoutY="71.0" prefHeight="47.0"  prefWidth="290.0">
+        <Label fx:id="labelPais" alignment="CENTER" layoutX="20.0" layoutY="72.0" opacity="0.9" prefHeight="47.0" prefWidth="300.0">
             <font>
-                <Font size="25.0" />
+                <Font name="System Bold" size="25.0" />
             </font></Label>
-        <Label fx:id="labelEjercitos" layoutX="198.0" layoutY="135.0" prefHeight="68.0" prefWidth="71.0" textAlignment="RIGHT">
+        <Label fx:id="labelEjercitos" alignment="CENTER" layoutX="146.0" layoutY="171.0" prefHeight="52.0" prefWidth="52.0" textAlignment="RIGHT">
             <font>
-                <Font name="System Bold" size="38.0" />
+                <Font name="System Bold" size="18.0" />
             </font></Label>
-        <Label alignment="CENTER" layoutX="11.0" layoutY="24.0" prefHeight="47.0" prefWidth="300.0" text="Agregar Ejercitos en">
+        <Label alignment="CENTER" layoutX="22.0" layoutY="8.0" prefHeight="35.0" prefWidth="300.0" text="Agregar Ejercitos">
             <font>
-                <Font size="25.0" />
+                <Font name="System Bold Italic" size="30.0" />
             </font>
         </Label>
+      <Button fx:id="botonSumar" layoutX="198.0" layoutY="172.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
+      <Button fx:id="botonRestar" layoutX="93.0" layoutY="172.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
     </children>
     <effect>
         <SepiaTone />

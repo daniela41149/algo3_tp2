@@ -15,7 +15,7 @@
     <children>
         <Label alignment="CENTER" layoutX="10.0" layoutY="8.0" prefHeight="41.0" prefWidth="425.0" text="Reagrupar Ejercitos">
             <font>
-                <Font name="System Bold Italic" size="25.0" />
+                <Font name="System Bold Italic" size="30.0" />
             </font>
         </Label>
         <Button fx:id="botonReagrupar" alignment="CENTER" layoutX="145.0" layoutY="342.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="156.0" text="Reagrupar">
@@ -53,27 +53,31 @@
          <effect>
             <InnerShadow blurType="ONE_PASS_BOX" />
          </effect>
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <Button fx:id="botonPasarUno" alignment="CENTER" layoutX="248.0" layoutY="274.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
          <effect>
             <InnerShadow blurType="ONE_PASS_BOX" />
          </effect>
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <Label fx:id="labelEjercitos" alignment="CENTER" layoutX="197.0" layoutY="276.0" prefHeight="52.0" prefWidth="52.0">
          <font>
-            <Font name="System Bold" size="25.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="249.0" layoutY="276.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="145.0" layoutY="276.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-         <image>
-            <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="70.0" fitWidth="104.0" layoutX="184.0" layoutY="79.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" rotate="36.9">
          <image>
             <Image url="@imagenes_reagrupar_ejercitos/flechaDeTraspaso.png" />
