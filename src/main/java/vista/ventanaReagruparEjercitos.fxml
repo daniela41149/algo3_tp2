@@ -18,7 +18,7 @@
                 <Font name="System Bold Italic" size="30.0" />
             </font>
         </Label>
-        <Button fx:id="botonReagrupar" alignment="CENTER" layoutX="224.0" layoutY="340.0" mnemonicParsing="false" onAction="#reagrupar" prefHeight="52.0" prefWidth="156.0" text="Reagrupar">
+        <Button fx:id="botonReagrupar" alignment="CENTER" layoutX="217.0" layoutY="342.0" mnemonicParsing="false" onAction="#reagrupar" prefHeight="52.0" prefWidth="170.0" text="Reagrupar">
             <font>
                 <Font size="25.0" />
             </font>
@@ -49,7 +49,7 @@
                 <Font size="23.0" />
             </font>
         </Label>
-        <Button fx:id="botonRestarUno" alignment="CENTER" layoutX="223.0" layoutY="280.0" mnemonicParsing="false" onAction="#restarUno" prefHeight="52.0" prefWidth="52.0">
+        <Button fx:id="botonRestarUno" alignment="CENTER" layoutX="217.0" layoutY="282.0" mnemonicParsing="false" onAction="#restarUno" prefHeight="52.0" prefWidth="52.0">
             <effect>
                 <InnerShadow blurType="ONE_PASS_BOX" />
             </effect>
@@ -61,7 +61,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="botonPasarUno" alignment="CENTER" layoutX="327.0" layoutY="280.0" mnemonicParsing="false" onAction="#pasarUno" prefHeight="52.0" prefWidth="52.0">
+        <Button fx:id="botonPasarUno" alignment="CENTER" layoutX="334.0" layoutY="282.0" mnemonicParsing="false" onAction="#pasarUno" prefHeight="52.0" prefWidth="52.0">
             <effect>
                 <InnerShadow blurType="ONE_PASS_BOX" />
             </effect>
