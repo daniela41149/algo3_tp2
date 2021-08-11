@@ -50,4 +50,7 @@ public class TarjetaOcupacion extends TarjetaObjetivo {
 
         return (ocupoLosContinentesDeEnunciado(tablero) && ocupoLaCantidadDePaisesPorContinenteDeEnunciado(tablero));
     }
+    public String devolverEnunciado() {
+        return enunciado;
+    }
 }

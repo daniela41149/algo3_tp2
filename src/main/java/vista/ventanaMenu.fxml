@@ -96,7 +96,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="botonObjetivo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="235.0" text="Objetivo Secreto">
+                  <Button fx:id="botonObjetivo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#verObjetivo" prefHeight="75.0" prefWidth="235.0" text="Objetivo Secreto">
                      <effect>
                         <SepiaTone />
                      </effect>

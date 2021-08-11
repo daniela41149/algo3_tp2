@@ -22,7 +22,7 @@
                           <Font size="19.0" />
                       </font>
                   </Label>
-                  <Button fx:id="botonElegir" disable="false" layoutX="700.0" mnemonicParsing="true" onAction="#elegir" prefHeight="75.0" prefWidth="235.0" text="Elegir">
+                  <Button fx:id="botonElegir" disable="false" layoutX="700.0" mnemonicParsing="true" onAction="#reagrupar" prefHeight="75.0" prefWidth="235.0" text="Reagrupar">
                       <effect>
                           <SepiaTone />
                       </effect>

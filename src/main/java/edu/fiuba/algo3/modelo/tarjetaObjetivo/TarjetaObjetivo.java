@@ -18,4 +18,6 @@ public abstract class TarjetaObjetivo {
     }
 
     public abstract boolean cumplioObjetivo(Tablero tablero, Juego juego);
+
+    public abstract String devolverEnunciado();
 }

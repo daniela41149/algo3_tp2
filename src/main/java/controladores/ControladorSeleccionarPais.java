@@ -76,7 +76,7 @@ public class ControladorSeleccionarPais {
     }
 
     @FXML
-    void elegir(ActionEvent event) throws IOException{
+    void reagrupar(ActionEvent event) throws IOException{
         levantarVentanaReagruparEjercitos();
         ControladorReagruparEjercitos controladorReagruparEjercitos = obtenerControladorReagruparEjercitos();
         int ejercitoDesde = buscarPais(nombrePais).cantidadDeFichas();

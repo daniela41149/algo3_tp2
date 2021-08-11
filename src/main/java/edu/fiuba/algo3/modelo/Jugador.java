@@ -155,6 +155,10 @@ public class Jugador {
         this.ejercitosDeCanje = 0;
     }
 
+    public String devolverEnunciadoDeObjetivo() {
+        return this.tarjetaDeObjetivo.devolverEnunciado();
+    }
+
 
 
 }

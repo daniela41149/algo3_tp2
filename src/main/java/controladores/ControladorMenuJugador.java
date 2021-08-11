@@ -63,6 +63,8 @@ public class ControladorMenuJugador {
     @FXML
     private Button botonColocarEjercito;
 
+
+
     @FXML
     void cargarJuego(ActionEvent event) throws IOException, JugadaInvalidaException {
         iniciarJuego();
@@ -104,6 +106,13 @@ public class ControladorMenuJugador {
         controladorSeleccionarPais.mostrarLimitrofesParaReagrupar();
     }
 
+    @FXML
+    void verObjetivo(ActionEvent event) throws IOException {
+        levantarVentanaObjetivoSecreto();
+        ControladorObjetivoSecreto controladorObjetivoSecreto = obtenerControladorObjetivoSecreto();
+        controladorObjetivoSecreto.mostrarObjetivo(juego.jugadorEnTurno().devolverEnunciadoDeObjetivo());
+    }
+
 
     private String nombre(String cadena){
         cadena = cadena.replaceAll("[0-9]","");
@@ -143,6 +152,15 @@ public class ControladorMenuJugador {
         escenarioSeleccion.show();
     }
 
+    public void levantarVentanaObjetivoSecreto() throws IOException {
+        loader = new FXMLLoader(getClass().getResource("/vista/ventanaObjetivoSecreto.fxml"));
+        root = (Parent) loader.load();
+        scene = new Scene(root);
+        escenarioSeleccion.setTitle("Objetivo Secreto");
+        escenarioSeleccion.setScene(scene);
+        escenarioSeleccion.show();
+    }
+
 
     public ControladorAgregarEjercitos obtenerControladorAgregarEjercitos() {
         ControladorAgregarEjercitos controladorAgregarEjercitos = (ControladorAgregarEjercitos) loader.getController();
@@ -154,6 +172,12 @@ public class ControladorMenuJugador {
         ControladorSeleccionarPais controladorSeleccionarPais = (ControladorSeleccionarPais) loader.getController();
         return controladorSeleccionarPais;
     }
+
+    public ControladorObjetivoSecreto obtenerControladorObjetivoSecreto() {
+        ControladorObjetivoSecreto controladorObjetivoSecreto = (ControladorObjetivoSecreto) loader.getController();
+        return controladorObjetivoSecreto;
+    }
+
 
 
     public void asignarJugadores(ArrayList<String> nombresJugadores) {

@@ -24,7 +24,6 @@ public class ControladorReagruparEjercitos {
     @FXML
     private Label labelPaisHasta;
 
-
     @FXML
     private Button botonReagrupar;
 

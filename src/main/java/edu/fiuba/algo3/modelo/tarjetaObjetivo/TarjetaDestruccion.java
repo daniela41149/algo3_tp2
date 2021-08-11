@@ -29,4 +29,8 @@ public class TarjetaDestruccion extends TarjetaObjetivo {
 
         return (destruyoAJugador(juego));
     }
+    public String devolverEnunciado() {
+        return enunciado;
+    }
+
 }
