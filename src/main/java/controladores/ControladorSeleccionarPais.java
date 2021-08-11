@@ -21,6 +21,7 @@ public class ControladorSeleccionarPais {
 
     Juego juego;
     HashMap<String, Integer> limitrofesConEjercitos;
+    HashMap<String, Integer> paisesConEjercitos;
     int ejercito;
     String limitrofeSeleccionado;
     String nombrePais;
@@ -45,6 +46,10 @@ public class ControladorSeleccionarPais {
     @FXML
     private ListView<String> listaLimitrofes;
 
+    @FXML
+    private ListView<String> listaPaises;
+
+
 
     Stage escenarioReagrupar = new Stage();
     Stage escenarioDados = new Stage();
@@ -54,22 +59,15 @@ public class ControladorSeleccionarPais {
 
 
 
-    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, HashMap<String, Integer> limitrofesConEjercitos) {
+    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises) {
         this.juego = juego;
         this.nombrePais = nombrePais;
         this.ejercito = cantEjercito;
         this.limitrofesConEjercitos = limitrofesConEjercitos;
+        this.listaPaises = listaPaises;
         labelPais1.setText(nombrePais);
-
-
     }
 
-    public void mostrarLimitrofesParaAtacar() {
-        mostrarLimitrofesActualesParaAtacar(nombrePais);
-    }
-    public void mostrarLimitrofesParaReagrupar() {
-        mostrarLimitrofesActualesParaReagrupar(nombrePais);
-    }
 
     @FXML
     void seleccionarLimitrofe(MouseEvent event) throws IOException{
@@ -80,6 +78,10 @@ public class ControladorSeleccionarPais {
     @FXML
     void elegir(ActionEvent event) throws IOException{
         levantarVentanaReagruparEjercitos();
+        ControladorReagruparEjercitos controladorReagruparEjercitos = obtenerControladorReagruparEjercitos();
+        int ejercitoDesde = buscarPais(nombrePais).cantidadDeFichas();
+        int ejercitoHasta = buscarPais(nombre(limitrofeSeleccionado)).cantidadDeFichas();
+        controladorReagruparEjercitos.reagrupar(juego,nombrePais,ejercitoDesde,nombre(limitrofeSeleccionado),ejercitoHasta,listaLimitrofes,limitrofesConEjercitos);
     }
 
     @FXML
@@ -92,6 +94,8 @@ public class ControladorSeleccionarPais {
 
     @FXML
     void volver(ActionEvent event) throws IOException{
+        listaPaises.getItems().clear();
+        refrescarDatosEnPantalla();
         Stage stage = (Stage) botonVolver.getScene().getWindow();
         stage.close();
     }
@@ -101,6 +105,8 @@ public class ControladorSeleccionarPais {
         cadena = cadena.replaceAll("[0-9]","");
         return cadena.substring(0, cadena.length() - 2);
     }
+
+
 
 
 
@@ -127,22 +133,34 @@ public class ControladorSeleccionarPais {
         return controladorDados;
     }
 
+    public ControladorReagruparEjercitos obtenerControladorReagruparEjercitos() {
+        ControladorReagruparEjercitos controladorReagruparEjercitos = (ControladorReagruparEjercitos) loader.getController();
+        return controladorReagruparEjercitos;
+    }
 
+    private void refrescarDatosEnPantalla(){
+        mostrarPaisesActuales();
+    }
 
+    private void mostrarPaisesActuales(){
+        paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
+    }
+
+    public void mostrarLimitrofesParaAtacar() {
+        mostrarLimitrofesActualesParaAtacar(nombrePais);
+    }
+    public void mostrarLimitrofesParaReagrupar() {
+        mostrarLimitrofesActualesParaReagrupar(nombrePais);
+    }
 
     private void mostrarLimitrofesActualesParaReagrupar(String nombre){
         limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(nombre);
-        if (limitrofesConEjercitos.isEmpty()) {
-            labelPais2.setText("no tiene limitrofes para reagrupar");
-        }
         limitrofesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaLimitrofes.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
     }
 
     private void mostrarLimitrofesActualesParaAtacar(String nombre) {
         limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(nombre);
-        if (limitrofesConEjercitos.isEmpty()) {
-            labelPais2.setText("no tiene limitrofes para atacar");
-        }
         limitrofesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaLimitrofes.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
     }
 
@@ -169,6 +187,8 @@ public class ControladorSeleccionarPais {
         }
         return paisesLimitrofes;
     }
+
+
 
     private Pais buscarPais (String nombrePaisBuscado) {
         List<Pais> paises = juego.devolverPaises();

@@ -82,7 +82,7 @@ public class ControladorMenuJugador {
         levantarVentanaSeleccionarPaisParaAtacar();
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, limitrofesConEjercitos);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, limitrofesConEjercitos,listaPaises);
         controladorSeleccionarPais.mostrarLimitrofesParaAtacar();
     }
 
@@ -100,7 +100,7 @@ public class ControladorMenuJugador {
         levantarVentanaSeleccionarPaisParaReagrupar();
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, limitrofesConEjercitos);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, limitrofesConEjercitos,listaPaises);
         controladorSeleccionarPais.mostrarLimitrofesParaReagrupar();
     }
 

@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorAgregarEjercitos">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorReagruparEjercitos">
     <children>
         <Label alignment="CENTER" layoutX="10.0" layoutY="8.0" prefHeight="41.0" prefWidth="425.0" text="Reagrupar Ejercitos">
             <font>
                 <Font name="System Bold Italic" size="30.0" />
             </font>
         </Label>
-        <Button fx:id="botonReagrupar" alignment="CENTER" layoutX="145.0" layoutY="342.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="156.0" text="Reagrupar">
+        <Button fx:id="botonReagrupar" alignment="CENTER" layoutX="145.0" layoutY="342.0" mnemonicParsing="false" onAction="#reagrupar" prefHeight="52.0" prefWidth="156.0" text="Reagrupar">
             <font>
                 <Font size="25.0" />
             </font>
@@ -29,60 +29,60 @@
                 <InnerShadow />
             </effect>
         </Button>
-      <Label fx:id="labelPaisDesde" alignment="CENTER" layoutX="26.0" layoutY="142.0" opacity="0.9" prefHeight="47.0" prefWidth="180.0">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelPaisHasta" alignment="CENTER" layoutX="241.0" layoutY="142.0" opacity="0.9" prefHeight="47.0" prefWidth="180.0">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelEjercitoPaisDesde" alignment="CENTER" layoutX="99.0" layoutY="195.0" prefHeight="33.0" prefWidth="34.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelEjercitoPaisHasta" alignment="CENTER" layoutX="314.0" layoutY="195.0" prefHeight="33.0" prefWidth="34.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Button fx:id="botonRestarUno" alignment="CENTER" layoutX="144.0" layoutY="274.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
-         <effect>
-            <InnerShadow blurType="ONE_PASS_BOX" />
-         </effect>
-         <graphic>
-            <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-               <image>
-                  <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="botonPasarUno" alignment="CENTER" layoutX="248.0" layoutY="274.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
-         <effect>
-            <InnerShadow blurType="ONE_PASS_BOX" />
-         </effect>
-         <graphic>
-            <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label fx:id="labelEjercitos" alignment="CENTER" layoutX="197.0" layoutY="276.0" prefHeight="52.0" prefWidth="52.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="70.0" fitWidth="104.0" layoutX="184.0" layoutY="79.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" rotate="36.9">
-         <image>
-            <Image url="@imagenes_reagrupar_ejercitos/flechaDeTraspaso.png" />
-         </image>
-      </ImageView>
+        <Label fx:id="labelPaisDesde" alignment="CENTER" layoutX="26.0" layoutY="142.0" opacity="0.9" prefHeight="47.0" prefWidth="180.0">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <Label fx:id="labelPaisHasta" alignment="CENTER" layoutX="241.0" layoutY="142.0" opacity="0.9" prefHeight="47.0" prefWidth="180.0">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <Label fx:id="labelEjercitoPaisDesde" alignment="CENTER" layoutX="99.0" layoutY="195.0" prefHeight="33.0" prefWidth="34.0">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Label fx:id="labelEjercitoPaisHasta" alignment="CENTER" layoutX="314.0" layoutY="195.0" prefHeight="33.0" prefWidth="34.0">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Button fx:id="botonRestarUno" alignment="CENTER" layoutX="144.0" layoutY="274.0" mnemonicParsing="false" onAction="#restarUno" prefHeight="52.0" prefWidth="52.0">
+            <effect>
+                <InnerShadow blurType="ONE_PASS_BOX" />
+            </effect>
+            <graphic>
+                <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                    <image>
+                        <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="botonPasarUno" alignment="CENTER" layoutX="248.0" layoutY="274.0" mnemonicParsing="false" onAction="#pasarUno" prefHeight="52.0" prefWidth="52.0">
+            <effect>
+                <InnerShadow blurType="ONE_PASS_BOX" />
+            </effect>
+            <graphic>
+                <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imagenes_reagrupar_ejercitos/flechaDeSumaYResta.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label fx:id="labelEjercitos" alignment="CENTER" layoutX="197.0" layoutY="276.0" prefHeight="52.0" prefWidth="52.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="70.0" fitWidth="104.0" layoutX="184.0" layoutY="79.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" rotate="36.9">
+            <image>
+                <Image url="@imagenes_reagrupar_ejercitos/flechaDeTraspaso.png" />
+            </image>
+        </ImageView>
     </children>
     <effect>
         <SepiaTone />
