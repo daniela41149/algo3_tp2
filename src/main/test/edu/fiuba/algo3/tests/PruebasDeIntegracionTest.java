@@ -650,20 +650,21 @@ public class PruebasDeIntegracionTest {
 
             assertTrue(juego.controlaContiente("Martina", "Asia"));
 
-            juego.colocarEjercito("Oregon",3);
-            juego.colocarEjercito("Iran",11);
-            juego.colocarEjercito("Rusia",4);
-
-            juego.colocarEjercito("Terranova",1);
-            juego.colocarEjercito("España",2);
-
-            juego.colocarEjercito("Arabia",3);
-            juego.colocarEjercito("Sahara",3);
-            juego.colocarEjercito("Egipto",3);
+            juego.colocarEjercito("Oregon",1);
+            juego.colocarEjercito("España",1);
+            juego.colocarEjercito("Etiopia",1);
             juego.pasarTurno();
 
-            juego.colocarEjercito("Nueva York",2);
-            juego.colocarEjercito("Australia",2);
+            juego.colocarEjercito("Alaska",2);
+            juego.colocarEjercito("Iran",7);
+            juego.colocarEjercito("Polonia",2);
+            juego.pasarTurno();
+
+            juego.colocarEjercito("Brasil",1);
+            juego.colocarEjercito("Borneo",1);
+            juego.colocarEjercito("Rusia",2);
+            juego.pasarTurno();
+
 
             juego.pasarTurno();
             juego.reagrupar("Iran","India",6);
@@ -671,28 +672,28 @@ public class PruebasDeIntegracionTest {
 
             assertEquals(argentina.cantidadDeFichas(),3);
             assertEquals(uruguay.cantidadDeFichas(),5);
-            assertEquals(oregon.cantidadDeFichas(),4);
-            assertEquals(terranova.cantidadDeFichas(),3);
+            assertEquals(oregon.cantidadDeFichas(),2);
+            assertEquals(terranova.cantidadDeFichas(),2);
             assertEquals(sumatra.cantidadDeFichas(),2);
-            assertEquals(españa.cantidadDeFichas(),3);
-            assertEquals(etiopia.cantidadDeFichas(),1);
+            assertEquals(españa.cantidadDeFichas(),2);
+            assertEquals(etiopia.cantidadDeFichas(),2);
 
-            assertEquals(alaska.cantidadDeFichas(),2);
-            assertEquals(polonia.cantidadDeFichas(),3);
+            assertEquals(alaska.cantidadDeFichas(),4);
+            assertEquals(polonia.cantidadDeFichas(),5);
             assertEquals(turquia.cantidadDeFichas(),2);
             assertEquals(india.cantidadDeFichas(),8);
-            assertEquals(iran.cantidadDeFichas(),8);
-            assertEquals(arabia.cantidadDeFichas(),5);
-            assertEquals(sahara.cantidadDeFichas(),4);
-            assertEquals(egipto.cantidadDeFichas(),4);
+            assertEquals(iran.cantidadDeFichas(),4);
+            assertEquals(arabia.cantidadDeFichas(),2);
+            assertEquals(sahara.cantidadDeFichas(),1);
+            assertEquals(egipto.cantidadDeFichas(),1);
 
-            assertEquals(brasil.cantidadDeFichas(),2);
+            assertEquals(brasil.cantidadDeFichas(),3);
             assertEquals(chile.cantidadDeFichas(),3);
-            assertEquals(nuevaYork.cantidadDeFichas(),4);
-            assertEquals(australia.cantidadDeFichas(),4);
-            assertEquals(borneo.cantidadDeFichas(),2);
+            assertEquals(nuevaYork.cantidadDeFichas(),2);
+            assertEquals(australia.cantidadDeFichas(),2);
+            assertEquals(borneo.cantidadDeFichas(),3);
             assertEquals(francia.cantidadDeFichas(),1);
-            assertEquals(rusia.cantidadDeFichas(),6);
+            assertEquals(rusia.cantidadDeFichas(),4);
             assertEquals(zaire.cantidadDeFichas(),2);
 
         } catch (JugadaInvalidaException e1) {
