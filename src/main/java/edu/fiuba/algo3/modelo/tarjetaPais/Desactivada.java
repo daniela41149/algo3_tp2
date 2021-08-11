@@ -8,8 +8,8 @@ public class Desactivada implements EstadoTarjetaPais{
 
     public void activar(TarjetaPais tarjetaPais,Jugador jugador) throws JugadaInvalidaException{
         String nombrePais = tarjetaPais.getNombre();
+        jugador.colocarEjercito(nombrePais,EJERCITOS);
         if(jugador.esDueñoDelPais(nombrePais)){
-            jugador.colocarEjercito(nombrePais,EJERCITOS);
             tarjetaPais.activar();
         }
 

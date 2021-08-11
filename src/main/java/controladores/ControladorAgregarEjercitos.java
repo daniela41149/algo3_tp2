@@ -13,12 +13,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
 
 public class ControladorAgregarEjercitos {
 
@@ -44,6 +48,9 @@ public class ControladorAgregarEjercitos {
     private Label nombreJugador;
 
     @FXML
+    private Label colorJugador;
+
+    @FXML
     private ListView<String> listaPaises;
 
     @FXML
@@ -56,7 +63,6 @@ public class ControladorAgregarEjercitos {
     private Button botonPasar;
 
 
-
     static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
     static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
     static final int NUMERO_PAISES = 50;
@@ -65,17 +71,22 @@ public class ControladorAgregarEjercitos {
     private String nombrePais;
     private HashMap<String, Integer> paisesConEjercitos;
     private int cantidadDeJugadores;
+    static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
+    private HashMap<String, List<Double>> diccionarioDeColores = new HashMap<>();
 
 
-    public void asignarEjercitos(String pais,int cantidad,Juego juego, Label nombreJugador, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
+
+    public void asignarEjercitos(String pais,int cantidad,Juego juego, Label nombreJugador, Label colorJugador,ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
         this.botonAtacar = botonAtacar;
         this.botonReagrupar = botonReagrupar;
         this.botonPasar = botonPasar;
         this.juego = juego;
         this.nombrePais = pais;
         this.nombreJugador = nombreJugador;
+        this.colorJugador = colorJugador;
         this.listaPaises = listaPaises;
         this.cantidadDeJugadores = juego.devolverJugadores().size();
+        crearDiccionarioDeColores();
         labelPais.setText( pais);
         labelEjercitos.setText( "0" );
     }
@@ -188,6 +199,13 @@ public class ControladorAgregarEjercitos {
 
     private void mostrarJugadorActual(){
         nombreJugador.setText( nombreJugadorActual() );
+        List<Double> numeroDeColorActual = buscarNumeroDeColorEnDiccionario(colorJugadorActual());
+        colorJugador.setTextFill(Color.color(numeroDeColorActual.get(0),numeroDeColorActual.get(1),numeroDeColorActual.get(2)));
+        colorJugador.setText("Ejército "+colorJugadorActual());
+    }
+
+    private List<Double> buscarNumeroDeColorEnDiccionario(String color) {
+        return diccionarioDeColores.get(color);
     }
 
     private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
@@ -199,8 +217,22 @@ public class ControladorAgregarEjercitos {
         return diccionario;
     }
 
+    private void crearDiccionarioDeColores () {
+        diccionarioDeColores.put(COLORES[0], new ArrayList<>(Arrays.asList(0.0,0.1,1.0)));
+        diccionarioDeColores.put(COLORES[1], new ArrayList<>(Arrays.asList(0.85,0.0,0.0)));
+        diccionarioDeColores.put(COLORES[2], new ArrayList<>(Arrays.asList(0.9,0.9,0.2)));
+        diccionarioDeColores.put(COLORES[3], new ArrayList<>(Arrays.asList(0.3,0.70,0.0)));
+        diccionarioDeColores.put(COLORES[4], new ArrayList<>(Arrays.asList(0.8,0.1,1.0)));
+        diccionarioDeColores.put(COLORES[5], new ArrayList<>(Arrays.asList(0.0,0.0,0.0)));
+    }
+
     private String nombreJugadorActual() {
         return juego.jugadorEnTurno().getNombre();
     }
+    private String colorJugadorActual() {
+        return juego.jugadorEnTurno().getColor();
+    }
+
+
 
 }

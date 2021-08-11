@@ -16,10 +16,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,10 +42,15 @@ public class ControladorMenuJugador {
     List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
     List<TarjetaPais> mazoDeTarjetasPais;
     String paisSeleccionado;
+    static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
+    private HashMap<String, List<Double>> diccionarioDeColores = new HashMap<>();
 
 
     @FXML
     private Label nombreJugador;
+
+    @FXML
+    private Label colorJugador;
 
     @FXML
     private Button botonAtacar;
@@ -93,7 +100,7 @@ public class ControladorMenuJugador {
         levantarVentanaAgregarEjercitos();
         ControladorAgregarEjercitos controladorAgregarEjercitos = obtenerControladorAgregarEjercitos();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, nombreJugador, listaPaises, botonAtacar, botonReagrupar, botonPasar);
+        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, nombreJugador, colorJugador, listaPaises, botonAtacar, botonReagrupar, botonPasar);
     }
 
     @FXML
@@ -185,6 +192,7 @@ public class ControladorMenuJugador {
     }
 
     public void iniciarJuego() throws IOException, JugadaInvalidaException {
+        crearDiccionarioDeColores();
         moderador = new Moderador();
         juego = new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), jugadores);
         mazoDeTarjetasObjetivo = moderador.pedirTarjetasObjetivo();
@@ -193,7 +201,6 @@ public class ControladorMenuJugador {
         juego.guardarMazoDeTarjetasPais(mazoDeTarjetasPais);
         juego.comenzarFaseInicial(aleatorio);
         refrescarDatosEnPantalla();
-
     }
 
     public void refrescarDatosEnPantalla() {
@@ -201,10 +208,17 @@ public class ControladorMenuJugador {
         mostrarPaisesActuales();
     }
 
-    private void mostrarJugadorActual() {
-        nombreJugador.setText(nombreJugadorActual());
+
+    private void mostrarJugadorActual(){
+        nombreJugador.setText( nombreJugadorActual() );
+        List<Double> numeroDeColorActual = buscarNumeroDeColorEnDiccionario(colorJugadorActual());
+        colorJugador.setTextFill(Color.color(numeroDeColorActual.get(0),numeroDeColorActual.get(1),numeroDeColorActual.get(2)));
+        colorJugador.setText("Ejército "+colorJugadorActual());
     }
 
+    private List<Double> buscarNumeroDeColorEnDiccionario(String color) {
+        return diccionarioDeColores.get(color);
+    }
 
     private void mostrarPaisesActuales() {
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
@@ -255,8 +269,21 @@ public class ControladorMenuJugador {
         return diccionario;
     }
 
+    private void crearDiccionarioDeColores () {
+        diccionarioDeColores.put(COLORES[0], new ArrayList<>(Arrays.asList(0.0,0.1,1.0)));
+        diccionarioDeColores.put(COLORES[1], new ArrayList<>(Arrays.asList(0.85,0.0,0.0)));
+        diccionarioDeColores.put(COLORES[2], new ArrayList<>(Arrays.asList(0.9,0.9,0.2)));
+        diccionarioDeColores.put(COLORES[3], new ArrayList<>(Arrays.asList(0.3,0.70,0.0)));
+        diccionarioDeColores.put(COLORES[4], new ArrayList<>(Arrays.asList(0.8,0.1,1.0)));
+        diccionarioDeColores.put(COLORES[5], new ArrayList<>(Arrays.asList(0.0,0.0,0.0)));
+    }
+
+
     private String nombreJugadorActual() {
         return juego.jugadorEnTurno().getNombre();
+    }
+    private String colorJugadorActual() {
+        return juego.jugadorEnTurno().getColor();
     }
 
 

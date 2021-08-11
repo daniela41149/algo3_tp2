@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorMenuJugador">
@@ -18,14 +19,23 @@
          <children>
             <HBox layoutX="107.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="nombreJugador" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="236.0">
-                     <effect>
-                        <SepiaTone />
-                     </effect>
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
+                  <VBox prefHeight="75.0" prefWidth="230.0">
+                     <children>
+                        <Label fx:id="nombreJugador" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="230.0">
+                           <effect>
+                              <SepiaTone />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="colorJugador" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="29.0" prefWidth="230.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                   <Button fx:id="botonAtacar" disable="true" mnemonicParsing="true" onAction="#atacar" prefHeight="75.0" prefWidth="235.0" text="Atacar">
                      <HBox.margin>
                         <Insets />

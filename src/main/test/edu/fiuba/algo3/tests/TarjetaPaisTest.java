@@ -12,8 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -151,7 +150,7 @@ public class TarjetaPaisTest {
         } catch (JugadaInvalidaException e) {
             lanzaExcepcion = true;
         }
-        assertFalse(lanzaExcepcion);
+        assertTrue(lanzaExcepcion);
         assertEquals(jugador.pedirPaises().get(0).cantidadDeFichas(),1);
         assertEquals(jugador.pedirPaises().get(1).cantidadDeFichas(),1);
         assertEquals(juego.devolverJugadores().get(1).pedirPaises().get(0).cantidadDeFichas(),1);
