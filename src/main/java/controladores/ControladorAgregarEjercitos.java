@@ -132,7 +132,9 @@ public class ControladorAgregarEjercitos {
 
     @FXML
     public void restarUno(ActionEvent event){
-        suma --;
+        if (suma > 0) {
+            suma --;
+        }
         String ejercitos= String.valueOf(suma);
         labelEjercitos.setText( ejercitos);
     }
