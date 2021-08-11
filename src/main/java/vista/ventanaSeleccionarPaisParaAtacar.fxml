@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorSeleccionarPais">
+    <children>
+        <AnchorPane layoutX="331.0" layoutY="27.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="labelNombrePaisDesde" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="545.0">
+                    <effect>
+                        <SepiaTone />
+                    </effect>
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
+                <Button fx:id="botonElegir" disable="false" layoutX="700.0" mnemonicParsing="true" onAction="#elegir" prefHeight="75.0" prefWidth="235.0" text="Elegir">
+                    <effect>
+                        <SepiaTone />
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <ImageView fitHeight="542.0" fitWidth="753.0" layoutX="257.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="73.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+            <image>
+                <Image url="@imagenesMenuJuego/tableroTEG.png" />
+            </image>
+        </ImageView>
+        <ListView fx:id="listaLimitrofes" layoutY="75.0" onMouseClicked="#seleccionarLimitrofe" prefHeight="528.0" prefWidth="181.0" AnchorPane.bottomAnchor="76.0" AnchorPane.rightAnchor="754.0">
+            <effect>
+                <SepiaTone />
+            </effect>
+        </ListView>
+        <AnchorPane layoutY="603.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="935.0">
+            <children>
+                <Button fx:id="botonVolver" disable="false" layoutX="696.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#volver"   prefHeight="75.0" prefWidth="235.0" text="Volver atras">
+                    <effect>
+                        <SepiaTone />
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Button>
+                <Label fx:id="labelNombrePaisHasta" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="488.0">
+                    <effect>
+                        <SepiaTone />
+                    </effect>
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
