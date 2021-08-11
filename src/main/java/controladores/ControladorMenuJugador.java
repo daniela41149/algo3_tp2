@@ -43,7 +43,6 @@ public class ControladorMenuJugador {
     List<TarjetaPais> mazoDeTarjetasPais;
     String paisSeleccionado;
     static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
-    private HashMap<String, List<Double>> diccionarioDeColores = new HashMap<>();
 
 
     @FXML
@@ -192,7 +191,6 @@ public class ControladorMenuJugador {
     }
 
     public void iniciarJuego() throws IOException, JugadaInvalidaException {
-        crearDiccionarioDeColores();
         moderador = new Moderador();
         juego = new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), jugadores);
         mazoDeTarjetasObjetivo = moderador.pedirTarjetasObjetivo();
@@ -211,14 +209,10 @@ public class ControladorMenuJugador {
 
     private void mostrarJugadorActual(){
         nombreJugador.setText( nombreJugadorActual() );
-        List<Double> numeroDeColorActual = buscarNumeroDeColorEnDiccionario(colorJugadorActual());
-        colorJugador.setTextFill(Color.color(numeroDeColorActual.get(0),numeroDeColorActual.get(1),numeroDeColorActual.get(2)));
+        cambiarElColor();
         colorJugador.setText("Ejército "+colorJugadorActual());
     }
 
-    private List<Double> buscarNumeroDeColorEnDiccionario(String color) {
-        return diccionarioDeColores.get(color);
-    }
 
     private void mostrarPaisesActuales() {
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
@@ -269,15 +263,27 @@ public class ControladorMenuJugador {
         return diccionario;
     }
 
-    private void crearDiccionarioDeColores () {
-        diccionarioDeColores.put(COLORES[0], new ArrayList<>(Arrays.asList(0.0,0.1,1.0)));
-        diccionarioDeColores.put(COLORES[1], new ArrayList<>(Arrays.asList(0.85,0.0,0.0)));
-        diccionarioDeColores.put(COLORES[2], new ArrayList<>(Arrays.asList(0.9,0.9,0.2)));
-        diccionarioDeColores.put(COLORES[3], new ArrayList<>(Arrays.asList(0.3,0.70,0.0)));
-        diccionarioDeColores.put(COLORES[4], new ArrayList<>(Arrays.asList(0.8,0.1,1.0)));
-        diccionarioDeColores.put(COLORES[5], new ArrayList<>(Arrays.asList(0.0,0.0,0.0)));
+    private void cambiarElColor() {
+        String colorDeJugadorActual = colorJugadorActual();
+        if (colorDeJugadorActual.equals(COLORES[0])) {
+            colorJugador.setTextFill(Color.color(0.0,0.1,1.0));
+        }
+        else if (colorDeJugadorActual.equals(COLORES[1])) {
+            colorJugador.setTextFill(Color.color(0.85,0.0,0.0));
+        }
+        else if (colorDeJugadorActual.equals(COLORES[2])) {
+            colorJugador.setTextFill(Color.color(0.8,0.7,0.0));
+        }
+        else if (colorDeJugadorActual.equals(COLORES[3])) {
+            colorJugador.setTextFill(Color.color(0.3,0.70,0.0));
+        }
+        else if (colorDeJugadorActual.equals(COLORES[4])) {
+            colorJugador.setTextFill(Color.color(0.8,0.1,1.0));
+        }
+        else {
+            colorJugador.setTextFill(Color.color(0.0,0.0,0.0));
+        }
     }
-
 
     private String nombreJugadorActual() {
         return juego.jugadorEnTurno().getNombre();
