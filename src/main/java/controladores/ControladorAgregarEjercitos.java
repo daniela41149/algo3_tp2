@@ -32,7 +32,10 @@ public class ControladorAgregarEjercitos {
     private Button botonAgregar;
 
     @FXML
-    private Button botonsumarUno;
+    private Button botonSumarUno;
+
+    @FXML
+    private Button botonRestarUno;
 
     @FXML
     private Button botonOkey;
@@ -123,6 +126,13 @@ public class ControladorAgregarEjercitos {
     @FXML
     public void sumarUno(ActionEvent event){
         suma ++;
+        String ejercitos= String.valueOf(suma);
+        labelEjercitos.setText( ejercitos);
+    }
+
+    @FXML
+    public void restarUno(ActionEvent event){
+        suma --;
         String ejercitos= String.valueOf(suma);
         labelEjercitos.setText( ejercitos);
     }

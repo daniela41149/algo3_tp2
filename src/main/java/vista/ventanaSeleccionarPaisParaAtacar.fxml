@@ -14,7 +14,7 @@
     <children>
         <AnchorPane layoutX="331.0" layoutY="27.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label fx:id="labelNombrePaisDesde" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="545.0">
+                <Label fx:id="labelPais1" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="545.0">
                     <effect>
                         <SepiaTone />
                     </effect>
@@ -58,7 +58,7 @@
                         <Font size="16.0" />
                     </font>
                 </Button>
-                <Label fx:id="labelNombrePaisHasta" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="488.0">
+                <Label fx:id="labelPais2" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="488.0">
                     <effect>
                         <SepiaTone />
                     </effect>

@@ -37,7 +37,7 @@
                 <Font name="System Bold Italic" size="30.0" />
             </font>
         </Label>
-      <Button fx:id="botonSumar" layoutX="198.0" layoutY="172.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
+      <Button fx:id="botonSumarUno" layoutX="198.0" layoutY="172.0" mnemonicParsing="false" onAction="#sumarUno" prefHeight="52.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -49,7 +49,7 @@
             <InnerShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <Button fx:id="botonRestar" layoutX="93.0" layoutY="172.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0">
+      <Button fx:id="botonRestarUno" layoutX="93.0" layoutY="172.0" mnemonicParsing="false" onAction="#restarUno" prefHeight="52.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="39.0" fitWidth="37.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                <image>
