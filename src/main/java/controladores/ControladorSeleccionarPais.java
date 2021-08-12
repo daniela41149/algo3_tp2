@@ -2,6 +2,7 @@ package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,12 +89,10 @@ public class ControladorSeleccionarPais {
     }
 
     @FXML
-    void atacar(ActionEvent event) throws IOException{
-        Integer fichasAtaque = buscarPais(nombrePais).cantidadDeFichas();
-        Integer fichasDefensa = buscarPais(nombre(limitrofeSeleccionado)).cantidadDeFichas();
+    void atacar(ActionEvent event) throws IOException, JugadaInvalidaException{
         levantarVentanaDados();
         ControladorDados controladorDados = obtenerControladorDados();
-        controladorDados.asignarFichas(fichasAtaque, fichasDefensa);
+        controladorDados.atacar(juego, nombrePais, nombre(limitrofeSeleccionado), buscarPais(nombrePais).cantidadDeFichas() );
 
     }
 

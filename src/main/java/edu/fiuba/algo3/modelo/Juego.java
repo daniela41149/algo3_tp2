@@ -128,8 +128,8 @@ public class Juego {
         ejercitosColocadosPorJugadorEnTurno += cantidadEjercito;
     }
 
-    public void atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
-        tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
+    public List<Integer>[] atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
+        return tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
 
     public List<Jugador> devolverJugadores(){

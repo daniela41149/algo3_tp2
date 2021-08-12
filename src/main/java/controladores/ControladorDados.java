@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Dados;
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -12,6 +13,9 @@ import javafx.scene.image.ImageView;
 
 public class ControladorDados{
 
+    private List<Integer> dadosEnBatalla[];
+    List<Integer> dadosAtacante;
+    List<Integer> dadosDefensor;
     Integer fichasAtaque = 0;
     Integer fichasDefensa = 0;
     List<ImageView> imagenesDadosAtacantes = new ArrayList<ImageView>();
@@ -58,9 +62,6 @@ public class ControladorDados{
 
     @FXML
     private void lanzar() {
-        Dados dados = new Dados();
-        List<Integer> dadosAtacante = dados.dadosAtaque(fichasAtaque);
-        List<Integer> dadosDefensor = dados.dadosDefensa(fichasDefensa);
         iniciarListasDeImagenes();
         mostrarDados(dadosAtacante, imagenesDadosAtacantes);
         mostrarDados(dadosDefensor, imagenesDadosDefensores);
@@ -76,8 +77,9 @@ public class ControladorDados{
         ( imagenesVacias.get(posicion) ).setImage( imagenes.get( numeroDado-1 ) );
     }
 
-    public void asignarFichas(Integer fichasAtaque, Integer fichasDefensa){
-        this.fichasAtaque = fichasAtaque;
-        this.fichasDefensa = fichasDefensa;
+    public void atacar(Juego juego, String paisAtacante, String paisDefensor, int fichas) throws JugadaInvalidaException{
+        dadosEnBatalla = juego.atacar(paisAtacante, paisDefensor, fichas);
+        dadosAtacante = dadosEnBatalla[0];
+        dadosDefensor = dadosEnBatalla[1];
     }
 }

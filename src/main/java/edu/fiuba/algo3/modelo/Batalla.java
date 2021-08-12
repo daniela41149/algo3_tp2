@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Batalla {
@@ -28,15 +28,20 @@ public class Batalla {
         }
     }
 
-    public void atacar(int cantidadEjercito) throws JugadaInvalidaException {
+    public List<Integer>[] atacar(int cantidadEjercito) throws JugadaInvalidaException {
         List<Integer> dadosDelAtacante;
         List<Integer> dadosDelDefensor;
+        List<Integer> [ ] dadosEnBatalla = new List [2];
 
         dadosDelAtacante = paisAtacante.atacar(paisDefensor, cantidadEjercito);
         dadosDelDefensor = paisDefensor.defender();
 
+        dadosEnBatalla[0] = dadosDelAtacante;
+        dadosEnBatalla[1] = dadosDelDefensor;
+
         establecerResultadosDeBatalla(dadosDelAtacante, dadosDelDefensor);
         paisDefensor.establecerDueño(paisAtacante);
+        return dadosEnBatalla;
     }
 
 }
