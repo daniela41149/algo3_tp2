@@ -1,6 +1,7 @@
 package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Moderador;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
@@ -51,6 +52,9 @@ public class ControladorAgregarEjercitos {
     private Label colorJugador;
 
     @FXML
+    private Label ejercitosDisponibles;
+
+    @FXML
     private ListView<String> listaPaises;
 
     @FXML
@@ -63,29 +67,38 @@ public class ControladorAgregarEjercitos {
     private Button botonPasar;
 
 
+
     static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
     static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
     static final int NUMERO_PAISES = 50;
     private Juego juego;
+    private Moderador moderador;
     private int suma = 0;
     private String nombrePais;
     private HashMap<String, Integer> paisesConEjercitos;
     private int cantidadDeJugadores;
     static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
 
+    Stage  escenarioNoHayEjercitos = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
 
 
 
-    public void asignarEjercitos(String pais,int cantidad,Juego juego, Label nombreJugador, Label colorJugador,ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
+
+    public void asignarEjercitos(String pais, int cantidad, Juego juego, Moderador moderador, Label nombreJugador, Label colorJugador, Label ejercitosDisponibles, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
         this.botonAtacar = botonAtacar;
         this.botonReagrupar = botonReagrupar;
         this.botonPasar = botonPasar;
         this.juego = juego;
+        this.moderador = moderador;
         this.nombrePais = pais;
         this.nombreJugador = nombreJugador;
         this.colorJugador = colorJugador;
         this.listaPaises = listaPaises;
         this.cantidadDeJugadores = juego.devolverJugadores().size();
+        this.ejercitosDisponibles = ejercitosDisponibles;
         labelPais.setText( pais);
         labelEjercitos.setText( "0" );
     }
@@ -159,32 +172,21 @@ public class ControladorAgregarEjercitos {
     }
 
 
-
-    Stage  escenarioNoHayEjercitos = new Stage();
-    Scene scene;
-    Parent root;
-    FXMLLoader loader;
-
-
-
     public void levantarVentanaNoHayEjercitosSuficientes() throws IOException {
         loader = new FXMLLoader(getClass().getResource("/vista/ventanaNoHayEjercitosSuficientes.fxml"));
         root = (Parent)loader.load();
         scene = new Scene(root);
+        escenarioNoHayEjercitos.setTitle("No Hay Ejercitos Suficientes");
         escenarioNoHayEjercitos.setScene(scene);
         escenarioNoHayEjercitos.show();
     }
 
 
-    private void mostrarPaisesActuales(){
-        paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
-        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
-    }
 
     private int sumarEjercitosTotales() {
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
         int ejercitosTotales = 0;
-        for (Pais pais : juego.devolverPaises()) {
+        for (Pais pais : moderador.pedirPaises()) {
             ejercitosTotales += pais.cantidadDeFichas();
         }
         return ejercitosTotales;
@@ -194,35 +196,46 @@ public class ControladorAgregarEjercitos {
     private void refrescarDatosEnPantalla(){
         mostrarJugadorActual();
         mostrarPaisesActuales();
+        mostrarEjercitosDisponibles();
     }
-
     private void mostrarJugadorActual(){
         nombreJugador.setText( nombreJugadorActual() );
         cambiarElColor();
         colorJugador.setText("Ejército "+colorJugadorActual());
     }
+    private void mostrarPaisesActuales(){
+        paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
+    }
+    private void mostrarEjercitosDisponibles() {
+        ejercitosDisponibles.setText(Integer.toString(ejercitoDisponibleActual()));
+    }
 
     private void cambiarElColor() {
-        String colorDeJugadorActual = juego.jugadorEnTurno().getColor();
-        System.out.println(colorDeJugadorActual);
-
+        String colorDeJugadorActual = colorJugadorActual();
         if (colorDeJugadorActual.equals(COLORES[0])) {
             colorJugador.setTextFill(Color.color(0.0,0.1,1.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.0,0.1,1.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[1])) {
             colorJugador.setTextFill(Color.color(0.85,0.0,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.85,0.0,0.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[2])) {
             colorJugador.setTextFill(Color.color(0.8,0.7,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.8,0.7,0.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[3])) {
             colorJugador.setTextFill(Color.color(0.3,0.70,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.3,0.70,0.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[4])) {
-        colorJugador.setTextFill(Color.color(0.8,0.1,1.0));
+            colorJugador.setTextFill(Color.color(0.8,0.1,1.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.8,0.1,1.0));
         }
         else {
             colorJugador.setTextFill(Color.color(0.0,0.0,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.0,0.0,0.0));
         }
     }
 
@@ -243,6 +256,9 @@ public class ControladorAgregarEjercitos {
     }
     private String colorJugadorActual() {
         return juego.jugadorEnTurno().getColor();
+    }
+    private int ejercitoDisponibleActual() {
+        return juego.devolverEjercitosRestantesDeJugadorActual();
     }
 
 

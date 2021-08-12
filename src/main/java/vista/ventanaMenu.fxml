@@ -19,23 +19,35 @@
          <children>
             <HBox layoutX="107.0" prefHeight="75.0" prefWidth="989.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox prefHeight="75.0" prefWidth="230.0">
+                  <HBox prefHeight="75.0" prefWidth="230.0">
                      <children>
-                        <Label fx:id="nombreJugador" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="230.0">
-                           <effect>
-                              <SepiaTone />
-                           </effect>
+                        <VBox prefHeight="75.0" prefWidth="195.0">
+                           <children>
+                              <Label fx:id="nombreJugador" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="230.0">
+                                 <effect>
+                                    <SepiaTone />
+                                 </effect>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="colorJugador" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="29.0" prefWidth="230.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Label fx:id="ejercitosDisponibles" alignment="CENTER" prefHeight="87.0" prefWidth="51.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                            <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="colorJugador" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="29.0" prefWidth="230.0">
-                           <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="23.0" />
                            </font>
                         </Label>
                      </children>
-                  </VBox>
+                  </HBox>
                   <Button fx:id="botonAtacar" disable="true" mnemonicParsing="true" onAction="#atacar" prefHeight="75.0" prefWidth="235.0" text="Atacar">
                      <HBox.margin>
                         <Insets />

@@ -1,6 +1,7 @@
 package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Moderador;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,12 +20,13 @@ import java.util.List;
 
 public class ControladorSeleccionarPais {
 
-    Juego juego;
-    HashMap<String, Integer> limitrofesConEjercitos;
-    HashMap<String, Integer> paisesConEjercitos;
-    int ejercito;
-    String limitrofeSeleccionado;
-    String nombrePais;
+    private Juego juego;
+    private HashMap<String, Integer> limitrofesConEjercitos;
+    private HashMap<String, Integer> paisesConEjercitos;
+    private int ejercito;
+    private String limitrofeSeleccionado;
+    private String nombrePais;
+    private Moderador moderador;
 
 
 
@@ -59,8 +61,9 @@ public class ControladorSeleccionarPais {
 
 
 
-    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises) {
+    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, Moderador moderador, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises) {
         this.juego = juego;
+        this.moderador = moderador;
         this.nombrePais = nombrePais;
         this.ejercito = cantEjercito;
         this.limitrofesConEjercitos = limitrofesConEjercitos;
@@ -81,7 +84,7 @@ public class ControladorSeleccionarPais {
         ControladorReagruparEjercitos controladorReagruparEjercitos = obtenerControladorReagruparEjercitos();
         int ejercitoDesde = buscarPais(nombrePais).cantidadDeFichas();
         int ejercitoHasta = buscarPais(nombre(limitrofeSeleccionado)).cantidadDeFichas();
-        controladorReagruparEjercitos.reagrupar(juego,nombrePais,ejercitoDesde,nombre(limitrofeSeleccionado),ejercitoHasta,listaLimitrofes,limitrofesConEjercitos);
+        controladorReagruparEjercitos.reagrupar(juego,moderador, nombrePais,ejercitoDesde,nombre(limitrofeSeleccionado),ejercitoHasta,listaLimitrofes,limitrofesConEjercitos);
     }
 
     @FXML
@@ -166,7 +169,7 @@ public class ControladorSeleccionarPais {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
         for (Pais unPais: paises) {
             if (unPais.esLimitrofe(paisBuscado) && juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
@@ -178,7 +181,7 @@ public class ControladorSeleccionarPais {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
         for (Pais unPais: paises) {
             if (unPais.esLimitrofe(paisBuscado) && !juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
@@ -191,7 +194,7 @@ public class ControladorSeleccionarPais {
 
 
     private Pais buscarPais (String nombrePaisBuscado) {
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         for (Pais unPais: paises) {
             if (unPais.getNombre().equals((nombrePaisBuscado)))
                 return unPais;

@@ -31,8 +31,7 @@ public class ControladorMenuJugador {
     private HashMap<String, Integer> paisesConEjercitos;
     private HashMap<String, Integer> limitrofesConEjercitos;
     private Juego juego;
-    Stage escenarioDados = new Stage();
-    Stage escenarioSeleccion = new Stage();
+    Stage escenario = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
@@ -50,6 +49,9 @@ public class ControladorMenuJugador {
 
     @FXML
     private Label colorJugador;
+
+    @FXML
+    private Label ejercitosDisponibles;
 
     @FXML
     private Button botonAtacar;
@@ -87,34 +89,34 @@ public class ControladorMenuJugador {
     @FXML
     void atacar(ActionEvent event) throws IOException {
         limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(nombre(paisSeleccionado));
-        levantarVentanaSeleccionarPaisParaAtacar();
+        levantarVentana("/vista/ventanaSeleccionarPaisParaAtacar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, limitrofesConEjercitos,listaPaises);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, moderador, limitrofesConEjercitos,listaPaises);
         controladorSeleccionarPais.mostrarLimitrofesParaAtacar();
     }
 
     @FXML
     void colocarEjercito(ActionEvent event) throws IOException {
-        levantarVentanaAgregarEjercitos();
+        levantarVentana("/vista/ventanaAgregarEjercitos.fxml","Agregar Ejercitos");
         ControladorAgregarEjercitos controladorAgregarEjercitos = obtenerControladorAgregarEjercitos();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, nombreJugador, colorJugador, listaPaises, botonAtacar, botonReagrupar, botonPasar);
+        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, moderador,nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonPasar);
     }
 
     @FXML
     void reagruparEjercito(ActionEvent event) throws IOException {
         limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(nombre(paisSeleccionado));
-        levantarVentanaSeleccionarPaisParaReagrupar();
+        levantarVentana("/vista/ventanaSeleccionarPaisParaReagrupar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, limitrofesConEjercitos,listaPaises);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, moderador, limitrofesConEjercitos,listaPaises);
         controladorSeleccionarPais.mostrarLimitrofesParaReagrupar();
     }
 
     @FXML
     void verObjetivo(ActionEvent event) throws IOException {
-        levantarVentanaObjetivoSecreto();
+        levantarVentana("/vista/ventanaObjetivoSecreto.fxml","Objetivo Secreto");
         ControladorObjetivoSecreto controladorObjetivoSecreto = obtenerControladorObjetivoSecreto();
         controladorObjetivoSecreto.mostrarObjetivo(juego.jugadorEnTurno().devolverEnunciadoDeObjetivo());
     }
@@ -130,43 +132,14 @@ public class ControladorMenuJugador {
         paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
     }
 
-
-    public void levantarVentanaAgregarEjercitos() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaAgregarEjercitos.fxml"));
+    public void levantarVentana(String path, String titulo) throws IOException {
+        loader = new FXMLLoader(getClass().getResource(path));
         root = (Parent) loader.load();
         scene = new Scene(root);
-        escenarioDados.setTitle("Agregar Ejercitos");
-        escenarioDados.setScene(scene);
-        escenarioDados.show();
+        escenario.setTitle(titulo);
+        escenario.setScene(scene);
+        escenario.show();
     }
-
-    public void levantarVentanaSeleccionarPaisParaReagrupar() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaSeleccionarPaisParaReagrupar.fxml"));
-        root = (Parent) loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion.setTitle("Seleccionar Pais");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
-
-    public void levantarVentanaSeleccionarPaisParaAtacar() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaSeleccionarPaisParaAtacar.fxml"));
-        root = (Parent) loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion.setTitle("Seleccionar Pais");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
-
-    public void levantarVentanaObjetivoSecreto() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaObjetivoSecreto.fxml"));
-        root = (Parent) loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion.setTitle("Objetivo Secreto");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
-
 
     public ControladorAgregarEjercitos obtenerControladorAgregarEjercitos() {
         ControladorAgregarEjercitos controladorAgregarEjercitos = (ControladorAgregarEjercitos) loader.getController();
@@ -185,7 +158,6 @@ public class ControladorMenuJugador {
     }
 
 
-
     public void asignarJugadores(ArrayList<String> nombresJugadores) {
         jugadores = nombresJugadores;
     }
@@ -201,28 +173,30 @@ public class ControladorMenuJugador {
         refrescarDatosEnPantalla();
     }
 
+
     public void refrescarDatosEnPantalla() {
         mostrarJugadorActual();
         mostrarPaisesActuales();
+        mostrarEjercitosDisponibles();
     }
-
-
     private void mostrarJugadorActual(){
         nombreJugador.setText( nombreJugadorActual() );
         cambiarElColor();
         colorJugador.setText("Ejército "+colorJugadorActual());
     }
-
-
     private void mostrarPaisesActuales() {
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
         paisesConEjercitos.forEach((nombrePais, cantidadEjercito) -> listaPaises.getItems().add(nombrePais + "  " + cantidadEjercito.toString()));
     }
+    private void mostrarEjercitosDisponibles() {
+        ejercitosDisponibles.setText(Integer.toString(ejercitoDisponibleActual()));
+    }
+
 
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
         HashMap<String, Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
         for (Pais unPais : paises) {
             if (unPais.esLimitrofe(paisBuscado) && !juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
@@ -234,7 +208,7 @@ public class ControladorMenuJugador {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String, Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
         for (Pais unPais : paises) {
             if (unPais.esLimitrofe(paisBuscado) && juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
@@ -245,7 +219,7 @@ public class ControladorMenuJugador {
     }
 
     private Pais buscarPais(String nombrePaisBuscado) {
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         for (Pais unPais : paises) {
             if (unPais.getNombre().equals((nombrePaisBuscado)))
                 return unPais;
@@ -267,21 +241,27 @@ public class ControladorMenuJugador {
         String colorDeJugadorActual = colorJugadorActual();
         if (colorDeJugadorActual.equals(COLORES[0])) {
             colorJugador.setTextFill(Color.color(0.0,0.1,1.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.0,0.1,1.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[1])) {
             colorJugador.setTextFill(Color.color(0.85,0.0,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.85,0.0,0.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[2])) {
             colorJugador.setTextFill(Color.color(0.8,0.7,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.8,0.7,0.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[3])) {
             colorJugador.setTextFill(Color.color(0.3,0.70,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.3,0.70,0.0));
         }
         else if (colorDeJugadorActual.equals(COLORES[4])) {
             colorJugador.setTextFill(Color.color(0.8,0.1,1.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.8,0.1,1.0));
         }
         else {
             colorJugador.setTextFill(Color.color(0.0,0.0,0.0));
+            ejercitosDisponibles.setTextFill(Color.color(0.0,0.0,0.0));
         }
     }
 
@@ -290,6 +270,9 @@ public class ControladorMenuJugador {
     }
     private String colorJugadorActual() {
         return juego.jugadorEnTurno().getColor();
+    }
+    private int ejercitoDisponibleActual() {
+        return juego.devolverEjercitosRestantesDeJugadorActual();
     }
 
 

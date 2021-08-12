@@ -1,6 +1,7 @@
 package controladores;
 
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Moderador;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ public class ControladorReagruparEjercitos {
 
 
     private Juego juego;
+    private Moderador moderador;
     private int suma = 0;
     private String nombrePaisDesde;
     private String nombrePaisHasta;
@@ -53,8 +55,11 @@ public class ControladorReagruparEjercitos {
 
 
 
-    public void reagrupar(Juego juego, String nombrePaisDesde, int ejercitosDesde, String nombrePaisHasta, int ejercitosHasta, ListView<String> listaLimitrofes, HashMap<String, Integer> limitrofesConEjercitos) {
+
+
+    public void reagrupar(Juego juego, Moderador moderador,String nombrePaisDesde, int ejercitosDesde, String nombrePaisHasta, int ejercitosHasta, ListView<String> listaLimitrofes, HashMap<String, Integer> limitrofesConEjercitos) {
         this.juego = juego;
+        this.moderador = moderador;
         this.nombrePaisDesde = nombrePaisDesde;
         this.nombrePaisHasta = nombrePaisHasta;
         this.ejercitosDesde = ejercitosDesde;
@@ -111,7 +116,7 @@ public class ControladorReagruparEjercitos {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
         for (Pais unPais: paises) {
             if (unPais.esLimitrofe(paisBuscado) && juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
@@ -123,7 +128,7 @@ public class ControladorReagruparEjercitos {
 
 
     private Pais buscarPais(String nombrePaisBuscado) {
-        List<Pais> paises = juego.devolverPaises();
+        List<Pais> paises = moderador.pedirPaises();
         for (Pais unPais : paises) {
             if (unPais.getNombre().equals((nombrePaisBuscado)))
                 return unPais;

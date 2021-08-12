@@ -88,7 +88,7 @@ public class Juego {
         cantidadTotal += tablero.ejercitosAdicionalesPorContinentesControlados(jugadorEnTurno);
 
         if (jugadorEnTurno.ejercitosDeCanje() > 0) {
-            cantidadTotal += jugadorEnTurno.ejercitosDeCanje();
+            ejercitosColocadosPorJugadorEnTurno -= jugadorEnTurno.ejercitosDeCanje();
             jugadorEnTurno.borrarEjercitosDeCanje();
         }
 
@@ -134,6 +134,29 @@ public class Juego {
 
     public List<Jugador> devolverJugadores(){
         return this.jugadores;
+    }
+
+    public int devolverEjercitosRestantesDeJugadorActual() {
+        int ejercitos = sumarEjercitosTotales();
+        int ejercitosFinalPrimeraRonda = jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA+50;
+        int ejercitosFinalSegundaRonda = jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA+jugadores.size()*CANT_EJERCITOS_EN_SEGUNDA_VUELTA+50;
+
+        if ((ejercitos < ejercitosFinalSegundaRonda) && (ejercitos >= ejercitosFinalPrimeraRonda)) {
+            return CANT_EJERCITOS_EN_SEGUNDA_VUELTA-ejercitosColocadosEnSegundaVuelta;
+        }
+        else if (ejercitos < ejercitosFinalPrimeraRonda) {
+            return CANT_EJERCITOS_EN_PRIMERA_VUELTA-ejercitosColocadosEnPrimeraVuelta;
+        }
+        return establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno())-ejercitosColocadosPorJugadorEnTurno;
+    }
+
+    private int sumarEjercitosTotales() {
+        List<Pais> paises = tablero.pasarPaisesAJuego();
+        int ejercitosTotales = 0;
+        for (Pais pais : paises) {
+            ejercitosTotales += pais.cantidadDeFichas();
+        }
+        return ejercitosTotales;
     }
 
     public boolean controlaContiente (String nombreJugador, String nombreContinente) {
@@ -203,7 +226,7 @@ public class Juego {
         }
     }
 
-    public List<Pais> devolverPaises(){
+    public List<Pais> devolvePaises(){
         return tablero.pasarPaisesAJuego();
     }
 
