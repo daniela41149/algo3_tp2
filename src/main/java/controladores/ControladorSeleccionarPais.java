@@ -89,9 +89,11 @@ public class ControladorSeleccionarPais {
 
     @FXML
     void atacar(ActionEvent event) throws IOException{
+        Integer fichasAtaque = buscarPais(nombrePais).cantidadDeFichas();
+        Integer fichasDefensa = buscarPais(nombre(limitrofeSeleccionado)).cantidadDeFichas();
         levantarVentanaDados();
         ControladorDados controladorDados = obtenerControladorDados();
-        controladorDados.asignarFichas(2, 4);
+        controladorDados.asignarFichas(fichasAtaque, fichasDefensa);
 
     }
 
