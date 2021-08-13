@@ -1,0 +1,11 @@
+@startuml
+hide empty description
+[*] --> PaisSinDueño: iniciar juego
+PaisSinDueño--> [*]: salir del juego
+
+PaisSinDueño-> PaisConElDueñoOriginal: repartir tarjetas
+PaisConElDueñoOriginal--> [*]: pierde o gana
+PaisConElDueñoOriginal--> PaisConOtroDueño: pierde batalla
+PaisConOtroDueño--> PaisConElDueñoOriginal: pierde batalla
+PaisConOtroDueño--> [*]: pierde o gana
+@enduml
