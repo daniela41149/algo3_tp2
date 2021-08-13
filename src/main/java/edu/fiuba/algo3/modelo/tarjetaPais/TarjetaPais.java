@@ -20,9 +20,9 @@ public class TarjetaPais {
         return this.nombre;
     }
 
-    public Simbolo getSimbolo() {
-        return this.simbolo;
-    }
+    // public Simbolo getSimbolo() {
+    //    return this.simbolo;
+    // }
 
 
     public void activarTarjeta(Jugador jugador) throws JugadaInvalidaException {
@@ -46,9 +46,23 @@ public class TarjetaPais {
         return this.simbolo.sonSimbolosDiferentes(simbolo1) && this.simbolo.sonSimbolosDiferentes(simbolo2) && simbolo1.sonSimbolosDiferentes(simbolo2);
     }
 
-    public boolean puedeCanjear (TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
-        return this.esElMismoSimbolo(tarjetaPais1.getSimbolo(),tarjetaPais2.getSimbolo()) || this.sonSimbolosDiferentes(tarjetaPais1.getSimbolo(),tarjetaPais2.getSimbolo());
+    private boolean esElMismoSimbolo(TarjetaPais tarjetaPais, Simbolo simbolo) {
+        return tarjetaPais.esElMismoSimbolo(this.simbolo,simbolo);
     }
+
+    public boolean esElMismoSimbolo(String nombreSimbolo) {
+        return this.simbolo.esElMismoSimbolo(nombreSimbolo);
+    }
+
+    private boolean sonSimbolosDiferentes(TarjetaPais tarjetaPais, Simbolo simbolo) {
+        return tarjetaPais.sonSimbolosDiferentes(this.simbolo,simbolo);
+    }
+
+
+    public boolean puedeCanjear (TarjetaPais tarjetaPais1, TarjetaPais tarjetaPais2) {
+        return tarjetaPais1.esElMismoSimbolo(tarjetaPais2,this.simbolo) || tarjetaPais1.sonSimbolosDiferentes(tarjetaPais2,this.simbolo);
+    }
+
 
     private void guardarSimboloDeTarjetaPais (String simbolo) {
         if (simbolo.equals("Comodin")) {
@@ -57,9 +71,6 @@ public class TarjetaPais {
             this.simbolo = new Figura(simbolo);
         }
     }
-
-
 }
-
 
 

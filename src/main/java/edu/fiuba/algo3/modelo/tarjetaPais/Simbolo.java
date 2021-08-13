@@ -5,12 +5,6 @@ public interface Simbolo {
     public boolean esElMismoSimbolo(Simbolo simbolo);
     public boolean sonSimbolosDiferentes(Simbolo simbolo);
 
-    public boolean esElMismo(String nombreSimbolo);
-    public boolean sonDiferentes(String nombreSimbolo);
-
-
-
-
-
-
+    public boolean esElMismoSimbolo(String nombreSimbolo);
+    public boolean sonSimbolosDiferentes(String nombreSimbolo);
 }

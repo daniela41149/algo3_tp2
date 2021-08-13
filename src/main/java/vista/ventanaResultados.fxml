@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorResultadosDeBatalla">
+    <children>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Label alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="36.0" prefWidth="450.0" style="&#10;" text="Resultados" textAlignment="CENTER" textFill="#4d351c" wrapText="false">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                    <effect>
+                        <SepiaTone />
+                    </effect>
+                </Label>
+                <Label fx:id="labelNombrePaisAtacante" alignment="CENTER" layoutX="12.0" layoutY="41.0" prefHeight="26.0" prefWidth="182.0" style="&#10;" textAlignment="CENTER" textFill="#2d72c6" wrapText="false">
+                    <font>
+                        <Font size="21.0" />
+                    </font>
+                </Label>
+                <Label fx:id="labelNombrePaisDefensor" alignment="CENTER" layoutX="439.0" layoutY="41.0" prefHeight="26.0" prefWidth="182.0" style="&#10;" textAlignment="CENTER" textFill="#2d72c6" wrapText="false">
+                    <font>
+                        <Font size="21.0" />
+                    </font>
+                </Label>
+                <Label fx:id="labelGanador" alignment="CENTER" layoutX="220.0" layoutY="74.0" prefHeight="225.0" prefWidth="188.0" style="&#10;" text="VS" textAlignment="CENTER" textFill="#c61919" wrapText="true">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="dadoAtacanteUno" fitHeight="91.0" fitWidth="68.0" layoutX="59.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="dadoAtacanteDos" fitHeight="91.0" fitWidth="68.0" layoutX="59.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="dadoAtacanteTres" fitHeight="91.0" fitWidth="68.0" layoutX="59.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="dadoDefensorUno" fitHeight="91.0" fitWidth="68.0" layoutX="508.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="dadoDefensorDos" fitHeight="91.0" fitWidth="68.0" layoutX="508.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="dadoDefensorTres" fitHeight="91.0" fitWidth="68.0" layoutX="508.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
+                <Button fx:id="botonCerrar" layoutX="285.0" layoutY="338.0" mnemonicParsing="false" onAction="#cerrar" text="Cerrar">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            <Label fx:id="labelEjercitosPaisAtacante" alignment="CENTER" layoutX="89.0" layoutY="67.0" prefHeight="28.0" prefWidth="29.0" style="&#10;" textAlignment="CENTER" textFill="#2d72c6" wrapText="false">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelEjercitosPaisDefensor" alignment="CENTER" layoutX="516.0" layoutY="67.0" prefHeight="28.0" prefWidth="29.0" style="&#10;" textAlignment="CENTER" textFill="#2d72c6" wrapText="false">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+    </children>
+    <effect>
+        <SepiaTone level="0.2" />
+    </effect>
+</VBox>

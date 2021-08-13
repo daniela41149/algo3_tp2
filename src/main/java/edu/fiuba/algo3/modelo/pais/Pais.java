@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.pais;
 
 import edu.fiuba.algo3.modelo.Ejercito;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class Pais {
         return false;
     }
 
-    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws JugadaInvalidaException {
+    public List<Integer> atacar(Pais paisDefensa, int cantidadEjercito) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         if(paisDefensa.esLimitrofe(this))
             return (ejercito.atacar(cantidadEjercito));
         else  {

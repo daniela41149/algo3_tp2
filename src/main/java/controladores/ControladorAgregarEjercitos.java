@@ -72,7 +72,7 @@ public class ControladorAgregarEjercitos {
     static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
     static final int NUMERO_PAISES = 50;
     private Juego juego;
-    private Moderador moderador;
+    private List<Pais> paisesEnTablero;
     private int suma = 0;
     private String nombrePais;
     private HashMap<String, Integer> paisesConEjercitos;
@@ -87,12 +87,12 @@ public class ControladorAgregarEjercitos {
 
 
 
-    public void asignarEjercitos(String pais, int cantidad, Juego juego, Moderador moderador, Label nombreJugador, Label colorJugador, Label ejercitosDisponibles, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
+    public void asignarEjercitos(String pais, int cantidad, Juego juego, List<Pais> paisesEnTablero, Label nombreJugador, Label colorJugador, Label ejercitosDisponibles, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
         this.botonAtacar = botonAtacar;
         this.botonReagrupar = botonReagrupar;
         this.botonPasar = botonPasar;
         this.juego = juego;
-        this.moderador = moderador;
+        this.paisesEnTablero = paisesEnTablero;
         this.nombrePais = pais;
         this.nombreJugador = nombreJugador;
         this.colorJugador = colorJugador;
@@ -186,7 +186,7 @@ public class ControladorAgregarEjercitos {
     private int sumarEjercitosTotales() {
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
         int ejercitosTotales = 0;
-        for (Pais pais : moderador.pedirPaises()) {
+        for (Pais pais : paisesEnTablero) {
             ejercitosTotales += pais.cantidadDeFichas();
         }
         return ejercitosTotales;

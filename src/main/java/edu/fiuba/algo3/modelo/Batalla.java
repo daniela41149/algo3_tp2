@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 
@@ -28,7 +29,7 @@ public class Batalla {
         }
     }
 
-    public List<Integer>[] atacar(int cantidadEjercito) throws JugadaInvalidaException {
+    public List<Integer>[] atacar(int cantidadEjercito) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         List<Integer> dadosDelAtacante;
         List<Integer> dadosDelDefensor;
         List<Integer> [ ] dadosEnBatalla = new List [2];

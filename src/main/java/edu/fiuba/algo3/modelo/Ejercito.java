@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
+
 import java.util.List;
 
 public class Ejercito {
@@ -48,8 +50,10 @@ public class Ejercito {
         return (this.cantidadDeFichas == 0);
     }
 
-    public List<Integer> atacar(int unaCantidadDeFichas) {
-
+    public List<Integer> atacar(int unaCantidadDeFichas) throws CantidadInvalidaDeEjercitosException {
+        if (this.cantidadDeFichas <= 1) {
+            throw new CantidadInvalidaDeEjercitosException();
+        }
         return dados.dadosAtaque(unaCantidadDeFichas);
     }
 

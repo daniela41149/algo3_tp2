@@ -44,7 +44,7 @@ public class ControladorReagruparEjercitos {
 
 
     private Juego juego;
-    private Moderador moderador;
+    private List<Pais> paisesEnTablero;
     private int suma = 0;
     private String nombrePaisDesde;
     private String nombrePaisHasta;
@@ -57,9 +57,9 @@ public class ControladorReagruparEjercitos {
 
 
 
-    public void reagrupar(Juego juego, Moderador moderador,String nombrePaisDesde, int ejercitosDesde, String nombrePaisHasta, int ejercitosHasta, ListView<String> listaLimitrofes, HashMap<String, Integer> limitrofesConEjercitos) {
+    public void reagrupar(Juego juego, List<Pais> paisesEnTablero ,String nombrePaisDesde, int ejercitosDesde, String nombrePaisHasta, int ejercitosHasta, ListView<String> listaLimitrofes, HashMap<String, Integer> limitrofesConEjercitos) {
         this.juego = juego;
-        this.moderador = moderador;
+        this.paisesEnTablero = paisesEnTablero;
         this.nombrePaisDesde = nombrePaisDesde;
         this.nombrePaisHasta = nombrePaisHasta;
         this.ejercitosDesde = ejercitosDesde;
@@ -116,9 +116,8 @@ public class ControladorReagruparEjercitos {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
-        for (Pais unPais: paises) {
+        for (Pais unPais: paisesEnTablero) {
             if (unPais.esLimitrofe(paisBuscado) && juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
                 paisesLimitrofes.put(unPais.getNombre(),unPais.cantidadDeFichas());
             }
@@ -128,8 +127,7 @@ public class ControladorReagruparEjercitos {
 
 
     private Pais buscarPais(String nombrePaisBuscado) {
-        List<Pais> paises = moderador.pedirPaises();
-        for (Pais unPais : paises) {
+        for (Pais unPais : paisesEnTablero) {
             if (unPais.getNombre().equals((nombrePaisBuscado)))
                 return unPais;
         }

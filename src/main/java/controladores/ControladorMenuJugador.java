@@ -36,10 +36,10 @@ public class ControladorMenuJugador {
     Parent root;
     FXMLLoader loader;
     ArrayList<String> jugadores = new ArrayList<>();
-    Moderador moderador;
     Aleatorio aleatorio = new Aleatorio();
+    List<Pais> paisesEnTablero;
     List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
-    List<TarjetaPais> mazoDeTarjetasPais;
+    List<TarjetaPais> mazoCompletoDeTarjetasPais = new ArrayList<>();
     String paisSeleccionado;
     static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
 
@@ -71,12 +71,22 @@ public class ControladorMenuJugador {
     @FXML
     private Button botonColocarEjercito;
 
+    @FXML
+    private Button botonTarjetas;
+
+    @FXML
+    private Button botonObjetivo;
+
 
 
     @FXML
     void cargarJuego(ActionEvent event) throws IOException, JugadaInvalidaException {
         iniciarJuego();
         botonArranque.setVisible(false);
+        botonColocarEjercito.setDisable(false);
+        botonObjetivo.setDisable(false);
+        botonTarjetas.setDisable(false);
+
     }
 
     @FXML
@@ -92,7 +102,7 @@ public class ControladorMenuJugador {
         levantarVentana("/vista/ventanaSeleccionarPaisParaAtacar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, moderador, limitrofesConEjercitos,listaPaises);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos,listaPaises,botonTarjetas);
         controladorSeleccionarPais.mostrarLimitrofesParaAtacar();
     }
 
@@ -101,7 +111,7 @@ public class ControladorMenuJugador {
         levantarVentana("/vista/ventanaAgregarEjercitos.fxml","Agregar Ejercitos");
         ControladorAgregarEjercitos controladorAgregarEjercitos = obtenerControladorAgregarEjercitos();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, moderador,nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonPasar);
+        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, paisesEnTablero,nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonPasar);
     }
 
     @FXML
@@ -110,7 +120,7 @@ public class ControladorMenuJugador {
         levantarVentana("/vista/ventanaSeleccionarPaisParaReagrupar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, moderador, limitrofesConEjercitos,listaPaises);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos,listaPaises,botonTarjetas);
         controladorSeleccionarPais.mostrarLimitrofesParaReagrupar();
     }
 
@@ -119,6 +129,13 @@ public class ControladorMenuJugador {
         levantarVentana("/vista/ventanaObjetivoSecreto.fxml","Objetivo Secreto");
         ControladorObjetivoSecreto controladorObjetivoSecreto = obtenerControladorObjetivoSecreto();
         controladorObjetivoSecreto.mostrarObjetivo(juego.jugadorEnTurno().devolverEnunciadoDeObjetivo());
+    }
+
+    @FXML
+    void verTarjetas(ActionEvent event) throws IOException {
+        levantarVentana("/vista/ventanaTarjetasPais.fxml","Tarjetas");
+        ControladorTarjetas controladorTarjetas = obtenerControladorTarjetas();
+        controladorTarjetas.mostrarTarjetas(juego,mazoCompletoDeTarjetasPais);
     }
 
 
@@ -145,13 +162,14 @@ public class ControladorMenuJugador {
         ControladorAgregarEjercitos controladorAgregarEjercitos = (ControladorAgregarEjercitos) loader.getController();
         return controladorAgregarEjercitos;
     }
-
-
+    public ControladorTarjetas obtenerControladorTarjetas() {
+        ControladorTarjetas controladorTarjetas = (ControladorTarjetas) loader.getController();
+        return controladorTarjetas;
+    }
     public ControladorSeleccionarPais obtenerControladorSeleccionarPais() {
         ControladorSeleccionarPais controladorSeleccionarPais = (ControladorSeleccionarPais) loader.getController();
         return controladorSeleccionarPais;
     }
-
     public ControladorObjetivoSecreto obtenerControladorObjetivoSecreto() {
         ControladorObjetivoSecreto controladorObjetivoSecreto = (ControladorObjetivoSecreto) loader.getController();
         return controladorObjetivoSecreto;
@@ -163,15 +181,20 @@ public class ControladorMenuJugador {
     }
 
     public void iniciarJuego() throws IOException, JugadaInvalidaException {
-        moderador = new Moderador();
+        Moderador moderador = new Moderador();
+        paisesEnTablero = moderador.pedirPaises();
         juego = new Juego(moderador.pedirPaises(), moderador.pedirContinentes(), jugadores);
         mazoDeTarjetasObjetivo = moderador.pedirTarjetasObjetivo();
-        mazoDeTarjetasPais = moderador.pedirTarjetasPais();
+        List <TarjetaPais> mazoDeTarjetasPais = moderador.pedirTarjetasPais();
+        for (TarjetaPais unaTarjeta: mazoDeTarjetasPais) {
+            mazoCompletoDeTarjetasPais.add(unaTarjeta);
+        }
         juego.guardarMazoDeTarjetasObjetivo(mazoDeTarjetasObjetivo);
         juego.guardarMazoDeTarjetasPais(mazoDeTarjetasPais);
         juego.comenzarFaseInicial(aleatorio);
         refrescarDatosEnPantalla();
     }
+
 
 
     public void refrescarDatosEnPantalla() {
@@ -196,9 +219,8 @@ public class ControladorMenuJugador {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
         HashMap<String, Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
-        for (Pais unPais : paises) {
+        for (Pais unPais : paisesEnTablero) {
             if (unPais.esLimitrofe(paisBuscado) && !juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
                 paisesLimitrofes.put(unPais.getNombre(), unPais.cantidadDeFichas());
             }
@@ -208,9 +230,8 @@ public class ControladorMenuJugador {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String, Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
-        for (Pais unPais : paises) {
+        for (Pais unPais : paisesEnTablero) {
             if (unPais.esLimitrofe(paisBuscado) && juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
                 paisesLimitrofes.put(unPais.getNombre(), unPais.cantidadDeFichas());
             }
@@ -219,8 +240,7 @@ public class ControladorMenuJugador {
     }
 
     private Pais buscarPais(String nombrePaisBuscado) {
-        List<Pais> paises = moderador.pedirPaises();
-        for (Pais unPais : paises) {
+        for (Pais unPais : paisesEnTablero) {
             if (unPais.getNombre().equals((nombrePaisBuscado)))
                 return unPais;
         }

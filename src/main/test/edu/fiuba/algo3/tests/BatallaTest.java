@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.tests;
 
 import edu.fiuba.algo3.modelo.Batalla;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test01NoSePuedeHacerBatallarAPaisesQueNoSonLimitrofes() throws JugadaInvalidaException {
+    public void test01NoSePuedeHacerBatallarAPaisesQueNoSonLimitrofes() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         Batalla batalla = new Batalla(mockPaisAtacante, mockPaisDefensor);
 
@@ -33,7 +34,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test02SiElAtacanteGanaUnaComparacionDeDadosEntoncesElDefensorSacaUnEjercito() throws JugadaInvalidaException {
+    public void test02SiElAtacanteGanaUnaComparacionDeDadosEntoncesElDefensorSacaUnEjercito() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(5);
@@ -51,7 +52,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test03SiElDefensorGanaUnaComparacionDeDadosEntoncesElAtacanteSacaUnEjercito() throws JugadaInvalidaException {
+    public void test03SiElDefensorGanaUnaComparacionDeDadosEntoncesElAtacanteSacaUnEjercito() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(2);
@@ -69,7 +70,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test04SiUnaComparacionDeDadosResultaEnEmpateElAtacanteSacaUnEjercito() throws JugadaInvalidaException {
+    public void test04SiUnaComparacionDeDadosResultaEnEmpateElAtacanteSacaUnEjercito() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(4);
@@ -87,7 +88,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test05LosDadosDeMasQuePuedaTenerElAtacantePorEncimaDelDefensorNoSeTienenEnCuentaEnLaBatalla() throws JugadaInvalidaException {
+    public void test05LosDadosDeMasQuePuedaTenerElAtacantePorEncimaDelDefensorNoSeTienenEnCuentaEnLaBatalla() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(5);
@@ -108,7 +109,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test06ElAtacanteGanaTodasLasComparacionesDeDados() throws JugadaInvalidaException {
+    public void test06ElAtacanteGanaTodasLasComparacionesDeDados() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(3);
@@ -130,7 +131,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test07ElDefensorGanaTodasLasComparacionesDeDados() throws JugadaInvalidaException {
+    public void test07ElDefensorGanaTodasLasComparacionesDeDados() throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(3);
@@ -152,7 +153,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void test08UnPaisAtacanteConUnSoloEjercitoNoPuedeBatallar() throws JugadaInvalidaException {
+    public void test08UnPaisAtacanteConUnSoloEjercitoNoPuedeBatallar() throws JugadaInvalidaException,CantidadInvalidaDeEjercitosException {
         setup();
         List<Integer> dadosAtacante = new ArrayList<>();
         List<Integer> dadosDefensor = new ArrayList<>();

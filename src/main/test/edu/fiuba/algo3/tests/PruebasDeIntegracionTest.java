@@ -339,7 +339,7 @@ public class PruebasDeIntegracionTest {
     }
 
     @Test
-    public void test002AtaqueEntrePaisesConElPaisDefensorComoGanador() throws IOException{
+    public void test002AtaqueEntrePaisesConElPaisDefensorComoGanador() throws IOException, CantidadInvalidaDeEjercitosException{
         setup();
         List<Integer> dadosAtaque = new ArrayList<>();
         dadosAtaque.add(1);
@@ -389,7 +389,7 @@ public class PruebasDeIntegracionTest {
     }
 
     @Test
-    public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() throws IOException {
+    public void test003AtaqueEntrePaisesConElPaisAtacanteComoGanador() throws IOException, CantidadInvalidaDeEjercitosException {
         setup();
 
         List<Integer> dadosAtaque = new ArrayList<>();

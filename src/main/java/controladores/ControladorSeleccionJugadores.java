@@ -34,27 +34,27 @@ public class ControladorSeleccionJugadores {
 
     @FXML
     void jugar_con_cinco(ActionEvent event) throws IOException {
-        levantarVentanaNombresDe5Jugadores();
+        levantarVentana("/vista/ventanaNombresDe5Jugadores.fxml",boton5,"ALTEGO");
     }
 
     @FXML
     void jugar_con_cuatro(ActionEvent event) throws IOException {
-        levantarVentanaNombresDe4Jugadores();
+        levantarVentana("/vista/ventanaNombresDe4Jugadores.fxml",boton4,"ALTEGO");
     }
 
     @FXML
     void jugar_con_dos(ActionEvent event) throws IOException {
-        levantarVentanaNombresDe2Jugadores();
+        levantarVentana("/vista/ventanaNombresDe2Jugadores.fxml",boton2,"ALTEGO");
     }
 
     @FXML
     void jugar_con_seis(ActionEvent event) throws IOException {
-        levantarVentanaNombresDe6Jugadores();
+        levantarVentana("/vista/ventanaNombresDe6Jugadores.fxml",boton6,"ALTEGO");
     }
 
     @FXML
     void jugar_con_tres(ActionEvent event) throws IOException {
-        levantarVentanaNombresDe3Jugadores();
+        levantarVentana("/vista/ventanaNombresDe3Jugadores.fxml",boton3,"ALTEGO");
     }
 
     Stage escenarioSeleccion = new Stage();
@@ -63,55 +63,16 @@ public class ControladorSeleccionJugadores {
     FXMLLoader loader;
 
 
-
-    public void levantarVentanaNombresDe2Jugadores() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNombresDe2Jugadores.fxml"));
+    public void levantarVentana(String path, Button boton, String titulo) throws IOException {
+        loader = new FXMLLoader(getClass().getResource(path));
         root = (Parent)loader.load();
         scene = new Scene(root);
-        escenarioSeleccion = (Stage) boton2.getScene().getWindow();
-        escenarioSeleccion.setTitle("ALTEGO");
+        escenarioSeleccion = (Stage) boton.getScene().getWindow();
+        escenarioSeleccion.setTitle(titulo);
         escenarioSeleccion.setScene(scene);
         escenarioSeleccion.show();
     }
 
-    public void levantarVentanaNombresDe3Jugadores() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNombresDe3Jugadores.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion = (Stage) boton3.getScene().getWindow();
-        escenarioSeleccion.setTitle("ALTEGO");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
 
-    public void levantarVentanaNombresDe4Jugadores() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNombresDe4Jugadores.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion = (Stage) boton4.getScene().getWindow();
-        escenarioSeleccion.setTitle("ALTEGO");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
-
-    public void levantarVentanaNombresDe5Jugadores() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNombresDe5Jugadores.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion = (Stage) boton5.getScene().getWindow();
-        escenarioSeleccion.setTitle("ALTEGO");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
-
-    public void levantarVentanaNombresDe6Jugadores() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNombresDe6Jugadores.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioSeleccion = (Stage) boton6.getScene().getWindow();
-        escenarioSeleccion.setTitle("ALTEGO");
-        escenarioSeleccion.setScene(scene);
-        escenarioSeleccion.show();
-    }
 
 }

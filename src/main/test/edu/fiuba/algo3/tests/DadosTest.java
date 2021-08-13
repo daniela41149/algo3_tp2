@@ -16,9 +16,9 @@ public class DadosTest {
     @Test
     public void test02DevuelveListaDeDadosDeAtaqueNoVacia() {
         Dados dados = new Dados();
-        assertEquals(0,dados.dadosAtaque(1).size());
-        assertEquals(1,dados.dadosAtaque(2).size());
-        assertEquals(2,dados.dadosAtaque(3).size());
+        assertEquals(1,dados.dadosAtaque(1).size());
+        assertEquals(2,dados.dadosAtaque(2).size());
+        assertEquals(3,dados.dadosAtaque(3).size());
         assertEquals(3,dados.dadosAtaque(4).size());
         assertEquals(3,dados.dadosAtaque(5).size());
         assertEquals(3,dados.dadosAtaque(6).size());
@@ -29,8 +29,8 @@ public class DadosTest {
     @Test
     public void test02DevuelveListaDeDadosDeDefensaNoVacia() {
         Dados dados = new Dados();
-        assertEquals(dados.dadosDefensa(1).size(), 2);
-        assertEquals(dados.dadosDefensa(2).size(), 3);
+        assertEquals(dados.dadosDefensa(1).size(), 1);
+        assertEquals(dados.dadosDefensa(2).size(), 2);
         assertEquals(dados.dadosDefensa(3).size(), 3);
         assertEquals(dados.dadosDefensa(4).size(), 3);
         assertEquals(dados.dadosDefensa(5).size(), 3);

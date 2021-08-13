@@ -73,7 +73,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botonColocarEjercito" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="75.0" prefWidth="235.0" text="Agregar Ejercito">
+                  <Button fx:id="botonColocarEjercito" disable="true" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="75.0" prefWidth="235.0" text="Agregar Ejercito">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -118,7 +118,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="botonObjetivo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#verObjetivo" prefHeight="75.0" prefWidth="235.0" text="Objetivo Secreto">
+                  <Button fx:id="botonObjetivo" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#verObjetivo" prefHeight="75.0" prefWidth="235.0" text="Objetivo Secreto">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -129,7 +129,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botonTarjetas" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#colocarEjercito" prefHeight="75.0" prefWidth="235.0" text="Tarjetas">
+                  <Button fx:id="botonTarjetas" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#verTarjetas" prefHeight="75.0" prefWidth="235.0" text="Tarjetas">
                      <effect>
                         <SepiaTone />
                      </effect>

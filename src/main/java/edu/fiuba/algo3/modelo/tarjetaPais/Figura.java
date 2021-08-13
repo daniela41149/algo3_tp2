@@ -8,20 +8,16 @@ public class Figura implements Simbolo{
     }
 
     public boolean esElMismoSimbolo(Simbolo simbolo) {
-        return simbolo.esElMismo(this.simbolo);
+        return simbolo.esElMismoSimbolo(this.simbolo);
     }
     public boolean sonSimbolosDiferentes(Simbolo simbolo){
-        return simbolo.sonDiferentes(this.simbolo);
+        return simbolo.sonSimbolosDiferentes(this.simbolo);
     }
 
-    public boolean esElMismo(String nombreSimbolo) {
+    public boolean esElMismoSimbolo(String nombreSimbolo) {
         return this.simbolo.equals(nombreSimbolo);
     }
-    public boolean sonDiferentes(String nombreSimbolo) {
+    public boolean sonSimbolosDiferentes(String nombreSimbolo) {
         return !this.simbolo.equals(nombreSimbolo);
     }
-
-
-
-
 }

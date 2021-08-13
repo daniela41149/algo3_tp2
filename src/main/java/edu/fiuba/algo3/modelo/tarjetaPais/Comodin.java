@@ -8,10 +8,10 @@ public class Comodin implements Simbolo {
     public boolean sonSimbolosDiferentes(Simbolo simbolo){
         return true;
     }
-    public boolean esElMismo(String nombreSimbolo) {
+    public boolean esElMismoSimbolo(String nombreSimbolo) {
         return true;
     }
-    public boolean sonDiferentes(String nombreSimbolo) {
+    public boolean sonSimbolosDiferentes(String nombreSimbolo) {
         return true;
     }
 

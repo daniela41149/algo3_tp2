@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
 
@@ -40,7 +41,7 @@ public class Tablero {
         return paisBuscado;
     }
 
-    public List<Integer>[] atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException {
+    public List<Integer>[] atacar(String nombrePaisAtacante, String nombrePaisDefensor,int cantEjercito)throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         Pais paisAtacante = buscarPais(nombrePaisAtacante) ;
         Pais paisDefensor = buscarPais(nombrePaisDefensor) ;
         if( (paisAtacante == null) || (paisDefensor == null) ){

@@ -38,6 +38,7 @@ public class Jugador {
         paises.add(nuevoPais);
     }
 
+
     public Pais buscarPais(String nombrePais){
         Pais paisBuscado = null;
         for(Pais pais: paises){
@@ -55,7 +56,6 @@ public class Jugador {
             throw new JugadaInvalidaException();
         }
         pais.colocarEjercito (this, cantidadEjercito);
-
     }
 
     public List<Pais> pedirPaises(){
@@ -143,6 +143,15 @@ public class Jugador {
         juego.devolverTarjetasAlMazo(tarjetasPaisParaDevolverAlMazo);
     }
 
+    public boolean tieneLaTarjetaPais (TarjetaPais tarjetaPais) {
+        for (TarjetaPais unaTarjetaPais: tarjetasPais) {
+            if (unaTarjetaPais.getNombre().equals(tarjetaPais.getNombre())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void entregarEjercitosDeCanje(int ejercitos){
         this.ejercitosDeCanje = ejercitos;
     }
@@ -158,8 +167,4 @@ public class Jugador {
     public String devolverEnunciadoDeObjetivo() {
         return this.tarjetaDeObjetivo.devolverEnunciado();
     }
-
-
-
 }
-

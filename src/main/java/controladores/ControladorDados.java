@@ -1,85 +1,173 @@
 package controladores;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.pais.Pais;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class ControladorDados{
+    private Juego juego;
+    private Jugador jugador;
+    private Pais paisAtacante;
+    private Pais paisDefensor;
+    private HashMap<String, Integer> limitrofesConEjercitos;
+    private List<Pais> paisesEnTablero;
+
 
     private List<Integer> dadosEnBatalla[];
+    ListView<String> listaLimitrofes;
     List<Integer> dadosAtacante;
     List<Integer> dadosDefensor;
+
     Integer fichasAtaque = 0;
     Integer fichasDefensa = 0;
-    List<ImageView> imagenesDadosAtacantes = new ArrayList<ImageView>();
-    List<ImageView> imagenesDadosDefensores = new ArrayList<ImageView>();
-    List<Image> imagenes = new ArrayList<Image>();// ../ para ir hacia atras
-    Image imagenDado1 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_1.png") ) ;
-    Image imagenDado2 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_2.png") ) ;
-    Image imagenDado3 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_3.png") ) ;
-    Image imagenDado4 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_4.png") ) ;
-    Image imagenDado5 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_5.png") ) ;
-    Image imagenDado6 = new Image( getClass().getResourceAsStream("/vista/imagenes_dado/dice_6.png") ) ;
+
+
+    private int numeroDeDadosElegidos = 0;
 
 
     @FXML
-    private Button boton;
+    private Button botonDado;
 
     @FXML
-    private ImageView dadoAtacanteUno;
+    private Button botonLanzar;
 
     @FXML
-    private ImageView dadoAtacanteDos;
+    private Label labelNombrePaisAtacante;
 
     @FXML
-    private ImageView dadoAtacanteTres;
+    private Label labelNombrePaisDefensor;
 
     @FXML
-    private ImageView dadoDefensorUno;
+    private Label labelEjercitosPaisAtacante;
 
     @FXML
-    private ImageView dadoDefensorDos;
+    private Label labelEjercitosPaisDefensor;
+
+
+
+    public void atacar(Juego juego, List<Pais> paisesEnTablero, Pais paisAtacante, Pais paisDefensor, ListView<String> listaLimitrofes,Button botonTarjetas) throws JugadaInvalidaException{
+        this.listaLimitrofes = listaLimitrofes;
+        this.juego = juego;
+        this.paisesEnTablero = paisesEnTablero;
+        this.jugador = juego.jugadorEnTurno();
+        this.paisAtacante = paisAtacante;
+        this.paisDefensor = paisDefensor;
+
+
+        labelNombrePaisAtacante.setText(paisAtacante.getNombre());
+        labelNombrePaisDefensor.setText(paisDefensor.getNombre());
+        labelEjercitosPaisAtacante.setText(String.valueOf(paisAtacante.cantidadDeFichas()));
+        labelEjercitosPaisDefensor.setText(String.valueOf(paisDefensor.cantidadDeFichas()));
+    }
+
+
 
     @FXML
-    private ImageView dadoDefensorTres;
+    private void elegirCantidadDeDados() {
+        if (numeroDeDadosElegidos <= 3) {
+            numeroDeDadosElegidos++;
+        }
 
-    private void iniciarListasDeImagenes() {
-        imagenes.addAll(  Arrays.asList( imagenDado1, imagenDado2, imagenDado3, imagenDado4, imagenDado5, imagenDado6 )  );
-        imagenesDadosAtacantes.add(dadoAtacanteUno);
-        imagenesDadosAtacantes.add(dadoAtacanteDos);
-        imagenesDadosAtacantes.add(dadoAtacanteTres);
-        imagenesDadosDefensores.add(dadoDefensorUno);
-        imagenesDadosDefensores.add(dadoDefensorDos);
-        imagenesDadosDefensores.add(dadoDefensorTres);
     }
 
     @FXML
-    private void lanzar() {
-        iniciarListasDeImagenes();
-        mostrarDados(dadosAtacante, imagenesDadosAtacantes);
-        mostrarDados(dadosDefensor, imagenesDadosDefensores);
-        boton.setVisible(false);
-    }
+    private void lanzar() throws IOException {
+        levantarVentana("/vista/ventanaResultados.fxml", botonLanzar, "Resultados de Batalla");
 
-    private void mostrarDados(List<Integer> dados, List<ImageView> imagenesVacias) {
-        for ( int i = 0; i < dados.size(); i++ )
-            asignarImagen( dados.get(i), i , imagenesVacias );
-    }
+        try {
+            dadosEnBatalla = juego.atacar(paisAtacante.getNombre(), paisDefensor.getNombre(), numeroDeDadosElegidos);
 
-    private void asignarImagen( int numeroDado, int posicion, List<ImageView> imagenesVacias ) {
-        ( imagenesVacias.get(posicion) ).setImage( imagenes.get( numeroDado-1 ) );
-    }
 
-    public void atacar(Juego juego, String paisAtacante, String paisDefensor, int fichas) throws JugadaInvalidaException{
-        dadosEnBatalla = juego.atacar(paisAtacante, paisDefensor, fichas);
+        } catch (CantidadInvalidaDeEjercitosException e1) {
+            //levantarVentana
+        } catch (JugadaInvalidaException e2) {
+            // levantarVentana
+        }
+        this.numeroDeDadosElegidos = 0;
         dadosAtacante = dadosEnBatalla[0];
         dadosDefensor = dadosEnBatalla[1];
+        ControladorResultadosDeBatalla controladorResultadosDeBatalla = obtenerControladorResultadosDeBatalla();
+        controladorResultadosDeBatalla.mostrarResultados(dadosAtacante, dadosDefensor);
+
+        controladorResultadosDeBatalla.mostrarDatos(paisAtacante.getNombre(),paisAtacante.cantidadDeFichas(),paisDefensor.getNombre(),paisDefensor.cantidadDeFichas(),listaLimitrofes, paisesEnTablero);
+        controladorResultadosDeBatalla.mostrarJugadorQueConquistoPais(jugador,paisDefensor.getNombre());
+
+
+
+        botonLanzar.setVisible(false);
     }
+
+
+
+
+
+
+
+    Stage escenarioSeleccion = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
+
+
+
+    public void levantarVentana(String path, Button boton,String titulo) throws IOException {
+        loader = new FXMLLoader(getClass().getResource(path));
+        root = (Parent)loader.load();
+        scene = new Scene(root);
+        escenarioSeleccion = (Stage) boton.getScene().getWindow();
+        escenarioSeleccion.setTitle(titulo);
+        escenarioSeleccion.setScene(scene);
+        escenarioSeleccion.show();
+    }
+
+    private ControladorResultadosDeBatalla obtenerControladorResultadosDeBatalla() {
+        ControladorResultadosDeBatalla controladorResultadosDeBatalla = (ControladorResultadosDeBatalla) loader.getController();
+        return controladorResultadosDeBatalla;
+    }
+
+
+
+
+
+    private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
+        HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
+        Pais paisBuscado = buscarPais(nombrePais);
+        for (Pais unPais: paisesEnTablero) {
+            if (unPais.esLimitrofe(paisBuscado) && !juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
+                paisesLimitrofes.put(unPais.getNombre(),unPais.cantidadDeFichas());
+            }
+        }
+        return paisesLimitrofes;
+    }
+
+    private Pais buscarPais(String nombrePaisBuscado) {
+        for (Pais unPais : paisesEnTablero) {
+            if (unPais.getNombre().equals((nombrePaisBuscado)))
+                return unPais;
+        }
+        return null;
+    }
+
+
+
+
 }

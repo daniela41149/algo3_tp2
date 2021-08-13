@@ -27,7 +27,8 @@ public class ControladorSeleccionarPais {
     private int ejercito;
     private String limitrofeSeleccionado;
     private String nombrePais;
-    private Moderador moderador;
+    private List<Pais> paisesEnTablero;
+    private Button botonTarjetas;
 
 
 
@@ -62,13 +63,15 @@ public class ControladorSeleccionarPais {
 
 
 
-    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, Moderador moderador, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises) {
+    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, List<Pais> paisesEnTablero, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises, Button botonTarjetas) {
         this.juego = juego;
-        this.moderador = moderador;
+        this.paisesEnTablero = paisesEnTablero;
         this.nombrePais = nombrePais;
         this.ejercito = cantEjercito;
         this.limitrofesConEjercitos = limitrofesConEjercitos;
         this.listaPaises = listaPaises;
+        this.botonTarjetas = botonTarjetas;
+
         labelPais1.setText(nombrePais);
     }
 
@@ -81,19 +84,22 @@ public class ControladorSeleccionarPais {
 
     @FXML
     void reagrupar(ActionEvent event) throws IOException{
-        levantarVentanaReagruparEjercitos();
+        levantarVentana("/vista/ventanaReagruparEjercitos.fxml","Reagrupar Ejercitos");
         ControladorReagruparEjercitos controladorReagruparEjercitos = obtenerControladorReagruparEjercitos();
         int ejercitoDesde = buscarPais(nombrePais).cantidadDeFichas();
         int ejercitoHasta = buscarPais(nombre(limitrofeSeleccionado)).cantidadDeFichas();
-        controladorReagruparEjercitos.reagrupar(juego,moderador, nombrePais,ejercitoDesde,nombre(limitrofeSeleccionado),ejercitoHasta,listaLimitrofes,limitrofesConEjercitos);
+        controladorReagruparEjercitos.reagrupar(juego,paisesEnTablero, nombrePais,ejercitoDesde,nombre(limitrofeSeleccionado),ejercitoHasta,listaLimitrofes,limitrofesConEjercitos);
     }
 
     @FXML
     void atacar(ActionEvent event) throws IOException, JugadaInvalidaException{
-        levantarVentanaDados();
+        levantarVentana("/vista/ventanaDados.fxml","Batalla");
         ControladorDados controladorDados = obtenerControladorDados();
-        controladorDados.atacar(juego, nombrePais, nombre(limitrofeSeleccionado), buscarPais(nombrePais).cantidadDeFichas() );
 
+        Pais paisAtacante = buscarPais(nombrePais);
+        Pais paisDefensor = buscarPais(nombre(limitrofeSeleccionado));
+
+        controladorDados.atacar(juego, paisesEnTablero,paisAtacante, paisDefensor,listaLimitrofes, botonTarjetas);
     }
 
     @FXML
@@ -114,23 +120,15 @@ public class ControladorSeleccionarPais {
 
 
 
-    public void levantarVentanaReagruparEjercitos() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaReagruparEjercitos.fxml"));
+    public void levantarVentana(String path, String titulo) throws IOException {
+        loader = new FXMLLoader(getClass().getResource(path));
         root = (Parent)loader.load();
         scene = new Scene(root);
-        escenarioReagrupar.setTitle("Reagrupar Ejercitos");
+        escenarioReagrupar.setTitle(titulo);
         escenarioReagrupar.setScene(scene);
         escenarioReagrupar.show();
     }
 
-    public void levantarVentanaDados() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaDados.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioDados.setTitle("Batalla");
-        escenarioDados.setScene(scene);
-        escenarioDados.show();
-    }
 
     public ControladorDados obtenerControladorDados() {
         ControladorDados controladorDados = (ControladorDados)loader.getController();
@@ -170,9 +168,8 @@ public class ControladorSeleccionarPais {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
-        for (Pais unPais: paises) {
+        for (Pais unPais: paisesEnTablero) {
             if (unPais.esLimitrofe(paisBuscado) && juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
                 paisesLimitrofes.put(unPais.getNombre(),unPais.cantidadDeFichas());
             }
@@ -182,9 +179,8 @@ public class ControladorSeleccionarPais {
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
         HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        List<Pais> paises = moderador.pedirPaises();
         Pais paisBuscado = buscarPais(nombrePais);
-        for (Pais unPais: paises) {
+        for (Pais unPais: paisesEnTablero) {
             if (unPais.esLimitrofe(paisBuscado) && !juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
                 paisesLimitrofes.put(unPais.getNombre(),unPais.cantidadDeFichas());
             }
@@ -195,8 +191,7 @@ public class ControladorSeleccionarPais {
 
 
     private Pais buscarPais (String nombrePaisBuscado) {
-        List<Pais> paises = moderador.pedirPaises();
-        for (Pais unPais: paises) {
+        for (Pais unPais: paisesEnTablero) {
             if (unPais.getNombre().equals((nombrePaisBuscado)))
                 return unPais;
         }

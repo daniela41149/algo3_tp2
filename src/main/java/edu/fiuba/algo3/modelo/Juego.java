@@ -128,7 +128,7 @@ public class Juego {
         ejercitosColocadosPorJugadorEnTurno += cantidadEjercito;
     }
 
-    public List<Integer>[] atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException {
+    public List<Integer>[] atacar(String nombrePaisAtacante, String nombrePaisDefensor, int cantidadDeEjercitoAtacante) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
         return tablero.atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante);
     }
 
@@ -226,17 +226,9 @@ public class Juego {
         }
     }
 
-    public List<Pais> devolvePaises(){
-        return tablero.pasarPaisesAJuego();
+    public void solicitarUnCanje (List<String> nombresTarjetasPaisParaCanjear){
+        jugadorEnTurno().solicitarUnCanje(nombresTarjetasPaisParaCanjear);
     }
-
-
-
-
-
-
-
-
 
 }
 
