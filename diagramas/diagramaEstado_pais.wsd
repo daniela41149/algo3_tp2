@@ -5,8 +5,8 @@ hide empty description
 PaisSinDueño--> [*]: salir del juego
 
 PaisSinDueño-> PaisConElDueñoOriginal: repartir tarjetas
-PaisConElDueñoOriginal--> [*]: pierde o gana
+PaisConElDueñoOriginal--> [*]: pierde o gana el juego
 PaisConElDueñoOriginal--> PaisConOtroDueño: pierde batalla
 PaisConOtroDueño--> PaisConElDueñoOriginal: pierde batalla
-PaisConOtroDueño--> [*]: pierde o gana
+PaisConOtroDueño--> [*]: pierde o gana el juego
 @enduml
