@@ -1,0 +1,139 @@
+@startuml
+
+Juego "1" *-- "1" Tablero
+Juego "1" -- "2..6" Jugador
+Juego "1" *-- "*" TarjetaPais
+Juego "1" *--- "*" TarjetaObjetivo
+Aleatorio <. Juego
+
+Tablero "1" *-- "6" Continente
+Tablero "1" *-- "*" Pais
+Continente "1" *-- "1..*" Pais
+
+Jugador "1" -- "1..*" Pais
+Jugador "1" -> "*" TarjetaPais
+
+Interface EstadoTarjetaPais
+Interface Simbolo
+
+TarjetaPais *-- EstadoTarjetaPais
+EstadoTarjetaPais <|.. Activada
+EstadoTarjetaPais <|.. Desactivada
+
+TarjetaPais *-- Simbolo
+Simbolo <|.. Comodin
+Simbolo <|.. Figura
+
+TarjetaObjetivo <|-- TarjetaDestruccion
+TarjetaObjetivo <|-- TarjetaOcupacion
+TarjetaObjetivo "1" -- "1" Jugador
+
+Ejercito "1" --> "1" "Dados"
+Jugador "1" ---> "1" Canjes
+Canjes "1" -- "*" Canje
+
+Pais "1" -> "1" Ejercito
+Tablero -> Batalla
+Batalla "1" --> "2" Pais
+
+Pais *-- EstadoPais
+EstadoPais <|.. Vacante
+EstadoPais <|.. Ocupado
+
+
+class Aleatorio {
+
+}
+
+class Batalla {
+
+}
+
+class Continente {
+
+}
+
+class Dados {
+
+}
+
+class Ejercito {
+
+}
+
+class Juego {
+
+}
+
+class Jugador {
+
+}
+
+class Moderador {
+
+}
+
+class Tablero {
+}
+
+class Activada {
+
+}
+
+class Comodin {
+}
+
+class Desactivada {
+}
+
+interface EstadoTarjetaPais {
+}
+
+class Figura {
+
+}
+
+interface Simbolo {
+
+}
+
+class TarjetaPais {
+
+}
+
+class TarjetaDestruccion {
+
+}
+
+abstract class TarjetaObjetivo {
+
+}
+
+class TarjetaOcupacion {
+
+}
+
+interface EstadoPais {
+}
+
+class Ocupado {
+
+}
+
+class Pais {
+
+}
+
+class Vacante {
+
+}
+
+class Canje {
+
+}
+
+class Canjes {
+
+}
+
+@enduml

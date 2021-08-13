@@ -1,0 +1,92 @@
+@startuml
+
+TarjetaObjetivo <|-- TarjetaDestruccion
+TarjetaObjetivo <|-- TarjetaOcupacion
+
+Interface EstadoTarjetaPais
+Interface Simbolo
+
+TarjetaPais *-- EstadoTarjetaPais
+EstadoTarjetaPais <|.. Activada
+EstadoTarjetaPais <|.. Desactivada
+
+TarjetaPais *-- Simbolo
+Simbolo <|.. Comodin
+Simbolo <|.. Figura
+
+abstract class TarjetaObjetivo {
+	- dueño: Jugador
+	+ establecerDueño(jugador)
+	+ cumplioObjetivoGeneral(): boolean
+	{abstract} + cumplioObjetivo(tablero, juego): boolean
+	{abstract} + devolverEnunciado(): String
+}
+
+class TarjetaDestruccion {
+	- enunciado: String
+    - colorADestruir: String
+	+ TarjetaDestruccion(enunciado, colorADestruir): TarjetaDestruccion
+	+ cumplioObjetivo(tablero, juego): boolean
+	+ devolverEnunciado(): String
+}
+
+class TarjetaOcupacion {
+	- enunciado: String
+	- continentesAOcupar: List
+    - cantidadPaisesPorContinente: HashMap
+
+	+ TarjetaOcupacion(enunciado, continentesAOcupar, cantidadPaisesPorContinente): TarjetaOcupacion
+	+ cumplioObjetivo(tablero, juego): boolean
+	+ devolverEnunciado(): String
+}
+
+interface EstadoTarjetaPais {
+	{abstract} + activar(tarjeta, jugador)
+}
+
+class Activada {
+	+ activar(tarjeta, jugador)
+}
+
+class Desactivada {
+	+ activar(tarjeta, jugador)
+}
+
+interface Simbolo {
+	{abstract} + esElMismo(simbolo): boolean
+	{abstract} + esElMismoSimbolo(simbolo): boolean
+	{abstract} + sonDiferentes(nombreSimbolo): boolean
+	{abstract} + sonSimbolosDiferentes(nombreSimbolo): boolean
+}
+
+class Comodin {
+	+ esElMismo(simbolo): boolean
+	+ esElMismoSimbolo(simbolo): boolean
+	+ sonDiferentes(nombreSimbolo): boolean
+	+ sonSimbolosDiferentes(nombreSimbolo): boolean
+}
+
+class Figura {
+	- simbolo: String
+	+ Figura(simbolo): Figura
+	+ esElMismo(simbolo): boolean
+	+ esElMismoSimbolo(simbolo): boolean
+	+ sonDiferentes(nombreSimbolo): boolean
+	+ sonSimbolosDiferentes(nombreSimbolo): boolean
+}
+
+class TarjetaPais {
+	- nombre: String
+    - simbolo: Simbolo
+    - estadoTarjeta: EstadoTarjetaPais
+
+	+ TarjetaPais(nombre, tipoDeSimbolo): TarjetaPais
+	+ getNombre(): String
+	+ getSimbolo(): Simbolo
+	+ activar()
+	+ desactivar()
+	+ activarTarjeta(jugador)
+	+ puedeCanjear(tarjetaPais1, tarjetaPais2): boolean
+}
+
+@enduml

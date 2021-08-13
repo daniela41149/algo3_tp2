@@ -1,0 +1,58 @@
+@startuml
+
+Jugador "1" -- "1..*" Pais
+Jugador "1" -> "*" TarjetaPais
+Jugador "1" ---> "1" Canjes
+Canjes "1" -- "*" Canje
+TarjetaObjetivo "1" -- "1" Jugador
+
+
+class Jugador {
+	- nombre: String
+	- color: String
+	+ Jugador(nombre, colorJugador, juego): Jugador
+	+ agregarPais(nuevoPais)
+	+ desocupar(nombrePais)
+	+ colocarEjercito(String nombrePais,int cantidadEjercito)
+	+ establecerObjetivo(objetivo)
+	+ cumplioObjetivo(tablero): boolean
+	+ activarTarjetaPais(nombreTarjetaPais)
+	+ solicitarUnCanje(nombresTarjetasPaisParaCanjear)
+}
+
+class Pais {
+	+ Pais(nombrePais, nombrePaisesLimitrofes): Pais
+	+ atacar(paisDefensa, cantidadEjercito)
+	+ defender()
+	+ colocarEjercito(Jugador jugador, int cantidadEjercito)
+	+ sacarFichas(cantidadDeFichas)
+	+ esLimitrofe(paisAtacante): boolean
+	+ establecerDueño(paisAtacante)
+	+ getEjercito(): Ejercito
+	+ getNombre(): String
+	+ nuevoDueño(): Jugador
+}
+
+class Canje {
+	+ Canje(numeroDeCanje, canjes): Canje
+	+ agregarTarjetaPaisParaCanjear(tarjetaPais)
+	+ solicitarUnCanje(jugador, tarjetasPais): boolean
+}
+
+class Canjes {
+	+ Canje(numeroDeCanje, canjes): Canje
+	+ devolverTarjetasAlMazo(jugador,  tarjetasPaisParaDevolverAlMazo, tarjetasPais)
+	+ solicitarUnCanje(nombresTarjetasPaisParaCanjear, jugador, tarjetasPais)
+}
+
+class TarjetaPais {
+	+ activarTarjeta(jugador)
+	+ puedeCanjear(tarjetaPais1, tarjetaPais2): boolean
+}
+
+abstract class TarjetaObjetivo {
+	{abstract} + cumplioObjetivo()
+	+ establecerDueño()
+}
+
+@enduml
