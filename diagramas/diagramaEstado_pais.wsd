@@ -1,4 +1,5 @@
 @startuml
+Title Diagrama de estado de un pais
 hide empty description
 [*] --> PaisSinDueño: iniciar juego
 PaisSinDueño--> [*]: salir del juego
