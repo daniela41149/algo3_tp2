@@ -32,6 +32,7 @@ public class ControladorMenuJugador {
     private HashMap<String, Integer> limitrofesConEjercitos;
     private Juego juego;
     Stage escenario = new Stage();
+    Stage escenarioNoEligioPais = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
@@ -108,10 +109,16 @@ public class ControladorMenuJugador {
 
     @FXML
     void colocarEjercito(ActionEvent event) throws IOException {
+        if (paisSeleccionado == null) {
+            levantarVentanaNoEligioPais();
+            return;
+        }
+
         levantarVentana("/vista/ventanaAgregarEjercitos.fxml","Agregar Ejercitos");
         ControladorAgregarEjercitos controladorAgregarEjercitos = obtenerControladorAgregarEjercitos();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, paisesEnTablero,nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonPasar);
+        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, paisesEnTablero, nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonPasar);
+        paisSeleccionado = null;
     }
 
     @FXML
@@ -147,6 +154,15 @@ public class ControladorMenuJugador {
     @FXML
     void seleccionarPais(MouseEvent event) throws IOException {
         paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
+    }
+
+    public void levantarVentanaNoEligioPais() throws IOException {
+        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNoEligioPais.fxml"));
+        root = (Parent)loader.load();
+        scene = new Scene(root);
+        escenarioNoEligioPais.setTitle("No Eligio Pais");
+        escenarioNoEligioPais.setScene(scene);
+        escenarioNoEligioPais.show();
     }
 
     public void levantarVentana(String path, String titulo) throws IOException {
