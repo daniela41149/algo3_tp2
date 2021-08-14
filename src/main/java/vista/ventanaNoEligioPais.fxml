@@ -22,12 +22,7 @@
                 <InnerShadow />
             </effect>
         </Button>
-        <Label alignment="CENTER" layoutX="21.0" layoutY="103.0" prefHeight="47.0" prefWidth="300.0" text="sin seleccionar el pais">
-            <font>
-                <Font size="25.0" />
-            </font>
-        </Label>
-      <Label alignment="CENTER" layoutX="21.0" layoutY="42.0" prefHeight="47.0" prefWidth="300.0" text="No podes colocar ejercitos">
+      <Label alignment="CENTER" layoutX="21.0" layoutY="25.0" prefHeight="150.0" prefWidth="300.0" text="No podes colocar ejercitos sin seleccionar el pais." textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>

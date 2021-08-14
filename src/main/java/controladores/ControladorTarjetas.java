@@ -33,16 +33,13 @@ public class ControladorTarjetas {
     private int numero = 0;
     static final String[] SIMBOLOS = {"Globo", "Barco", "Cañon", "Comodin"};
     List<String> nombreTarjetasSeleccionadasParaCanjear = new ArrayList<>();
-    String nombrePrimeraTarjeta;
-    String nombreSegundaTarjeta;
-    String nombreTerceraTarjeta;
 
 
     Image globo = new Image( getClass().getResourceAsStream("/vista/imagenesTarjetasPais/globo.png") ) ;
     Image barco = new Image( getClass().getResourceAsStream("/vista/imagenesTarjetasPais/barco.png") ) ;
     Image cañon = new Image( getClass().getResourceAsStream("/vista/imagenesTarjetasPais/cañon.png") ) ;
     Image comodin = new Image( getClass().getResourceAsStream("/vista/imagenesTarjetasPais/comodin.png") ) ;
-    Image dibujoTarjeta = new Image( getClass().getResourceAsStream("/vista/imagenes_objetivos/objetivoSecreto fondo.png") ) ;
+
 
 
     @FXML
@@ -69,6 +66,8 @@ public class ControladorTarjetas {
     @FXML
     private Button botonCanjear;
 
+    @FXML
+    private Button botonOkey;
 
 
     @FXML
@@ -98,6 +97,11 @@ public class ControladorTarjetas {
     @FXML
     private Label labelTercerPaisSeleccionado;
 
+    Stage escenario = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
+
 
     public void mostrarTarjetas(Juego juego,List<TarjetaPais> mazoCompletoDeTarjetasPais) {
         this.juego = juego;
@@ -110,9 +114,15 @@ public class ControladorTarjetas {
         imagenTarjetaPrincipal.setVisible(false);
         botonCanjear.setDisable(true);
 
+
         this.iterador = tarjetasPais.listIterator();
-        guardarObjetoDeIterador();
+        this.tarjetaPaisSeleccionada = iterador.next();
+        mostrarTarjeta(tarjetaPaisSeleccionada,labelPais,imagenSimbolo,imagenTarjetaPrincipal);
+
         this.iteradorCanje = tarjetasPaisParaCanjear.listIterator();
+
+        verificacionesSegunNumeroDeTarjetas();
+        verificacionesBotonSiguienteYAnterior();
     }
 
 
@@ -120,17 +130,31 @@ public class ControladorTarjetas {
 
 
     @FXML
-    void activar(ActionEvent event) throws IOException, JugadaInvalidaException {
-        juego.jugadorEnTurno().activarTarjetaPais(tarjetasPais.get(numero).getNombre());
-        tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
-        mostrarSiguienteTarjeta();
+    void activar(ActionEvent event) throws IOException {
+
+        try {
+            juego.jugadorEnTurno().activarTarjetaPais(tarjetasPais.get(numero).getNombre());
+            tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
+            mostrarSiguienteTarjeta();
+
+
+        } catch (JugadaInvalidaException e) {
+            levantarVentana("/vista/ventanaNoSePuedeActivarTarjetaPais.fxml","No Se Puede Activar la Tarjeta");
+        }
+        verificacionesSegunNumeroDeTarjetas();
+        verificacionesBotonSiguienteYAnterior();
+
+
     }
 
+
+
     @FXML
-    void seleccionarParaCanje(ActionEvent event) throws IOException, JugadaInvalidaException {
+    void seleccionarParaCanje(ActionEvent event) {
+        verificacionesSegunNumeroDeTarjetas();
+        verificacionesBotonSiguienteYAnterior();
 
-        if (nombreTarjetasSeleccionadasParaCanjear.size() < 3){
-
+        if (tarjetasPaisParaCanjear.size() < 3){
             tarjetasPaisParaCanjear.add(tarjetaPaisSeleccionada);
             iterador.remove();
             mostrarTarjetasDeCanje();
@@ -138,34 +162,47 @@ public class ControladorTarjetas {
             mostrarTarjeta(tarjetaPaisSeleccionada,labelPais,imagenSimbolo,imagenTarjetaPrincipal);
 
         }
-        if (nombreTarjetasSeleccionadasParaCanjear.size() == 3){
+        if (tarjetasPaisParaCanjear.size() == 3){
             botonCanjear.setDisable(false);
         }
-
-
-
+        verificacionesSegunNumeroDeTarjetas();
+        verificacionesBotonSiguienteYAnterior();
     }
 
     @FXML
-    void canjear(ActionEvent event) throws IOException, JugadaInvalidaException {
-        juego.solicitarUnCanje(nombreTarjetasSeleccionadasParaCanjear);
+    void cerrar(ActionEvent event) {
+        Stage stage = (Stage) botonOkey.getScene().getWindow();
+        stage.close();
+    }
+
+
+    @FXML
+    void canjear(ActionEvent event) {
+        List<String> nombresDeLasTarjetasSeleccionadas = buscarNombresDeTarjetasParaCanje();
+        juego.solicitarUnCanje(nombresDeLasTarjetasSeleccionadas);
+
         noMostrarTarjeta(labelPrimerPaisSeleccionado,imagenPrimerSimboloSeleccionado,imagenPrimerTarjeta);
         noMostrarTarjeta(labelSegundoPaisSeleccionado,imagenSegundoSimboloSeleccionado,imagenSegundaTarjeta);
         noMostrarTarjeta(labelTercerPaisSeleccionado,imagenTercerSimboloSeleccionado,imagenTercerTarjeta);
-        botonCanjear.setDisable(true);
+
         this.tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
         tarjetasPaisParaCanjear = new ArrayList<>();
         nombreTarjetasSeleccionadasParaCanjear = new ArrayList<>();
         mostrarSiguienteTarjeta();
+
+        verificacionesSegunNumeroDeTarjetas();
+        verificacionesBotonSiguienteYAnterior();
     }
 
     @FXML
     void anterior(ActionEvent event){
+        verificacionesBotonSiguienteYAnterior();
         mostrarAnteriorTarjeta();
     }
 
     @FXML
     void siguiente(ActionEvent event) {
+        verificacionesBotonSiguienteYAnterior();
         mostrarSiguienteTarjeta();
     }
 
@@ -184,17 +221,6 @@ public class ControladorTarjetas {
 
     }
 
-    private void pasarTarjetas(TarjetaPais tarjeta, List<TarjetaPais> primerMazo, List<TarjetaPais> segundoMazo) {
-        for (TarjetaPais unaTarjeta: primerMazo) {
-            if (tarjeta.getNombre().equals(unaTarjeta.getNombre())) {
-                primerMazo.remove(tarjeta);
-                segundoMazo.add(tarjeta);
-            }
-        }
-    }
-
-
-
 
     private void mostrarPrimerTarjetaSeleccionada(TarjetaPais tarjetaActual) {
         mostrarTarjeta(tarjetaActual, labelPrimerPaisSeleccionado,imagenPrimerSimboloSeleccionado,imagenPrimerTarjeta);
@@ -210,9 +236,9 @@ public class ControladorTarjetas {
 
     private void mostrarSiguienteTarjeta(){
         if (iterador.hasNext()) {
-            iterador.next();
-            guardarObjetoDeIterador();
+            tarjetaPaisSeleccionada = iterador.next();
             mostrarTarjeta(tarjetaPaisSeleccionada,labelPais,imagenSimbolo,imagenTarjetaPrincipal);
+
         }
         else {
             noMostrarTarjeta(labelPais,imagenSimbolo,imagenTarjetaPrincipal);
@@ -222,13 +248,20 @@ public class ControladorTarjetas {
     private void guardarObjetoDeIterador() {
         if (iterador.hasNext()) {
             tarjetaPaisSeleccionada = iterador.next();
-            iterador.previous();
         }
-        else {
+        else if (iterador.hasPrevious()) {
             tarjetaPaisSeleccionada = iterador.previous();
-            iterador.next();
         }
     }
+
+    private List<String> buscarNombresDeTarjetasParaCanje() {
+        List<String> listaNombres = new ArrayList<>();
+        for (TarjetaPais unaTarjeta: tarjetasPaisParaCanjear) {
+            listaNombres.add(unaTarjeta.getNombre());
+        }
+        return listaNombres;
+    }
+
 
 
     private void mostrarAnteriorTarjeta(){
@@ -242,14 +275,45 @@ public class ControladorTarjetas {
     }
 
     private void mostrarTarjetasDeCanje() {
-        if (iteradorCanje.hasNext()) {
-            mostrarPrimerTarjetaSeleccionada(tarjetaPaisSeleccionada);
-            if (iteradorCanje.hasNext()) {
-                mostrarSegundaTarjetaSeleccionada(tarjetaPaisSeleccionada);
-                if (iteradorCanje.hasNext()) {
-                    mostrarTercerTarjetaSeleccionada(tarjetaPaisSeleccionada);
+        if (tarjetasPaisParaCanjear.size() >= 1) {
+            mostrarPrimerTarjetaSeleccionada(tarjetasPaisParaCanjear.get(0));
+            if (tarjetasPaisParaCanjear.size() >= 2) {
+                mostrarSegundaTarjetaSeleccionada(tarjetasPaisParaCanjear.get(1));
+                if (tarjetasPaisParaCanjear.size() == 3) {
+                    mostrarTercerTarjetaSeleccionada(tarjetasPaisParaCanjear.get(2));
                 }
             }
+        }
+    }
+
+
+
+
+    private void verificacionesSegunNumeroDeTarjetas () {
+        if (tarjetasPaisParaCanjear.size() == 3) {
+            botonCanjear.setDisable(false);
+        }
+        if (this.tarjetasPaisParaCanjear.size() <3) {
+            botonCanjear.setDisable(true);
+        }
+        if (this.tarjetasPais.size() == 0) {
+            botonActivar.setDisable(true);
+            botonSeleccionarCanje.setDisable(true);
+            noMostrarTarjeta(labelPais,imagenSimbolo,imagenTarjetaPrincipal);
+        }
+    }
+
+    private void verificacionesBotonSiguienteYAnterior () {
+        if (iterador.hasNext()) {
+            botonSiguiente.setDisable(false);
+        }
+        else {
+            botonSiguiente.setDisable(true);
+        }
+        if (iterador.hasPrevious()) {
+            botonAnterior.setDisable(false);
+        }  else {
+            botonAnterior.setDisable(true);
         }
     }
 
@@ -275,6 +339,18 @@ public class ControladorTarjetas {
         }
         return listaTarjetas;
     }
+
+
+    public void levantarVentana(String path, String titulo) throws IOException {
+        loader = new FXMLLoader(getClass().getResource(path));
+        root = (Parent) loader.load();
+        scene = new Scene(root);
+        escenario.setTitle(titulo);
+        escenario.setScene(scene);
+        escenario.show();
+    }
+
+
 
 
 }

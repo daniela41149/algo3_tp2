@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorAgregarEjercitos">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorTarjetas">
     <children>
         <Button fx:id="botonOkey" layoutX="112.0" layoutY="194.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="47.0" prefWidth="140.0" text="Okey">
             <font>
@@ -26,12 +26,7 @@
             <font>
                 <Font name="System Bold" size="38.0" />
             </font></Label>
-        <Label alignment="CENTER" layoutX="18.0" layoutY="66.0" prefHeight="47.0" prefWidth="327.0" text="No se puede activar esta tarjeta.">
-            <font>
-                <Font size="22.0" />
-            </font>
-        </Label>
-        <Label alignment="CENTER" layoutX="32.0" layoutY="121.0" prefHeight="47.0" prefWidth="300.0" text="El Pais no es de tu propiedad.">
+        <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="180.0" prefWidth="327.0" text="No se puede activar esta tarjeta. El Pais no es de tu propiedad." textAlignment="CENTER" wrapText="true">
             <font>
                 <Font size="22.0" />
             </font>
