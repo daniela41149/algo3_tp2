@@ -37,6 +37,9 @@ public class ControladorAgregarEjercitos {
     private Button botonAgregar;
 
     @FXML
+    private Button botonColocar;
+
+    @FXML
     private Button botonSumarUno;
 
     @FXML
@@ -87,9 +90,10 @@ public class ControladorAgregarEjercitos {
 
 
 
-    public void asignarEjercitos(String pais, int cantidad, Juego juego, List<Pais> paisesEnTablero, Label nombreJugador, Label colorJugador, Label ejercitosDisponibles, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonPasar){
+    public void asignarEjercitos(String pais, Juego juego, List<Pais> paisesEnTablero, Label nombreJugador, Label colorJugador, Label ejercitosDisponibles, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonColocar, Button botonPasar){
         this.botonAtacar = botonAtacar;
         this.botonReagrupar = botonReagrupar;
+        this.botonColocar = botonColocar;
         this.botonPasar = botonPasar;
         this.juego = juego;
         this.paisesEnTablero = paisesEnTablero;
@@ -108,8 +112,8 @@ public class ControladorAgregarEjercitos {
     public void agregarEjercitos(ActionEvent event) throws IOException{
 
         int ejercitosTotales = sumarEjercitosTotales();
-        int maximoPrimeraVuelta = cantidadDeJugadores*CANT_EJERCITOS_EN_PRIMERA_VUELTA+NUMERO_PAISES;
-        int maximoSegundaVuelta = cantidadDeJugadores*CANT_EJERCITOS_EN_SEGUNDA_VUELTA+ cantidadDeJugadores*CANT_EJERCITOS_EN_PRIMERA_VUELTA+NUMERO_PAISES;
+        int maximoPrimeraVuelta = ((cantidadDeJugadores*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+NUMERO_PAISES);
+        int maximoSegundaVuelta = ((cantidadDeJugadores*CANT_EJERCITOS_EN_SEGUNDA_VUELTA)+(cantidadDeJugadores*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+NUMERO_PAISES);
 
         try {
 
@@ -128,16 +132,17 @@ public class ControladorAgregarEjercitos {
             }
             else {
                 juego.colocarEjercito(nombrePais,suma);
+                if (ejercitoDisponibleActual() == 0)
+                    botonColocar.setDisable(true);
             }
 
             listaPaises.getItems().clear();
             refrescarDatosEnPantalla();
 
-
         } catch (CantidadInvalidaDeEjercitosException e1) {
             levantarVentanaNoHayEjercitosSuficientes();
-
         } catch (JugadaInvalidaException e2) {
+
         }
 
         Stage stage = (Stage) botonAgregar.getScene().getWindow();
@@ -191,7 +196,6 @@ public class ControladorAgregarEjercitos {
         }
         return ejercitosTotales;
     }
-
 
     private void refrescarDatosEnPantalla(){
         mostrarJugadorActual();

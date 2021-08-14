@@ -92,6 +92,7 @@ public class ControladorMenuJugador {
 
     @FXML
     void pasarTurno(ActionEvent event) {
+        botonColocarEjercito.setDisable(false);
         listaPaises.getItems().clear();
         juego.pasarTurno();
         refrescarDatosEnPantalla();
@@ -122,8 +123,7 @@ public class ControladorMenuJugador {
 
         levantarVentana("/vista/ventanaAgregarEjercitos.fxml","Agregar Ejercitos");
         ControladorAgregarEjercitos controladorAgregarEjercitos = obtenerControladorAgregarEjercitos();
-        int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), fichas, juego, paisesEnTablero, nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonPasar);
+        controladorAgregarEjercitos.asignarEjercitos(nombre(paisSeleccionado), juego, paisesEnTablero, nombreJugador, colorJugador, ejercitosDisponibles, listaPaises, botonAtacar, botonReagrupar, botonColocarEjercito, botonPasar);
         paisSeleccionado = null;
     }
 

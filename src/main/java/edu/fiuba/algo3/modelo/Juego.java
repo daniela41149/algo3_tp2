@@ -138,8 +138,8 @@ public class Juego {
 
     public int devolverEjercitosRestantesDeJugadorActual() {
         int ejercitos = sumarEjercitosTotales();
-        int ejercitosFinalPrimeraRonda = jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA+50;
-        int ejercitosFinalSegundaRonda = jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA+jugadores.size()*CANT_EJERCITOS_EN_SEGUNDA_VUELTA+50;
+        int ejercitosFinalPrimeraRonda = ((jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+50);
+        int ejercitosFinalSegundaRonda = ((jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+(jugadores.size()*CANT_EJERCITOS_EN_SEGUNDA_VUELTA)+50);
 
         if ((ejercitos < ejercitosFinalSegundaRonda) && (ejercitos >= ejercitosFinalPrimeraRonda)) {
             return CANT_EJERCITOS_EN_SEGUNDA_VUELTA-ejercitosColocadosEnSegundaVuelta;
