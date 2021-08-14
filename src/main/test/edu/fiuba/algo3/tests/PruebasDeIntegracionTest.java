@@ -350,10 +350,10 @@ public class PruebasDeIntegracionTest {
         dadosDefensa.add(5);
 
         Dados mockedDadosAtaque = mock(Dados.class);
-        when(mockedDadosAtaque.dadosAtaque(anyInt())).thenReturn(dadosAtaque);
+        when(mockedDadosAtaque.tirarDados(anyInt())).thenReturn(dadosAtaque);
 
         Dados mockedDadosDefensa = mock(Dados.class);
-        when(mockedDadosDefensa.dadosDefensa(anyInt())).thenReturn(dadosDefensa);
+        when(mockedDadosDefensa.tirarDados(anyInt())).thenReturn(dadosDefensa);
 
         Ejercito ejercitoPaisAtacante = tablero.buscarPais("Argentina").getEjercito();
         Ejercito ejercitoPaisDefensor = tablero.buscarPais("Brasil").getEjercito();
@@ -401,10 +401,10 @@ public class PruebasDeIntegracionTest {
         dadosDefensa.add(2);
 
         Dados mockedDadosAtaque = mock(Dados.class);
-        when(mockedDadosAtaque.dadosAtaque(anyInt())).thenReturn(dadosAtaque);
+        when(mockedDadosAtaque.tirarDados(anyInt())).thenReturn(dadosAtaque);
 
         Dados mockedDadosDefensa = mock(Dados.class);
-        when(mockedDadosDefensa.dadosDefensa(anyInt())).thenReturn(dadosDefensa);
+        when(mockedDadosDefensa.tirarDados(anyInt())).thenReturn(dadosDefensa);
 
         Ejercito ejercitoPaisAtacante = tablero.buscarPais("Argentina").getEjercito();
         Ejercito ejercitoPaisDefensor = tablero.buscarPais("Brasil").getEjercito();
@@ -798,10 +798,10 @@ public class PruebasDeIntegracionTest {
             dadosDefensa.add(2);
 
             Dados mockedDadosAtaque = mock(Dados.class);
-            when(mockedDadosAtaque.dadosAtaque(anyInt())).thenReturn(dadosAtaque);
+            when(mockedDadosAtaque.tirarDados(anyInt())).thenReturn(dadosAtaque);
 
             Dados mockedDadosDefensa = mock(Dados.class);
-            when(mockedDadosDefensa.dadosDefensa(anyInt())).thenReturn(dadosDefensa);
+            when(mockedDadosDefensa.tirarDados(anyInt())).thenReturn(dadosDefensa);
 
             Ejercito ejercitoPaisAtacante = argentina.getEjercito();
             Ejercito ejercitoPaisDefensor = chile.getEjercito();

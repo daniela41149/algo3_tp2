@@ -8,6 +8,8 @@ public class Ejercito {
 
     int cantidadDeFichas;
     Dados dados;
+    static final int MAX_CANTIDAD_LANZAR_DADOS = 3;
+    static final int MIN_CANTIDAD_LANZAR_DADOS = 1;
 
     public Ejercito() {
 
@@ -51,15 +53,21 @@ public class Ejercito {
     }
 
     public List<Integer> atacar(int unaCantidadDeFichas) throws CantidadInvalidaDeEjercitosException {
-        if (this.cantidadDeFichas <= 1) {
+        if (unaCantidadDeFichas > MAX_CANTIDAD_LANZAR_DADOS) {
+            return dados.tirarDados(MAX_CANTIDAD_LANZAR_DADOS);
+        }
+        if (unaCantidadDeFichas >= MIN_CANTIDAD_LANZAR_DADOS && unaCantidadDeFichas <= MAX_CANTIDAD_LANZAR_DADOS & unaCantidadDeFichas <= this.cantidadDeFichas-MIN_CANTIDAD_LANZAR_DADOS) {
+            return dados.tirarDados(unaCantidadDeFichas);
+        }
+        else {
             throw new CantidadInvalidaDeEjercitosException();
         }
-        return dados.dadosAtaque(unaCantidadDeFichas);
     }
 
-    public List<Integer> defender() {
 
-        return dados.dadosDefensa(this.cantidadDeFichas);
+
+    public List<Integer> defender() {
+        return dados.tirarDados(this.cantidadDeFichas);
     }
 
     public int devolverCantidadDeFichas() {

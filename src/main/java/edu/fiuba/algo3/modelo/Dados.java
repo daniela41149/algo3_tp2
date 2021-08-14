@@ -1,4 +1,6 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,9 +11,7 @@ public class Dados {
 
     static final int MIN_VALOR_DADO = 1;
     static final int MAX_VALOR_DADO = 6;
-    static final int MAX_DADOS_DEFENSA = 3;
-    static final int MAX_DADOS_ATAQUE = 3;
-    static final int MIN_CANTIDAD_DADOS = 1;
+
 
 
     List<Integer> listaDados;
@@ -19,7 +19,8 @@ public class Dados {
     public Dados(){
     }
 
-    private List<Integer> lanzarDados( int cantidadDeDados ){
+
+    public List<Integer> tirarDados( int cantidadDeDados ){
 
         List<Integer> listaDados = new ArrayList<>();
         Random numeroDado= new Random();
@@ -34,28 +35,4 @@ public class Dados {
         return listaDados;
     }
 
-    public List<Integer> dadosAtaque(int cantidadDeDados){
-
-        if ( (cantidadDeDados >= MIN_CANTIDAD_DADOS) && (cantidadDeDados <= MAX_DADOS_ATAQUE) )
-            return lanzarDados(cantidadDeDados);
-
-        return lanzarDadosConCantidad(cantidadDeDados);
-    }
-
-    public List<Integer> dadosDefensa(int cantidadDeDados){
-
-        if ( (cantidadDeDados >= MIN_CANTIDAD_DADOS) && (cantidadDeDados < MAX_DADOS_DEFENSA) )
-            return lanzarDados(cantidadDeDados);
-
-        return lanzarDadosConCantidad(cantidadDeDados);
-    }
-
-    private List<Integer> lanzarDadosConCantidad(int cantidadDeDados){
-
-        if(cantidadDeDados >= MAX_DADOS_DEFENSA){
-            return lanzarDados(3);
-        }
-        return lanzarDados(0);
-
-    }
 }
