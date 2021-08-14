@@ -100,6 +100,10 @@ public class ControladorSeleccionarPais {
 
     @FXML
     void atacar(ActionEvent event) throws IOException, JugadaInvalidaException{
+        if (limitrofeSeleccionado == null){
+            levantarVentanaNoEligioPais();
+            return;
+        }
         levantarVentana("/vista/ventanaDados.fxml","Batalla");
         ControladorDados controladorDados = obtenerControladorDados();
 
@@ -107,6 +111,8 @@ public class ControladorSeleccionarPais {
         Pais paisDefensor = buscarPais(nombre(limitrofeSeleccionado));
 
         controladorDados.atacar(juego, paisesEnTablero,paisAtacante, paisDefensor,listaLimitrofes, botonTarjetas);
+        limitrofeSeleccionado = null;
+        labelPais2.setText("");
     }
 
     @FXML

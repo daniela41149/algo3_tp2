@@ -99,12 +99,18 @@ public class ControladorMenuJugador {
 
     @FXML
     void atacar(ActionEvent event) throws IOException {
+        if (paisSeleccionado == null) {
+            levantarVentanaNoEligioPais();
+            return;
+        }
+
         limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(nombre(paisSeleccionado));
         levantarVentana("/vista/ventanaSeleccionarPaisParaAtacar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
         controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos,listaPaises,botonTarjetas);
         controladorSeleccionarPais.mostrarLimitrofesParaAtacar();
+        paisSeleccionado = null;
     }
 
     @FXML
