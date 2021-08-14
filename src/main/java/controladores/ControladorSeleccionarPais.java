@@ -56,6 +56,7 @@ public class ControladorSeleccionarPais {
 
 
     Stage escenarioReagrupar = new Stage();
+    Stage escenarioNoEligioPais = new Stage();
     Stage escenarioDados = new Stage();
     Scene scene;
     Parent root;
@@ -84,11 +85,17 @@ public class ControladorSeleccionarPais {
 
     @FXML
     void reagrupar(ActionEvent event) throws IOException{
+        if (limitrofeSeleccionado == null){
+            levantarVentanaNoEligioPais();
+            return;
+        }
         levantarVentana("/vista/ventanaReagruparEjercitos.fxml","Reagrupar Ejercitos");
         ControladorReagruparEjercitos controladorReagruparEjercitos = obtenerControladorReagruparEjercitos();
         int ejercitoDesde = buscarPais(nombrePais).cantidadDeFichas();
         int ejercitoHasta = buscarPais(nombre(limitrofeSeleccionado)).cantidadDeFichas();
         controladorReagruparEjercitos.reagrupar(juego,paisesEnTablero, nombrePais,ejercitoDesde,nombre(limitrofeSeleccionado),ejercitoHasta,listaLimitrofes,limitrofesConEjercitos);
+        limitrofeSeleccionado = null;
+        labelPais2.setText("");
     }
 
     @FXML
@@ -116,9 +123,14 @@ public class ControladorSeleccionarPais {
         return cadena.substring(0, cadena.length() - 2);
     }
 
-
-
-
+    public void levantarVentanaNoEligioPais() throws IOException {
+        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNoEligioPais.fxml"));
+        root = (Parent)loader.load();
+        scene = new Scene(root);
+        escenarioNoEligioPais.setTitle("No Eligio Pais");
+        escenarioNoEligioPais.setScene(scene);
+        escenarioNoEligioPais.show();
+    }
 
     public void levantarVentana(String path, String titulo) throws IOException {
         loader = new FXMLLoader(getClass().getResource(path));

@@ -123,12 +123,18 @@ public class ControladorMenuJugador {
 
     @FXML
     void reagruparEjercito(ActionEvent event) throws IOException {
+        if (paisSeleccionado == null) {
+            levantarVentanaNoEligioPais();
+            return;
+        }
+
         limitrofesConEjercitos = nombrePaisYEjercitosDePaisesLimitrofesParaReagrupar(nombre(paisSeleccionado));
         levantarVentana("/vista/ventanaSeleccionarPaisParaReagrupar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
         controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos,listaPaises,botonTarjetas);
         controladorSeleccionarPais.mostrarLimitrofesParaReagrupar();
+        paisSeleccionado = null;
     }
 
     @FXML
