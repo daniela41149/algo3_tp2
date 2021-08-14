@@ -80,13 +80,17 @@ public class ControladorSeleccionarPais {
     @FXML
     void seleccionarLimitrofe(MouseEvent event) throws IOException{
         limitrofeSeleccionado = listaLimitrofes.getSelectionModel().getSelectedItem();
+        if (limitrofeSeleccionado == null) {
+            levantarVentana("/vista/ventanaNoEligioPais.fxml", "No Eligio Pais");
+            return;
+        }
         labelPais2.setText(nombre(limitrofeSeleccionado));
     }
 
     @FXML
     void reagrupar(ActionEvent event) throws IOException{
         if (limitrofeSeleccionado == null){
-            levantarVentanaNoEligioPais();
+            levantarVentana("/vista/ventanaNoEligioPais.fxml", "No Eligio Pais");
             return;
         }
         levantarVentana("/vista/ventanaReagruparEjercitos.fxml","Reagrupar Ejercitos");
@@ -101,7 +105,7 @@ public class ControladorSeleccionarPais {
     @FXML
     void atacar(ActionEvent event) throws IOException, JugadaInvalidaException{
         if (limitrofeSeleccionado == null){
-            levantarVentanaNoEligioPais();
+            levantarVentana("/vista/ventanaNoEligioPais.fxml", "No Eligio Pais");
             return;
         }
         levantarVentana("/vista/ventanaDados.fxml","Batalla");
@@ -123,19 +127,9 @@ public class ControladorSeleccionarPais {
         stage.close();
     }
 
-
     private String nombre(String cadena){
         cadena = cadena.replaceAll("[0-9]","");
         return cadena.substring(0, cadena.length() - 2);
-    }
-
-    public void levantarVentanaNoEligioPais() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNoEligioPais.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioNoEligioPais.setTitle("No Eligio Pais");
-        escenarioNoEligioPais.setScene(scene);
-        escenarioNoEligioPais.show();
     }
 
     public void levantarVentana(String path, String titulo) throws IOException {
@@ -146,7 +140,6 @@ public class ControladorSeleccionarPais {
         escenarioReagrupar.setScene(scene);
         escenarioReagrupar.show();
     }
-
 
     public ControladorDados obtenerControladorDados() {
         ControladorDados controladorDados = (ControladorDados)loader.getController();

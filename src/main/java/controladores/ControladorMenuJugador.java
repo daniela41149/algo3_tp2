@@ -101,7 +101,7 @@ public class ControladorMenuJugador {
     @FXML
     void atacar(ActionEvent event) throws IOException {
         if (paisSeleccionado == null) {
-            levantarVentanaNoEligioPais();
+            levantarVentana("/vista/ventanaNoEligioPais.fxml", "No Eligio Pais");
             return;
         }
 
@@ -117,7 +117,7 @@ public class ControladorMenuJugador {
     @FXML
     void colocarEjercito(ActionEvent event) throws IOException {
         if (paisSeleccionado == null) {
-            levantarVentanaNoEligioPais();
+            levantarVentana("/vista/ventanaNoEligioPais.fxml", "No Eligio Pais");
             return;
         }
 
@@ -130,7 +130,7 @@ public class ControladorMenuJugador {
     @FXML
     void reagruparEjercito(ActionEvent event) throws IOException {
         if (paisSeleccionado == null) {
-            levantarVentanaNoEligioPais();
+            levantarVentana("/vista/ventanaNoEligioPais.fxml", "No Eligio Pais");
             return;
         }
 
@@ -166,15 +166,6 @@ public class ControladorMenuJugador {
     @FXML
     void seleccionarPais(MouseEvent event) throws IOException {
         paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
-    }
-
-    public void levantarVentanaNoEligioPais() throws IOException {
-        loader = new FXMLLoader(getClass().getResource("/vista/ventanaNoEligioPais.fxml"));
-        root = (Parent)loader.load();
-        scene = new Scene(root);
-        escenarioNoEligioPais.setTitle("No Eligio Pais");
-        escenarioNoEligioPais.setScene(scene);
-        escenarioNoEligioPais.show();
     }
 
     public void levantarVentana(String path, String titulo) throws IOException {
