@@ -29,7 +29,6 @@ public class ControladorDados{
     private Jugador jugador;
     private Pais paisAtacante;
     private Pais paisDefensor;
-    private HashMap<String, Integer> limitrofesConEjercitos;
     private List<Pais> paisesEnTablero;
 
     private List<Integer> dadosEnBatalla[];
@@ -45,8 +44,6 @@ public class ControladorDados{
     @FXML
     private Button botonLanzar;
 
-    @FXML
-    private Button botonDados;
 
     @FXML
     private Label labelNombrePaisAtacante;
@@ -95,37 +92,41 @@ public class ControladorDados{
 
     @FXML
     private void lanzar() throws IOException {
-        levantarVentana("/vista/ventanaResultados.fxml", botonLanzar, "Resultados de Batalla");
 
         try {
             dadosEnBatalla = juego.atacar(paisAtacante.getNombre(), paisDefensor.getNombre(), numeroDeDadosElegidos);
 
 
         } catch (CantidadInvalidaDeEjercitosException e1) {
-            //levantarVentana
+            //no se necesita atrapar la excepcion
         } catch (JugadaInvalidaException e2) {
-            // levantarVentana
+            // no se necesita atrapar la excepcion
         }
-        this.numeroDeDadosElegidos = 0;
-        dadosAtacante = dadosEnBatalla[0];
-        dadosDefensor = dadosEnBatalla[1];
-        ControladorResultadosDeBatalla controladorResultadosDeBatalla = obtenerControladorResultadosDeBatalla();
-        controladorResultadosDeBatalla.mostrarResultados(dadosAtacante, dadosDefensor);
+        if (juego.cumplioObjetivo(jugador)) {
+            levantarVentana("vista/ventanaGanaste.fxml", botonLanzar,"Ganaste el juego");
+        }
+        else {
+            levantarVentana("/vista/ventanaResultados.fxml", botonLanzar, "Resultados de Batalla");
 
-        controladorResultadosDeBatalla.mostrarDatos(paisAtacante.getNombre(),paisAtacante.cantidadDeFichas(),paisDefensor.getNombre(),paisDefensor.cantidadDeFichas(),listaLimitrofes, paisesEnTablero);
-        controladorResultadosDeBatalla.mostrarJugadorQueConquistoPais(jugador,paisDefensor.getNombre());
+            this.numeroDeDadosElegidos = 0;
+            dadosAtacante = dadosEnBatalla[0];
+            dadosDefensor = dadosEnBatalla[1];
+            ControladorResultadosDeBatalla controladorResultadosDeBatalla = obtenerControladorResultadosDeBatalla();
+            controladorResultadosDeBatalla.mostrarResultados(dadosAtacante, dadosDefensor);
 
-        labelEjercitosDisponibles.setText(Integer.toString(juego.devolverEjercitosRestantesDeJugadorActual()));
-        if (juego.devolverEjercitosRestantesDeJugadorActual() > 0)
-            botonColocarEjercitos.setDisable(false);
+            controladorResultadosDeBatalla.mostrarDatos(paisAtacante.getNombre(),paisAtacante.cantidadDeFichas(),paisDefensor.getNombre(),paisDefensor.cantidadDeFichas(),listaLimitrofes, paisesEnTablero);
+            controladorResultadosDeBatalla.mostrarJugadorQueConquistoPais(jugador,paisDefensor.getNombre());
 
-        botonLanzar.setVisible(false);
+            labelEjercitosDisponibles.setText(Integer.toString(juego.devolverEjercitosRestantesDeJugadorActual()));
+            if (juego.devolverEjercitosRestantesDeJugadorActual() > 0)
+                botonColocarEjercitos.setDisable(false);
+
+            botonLanzar.setVisible(false);
+
+        }
+
+
     }
-
-
-
-
-
 
 
     Stage escenarioSeleccion = new Stage();
@@ -148,29 +149,6 @@ public class ControladorDados{
     private ControladorResultadosDeBatalla obtenerControladorResultadosDeBatalla() {
         ControladorResultadosDeBatalla controladorResultadosDeBatalla = (ControladorResultadosDeBatalla) loader.getController();
         return controladorResultadosDeBatalla;
-    }
-
-
-
-
-
-    private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
-        HashMap<String,Integer> paisesLimitrofes = new HashMap<>();
-        Pais paisBuscado = buscarPais(nombrePais);
-        for (Pais unPais: paisesEnTablero) {
-            if (unPais.esLimitrofe(paisBuscado) && !juego.jugadorEnTurno().esDueñoDelPais(unPais.getNombre())) {
-                paisesLimitrofes.put(unPais.getNombre(),unPais.cantidadDeFichas());
-            }
-        }
-        return paisesLimitrofes;
-    }
-
-    private Pais buscarPais(String nombrePaisBuscado) {
-        for (Pais unPais : paisesEnTablero) {
-            if (unPais.getNombre().equals((nombrePaisBuscado)))
-                return unPais;
-        }
-        return null;
     }
 
 
