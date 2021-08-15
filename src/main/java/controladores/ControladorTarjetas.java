@@ -142,8 +142,6 @@ public class ControladorTarjetas {
             juego.jugadorEnTurno().activarTarjetaPais(tarjetaPaisSeleccionada.getNombre());
             iterador.remove();
             mostrarSiguienteTarjeta();
-            guardarObjetoDeIterador();
-            mostrarTarjeta(tarjetaPaisSeleccionada,labelPais,imagenSimbolo,imagenTarjetaPrincipal);
 
         } catch (JugadaInvalidaException e) {
             levantarVentana("/vista/ventanaNoSePuedeActivarTarjetaPais.fxml","No Se Puede Activar la Tarjeta");
