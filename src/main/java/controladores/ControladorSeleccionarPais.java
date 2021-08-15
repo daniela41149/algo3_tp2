@@ -119,7 +119,7 @@ public class ControladorSeleccionarPais {
     }
 
     @FXML
-    void volver(ActionEvent event) throws IOException{
+    void volver(ActionEvent event) {
         listaPaises.getItems().clear();
         refrescarDatosEnPantalla();
         Stage stage = (Stage) botonVolver.getScene().getWindow();

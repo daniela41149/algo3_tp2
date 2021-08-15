@@ -88,7 +88,6 @@ public class ControladorMenuJugador {
         botonPasar.setDisable(true);
         botonColocarEjercito.setDisable(false);
         botonObjetivo.setDisable(false);
-        botonTarjetas.setDisable(false);
 
     }
 
@@ -157,7 +156,7 @@ public class ControladorMenuJugador {
     void verTarjetas(ActionEvent event) throws IOException {
         levantarVentana("/vista/ventanaTarjetasPais.fxml","Tarjetas");
         ControladorTarjetas controladorTarjetas = obtenerControladorTarjetas();
-        controladorTarjetas.mostrarTarjetas(juego,mazoCompletoDeTarjetasPais);
+        controladorTarjetas.mostrarTarjetas(juego,mazoCompletoDeTarjetasPais,botonTarjetas,ejercitosDisponibles);
     }
 
     @FXML

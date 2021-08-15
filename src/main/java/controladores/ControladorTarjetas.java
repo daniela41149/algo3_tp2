@@ -69,6 +69,8 @@ public class ControladorTarjetas {
     @FXML
     private Button botonOkey;
 
+    @FXML
+    private Button botonTarjetas;
 
     @FXML
     private ImageView imagenPrimerTarjeta;
@@ -97,16 +99,21 @@ public class ControladorTarjetas {
     @FXML
     private Label labelTercerPaisSeleccionado;
 
+    @FXML
+    private Label ejercitosDisponibles;
+
     Stage escenario = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
 
 
-    public void mostrarTarjetas(Juego juego,List<TarjetaPais> mazoCompletoDeTarjetasPais) {
+    public void mostrarTarjetas(Juego juego,List<TarjetaPais> mazoCompletoDeTarjetasPais,Button botonTarjetas,Label ejercitosDisponibles) {
         this.juego = juego;
         this.tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
         this.mazoCompletoDeTarjetasPais = mazoCompletoDeTarjetasPais;
+        this.botonTarjetas = botonTarjetas;
+        this.ejercitosDisponibles = ejercitosDisponibles;
 
         imagenPrimerTarjeta.setVisible(false);
         imagenSegundaTarjeta.setVisible(false);
@@ -134,17 +141,15 @@ public class ControladorTarjetas {
 
         try {
             juego.jugadorEnTurno().activarTarjetaPais(tarjetasPais.get(numero).getNombre());
-            tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
-            mostrarSiguienteTarjeta();
-
 
         } catch (JugadaInvalidaException e) {
             levantarVentana("/vista/ventanaNoSePuedeActivarTarjetaPais.fxml","No Se Puede Activar la Tarjeta");
         }
+        tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
+        mostrarSiguienteTarjeta();
         verificacionesSegunNumeroDeTarjetas();
         verificacionesBotonSiguienteYAnterior();
-
-
+        actualizarNumeroDeEjercitosDeMenu();
     }
 
 
@@ -192,6 +197,8 @@ public class ControladorTarjetas {
 
         verificacionesSegunNumeroDeTarjetas();
         verificacionesBotonSiguienteYAnterior();
+        actualizarNumeroDeEjercitosDeMenu();
+
     }
 
     @FXML
@@ -287,6 +294,11 @@ public class ControladorTarjetas {
     }
 
 
+    private void actualizarNumeroDeEjercitosDeMenu() {
+        ejercitosDisponibles.setText(String.valueOf(juego.devolverEjercitosRestantesDeJugadorActual()));
+    }
+
+
 
 
     private void verificacionesSegunNumeroDeTarjetas () {
@@ -297,6 +309,7 @@ public class ControladorTarjetas {
             botonCanjear.setDisable(true);
         }
         if (this.tarjetasPais.size() == 0) {
+            botonTarjetas.setDisable(true);
             botonActivar.setDisable(true);
             botonSeleccionarCanje.setDisable(true);
             noMostrarTarjeta(labelPais,imagenSimbolo,imagenTarjetaPrincipal);
