@@ -44,6 +44,8 @@ public class ControladorDados{
     @FXML
     private Button botonLanzar;
 
+    @FXML
+    private Button botonTarjetas;
 
     @FXML
     private Label labelNombrePaisAtacante;
@@ -74,6 +76,7 @@ public class ControladorDados{
         this.numeroDeDadosElegidos = 0;
         this.labelEjercitosDisponibles = ejercitosDisponibles;
         this.botonColocarEjercitos = botonColocarEjercitos;
+        this.botonTarjetas = botonTarjetas;
 
         labelNombrePaisAtacante.setText(paisAtacante.getNombre());
         labelNombrePaisDefensor.setText(paisDefensor.getNombre());
@@ -98,12 +101,12 @@ public class ControladorDados{
 
 
         } catch (CantidadInvalidaDeEjercitosException e1) {
-            //no se necesita atrapar la excepcion
+            levantarVentana("/vista/ventanaNoHayEjercitosSuficientes.fxml", botonLanzar,"No hay ejercitos suficientes para atacar.");
         } catch (JugadaInvalidaException e2) {
             // no se necesita atrapar la excepcion
         }
         if (juego.cumplioObjetivo(jugador)) {
-            levantarVentana("vista/ventanaGanaste.fxml", botonLanzar,"Ganaste el juego");
+            levantarVentana("/vista/ventanaGanaste.fxml", botonLanzar,"Ganaste el juego");
         }
         else {
             levantarVentana("/vista/ventanaResultados.fxml", botonLanzar, "Resultados de Batalla");
@@ -120,7 +123,9 @@ public class ControladorDados{
             labelEjercitosDisponibles.setText(Integer.toString(juego.devolverEjercitosRestantesDeJugadorActual()));
             if (juego.devolverEjercitosRestantesDeJugadorActual() > 0)
                 botonColocarEjercitos.setDisable(false);
-
+            if (jugador.esDueñoDelPais(paisDefensor.getNombre())) {
+                botonTarjetas.setDisable(false);
+            }
             botonLanzar.setVisible(false);
 
         }
