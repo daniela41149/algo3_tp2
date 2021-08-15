@@ -28,22 +28,21 @@ import java.util.List;
 
 public class ControladorMenuJugador {
 
+    static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
     private HashMap<String, Integer> paisesConEjercitos;
     private HashMap<String, Integer> limitrofesConEjercitos;
     private Juego juego;
-    Stage escenario = new Stage();
-    Stage escenarioNoEligioPais = new Stage();
-    Scene scene;
-    Parent root;
-    FXMLLoader loader;
     ArrayList<String> jugadores = new ArrayList<>();
     Aleatorio aleatorio = new Aleatorio();
     List<Pais> paisesEnTablero;
     List<TarjetaObjetivo> mazoDeTarjetasObjetivo;
     List<TarjetaPais> mazoCompletoDeTarjetasPais = new ArrayList<>();
     String paisSeleccionado;
-    static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
 
+    Stage escenario = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
 
     @FXML
     private Label nombreJugador;
@@ -55,6 +54,9 @@ public class ControladorMenuJugador {
     private Label ejercitosDisponibles;
 
     @FXML
+    private ListView<String> listaPaises;
+
+    @FXML
     private Button botonAtacar;
 
     @FXML
@@ -62,9 +64,6 @@ public class ControladorMenuJugador {
 
     @FXML
     private Button botonPasar;
-
-    @FXML
-    private ListView<String> listaPaises;
 
     @FXML
     private Button botonArranque;
@@ -112,9 +111,10 @@ public class ControladorMenuJugador {
         levantarVentana("/vista/ventanaSeleccionarPaisParaAtacar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos,listaPaises,botonTarjetas);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos, listaPaises, botonTarjetas, ejercitosDisponibles, botonColocarEjercito);
         controladorSeleccionarPais.mostrarLimitrofesParaAtacar();
         paisSeleccionado = null;
+        refrescarDatosEnPantalla();
     }
 
     @FXML
@@ -141,7 +141,7 @@ public class ControladorMenuJugador {
         levantarVentana("/vista/ventanaSeleccionarPaisParaReagrupar.fxml","Seleccionar Pais");
         ControladorSeleccionarPais controladorSeleccionarPais = obtenerControladorSeleccionarPais();
         int fichas = buscarPais(nombre(paisSeleccionado)).cantidadDeFichas();
-        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos,listaPaises,botonTarjetas);
+        controladorSeleccionarPais.seleccionarPais((nombre(paisSeleccionado)), fichas, juego, paisesEnTablero, limitrofesConEjercitos, listaPaises, botonTarjetas, ejercitosDisponibles, botonColocarEjercito);
         controladorSeleccionarPais.mostrarLimitrofesParaReagrupar();
         paisSeleccionado = null;
     }
@@ -160,12 +160,6 @@ public class ControladorMenuJugador {
         controladorTarjetas.mostrarTarjetas(juego,mazoCompletoDeTarjetasPais);
     }
 
-
-    private String nombre(String cadena){
-        cadena = cadena.replaceAll("[0-9]","");
-        return cadena.substring(0, cadena.length() - 2);
-    }
-
     @FXML
     void seleccionarPais(MouseEvent event) throws IOException {
         paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
@@ -176,6 +170,11 @@ public class ControladorMenuJugador {
             botonAtacar.setDisable(false);
             botonReagrupar.setDisable(false);
         }
+    }
+
+    private String nombre(String cadena){
+        cadena = cadena.replaceAll("[0-9]","");
+        return cadena.substring(0, cadena.length() - 2);
     }
 
     public void levantarVentana(String path, String titulo) throws IOException {
@@ -224,8 +223,6 @@ public class ControladorMenuJugador {
         refrescarDatosEnPantalla();
     }
 
-
-
     public void refrescarDatosEnPantalla() {
         mostrarJugadorActual();
         mostrarPaisesActuales();
@@ -243,8 +240,6 @@ public class ControladorMenuJugador {
     private void mostrarEjercitosDisponibles() {
         ejercitosDisponibles.setText(Integer.toString(ejercitoDisponibleActual()));
     }
-
-
 
     private HashMap<String, Integer> nombrePaisYEjercitosDePaisesLimitrofesParaAtacar(String nombrePais) {
         HashMap<String, Integer> paisesLimitrofes = new HashMap<>();
@@ -275,7 +270,6 @@ public class ControladorMenuJugador {
         }
         return null;
     }
-
 
     private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual() {
         List<Pais> listaPaises = juego.jugadorEnTurno().pedirPaises();

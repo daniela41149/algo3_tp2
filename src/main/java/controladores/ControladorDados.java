@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControladorDados{
+
     private Juego juego;
     private Jugador jugador;
     private Pais paisAtacante;
@@ -31,17 +32,15 @@ public class ControladorDados{
     private HashMap<String, Integer> limitrofesConEjercitos;
     private List<Pais> paisesEnTablero;
 
-
     private List<Integer> dadosEnBatalla[];
     ListView<String> listaLimitrofes;
     List<Integer> dadosAtacante;
     List<Integer> dadosDefensor;
 
-    Integer fichasAtaque = 0;
-    Integer fichasDefensa = 0;
-
-
     private int numeroDeDadosElegidos;
+
+    @FXML
+    private Button botonColocarEjercitos;
 
     @FXML
     private Button botonLanzar;
@@ -64,8 +63,11 @@ public class ControladorDados{
     @FXML
     private Label labelCantidadDeDados;
 
+    @FXML
+    private Label labelEjercitosDisponibles;
 
-    public void atacar(Juego juego, List<Pais> paisesEnTablero, Pais paisAtacante, Pais paisDefensor, ListView<String> listaLimitrofes,Button botonTarjetas) throws JugadaInvalidaException{
+
+    public void atacar(Juego juego, List<Pais> paisesEnTablero, Pais paisAtacante, Pais paisDefensor, ListView<String> listaLimitrofes,Button botonTarjetas, Label ejercitosDisponibles, Button botonColocarEjercitos) throws JugadaInvalidaException{
         this.listaLimitrofes = listaLimitrofes;
         this.juego = juego;
         this.paisesEnTablero = paisesEnTablero;
@@ -73,6 +75,8 @@ public class ControladorDados{
         this.paisAtacante = paisAtacante;
         this.paisDefensor = paisDefensor;
         this.numeroDeDadosElegidos = 0;
+        this.labelEjercitosDisponibles = ejercitosDisponibles;
+        this.botonColocarEjercitos = botonColocarEjercitos;
 
         labelNombrePaisAtacante.setText(paisAtacante.getNombre());
         labelNombrePaisDefensor.setText(paisDefensor.getNombre());
@@ -80,8 +84,6 @@ public class ControladorDados{
         labelEjercitosPaisDefensor.setText(String.valueOf(paisDefensor.cantidadDeFichas()));
         labelCantidadDeDados.setText(String.valueOf(numeroDeDadosElegidos));
     }
-
-
 
     @FXML
     private void elegirCantidadDeDados() {
@@ -113,7 +115,9 @@ public class ControladorDados{
         controladorResultadosDeBatalla.mostrarDatos(paisAtacante.getNombre(),paisAtacante.cantidadDeFichas(),paisDefensor.getNombre(),paisDefensor.cantidadDeFichas(),listaLimitrofes, paisesEnTablero);
         controladorResultadosDeBatalla.mostrarJugadorQueConquistoPais(jugador,paisDefensor.getNombre());
 
-
+        labelEjercitosDisponibles.setText(Integer.toString(juego.devolverEjercitosRestantesDeJugadorActual()));
+        if (juego.devolverEjercitosRestantesDeJugadorActual() > 0)
+            botonColocarEjercitos.setDisable(false);
 
         botonLanzar.setVisible(false);
     }

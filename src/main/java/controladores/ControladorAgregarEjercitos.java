@@ -27,6 +27,22 @@ import java.util.List;
 
 public class ControladorAgregarEjercitos {
 
+    static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
+    static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
+    static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
+    static final int NUMERO_PAISES = 50;
+    private Juego juego;
+    private List<Pais> paisesEnTablero;
+    private String nombrePais;
+    private HashMap<String, Integer> paisesConEjercitos;
+    private int cantidadDeJugadores;
+    private int suma = 0;
+
+    Stage  escenarioNoHayEjercitos = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
+
     @FXML
     private Label labelPais;
 
@@ -69,27 +85,6 @@ public class ControladorAgregarEjercitos {
     @FXML
     private Button botonPasar;
 
-
-
-    static final int CANT_EJERCITOS_EN_PRIMERA_VUELTA = 5;
-    static final int CANT_EJERCITOS_EN_SEGUNDA_VUELTA = 3;
-    static final int NUMERO_PAISES = 50;
-    private Juego juego;
-    private List<Pais> paisesEnTablero;
-    private int suma = 0;
-    private String nombrePais;
-    private HashMap<String, Integer> paisesConEjercitos;
-    private int cantidadDeJugadores;
-    static final String[] COLORES = {"Azul", "Rojo", "Amarillo", "Verde", "Rosa", "Negro"};
-
-    Stage  escenarioNoHayEjercitos = new Stage();
-    Scene scene;
-    Parent root;
-    FXMLLoader loader;
-
-
-
-
     public void asignarEjercitos(String pais, Juego juego, List<Pais> paisesEnTablero, Label nombreJugador, Label colorJugador, Label ejercitosDisponibles, ListView<String> listaPaises, Button botonAtacar, Button botonReagrupar, Button botonColocar, Button botonPasar){
         this.botonAtacar = botonAtacar;
         this.botonReagrupar = botonReagrupar;
@@ -107,7 +102,6 @@ public class ControladorAgregarEjercitos {
         labelEjercitos.setText( "0" );
     }
 
-
     @FXML
     public void agregarEjercitos(ActionEvent event) throws IOException{
 
@@ -117,20 +111,20 @@ public class ControladorAgregarEjercitos {
 
         try {
 
-            if ((maximoSegundaVuelta > ejercitosTotales) && (maximoPrimeraVuelta <= ejercitosTotales)) {
-                juego.colocarEjercitoSegundaVuelta(nombrePais, suma);
+            if (juego.estaEnFaseInicial()){
+                if ((maximoSegundaVuelta > ejercitosTotales) && (maximoPrimeraVuelta <= ejercitosTotales)) {
+                    juego.colocarEjercitoSegundaVuelta(nombrePais, suma);
 
-                ejercitosTotales = sumarEjercitosTotales();
-                if (ejercitosTotales == maximoSegundaVuelta) {
-                    botonAtacar.setVisible(true);
-                    botonReagrupar.setVisible(true);
-                    botonPasar.setDisable(false);
+                    ejercitosTotales = sumarEjercitosTotales();
+                    if (ejercitosTotales == maximoSegundaVuelta) {
+                        botonAtacar.setVisible(true);
+                        botonReagrupar.setVisible(true);
+                        botonPasar.setDisable(false);
+                    }
+                } else {
+                    juego.colocarEjercitoPrimeraVuelta(nombrePais, suma);
                 }
-            }
-            else if (maximoPrimeraVuelta > ejercitosTotales) {
-                juego.colocarEjercitoPrimeraVuelta(nombrePais, suma);
-            }
-            else {
+            } else {
                 juego.colocarEjercito(nombrePais,suma);
                 if (ejercitoDisponibleActual() == 0)
                     botonColocar.setDisable(true);
@@ -148,7 +142,6 @@ public class ControladorAgregarEjercitos {
         Stage stage = (Stage) botonAgregar.getScene().getWindow();
         stage.close();
     }
-
 
     @FXML
     public void sumarUno(ActionEvent event){
@@ -169,13 +162,11 @@ public class ControladorAgregarEjercitos {
         labelEjercitos.setText( ejercitos);
     }
 
-
     @FXML
     public void cerrar(ActionEvent event){
         Stage stage = (Stage) botonOkey.getScene().getWindow();
         stage.close();
     }
-
 
     public void levantarVentanaNoHayEjercitosSuficientes() throws IOException {
         loader = new FXMLLoader(getClass().getResource("/vista/ventanaNoHayEjercitosSuficientes.fxml"));
@@ -185,8 +176,6 @@ public class ControladorAgregarEjercitos {
         escenarioNoHayEjercitos.setScene(scene);
         escenarioNoHayEjercitos.show();
     }
-
-
 
     private int sumarEjercitosTotales() {
         paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
@@ -243,7 +232,6 @@ public class ControladorAgregarEjercitos {
         }
     }
 
-
     private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual (){
         List<Pais> listaPaises = juego.jugadorEnTurno().pedirPaises();
         HashMap<String,Integer> diccionario = new HashMap<>();
@@ -252,8 +240,6 @@ public class ControladorAgregarEjercitos {
         }
         return diccionario;
     }
-
-
 
     private String nombreJugadorActual() {
         return juego.jugadorEnTurno().getNombre();
@@ -264,7 +250,5 @@ public class ControladorAgregarEjercitos {
     private int ejercitoDisponibleActual() {
         return juego.devolverEjercitosRestantesDeJugadorActual();
     }
-
-
 
 }

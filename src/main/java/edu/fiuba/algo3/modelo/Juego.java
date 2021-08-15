@@ -21,9 +21,9 @@ public class Juego {
     private Tablero tablero;
     private List<Jugador> jugadores;
     private int posicionJugadorEnTurno;
+    private boolean terminoPrimeraVueltaDeColocacion;
+    private boolean terminoSegundaVueltaDeColocacion;
     private int ejercitosColocadosPorJugadorEnTurno;
-    private int ejercitosColocadosEnPrimeraVuelta;
-    private int ejercitosColocadosEnSegundaVuelta;
     private List<TarjetaPais> mazoTarjetasPais;
     private List<TarjetaObjetivo> mazoTarjetasObjetivo;
 
@@ -31,9 +31,9 @@ public class Juego {
     public Juego(List<Pais> paises, List<Continente> continentes, List<String> nombresDeJugadores) {
 
         this.posicionJugadorEnTurno = 0;
-        this.ejercitosColocadosEnPrimeraVuelta = 0;
-        this.ejercitosColocadosEnSegundaVuelta = 0;
         this.ejercitosColocadosPorJugadorEnTurno = 0;
+        this.terminoPrimeraVueltaDeColocacion = false;
+        this.terminoSegundaVueltaDeColocacion = false;
         this.tablero = new Tablero(paises, continentes);
         this.jugadores = new LinkedList<>();
         for (int i = 0; i < nombresDeJugadores.size(); i++)
@@ -66,6 +66,10 @@ public class Juego {
         }
     }
 
+    public boolean estaEnFaseInicial() {
+        return (!terminoPrimeraVueltaDeColocacion || !terminoSegundaVueltaDeColocacion);
+    }
+
     public Jugador jugadorEnTurno() {
         return jugadores.get(posicionJugadorEnTurno);
     }
@@ -75,8 +79,27 @@ public class Juego {
         if (posicionJugadorEnTurno >= jugadores.size())
             posicionJugadorEnTurno = 0;
         ejercitosColocadosPorJugadorEnTurno = 0;
-        ejercitosColocadosEnPrimeraVuelta = 0;
-        ejercitosColocadosEnSegundaVuelta = 0;
+        verificarSiTerminoRondasDeColocacion();
+    }
+
+    private void verificarSiTerminoRondasDeColocacion() {
+        int ejercitos = sumarEjercitosTotales();
+        int ejercitosFinalPrimeraRonda = ((jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+50);
+        int ejercitosFinalSegundaRonda = ((jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+(jugadores.size()*CANT_EJERCITOS_EN_SEGUNDA_VUELTA)+50);
+
+        if (ejercitos == ejercitosFinalPrimeraRonda)
+            terminoPrimeraVueltaDeColocacion = true;
+        if (ejercitos == ejercitosFinalSegundaRonda)
+            terminoSegundaVueltaDeColocacion = true;
+    }
+
+    private int sumarEjercitosTotales() {
+        List<Pais> paises = tablero.pasarPaisesAJuego();
+        int ejercitosTotales = 0;
+        for (Pais pais : paises) {
+            ejercitosTotales += pais.cantidadDeFichas();
+        }
+        return ejercitosTotales;
     }
 
     private int establecerCantidadDeEjercitosPermitidosParaColocar(Jugador jugadorEnTurno) {
@@ -96,24 +119,24 @@ public class Juego {
     }
 
     public void colocarEjercitoPrimeraVuelta(String nombreDePais, int cantidadEjercitos) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
-        int totalEjercitos = ejercitosColocadosEnPrimeraVuelta + cantidadEjercitos;
+        int totalEjercitos = ejercitosColocadosPorJugadorEnTurno + cantidadEjercitos;
         if (totalEjercitos > CANT_EJERCITOS_EN_PRIMERA_VUELTA)
             throw new CantidadInvalidaDeEjercitosException();
 
         jugadorEnTurno().colocarEjercito(nombreDePais, cantidadEjercitos);
-        ejercitosColocadosEnPrimeraVuelta += cantidadEjercitos;
-        if (ejercitosColocadosEnPrimeraVuelta == CANT_EJERCITOS_EN_PRIMERA_VUELTA)
+        ejercitosColocadosPorJugadorEnTurno += cantidadEjercitos;
+        if (ejercitosColocadosPorJugadorEnTurno == CANT_EJERCITOS_EN_PRIMERA_VUELTA)
             pasarTurno();
     }
 
     public void colocarEjercitoSegundaVuelta(String nombreDePais, int cantidadEjercitos) throws JugadaInvalidaException, CantidadInvalidaDeEjercitosException {
-        int totalEjercitos = ejercitosColocadosEnSegundaVuelta + cantidadEjercitos;
+        int totalEjercitos = ejercitosColocadosPorJugadorEnTurno + cantidadEjercitos;
         if (totalEjercitos > CANT_EJERCITOS_EN_SEGUNDA_VUELTA)
             throw new CantidadInvalidaDeEjercitosException();
 
         jugadorEnTurno().colocarEjercito(nombreDePais, cantidadEjercitos);
-        ejercitosColocadosEnSegundaVuelta += cantidadEjercitos;
-        if (ejercitosColocadosEnSegundaVuelta == CANT_EJERCITOS_EN_SEGUNDA_VUELTA)
+        ejercitosColocadosPorJugadorEnTurno += cantidadEjercitos;
+        if (ejercitosColocadosPorJugadorEnTurno == CANT_EJERCITOS_EN_SEGUNDA_VUELTA)
             pasarTurno();
     }
 
@@ -137,26 +160,13 @@ public class Juego {
     }
 
     public int devolverEjercitosRestantesDeJugadorActual() {
-        int ejercitos = sumarEjercitosTotales();
-        int ejercitosFinalPrimeraRonda = ((jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+50);
-        int ejercitosFinalSegundaRonda = ((jugadores.size()*CANT_EJERCITOS_EN_PRIMERA_VUELTA)+(jugadores.size()*CANT_EJERCITOS_EN_SEGUNDA_VUELTA)+50);
+        if (terminoSegundaVueltaDeColocacion)
+            return establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno())-ejercitosColocadosPorJugadorEnTurno;
 
-        if ((ejercitos < ejercitosFinalSegundaRonda) && (ejercitos >= ejercitosFinalPrimeraRonda)) {
-            return CANT_EJERCITOS_EN_SEGUNDA_VUELTA-ejercitosColocadosEnSegundaVuelta;
-        }
-        else if (ejercitos < ejercitosFinalPrimeraRonda) {
-            return CANT_EJERCITOS_EN_PRIMERA_VUELTA-ejercitosColocadosEnPrimeraVuelta;
-        }
-        return establecerCantidadDeEjercitosPermitidosParaColocar(jugadorEnTurno())-ejercitosColocadosPorJugadorEnTurno;
-    }
+        if (terminoPrimeraVueltaDeColocacion)
+            return CANT_EJERCITOS_EN_SEGUNDA_VUELTA-ejercitosColocadosPorJugadorEnTurno;
 
-    private int sumarEjercitosTotales() {
-        List<Pais> paises = tablero.pasarPaisesAJuego();
-        int ejercitosTotales = 0;
-        for (Pais pais : paises) {
-            ejercitosTotales += pais.cantidadDeFichas();
-        }
-        return ejercitosTotales;
+        return CANT_EJERCITOS_EN_PRIMERA_VUELTA-ejercitosColocadosPorJugadorEnTurno;
     }
 
     public boolean controlaContiente (String nombreJugador, String nombreContinente) {

@@ -30,13 +30,22 @@ public class ControladorSeleccionarPais {
     private List<Pais> paisesEnTablero;
     private Button botonTarjetas;
 
-
+    Stage escenarioReagrupar = new Stage();
+    Scene scene;
+    Parent root;
+    FXMLLoader loader;
 
     @FXML
     private Label labelPais1;
 
     @FXML
     private Label labelPais2;
+
+    @FXML
+    private Label ejercitosDiponibles;
+
+    @FXML
+    private Button botonColocarEjercito;
 
     @FXML
     private Button botonReagrupar;
@@ -53,18 +62,7 @@ public class ControladorSeleccionarPais {
     @FXML
     private ListView<String> listaPaises;
 
-
-
-    Stage escenarioReagrupar = new Stage();
-    Stage escenarioNoEligioPais = new Stage();
-    Stage escenarioDados = new Stage();
-    Scene scene;
-    Parent root;
-    FXMLLoader loader;
-
-
-
-    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, List<Pais> paisesEnTablero, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises, Button botonTarjetas) {
+    public void seleccionarPais(String nombrePais, int cantEjercito, Juego juego, List<Pais> paisesEnTablero, HashMap<String, Integer> limitrofesConEjercitos,ListView<String> listaPaises, Button botonTarjetas, Label labelEjercitosDisponibles, Button botonColocarEjercito) {
         this.juego = juego;
         this.paisesEnTablero = paisesEnTablero;
         this.nombrePais = nombrePais;
@@ -72,10 +70,11 @@ public class ControladorSeleccionarPais {
         this.limitrofesConEjercitos = limitrofesConEjercitos;
         this.listaPaises = listaPaises;
         this.botonTarjetas = botonTarjetas;
+        this.ejercitosDiponibles = labelEjercitosDisponibles;
+        this.botonColocarEjercito = botonColocarEjercito;
 
         labelPais1.setText(nombrePais);
     }
-
 
     @FXML
     void seleccionarLimitrofe(MouseEvent event) throws IOException{
@@ -114,7 +113,7 @@ public class ControladorSeleccionarPais {
         Pais paisAtacante = buscarPais(nombrePais);
         Pais paisDefensor = buscarPais(nombre(limitrofeSeleccionado));
 
-        controladorDados.atacar(juego, paisesEnTablero,paisAtacante, paisDefensor,listaLimitrofes, botonTarjetas);
+        controladorDados.atacar(juego, paisesEnTablero,paisAtacante, paisDefensor,listaLimitrofes, botonTarjetas, ejercitosDiponibles, botonColocarEjercito);
         limitrofeSeleccionado = null;
         labelPais2.setText("");
     }
