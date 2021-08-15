@@ -1,17 +1,29 @@
 @startuml
-
-Juego "1" *-- "1" Tablero
+Juego  *- Tablero
 Juego "1" -- "2..6" Jugador
 Juego "1" *-- "*" TarjetaPais
 Juego "1" *--- "*" TarjetaObjetivo
 Aleatorio <. Juego
+Tablero . Jugador
+
+
+Canjes "1" o-- "*" Canje
+Canjes ..> "*" TarjetaPais
+Canjes ..> Jugador
+Canje "1" o-- "3" TarjetaPais
+Canje ..> Jugador
+
+Pais ->  Ejercito
+
+Interface EstadoTarjetaPais
+Interface Simbolo
+
 
 Tablero "1" *-- "6" Continente
 Tablero "1" *-- "*" Pais
 Continente "1" *-- "1..*" Pais
 
 Jugador "1" -- "1..*" Pais
-Jugador "1" -> "*" TarjetaPais
 
 Interface EstadoTarjetaPais
 Interface Simbolo
@@ -26,14 +38,14 @@ Simbolo <|.. Figura
 
 TarjetaObjetivo <|-- TarjetaDestruccion
 TarjetaObjetivo <|-- TarjetaOcupacion
-TarjetaObjetivo "1" -- "1" Jugador
+TarjetaObjetivo  --  Jugador
 
-Ejercito "1" --> "1" "Dados"
-Jugador "1" ---> "1" Canjes
-Canjes "1" -- "*" Canje
+Ejercito  -->  "Dados"
+Jugador  --->  Canjes
 
-Pais "1" -> "1" Ejercito
+
 Tablero -> Batalla
+Jugador "1" -> "*" TarjetaPais
 Batalla "1" --> "2" Pais
 
 Pais *-- EstadoPais
@@ -135,5 +147,4 @@ class Canje {
 class Canjes {
 
 }
-
 @enduml

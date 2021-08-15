@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +13,7 @@ public class Dados {
 
 
 
-    List<Integer> listaDados;
+
 
     public Dados(){
     }

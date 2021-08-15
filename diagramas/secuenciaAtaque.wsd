@@ -1,16 +1,11 @@
 @startuml
-title: Ataque exitoso entre países.
-activate ":Juego"
-":Juego" -> "pedro:Jugador" : jugarTurno()
-activate "pedro:Jugador"
-"pedro:Jugador" -> ":Juego" : atacar (String,String,cantidadEjercito)
-deactivate "pedro:Jugador"
+title: Ataque exitoso entre países donde el país ganador es el defensor.
 
-":Juego" -> ":Tablero" : atacar (String, String, cantidadEjercito)
+":Juego" -> ":Tablero" : atacar (String, String, cantidadEjercito):  List int
 activate ":Tablero"
-":Tablero" -> ":Batalla": atacar (cantidadEjercito)
+":Tablero" -> ":Batalla": atacar (cantidadEjercito):  List int
 activate ":Batalla"
-":Batalla" -> "paisAtacante:Pais": atacar(paisDefensa,cantidadEjercito)
+":Batalla" -> "paisAtacante:Pais": atacar(paisDefensa,cantidadEjercito):  List int
 activate "paisAtacante:Pais"
 "paisAtacante:Pais" -> "paisDefensor:Pais": esLimitrofe(paisAtacante)
 activate "paisDefensor:Pais"
@@ -56,19 +51,13 @@ deactivate "paisAtacante:Pais"
             activate "paisDefensor:Pais"
 "paisDefensor:Pais" -> "defensa:Ejercito": quedoSinEjercito()
 activate "defensa:Ejercito"
-"defensa:Ejercito" --> "paisDefensor:Pais": true
+"defensa:Ejercito" --> "paisDefensor:Pais": false
 deactivate "defensa:Ejercito"
 
-
-"paisDefensor:Pais" -> ":Jugador": desocupar(String Pais)
-activate ":Jugador"
-deactivate ":Jugador"
-"paisDefensor:Pais" -> "paisAtacante:Pais": nuevoDueño()
-activate "paisAtacante:Pais"
-"paisAtacante:Pais" --> "paisDefensor:Pais": pedro
 deactivate "paisAtacante:Pais"
 deactivate "paisDefensor:Pais"
+":Batalla" --> ":Tablero": dadosDeBatalla
 deactivate ":Batalla"
+":Tablero" --> ":Juego": dadosDeBatalla
 deactivate ":Tablero"
-deactivate "pedro:Jugador"
 @enduml

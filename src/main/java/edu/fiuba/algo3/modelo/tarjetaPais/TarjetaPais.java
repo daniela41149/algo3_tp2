@@ -20,10 +20,6 @@ public class TarjetaPais {
         return this.nombre;
     }
 
-    // public Simbolo getSimbolo() {
-    //    return this.simbolo;
-    // }
-
 
     public void activarTarjeta(Jugador jugador) throws JugadaInvalidaException {
         this.estadoTarjeta.activar(this, jugador);
