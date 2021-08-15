@@ -1,17 +1,12 @@
 package controladores;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.CantidadInvalidaDeEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
 import edu.fiuba.algo3.modelo.pais.Pais;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControladorDados{
@@ -31,7 +24,7 @@ public class ControladorDados{
     private Pais paisDefensor;
     private List<Pais> paisesEnTablero;
 
-    private List<Integer> dadosEnBatalla[];
+    private List<Integer>[] dadosEnBatalla;
     ListView<String> listaLimitrofes;
     List<Integer> dadosAtacante;
     List<Integer> dadosDefensor;
@@ -73,7 +66,7 @@ public class ControladorDados{
         this.jugador = juego.jugadorEnTurno();
         this.paisAtacante = paisAtacante;
         this.paisDefensor = paisDefensor;
-        this.numeroDeDadosElegidos = 0;
+        this.numeroDeDadosElegidos = 1;
         this.labelEjercitosDisponibles = ejercitosDisponibles;
         this.botonColocarEjercitos = botonColocarEjercitos;
         this.botonTarjetas = botonTarjetas;
@@ -86,10 +79,16 @@ public class ControladorDados{
     }
 
     @FXML
-    private void elegirCantidadDeDados() {
-        if (numeroDeDadosElegidos < 3) {
+    private void sumarUno() {
+        if (numeroDeDadosElegidos < 3)
             numeroDeDadosElegidos++;
-        }
+        labelCantidadDeDados.setText(String.valueOf(numeroDeDadosElegidos));
+    }
+
+    @FXML
+    private void restarUno() {
+        if (numeroDeDadosElegidos > 1)
+            numeroDeDadosElegidos--;
         labelCantidadDeDados.setText(String.valueOf(numeroDeDadosElegidos));
     }
 
@@ -99,16 +98,6 @@ public class ControladorDados{
         try {
             dadosEnBatalla = juego.atacar(paisAtacante.getNombre(), paisDefensor.getNombre(), numeroDeDadosElegidos);
 
-
-        } catch (CantidadInvalidaDeEjercitosException e1) {
-            levantarVentana("/vista/ventanaNoHayEjercitosSuficientes.fxml", botonLanzar,"No hay ejercitos suficientes para atacar.");
-        } catch (JugadaInvalidaException e2) {
-            // no se necesita atrapar la excepcion
-        }
-        if (juego.cumplioObjetivo(jugador)) {
-            levantarVentana("/vista/ventanaGanaste.fxml", botonLanzar,"Ganaste el juego");
-        }
-        else {
             levantarVentana("/vista/ventanaResultados.fxml", botonLanzar, "Resultados de Batalla");
 
             this.numeroDeDadosElegidos = 0;
@@ -128,18 +117,22 @@ public class ControladorDados{
             }
             botonLanzar.setVisible(false);
 
+        } catch (CantidadInvalidaDeEjercitosException e1) {
+            levantarVentana("/vista/ventanaNoHayEjercitosSuficientes.fxml", botonLanzar,"No hay ejercitos suficientes para atacar.");
+        } catch (JugadaInvalidaException e2) {
+            // no se necesita atrapar la excepcion
         }
 
+        if (juego.cumplioObjetivo(jugador)) {
+            levantarVentana("/vista/ventanaGanaste.fxml", botonLanzar,"Ganaste el juego");
+        }
 
     }
-
 
     Stage escenarioSeleccion = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
-
-
 
     public void levantarVentana(String path, Button boton,String titulo) throws IOException {
         loader = new FXMLLoader(getClass().getResource(path));
@@ -155,8 +148,5 @@ public class ControladorDados{
         ControladorResultadosDeBatalla controladorResultadosDeBatalla = (ControladorResultadosDeBatalla) loader.getController();
         return controladorResultadosDeBatalla;
     }
-
-
-
 
 }

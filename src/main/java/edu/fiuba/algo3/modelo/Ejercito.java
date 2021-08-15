@@ -63,6 +63,8 @@ public class Ejercito {
     }
 
     public List<Integer> defender() {
+        if (this.cantidadDeFichas > MAX_CANTIDAD_LANZAR_DADOS)
+            return dados.tirarDados(MAX_CANTIDAD_LANZAR_DADOS);
         return dados.tirarDados(this.cantidadDeFichas);
     }
 
