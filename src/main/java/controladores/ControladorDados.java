@@ -41,14 +41,13 @@ public class ControladorDados{
     Integer fichasDefensa = 0;
 
 
-    private int numeroDeDadosElegidos = 0;
-
-
-    @FXML
-    private Button botonDado;
+    private int numeroDeDadosElegidos;
 
     @FXML
     private Button botonLanzar;
+
+    @FXML
+    private Button botonDados;
 
     @FXML
     private Label labelNombrePaisAtacante;
@@ -62,6 +61,8 @@ public class ControladorDados{
     @FXML
     private Label labelEjercitosPaisDefensor;
 
+    @FXML
+    private Label labelCantidadDeDados;
 
 
     public void atacar(Juego juego, List<Pais> paisesEnTablero, Pais paisAtacante, Pais paisDefensor, ListView<String> listaLimitrofes,Button botonTarjetas) throws JugadaInvalidaException{
@@ -71,22 +72,23 @@ public class ControladorDados{
         this.jugador = juego.jugadorEnTurno();
         this.paisAtacante = paisAtacante;
         this.paisDefensor = paisDefensor;
-
+        this.numeroDeDadosElegidos = 0;
 
         labelNombrePaisAtacante.setText(paisAtacante.getNombre());
         labelNombrePaisDefensor.setText(paisDefensor.getNombre());
         labelEjercitosPaisAtacante.setText(String.valueOf(paisAtacante.cantidadDeFichas()));
         labelEjercitosPaisDefensor.setText(String.valueOf(paisDefensor.cantidadDeFichas()));
+        labelCantidadDeDados.setText(String.valueOf(numeroDeDadosElegidos));
     }
 
 
 
     @FXML
     private void elegirCantidadDeDados() {
-        if (numeroDeDadosElegidos <= 3) {
+        if (numeroDeDadosElegidos < 3) {
             numeroDeDadosElegidos++;
         }
-
+        labelCantidadDeDados.setText(String.valueOf(numeroDeDadosElegidos));
     }
 
     @FXML

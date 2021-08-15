@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorDados">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ControladorDados">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -28,14 +32,14 @@
                   <Font size="21.0" />
                </font>
             </Label>
-          <Label fx:id="labelGanador" alignment="CENTER" layoutX="220.0" layoutY="74.0" prefHeight="225.0" prefWidth="188.0" style="&#10;" text="VS" textAlignment="CENTER" textFill="#c61919" wrapText="true">
+          <Label fx:id="labelGanador" alignment="CENTER" layoutX="220.0" layoutY="74.0" prefHeight="164.0" prefWidth="188.0" style="&#10;" text="VS" textAlignment="CENTER" textFill="#c61919" wrapText="true">
               <font>
                   <Font size="30.0" />
               </font>
           </Label>
-            <Button fx:id="botonDado" layoutX="274.0" layoutY="255.0" mnemonicParsing="false" onAction="#elegirCantidadDeDados" prefHeight="75.0" prefWidth="68.0">
+            <Button fx:id="botonDado" layoutX="238.0" layoutY="267.0" mnemonicParsing="false" onAction="#elegirCantidadDeDados" prefHeight="45.0" prefWidth="50.0">
                <graphic>
-                  <ImageView fitHeight="67.0" fitWidth="75.0" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="51.0" preserveRatio="true">
                      <image>
                         <Image url="@imagenes_dado/dado_lanzar.png" />
                      </image>
@@ -58,6 +62,11 @@
             <Label fx:id="labelEjercitosPaisDefensor" alignment="CENTER" layoutX="513.0" layoutY="67.0" prefHeight="36.0" prefWidth="34.0" style="&#10;" textAlignment="CENTER" textFill="#2d72c6" wrapText="false">
                <font>
                   <Font size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelCantidadDeDados" alignment="CENTER" layoutX="322.0" layoutY="267.0" prefHeight="56.0" prefWidth="58.0" textFill="#4d351c">
+               <font>
+                  <Font size="30.0" />
                </font>
             </Label>
       </children>
