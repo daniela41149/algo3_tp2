@@ -84,6 +84,9 @@ public class ControladorMenuJugador {
     void cargarJuego(ActionEvent event) throws IOException, JugadaInvalidaException {
         iniciarJuego();
         botonArranque.setVisible(false);
+        botonAtacar.setVisible(false);
+        botonReagrupar.setVisible(false);
+        botonPasar.setDisable(true);
         botonColocarEjercito.setDisable(false);
         botonObjetivo.setDisable(false);
         botonTarjetas.setDisable(false);
@@ -166,6 +169,13 @@ public class ControladorMenuJugador {
     @FXML
     void seleccionarPais(MouseEvent event) throws IOException {
         paisSeleccionado = listaPaises.getSelectionModel().getSelectedItem();
+        botonAtacar.setDisable(true);
+        botonReagrupar.setDisable(true);
+        Pais pais = buscarPais(nombre(paisSeleccionado));
+        if (pais != null && pais.cantidadDeFichas() > 1) {
+            botonAtacar.setDisable(false);
+            botonReagrupar.setDisable(false);
+        }
     }
 
     public void levantarVentana(String path, String titulo) throws IOException {

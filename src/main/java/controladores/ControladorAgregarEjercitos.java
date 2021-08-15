@@ -122,8 +122,8 @@ public class ControladorAgregarEjercitos {
 
                 ejercitosTotales = sumarEjercitosTotales();
                 if (ejercitosTotales == maximoSegundaVuelta) {
-                    botonAtacar.setDisable(false);
-                    botonReagrupar.setDisable(false);
+                    botonAtacar.setVisible(true);
+                    botonReagrupar.setVisible(true);
                     botonPasar.setDisable(false);
                 }
             }
