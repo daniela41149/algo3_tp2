@@ -124,15 +124,25 @@ public class ControladorDados{
         }
 
         if (juego.cumplioObjetivo(jugador)) {
-            levantarVentana("/vista/ventanaGanaste.fxml", botonLanzar,"Ganaste el juego");
+            levantarVentanaDeGanadorDeJuego();
         }
 
     }
 
     Stage escenarioSeleccion = new Stage();
+    Stage escenarioGanador = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
+
+    public void levantarVentanaDeGanadorDeJuego() throws IOException {
+        loader = new FXMLLoader(getClass().getResource("/vista/ventanaGanaste.fxml"));
+        root = (Parent) loader.load();
+        scene = new Scene(root);
+        escenarioGanador.setTitle("Ganaste el juego");
+        escenarioGanador.setScene(scene);
+        escenarioGanador.show();
+    }
 
     public void levantarVentana(String path, Button boton,String titulo) throws IOException {
         loader = new FXMLLoader(getClass().getResource(path));
