@@ -2,38 +2,37 @@
 
 Jugador "1" -- "1..*" Pais
 Jugador "1" -> "*" TarjetaPais
-Jugador "1" ---> "1" Canjes
-Canjes "1" -- "*" Canje
-TarjetaObjetivo "1" -- "1" Jugador
+Jugador  --->  Canjes
+Canjes "1" o-- "*" Canje
+Canjes ..> "*" TarjetaPais
+Canjes ..> Jugador
+Canje "1" o-- "3" TarjetaPais
+Canje ..> Jugador
 
 
 class Jugador {
-	- nombre: String
-	- color: String
+     - nombreJugador: String
+     - color: String
+     - jugadorQueLoDestruyo: Jugador
+     - tarjetaDeObjetivo: TarjetaObjetivo
+     - ejercitosDeCanje: int
 	+ Jugador(nombre, colorJugador, juego): Jugador
 	+ agregarPais(nuevoPais)
 	+ desocupar(nombrePais)
 	+ colocarEjercito(String nombrePais,int cantidadEjercito)
-	+ establecerObjetivo(objetivo)
+	+ establecerObjetivo(tarjetaObjetivo)
 	+ cumplioObjetivo(tablero): boolean
 	+ activarTarjetaPais(nombreTarjetaPais)
 	+ solicitarUnCanje(nombresTarjetasPaisParaCanjear)
 }
 
 class Pais {
-	+ Pais(nombrePais, nombrePaisesLimitrofes): Pais
-	+ atacar(paisDefensa, cantidadEjercito)
-	+ defender()
-	+ colocarEjercito(Jugador jugador, int cantidadEjercito)
-	+ sacarFichas(cantidadDeFichas)
-	+ esLimitrofe(paisAtacante): boolean
-	+ establecerDueño(paisAtacante)
-	+ getEjercito(): Ejercito
-	+ getNombre(): String
-	+ nuevoDueño(): Jugador
+
 }
 
 class Canje {
+    - ejercitos: int
+    - numeroDeCanje: int
 	+ Canje(numeroDeCanje, canjes): Canje
 	+ agregarTarjetaPaisParaCanjear(tarjetaPais)
 	+ solicitarUnCanje(jugador, tarjetasPais): boolean
@@ -50,9 +49,5 @@ class TarjetaPais {
 	+ puedeCanjear(tarjetaPais1, tarjetaPais2): boolean
 }
 
-abstract class TarjetaObjetivo {
-	{abstract} + cumplioObjetivo()
-	+ establecerDueño()
-}
 
 @enduml

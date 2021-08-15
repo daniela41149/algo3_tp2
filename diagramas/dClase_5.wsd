@@ -15,8 +15,8 @@ Simbolo <|.. Comodin
 Simbolo <|.. Figura
 
 abstract class TarjetaObjetivo {
-	- dueño: Jugador
-	+ establecerDueño(jugador)
+	- dueÃ±o: Jugador
+	+ establecerDueÃ±o(jugador)
 	+ cumplioObjetivoGeneral(): boolean
 	{abstract} + cumplioObjetivo(tablero, juego): boolean
 	{abstract} + devolverEnunciado(): String
@@ -77,16 +77,12 @@ class Figura {
 
 class TarjetaPais {
 	- nombre: String
-    - simbolo: Simbolo
-    - estadoTarjeta: EstadoTarjetaPais
-
 	+ TarjetaPais(nombre, tipoDeSimbolo): TarjetaPais
-	+ getNombre(): String
-	+ getSimbolo(): Simbolo
 	+ activar()
 	+ desactivar()
 	+ activarTarjeta(jugador)
 	+ puedeCanjear(tarjetaPais1, tarjetaPais2): boolean
+
 }
 
 @enduml

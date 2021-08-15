@@ -1,10 +1,13 @@
 @startuml
 
-Juego "1" *-- "1" Tablero
+Juego  *- Tablero
 Juego "1" -- "2..6" Jugador
 Juego "1" *-- "*" TarjetaPais
 Juego "1" *--- "*" TarjetaObjetivo
 Aleatorio <. Juego
+Tablero . Jugador
+Jugador "1" -> "*" TarjetaPais
+Jugador -- TarjetaObjetivo
 
 class Aleatorio {
 	+ agarrarTajetaObjetivoAleatoriaDelMazo(mazoDeTarjetas): TarjetaObjetivo
@@ -21,53 +24,42 @@ class Moderador {
 }
 
 class Juego {
+    - posicionJugadorEnTurno: int
+    - ejercitosColocadosPorJugadorEnTurno: int
+    - ejercitosColocadosEnPrimeraVuelta: int
+    - ejercitosColocadosEnSegundaVuelta: int
+    - mazoTarjetasPais: List
+    - mazoTarjetasObjetivo: List
 	+ Juego(paises, continentes, nombresDeJugadores): Juego
-	+ colocarEjercitoPrimeraVuelta(nombreDePais, cantidadEjercitos)
-	+ colocarEjercitoSegundaVuelta(nombreDePais, cantidadEjercitos)
 	+ guardarMazoDeTarjetasPais(tarjetasPais)
 	+ guardarMazoDeTarjetasObjetivo(tarjetasObjetivo)
 	+ comenzarFaseInicial(aleatorio)
 	+ jugadorEnTurno(): Jugador
 	+ pasarTurno()
-	+ atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante)
-	+ colocarEjercito(nombrePais, cantidadEjercito)
 	+ cumplioObjetivo(jugador): boolean
-	+ reagrupar(nombrePaisDesde, nombrePaisHasta, cantidadDeEjercito)
 	+ entregaTarjetaPais(): TarjetaPais
 	+ devolverTarjetasAlMazo(tarjetasPais)
 }
 
 class Jugador {
-	+ Jugador(nombre, colorJugador, juego): Jugador
-	+ agregarPais(nuevoPais)
-	+ desocupar(nombrePais)
-	+ colocarEjercito(String nombrePais,int cantidadEjercito)
-	+ establecerObjetivo(objetivo)
-	+ cumplioObjetivo(tablero): boolean
-	+ activarTarjetaPais(nombreTarjetaPais)
-	+ solicitarUnCanje(nombresTarjetasPaisParaCanjear)
+     - nombreJugador: String
+     - color: String
+     - paises: List
+     - jugadorQueLoDestruyo: Jugador
+     - canjes: Canjes
+     - ejercitosDeCanje: int
 }
 
 class Tablero {
-	+ Tablero( paises, continentes)
-	+ atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante)
-	+ buscarPais(nombrePais): Pais
-	+ buscarContinente(nombreContinente): Continente
-	+ ejercitosAdicionalesPorContinentesControlados(jugador): int
-	+ controlaContinente(jugador, nombreContinente): boolean
-	+ poseeUnaCantidadDePaisesEnContinente(jugador, cantidadDePaises, nombreContinente): boolean
+
 }
 
 class TarjetaPais {
-	+ activarTarjeta(jugador)
-	+ puedeCanjear(tarjetaPais1, tarjetaPais2): boolean
+
 }
 
 abstract class TarjetaObjetivo {
-	{abstract} + cumplioObjetivo()
-	+ cumplioObjetivoGeneral()
-	{abstract} + devolverEnunciado()
-	+ establecerDueño()
+
 }
 
 @enduml

@@ -1,7 +1,7 @@
 @startuml
 
-Ejercito "1" --> "1" "Dados"
-Pais "1" -> "1" Ejercito
+Ejercito --> "Dados"
+Pais ->  Ejercito
 Pais *-- EstadoPais
 EstadoPais <|.. Vacante
 EstadoPais <|.. Ocupado
@@ -10,33 +10,24 @@ EstadoPais <|.. Ocupado
 class Pais {
 	- nombrePais: String
     - nombrePaisesLimitrofes: List
-    - dueño: Jugador
-    - ejercito: Ejercito
-    - estadoPais: EstadoPais
-
+    - dueÃ±o: Jugador
 	+ Pais(nombrePais, nombrePaisesLimitrofes): Pais
-	+ atacar(paisDefensa, cantidadEjercito)
+	+ atacar(paisDefensa, cantidadEjercito): List
 	+ defender()
 	+ colocarEjercito(Jugador jugador, int cantidadEjercito)
 	+ sacarFichas(cantidadDeFichas)
-	+ esLimitrofe(paisAtacante): boolean
-	+ establecerDueño(paisAtacante)
-	+ getEjercito(): Ejercito
-	+ getNombre(): String
-	+ nuevoDueño(): Jugador
+	+ esLimitrofe(pais): boolean
+	+ establecerDueÃ±o(paisAtacante)
+	+ nuevoDueÃ±o(): Jugador
 }
 
 class Dados {
 	- listaDados: List
-	+ dadosAtaque(cantidadDeDados): List
-	+ dadosDefensa(cantidadDeDados): List
+	+ tirarDados(cantidadDeDados): List
 }
 
 class Ejercito {
 	- cantidadDeFichas: int
-    - dados: Dados
-	+ Ejercito()
-	+ Ejercito(unaCantidadDeFichas)
 	+ atacar(unaCantidadFichas): List
 	+ defender(): List
 	+ agregarFicha()

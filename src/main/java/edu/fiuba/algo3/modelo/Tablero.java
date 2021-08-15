@@ -84,7 +84,6 @@ public class Tablero {
             ejercitosAdicionales = unContinente.ejercitosAdicionalesPorContinentesControlados(jugador,ejercitosAdicionales);
         }
         return ejercitosAdicionales;
-
     }
 
 }

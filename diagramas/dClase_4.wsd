@@ -1,22 +1,18 @@
 @startuml
 
 Tablero "1" *-- "6" Continente
-Tablero "1" *-- "*" Pais
 Tablero -> Batalla
-Batalla "1" --> "2" Pais
-Continente "1" *-- "1..*" Pais
 
 class Tablero {
 	- paises: List
-    - continentes: List
-    - batalla: Batalla
 
-	+ atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante)
+	+ atacar(nombrePaisAtacante, nombrePaisDefensor, cantidadDeEjercitoAtacante): List
 	+ buscarPais(nombrePais): Pais
 	+ buscarContinente(nombreContinente): Continente
 	+ ejercitosAdicionalesPorContinentesControlados(jugador): int
 	+ controlaContinente(jugador, nombreContinente): boolean
 	+ poseeUnaCantidadDePaisesEnContinente(jugador, cantidadDePaises, nombreContinente): boolean
+
 }
 
 class Batalla {
@@ -31,8 +27,6 @@ class Continente {
 	- nombre: String
     - paises: List
     - ejercitos: int
-
-	+ getNombre(): String
 	+ Continente(nombreContinente, listaPaises, ejercitosAdicionales): Continente
 	+ cantidadDePaises(): int
 	+ cantidadDePaisesControlados(jugador): int

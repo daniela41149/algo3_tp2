@@ -64,8 +64,6 @@ public class Ejercito {
         }
     }
 
-
-
     public List<Integer> defender() {
         return dados.tirarDados(this.cantidadDeFichas);
     }
@@ -73,7 +71,6 @@ public class Ejercito {
     public int devolverCantidadDeFichas() {
         return this.cantidadDeFichas;
     }
-
 
     public void setDados(Dados nuevosDados) {
         this.dados = nuevosDados;

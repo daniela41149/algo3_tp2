@@ -22,9 +22,9 @@ public class Pais {
         this.estadoPais = new Vacante();
     }
 
-    public boolean esLimitrofe(Pais paisAtacante) {
+    public boolean esLimitrofe(Pais unPais) {
         for (String limitrofe: nombrePaisesLimitrofes) {
-            if (paisAtacante.getNombre().equals(limitrofe)) {
+            if (unPais.getNombre().equals(limitrofe)) {
                 return true;
             }
         }
