@@ -53,15 +53,13 @@ public class Ejercito {
     }
 
     public List<Integer> atacar(int unaCantidadDeFichas) throws CantidadInvalidaDeEjercitosException {
-        if (unaCantidadDeFichas > MAX_CANTIDAD_LANZAR_DADOS) {
+        if (unaCantidadDeFichas > MAX_CANTIDAD_LANZAR_DADOS)
             return dados.tirarDados(MAX_CANTIDAD_LANZAR_DADOS);
-        }
-        if (unaCantidadDeFichas >= MIN_CANTIDAD_LANZAR_DADOS && unaCantidadDeFichas <= MAX_CANTIDAD_LANZAR_DADOS & unaCantidadDeFichas <= this.cantidadDeFichas-MIN_CANTIDAD_LANZAR_DADOS) {
-            return dados.tirarDados(unaCantidadDeFichas);
-        }
-        else {
+
+        if ( (unaCantidadDeFichas < MIN_CANTIDAD_LANZAR_DADOS) || (unaCantidadDeFichas > (this.cantidadDeFichas-MIN_CANTIDAD_LANZAR_DADOS)) )
             throw new CantidadInvalidaDeEjercitosException();
-        }
+
+        return dados.tirarDados(unaCantidadDeFichas);
     }
 
 
