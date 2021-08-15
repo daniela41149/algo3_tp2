@@ -138,15 +138,17 @@ public class ControladorTarjetas {
 
     @FXML
     void activar(ActionEvent event) throws IOException {
-
         try {
-            juego.jugadorEnTurno().activarTarjetaPais(tarjetasPais.get(numero).getNombre());
+            juego.jugadorEnTurno().activarTarjetaPais(tarjetaPaisSeleccionada.getNombre());
+            iterador.remove();
+            mostrarSiguienteTarjeta();
+            guardarObjetoDeIterador();
+            mostrarTarjeta(tarjetaPaisSeleccionada,labelPais,imagenSimbolo,imagenTarjetaPrincipal);
 
         } catch (JugadaInvalidaException e) {
             levantarVentana("/vista/ventanaNoSePuedeActivarTarjetaPais.fxml","No Se Puede Activar la Tarjeta");
         }
-        tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
-        mostrarSiguienteTarjeta();
+
         verificacionesSegunNumeroDeTarjetas();
         verificacionesBotonSiguienteYAnterior();
         actualizarNumeroDeEjercitosDeMenu();
