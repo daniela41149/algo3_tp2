@@ -139,6 +139,7 @@ public class ControladorTarjetas {
     @FXML
     void activar(ActionEvent event) throws IOException {
         try {
+
             juego.jugadorEnTurno().activarTarjetaPais(tarjetaPaisSeleccionada.getNombre());
             iterador.remove();
             mostrarSiguienteTarjeta();
