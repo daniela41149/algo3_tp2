@@ -1,5 +1,5 @@
 @startuml
-title: Ataque exitoso entre países donde el país ganador es el defensor.
+title: Ataque exitoso entre países donde el país ganador es el atacante.
 
 ":Juego" -> ":Tablero" : atacar (String, String, cantidadEjercito):  List int
 activate ":Tablero"
