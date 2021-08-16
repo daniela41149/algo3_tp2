@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -58,8 +59,11 @@ public class ControladorDados{
     @FXML
     private Label labelEjercitosDisponibles;
 
+    @FXML
+    private ListView listaPaises;
 
-    public void atacar(Juego juego, List<Pais> paisesEnTablero, Pais paisAtacante, Pais paisDefensor, ListView<String> listaLimitrofes,Button botonTarjetas, Label ejercitosDisponibles, Button botonColocarEjercitos) throws JugadaInvalidaException{
+
+    public void atacar(Juego juego, List<Pais> paisesEnTablero, Pais paisAtacante, Pais paisDefensor, ListView<String> listaLimitrofes,Button botonTarjetas, Label ejercitosDisponibles, Button botonColocarEjercitos, ListView<String> listaPaises) throws JugadaInvalidaException{
         this.listaLimitrofes = listaLimitrofes;
         this.juego = juego;
         this.paisesEnTablero = paisesEnTablero;
@@ -70,6 +74,7 @@ public class ControladorDados{
         this.labelEjercitosDisponibles = ejercitosDisponibles;
         this.botonColocarEjercitos = botonColocarEjercitos;
         this.botonTarjetas = botonTarjetas;
+        this.listaPaises = listaPaises;
 
         labelNombrePaisAtacante.setText(paisAtacante.getNombre());
         labelNombrePaisDefensor.setText(paisDefensor.getNombre());
@@ -125,7 +130,12 @@ public class ControladorDados{
 
         if (juego.cumplioObjetivo(jugador)) {
             levantarVentanaDeGanadorDeJuego();
+
         }
+
+        listaPaises.getItems().clear();
+        HashMap<String, Integer> paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
 
     }
 
@@ -158,5 +168,17 @@ public class ControladorDados{
         ControladorResultadosDeBatalla controladorResultadosDeBatalla = (ControladorResultadosDeBatalla) loader.getController();
         return controladorResultadosDeBatalla;
     }
+
+    private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual() {
+        List<Pais> listaPaises = juego.jugadorEnTurno().pedirPaises();
+        HashMap<String, Integer> diccionario = new HashMap<>();
+        for (Pais unPais : listaPaises) {
+            diccionario.put(unPais.getNombre(), unPais.cantidadDeFichas());
+        }
+        return diccionario;
+    }
+
+
+
 
 }

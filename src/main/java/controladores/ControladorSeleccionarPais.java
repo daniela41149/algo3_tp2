@@ -113,7 +113,7 @@ public class ControladorSeleccionarPais {
         Pais paisAtacante = buscarPais(nombrePais);
         Pais paisDefensor = buscarPais(nombre(limitrofeSeleccionado));
 
-        controladorDados.atacar(juego, paisesEnTablero,paisAtacante, paisDefensor,listaLimitrofes, botonTarjetas, ejercitosDiponibles, botonColocarEjercito);
+        controladorDados.atacar(juego, paisesEnTablero,paisAtacante, paisDefensor,listaLimitrofes, botonTarjetas, ejercitosDiponibles, botonColocarEjercito,listaPaises);
         limitrofeSeleccionado = null;
         labelPais2.setText("");
     }
