@@ -66,7 +66,7 @@ public class Tablero {
 
         int cantidadControlada = continente.cantidadDePaisesControlados(unJugador);
 
-        return (cantidadControlada == cantidadDePaises);
+        return (cantidadControlada >= cantidadDePaises);
     }
 
     public boolean controlaContinente(Jugador unJugador, String nombreContinente) {

@@ -48,10 +48,7 @@ public class TarjetaOcupacion extends TarjetaObjetivo {
         if (cumplioObjetivoGeneral())
             return true;
 
-        boolean cumplePrimerObjetivo = ocupoLosContinentesDeEnunciado(tablero);
-        boolean cumpleSegundoObjetivo = ocupoLaCantidadDePaisesPorContinenteDeEnunciado(tablero);
-
-        return (cumplePrimerObjetivo && cumpleSegundoObjetivo);
+        return ( ocupoLosContinentesDeEnunciado(tablero) && ocupoLaCantidadDePaisesPorContinenteDeEnunciado(tablero) );
     }
     public String devolverEnunciado() {
         return enunciado;
