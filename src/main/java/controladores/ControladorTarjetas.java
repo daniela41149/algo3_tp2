@@ -3,6 +3,7 @@ package controladores;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Moderador;
 import edu.fiuba.algo3.modelo.excepciones.JugadaInvalidaException;
+import edu.fiuba.algo3.modelo.pais.Pais;
 import edu.fiuba.algo3.modelo.tarjetaPais.TarjetaPais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -102,18 +105,23 @@ public class ControladorTarjetas {
     @FXML
     private Label ejercitosDisponibles;
 
+    @FXML
+    private ListView listaPaises;
+
+
     Stage escenario = new Stage();
     Scene scene;
     Parent root;
     FXMLLoader loader;
 
 
-    public void mostrarTarjetas(Juego juego,List<TarjetaPais> mazoCompletoDeTarjetasPais,Button botonTarjetas,Label ejercitosDisponibles) {
+    public void mostrarTarjetas(Juego juego, List<TarjetaPais> mazoCompletoDeTarjetasPais, Button botonTarjetas, Label ejercitosDisponibles, ListView<String> listaPaises) {
         this.juego = juego;
         this.tarjetasPais = buscarTarjetasDelJugador(mazoCompletoDeTarjetasPais);
         this.mazoCompletoDeTarjetasPais = mazoCompletoDeTarjetasPais;
         this.botonTarjetas = botonTarjetas;
         this.ejercitosDisponibles = ejercitosDisponibles;
+        this.listaPaises = listaPaises;
 
         imagenPrimerTarjeta.setVisible(false);
         imagenSegundaTarjeta.setVisible(false);
@@ -139,10 +147,7 @@ public class ControladorTarjetas {
     @FXML
     void activar(ActionEvent event) throws IOException {
         try {
-
             juego.jugadorEnTurno().activarTarjetaPais(tarjetaPaisSeleccionada.getNombre());
-            iterador.remove();
-            mostrarSiguienteTarjeta();
 
         } catch (JugadaInvalidaException e) {
             levantarVentana("/vista/ventanaNoSePuedeActivarTarjetaPais.fxml","No Se Puede Activar la Tarjeta");
@@ -246,7 +251,6 @@ public class ControladorTarjetas {
         if (iterador.hasNext()) {
             tarjetaPaisSeleccionada = iterador.next();
             mostrarTarjeta(tarjetaPaisSeleccionada,labelPais,imagenSimbolo,imagenTarjetaPrincipal);
-
         }
         else {
             noMostrarTarjeta(labelPais,imagenSimbolo,imagenTarjetaPrincipal);
@@ -297,10 +301,10 @@ public class ControladorTarjetas {
 
     private void actualizarNumeroDeEjercitosDeMenu() {
         ejercitosDisponibles.setText(String.valueOf(juego.devolverEjercitosRestantesDeJugadorActual()));
+        listaPaises.getItems().clear();
+        HashMap<String, Integer>  paisesConEjercitos = nombrePaisesYEjercitosDeJugadorActual();
+        paisesConEjercitos.forEach( (nombrePais,cantidadEjercito) -> listaPaises.getItems().add( nombrePais+ "  "+cantidadEjercito.toString() ) );
     }
-
-
-
 
     private void verificacionesSegunNumeroDeTarjetas () {
         if (tarjetasPaisParaCanjear.size() == 3) {
@@ -352,6 +356,15 @@ public class ControladorTarjetas {
             }
         }
         return listaTarjetas;
+    }
+
+    private HashMap<String, Integer> nombrePaisesYEjercitosDeJugadorActual() {
+        List<Pais> listaPaises = juego.jugadorEnTurno().pedirPaises();
+        HashMap<String, Integer> diccionario = new HashMap<>();
+        for (Pais unPais : listaPaises) {
+            diccionario.put(unPais.getNombre(), unPais.cantidadDeFichas());
+        }
+        return diccionario;
     }
 
 
